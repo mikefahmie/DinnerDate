@@ -1,0 +1,71 @@
+-- Create restaurants table
+CREATE TABLE IF NOT EXISTS public.restaurants (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  google_place_id text NOT NULL,
+  name text NOT NULL,
+  display_name text NULL,
+  formatted_address text NULL,
+  short_formatted_address text NULL,
+  location_lat numeric(10, 8) NULL,
+  location_lng numeric(11, 8) NULL,
+  location_city text NULL,
+  plus_code text NULL,
+  business_status text NULL,
+  primary_type text NULL,
+  types text[] NULL,
+  website_uri text NULL,
+  phone_number text NULL,
+  international_phone_number text NULL,
+  rating numeric(2, 1) NULL,
+  user_rating_count integer NULL DEFAULT 0,
+  price_level integer NULL,
+  price_range jsonb NULL,
+  regular_opening_hours jsonb NULL,
+  current_opening_hours jsonb NULL,
+  serves_breakfast boolean NULL DEFAULT false,
+  serves_brunch boolean NULL DEFAULT false,
+  serves_lunch boolean NULL DEFAULT false,
+  serves_dinner boolean NULL DEFAULT false,
+  serves_beer boolean NULL DEFAULT false,
+  serves_wine boolean NULL DEFAULT false,
+  serves_cocktails boolean NULL DEFAULT false,
+  serves_coffee boolean NULL DEFAULT false,
+  serves_dessert boolean NULL DEFAULT false,
+  serves_vegetarian_food boolean NULL DEFAULT false,
+  dine_in boolean NULL DEFAULT false,
+  takeout boolean NULL DEFAULT false,
+  delivery boolean NULL DEFAULT false,
+  curbside_pickup boolean NULL DEFAULT false,
+  reservable boolean NULL DEFAULT false,
+  outdoor_seating boolean NULL DEFAULT false,
+  good_for_children boolean NULL DEFAULT false,
+  good_for_groups boolean NULL DEFAULT false,
+  good_for_watching_sports boolean NULL DEFAULT false,
+  live_music boolean NULL DEFAULT false,
+  allows_dogs boolean NULL DEFAULT false,
+  restroom boolean NULL DEFAULT false,
+  menu_for_children boolean NULL DEFAULT false,
+  accessibility_options jsonb NULL,
+  parking_options jsonb NULL,
+  payment_options jsonb NULL,
+  photos text[] NULL,
+  editorial_summary text NULL,
+  reviews_summary text NULL,
+  generative_summary text NULL,
+  last_synced timestamp with time zone NULL DEFAULT now(),
+  sync_version integer NULL DEFAULT 1,
+  is_active boolean NULL DEFAULT true,
+  created_at timestamp with time zone NULL DEFAULT now(),
+  updated_at timestamp with time zone NULL DEFAULT now(),
+  CONSTRAINT restaurants_pkey PRIMARY KEY (id),
+  CONSTRAINT restaurants_google_place_id_key UNIQUE (google_place_id)
+);
+
+-- Create indexes
+CREATE INDEX IF NOT EXISTS idx_restaurants_location ON public.restaurants USING btree (location_lat, location_lng);
+CREATE INDEX IF NOT EXISTS idx_restaurants_city ON public.restaurants USING btree (location_city);
+CREATE INDEX IF NOT EXISTS idx_restaurants_primary_type ON public.restaurants USING btree (primary_type);
+CREATE INDEX IF NOT EXISTS idx_restaurants_types ON public.restaurants USING gin (types);
+CREATE INDEX IF NOT EXISTS idx_restaurants_rating ON public.restaurants USING btree (rating);
+CREATE INDEX IF NOT EXISTS idx_restaurants_price_level ON public.restaurants USING btree (price_level);
+CREATE INDEX IF NOT EXISTS idx_restaurants_google_place_id ON public.restaurants USING btree (google_place_id);
