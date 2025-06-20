@@ -365,7 +365,6 @@ const BudgetStep: React.FC<BudgetStepProps> = ({
             trackStyle={{ height: 6, backgroundColor: theme.colors.border }}
             thumbStyle={{ backgroundColor: theme.colors.primary, width: 20, height: 20 }}
           />
-            
             <View style={styles.sliderLabels}>
               <Text style={styles.sliderLabel}>$</Text>
               <Text style={styles.sliderLabel}>$$</Text>
