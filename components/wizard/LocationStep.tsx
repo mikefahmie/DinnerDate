@@ -153,9 +153,9 @@ const LocationStep: React.FC<LocationStepProps> = ({
       backgroundColor: theme.colors.border,
     },
     continueButtonText: {
-      fontSize: theme.typography.fontSize.button,
+      fontSize: theme.typography.fontSize.body,
       fontWeight: '600',
-      color: theme.colors.white,
+      color: theme.colors.textOnPrimary,
     },
     continueButtonTextDisabled: {
       color: theme.colors.textSecondary,

@@ -12,6 +12,11 @@ import SortOptions from '../components/search/SortOptions'
 import LoadingSpinner from '../components/ui/LoadingSpinner'
 import EmptyState from '../components/ui/EmptyState'
 import FilterModal from '../components/filters/FilterModal'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { RootStackParamList } from '../types/navigation'
+
+
+type RestaurantDiscoveryNavigationProp = NativeStackNavigationProp<RootStackParamList, 'RestaurantDiscovery'>
 
 type RouteParams = {
   RestaurantDiscovery: {
@@ -25,7 +30,7 @@ export type SortOption = 'distance' | 'rating' | 'price' | 'openNow'
 
 const RestaurantDiscoveryScreen: React.FC = () => {
   const { theme } = useTheme()
-  const navigation = useNavigation()
+  const navigation = useNavigation<RestaurantDiscoveryNavigationProp>()
   const route = useRoute<RestaurantDiscoveryRouteProp>()
   
   const [filters, setFilters] = useState<WizardState>(

@@ -1,9 +1,11 @@
-// screens/DiscoveryWizard.tsx - Updated for new timing options and budget handling
+// screens/DiscoveryWizard.tsx - Fixed navigation typing
 import React, { useState } from 'react'
 import { View, Text, StyleSheet, Animated } from 'react-native'
 import { Button } from '@rneui/themed'
 import { useTheme } from '../hooks/useTheme'
 import { useNavigation } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { RootStackParamList } from '../types/navigation'
 import WizardContainer from '../components/wizard/WizardContainer'
 import LocationStep from '../components/wizard/LocationStep'
 import MealTypeStep from '../components/wizard/MealTypeStep'
@@ -24,6 +26,8 @@ export interface WizardState {
   features: string[]
 }
 
+type DiscoveryWizardNavigationProp = NativeStackNavigationProp<RootStackParamList, 'DiscoveryWizard'>
+
 const TOTAL_STEPS = 7
 const STEP_TITLES = [
   'Where are you dining?',
@@ -37,7 +41,7 @@ const STEP_TITLES = [
 
 const DiscoveryWizardScreen: React.FC = () => {
   const { theme } = useTheme()
-  const navigation = useNavigation()
+  const navigation = useNavigation<DiscoveryWizardNavigationProp>()
   const [currentStep, setCurrentStep] = useState(1)
   const [slideAnim] = useState(new Animated.Value(0))
   

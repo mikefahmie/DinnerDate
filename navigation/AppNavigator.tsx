@@ -1,10 +1,13 @@
-// navigation/AppNavigator.tsx
+// navigation/AppNavigator.tsx - Fixed navigation types
 import React, { useState, useEffect } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { Session } from '@supabase/supabase-js'
 import { supabase } from '../lib/supabase'
 import { useTheme } from '../hooks/useTheme'
+
+// Import the navigation types
+import { RootStackParamList } from '../types/navigation'
 
 // Screens
 import SplashScreen from '../screens/SplashScreen'
@@ -14,26 +17,6 @@ import RestaurantDiscoveryScreen from '../screens/RestaurantDiscoveryScreen'
 import RestaurantDetailScreen from '../screens/RestaurantDetailScreen'
 import FavoritesScreen from '../screens/FavoritesScreen'
 import TabNavigator from './TabNavigator'
-
-// Navigation Types
-export type RootStackParamList = {
-  Splash: undefined
-  Auth: undefined
-  DiscoveryWizard: undefined
-  MainTabs: undefined
-  RestaurantDiscovery: {
-    filters?: any // WizardState type
-  }
-  RestaurantDetail: {
-    restaurantId: string
-  }
-}
-
-export type MainTabParamList = {
-  Discovery: undefined
-  Favorites: undefined
-  Profile: undefined
-}
 
 const RootStack = createNativeStackNavigator<RootStackParamList>()
 

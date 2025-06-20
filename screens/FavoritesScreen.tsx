@@ -15,10 +15,15 @@ import { useFavorites } from '../hooks/useFavorites'
 import RestaurantCard from '../components/restaurant/RestaurantCard'
 import EmptyState from '../components/ui/EmptyState'
 import LoadingSpinner from '../components/ui/LoadingSpinner'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { RootStackParamList } from '../types/navigation'
+
+type FavoritesNavigationProp = NativeStackNavigationProp<RootStackParamList>
+
 
 const FavoritesScreen: React.FC = () => {
   const { theme } = useTheme()
-  const navigation = useNavigation()
+  const navigation = useNavigation<FavoritesNavigationProp>()
   const [refreshing, setRefreshing] = useState(false)
   const [selectionMode, setSelectionMode] = useState(false)
   const [selectedItems, setSelectedItems] = useState<string[]>([])
