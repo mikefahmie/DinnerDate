@@ -1,9 +1,9 @@
-// screens/DiscoveryWizard.tsx - Fixed navigation typing
-import React, { useState } from 'react'
+// screens/DiscoveryWizard.tsx - Auto-reset when accessed via Home tab
+import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, Animated } from 'react-native'
 import { Button } from '@rneui/themed'
 import { useTheme } from '../hooks/useTheme'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useFocusEffect } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { RootStackParamList } from '../types/navigation'
 import WizardContainer from '../components/wizard/WizardContainer'
@@ -39,21 +39,33 @@ const STEP_TITLES = [
   'Looking for anything specific?'
 ]
 
+const INITIAL_WIZARD_STATE: WizardState = {
+  location: 'Ann Arbor, MI',
+  mealTypes: [],
+  serviceStyles: [],
+  timing: 'now',
+  budget: [], // Start with empty budget array - user can select multiple
+  dietary: [],
+  features: []
+}
+
 const DiscoveryWizardScreen: React.FC = () => {
   const { theme } = useTheme()
   const navigation = useNavigation<DiscoveryWizardNavigationProp>()
   const [currentStep, setCurrentStep] = useState(1)
   const [slideAnim] = useState(new Animated.Value(0))
   
-  const [wizardState, setWizardState] = useState<WizardState>({
-    location: 'Ann Arbor, MI',
-    mealTypes: [],
-    serviceStyles: [],
-    timing: 'now',
-    budget: [], // Start with empty budget array - user can select multiple
-    dietary: [],
-    features: []
-  })
+  const [wizardState, setWizardState] = useState<WizardState>(INITIAL_WIZARD_STATE)
+
+  // Reset wizard state whenever this screen is focused (i.e., when Home tab is tapped)
+  useFocusEffect(
+    React.useCallback(() => {
+      // Reset to initial state and step 1
+      setWizardState(INITIAL_WIZARD_STATE)
+      setCurrentStep(1)
+      slideAnim.setValue(0)
+    }, [slideAnim])
+  )
 
   const updateWizardState = (updates: Partial<WizardState>) => {
     setWizardState(prev => ({ ...prev, ...updates }))

@@ -1,14 +1,15 @@
-// navigation/TabNavigator.tsx - Fixed Android navigation bar overlap
+// navigation/TabNavigator.tsx - Home button that keeps tabs visible
 import React from 'react'
-import { Platform, Dimensions } from 'react-native'
+import { Platform } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Icon } from '@rneui/themed'
 import { useTheme } from '../hooks/useTheme'
 
 // Import screens
-import DiscoveryScreen from '../screens/RestaurantDiscoveryScreen'
+import RestaurantDiscoveryScreen from '../screens/RestaurantDiscoveryScreen'
 import FavoritesScreen from '../screens/FavoritesScreen'
 import ProfileScreen from '../screens/ProfileScreen'
+import DiscoveryWizardScreen from '../screens/DiscoveryWizard'
 
 import { MainTabParamList } from '../types/navigation'
 
@@ -62,7 +63,7 @@ const TabNavigator: React.FC = () => {
     >
       <Tab.Screen
         name="Discovery"
-        component={DiscoveryScreen}
+        component={RestaurantDiscoveryScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Icon
@@ -72,6 +73,21 @@ const TabNavigator: React.FC = () => {
               color={color}
             />
           ),
+        }}
+      />
+      <Tab.Screen
+        name="Home"
+        component={DiscoveryWizardScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Icon
+              name="refresh-cw"
+              type="feather"
+              size={size}
+              color={color}
+            />
+          ),
+          tabBarLabel: 'Start Fresh',
         }}
       />
       <Tab.Screen

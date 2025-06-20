@@ -1,11 +1,10 @@
-// screens/ProfileScreen.tsx
+// screens/ProfileScreen.tsx - Fixed scrollable layout
 import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, Alert, ScrollView } from 'react-native'
 import { Button, Input, Avatar, ListItem, Icon } from '@rneui/themed'
 import { useTheme } from '../hooks/useTheme'
 import { supabase } from '../lib/supabase'
 import { Session } from '@supabase/supabase-js'
-import ScreenLayout from '../components/layout/ScreenLayout'
 import LoadingSpinner from '../components/ui/LoadingSpinner'
 
 interface Profile {
@@ -229,10 +228,14 @@ const ProfileScreen: React.FC = () => {
       flex: 1,
       backgroundColor: theme.colors.background,
     },
+    scrollContent: {
+      paddingBottom: 120, // Extra padding for tab navigation + Android nav
+    },
     loadingContainer: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
+      backgroundColor: theme.colors.background,
     },
     profileHeader: {
       alignItems: 'center',
@@ -258,6 +261,7 @@ const ProfileScreen: React.FC = () => {
       backgroundColor: theme.colors.surface,
       padding: theme.spacing.lg,
       marginBottom: theme.spacing.lg,
+      marginHorizontal: theme.spacing.lg,
       borderRadius: theme.borderRadius.lg,
     },
     sectionTitle: {
@@ -279,6 +283,7 @@ const ProfileScreen: React.FC = () => {
       borderRadius: theme.borderRadius.lg,
       overflow: 'hidden',
       marginBottom: theme.spacing.lg,
+      marginHorizontal: theme.spacing.lg,
     },
     settingsItem: {
       backgroundColor: 'transparent',
@@ -297,46 +302,42 @@ const ProfileScreen: React.FC = () => {
       backgroundColor: theme.colors.error,
       borderRadius: theme.borderRadius.md,
       marginTop: theme.spacing.lg,
+      marginHorizontal: theme.spacing.lg,
+      marginBottom: theme.spacing.xl,
     },
   })
 
   if (loading) {
     return (
-      <ScreenLayout showHeader headerTitle="Profile">
-        <View style={styles.loadingContainer}>
-          <LoadingSpinner />
-        </View>
-      </ScreenLayout>
+      <View style={styles.loadingContainer}>
+        <LoadingSpinner />
+      </View>
     )
   }
 
   return (
-    <ScreenLayout 
-      showHeader 
-      headerTitle="Profile"
-      scrollable
-      padding={false}
-    >
-      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+    <View style={styles.container}>
+      <ScrollView 
+        style={styles.container}
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+      >
         {renderProfileHeader()}
+        {renderProfileForm()}
+        {renderSettingsSection()}
         
-        <View style={{ paddingHorizontal: theme.spacing.screenPadding }}>
-          {renderProfileForm()}
-          {renderSettingsSection()}
-          
-          <Button
-            title="Sign Out"
-            onPress={signOut}
-            buttonStyle={styles.signOutButton}
-            icon={{
-              name: 'sign-out',
-              type: 'font-awesome',
-              color: theme.colors.textOnPrimary,
-            }}
-          />
-        </View>
+        <Button
+          title="Sign Out"
+          onPress={signOut}
+          buttonStyle={styles.signOutButton}
+          icon={{
+            name: 'sign-out',
+            type: 'font-awesome',
+            color: theme.colors.textOnPrimary,
+          }}
+        />
       </ScrollView>
-    </ScreenLayout>
+    </View>
   )
 }
 
