@@ -1,6 +1,6 @@
-// components/wizard/TimingStep.tsx
+// components/wizard/TimingStep.tsx - Day-based timing selection
 import React, { useState } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import { Button, Icon } from '@rneui/themed'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { useTheme } from '../../hooks/useTheme'
@@ -13,7 +13,7 @@ interface TimingStepProps {
 }
 
 interface TimingOption {
-  id: 'now' | 'later' | 'anytime'
+  id: 'today' | 'tomorrow' | 'specific' | 'anytime'
   label: string
   icon: { name: string; type: string }
   description: string
@@ -21,21 +21,27 @@ interface TimingOption {
 
 const TIMING_OPTIONS: TimingOption[] = [
   {
-    id: 'now',
-    label: 'Right Now',
-    icon: { name: 'bolt', type: 'font-awesome' },
-    description: 'I want to eat soon'
+    id: 'today',
+    label: 'Today',
+    icon: { name: 'clock', type: 'feather' },
+    description: 'Show restaurants open today'
   },
   {
-    id: 'later',
-    label: 'Schedule for Later',
-    icon: { name: 'calendar', type: 'font-awesome' },
-    description: 'Plan for a specific time'
+    id: 'tomorrow',
+    label: 'Tomorrow',
+    icon: { name: 'sunrise', type: 'feather' },
+    description: 'Show restaurants open tomorrow'
+  },
+  {
+    id: 'specific',
+    label: 'Pick a Date',
+    icon: { name: 'calendar', type: 'feather' },
+    description: 'Choose a specific date'
   },
   {
     id: 'anytime',
-    label: 'Anytime',
-    icon: { name: 'clock-o', type: 'font-awesome' },
+    label: 'Any Day',
+    icon: { name: 'globe', type: 'feather' },
     description: 'Show all restaurants regardless of hours'
   }
 ]
@@ -47,52 +53,68 @@ const TimingStep: React.FC<TimingStepProps> = ({
 }) => {
   const { theme } = useTheme()
   const [showDatePicker, setShowDatePicker] = useState(false)
-  const [showTimePicker, setShowTimePicker] = useState(false)
-  
-  // Initialize with current time + 1 hour if no scheduled time
-  const getInitialScheduledTime = () => {
+  const [selectedDate, setSelectedDate] = useState(new Date())
+
+  // Map old timing values to new ones
+  const getCurrentTiming = (): 'today' | 'tomorrow' | 'specific' | 'anytime' => {
+    if (wizardState.timing === 'anytime') return 'anytime'
+    if (wizardState.timing === 'now') return 'today'
     if (wizardState.scheduledTime) {
-      return wizardState.scheduledTime
+      const today = new Date()
+      const tomorrow = new Date(today)
+      tomorrow.setDate(tomorrow.getDate() + 1)
+      
+      const scheduleDate = new Date(wizardState.scheduledTime)
+      
+      if (scheduleDate.toDateString() === today.toDateString()) {
+        return 'today'
+      } else if (scheduleDate.toDateString() === tomorrow.toDateString()) {
+        return 'tomorrow'
+      } else {
+        return 'specific'
+      }
     }
-    const now = new Date()
-    now.setHours(now.getHours() + 1)
-    now.setMinutes(0, 0, 0) // Round to nearest hour
-    return now
+    return 'today'
   }
 
-  const [selectedDate, setSelectedDate] = useState(getInitialScheduledTime())
-
-  const handleTimingChange = (timing: 'now' | 'later' | 'anytime') => {
-    if (timing === 'now' || timing === 'anytime') {
-      updateWizardState({ 
-        timing: timing,
-        scheduledTime: undefined
-      })
-    } else {
-      updateWizardState({ 
-        timing: 'later',
-        scheduledTime: selectedDate
-      })
+  const handleTimingChange = (timing: 'today' | 'tomorrow' | 'specific' | 'anytime') => {
+    const today = new Date()
+    const tomorrow = new Date(today)
+    tomorrow.setDate(tomorrow.getDate() + 1)
+    
+    switch (timing) {
+      case 'today':
+        updateWizardState({ 
+          timing: 'now',
+          scheduledTime: today
+        })
+        break
+      case 'tomorrow':
+        updateWizardState({ 
+          timing: 'later',
+          scheduledTime: tomorrow
+        })
+        break
+      case 'specific':
+        setShowDatePicker(true)
+        break
+      case 'anytime':
+        updateWizardState({ 
+          timing: 'anytime',
+          scheduledTime: undefined
+        })
+        break
     }
   }
 
   const handleDateChange = (event: any, date?: Date) => {
     setShowDatePicker(false)
     if (date) {
-      const newDate = new Date(selectedDate)
-      newDate.setFullYear(date.getFullYear(), date.getMonth(), date.getDate())
-      setSelectedDate(newDate)
-      updateWizardState({ scheduledTime: newDate })
-    }
-  }
-
-  const handleTimeChange = (event: any, time?: Date) => {
-    setShowTimePicker(false)
-    if (time) {
-      const newDate = new Date(selectedDate)
-      newDate.setHours(time.getHours(), time.getMinutes())
-      setSelectedDate(newDate)
-      updateWizardState({ scheduledTime: newDate })
+      setSelectedDate(date)
+      updateWizardState({ 
+        timing: 'later',
+        scheduledTime: date
+      })
     }
   }
 
@@ -114,20 +136,13 @@ const TimingStep: React.FC<TimingStepProps> = ({
     }
   }
 
-  const formatTime = (date: Date) => {
-    return date.toLocaleTimeString('en-US', { 
-      hour: 'numeric', 
-      minute: '2-digit',
-      hour12: true 
-    })
-  }
-
   const handleContinue = () => {
     onNext()
   }
 
   const renderTimingCard = (option: TimingOption) => {
-    const isSelected = wizardState.timing === option.id
+    const currentTiming = getCurrentTiming()
+    const isSelected = currentTiming === option.id
 
     return (
       <TouchableOpacity
@@ -182,63 +197,20 @@ const TimingStep: React.FC<TimingStepProps> = ({
     )
   }
 
-  const renderScheduleDetails = () => {
-    if (wizardState.timing !== 'later') return null
+  const renderSelectedDateInfo = () => {
+    if (getCurrentTiming() !== 'specific' || !wizardState.scheduledTime) return null
 
     return (
-      <View style={styles.scheduleContainer}>
-        <Text style={styles.scheduleTitle}>When would you like to dine?</Text>
-        
-        <View style={styles.dateTimeSelectors}>
-          <TouchableOpacity
-            style={styles.dateTimeButton}
-            onPress={() => setShowDatePicker(true)}
-          >
-            <Icon
-              name="calendar"
-              type="feather"
-              size={20}
-              color={theme.colors.primary}
-            />
-            <Text style={styles.dateTimeButtonText}>
-              {formatDate(selectedDate)}
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.dateTimeButton}
-            onPress={() => setShowTimePicker(true)}
-          >
-            <Icon
-              name="clock"
-              type="feather"
-              size={20}
-              color={theme.colors.primary}
-            />
-            <Text style={styles.dateTimeButtonText}>
-              {formatTime(selectedDate)}
-            </Text>
-          </TouchableOpacity>
-        </View>
-
-        {showDatePicker && (
-          <DateTimePicker
-            value={selectedDate}
-            mode="date"
-            display={Platform.OS === 'ios' ? 'spinner' : 'default'}
-            onChange={handleDateChange}
-            minimumDate={new Date()}
-          />
-        )}
-
-        {showTimePicker && (
-          <DateTimePicker
-            value={selectedDate}
-            mode="time"
-            display={Platform.OS === 'ios' ? 'spinner' : 'default'}
-            onChange={handleTimeChange}
-          />
-        )}
+      <View style={styles.dateInfoContainer}>
+        <Icon
+          name="calendar"
+          type="feather"
+          size={20}
+          color={theme.colors.primary}
+        />
+        <Text style={styles.dateInfoText}>
+          Selected date: {formatDate(new Date(wizardState.scheduledTime))}
+        </Text>
       </View>
     )
   }
@@ -247,16 +219,20 @@ const TimingStep: React.FC<TimingStepProps> = ({
     container: {
       flex: 1,
     },
-    content: {
+    scrollContainer: {
       flex: 1,
+      paddingHorizontal: theme.spacing.lg,
+    },
+    content: {
       paddingTop: theme.spacing.md,
+      paddingBottom: theme.spacing.xl,
     },
     subtitle: {
       fontSize: theme.typography.fontSize.body,
       color: theme.colors.textSecondary,
       textAlign: 'center',
       marginBottom: theme.spacing.xl,
-      lineHeight: theme.typography.fontSize.body * 1.4,
+      lineHeight: theme.typography.fontSize.body * 1.5,
       paddingHorizontal: theme.spacing.md,
     },
     timingOptionsContainer: {
@@ -315,44 +291,39 @@ const TimingStep: React.FC<TimingStepProps> = ({
     checkIconContainer: {
       marginLeft: theme.spacing.md,
     },
-    scheduleContainer: {
-      backgroundColor: theme.colors.accent + '10', // 6% opacity
-      borderRadius: theme.borderRadius.lg,
-      padding: theme.spacing.lg,
-      marginBottom: theme.spacing.lg,
-    },
-    scheduleTitle: {
-      fontSize: theme.typography.fontSize.h3,
-      fontWeight: '600',
-      color: theme.colors.textPrimary,
-      marginBottom: theme.spacing.md,
-      textAlign: 'center',
-    },
-    dateTimeSelectors: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      gap: theme.spacing.md,
-    },
-    dateTimeButton: {
-      flex: 1,
+    dateInfoContainer: {
       flexDirection: 'row',
       alignItems: 'center',
-      backgroundColor: theme.colors.surface,
+      justifyContent: 'center',
+      backgroundColor: theme.colors.accent + '15',
       borderRadius: theme.borderRadius.md,
       padding: theme.spacing.md,
-      borderWidth: 1,
-      borderColor: theme.colors.border,
+      marginBottom: theme.spacing.lg,
       gap: theme.spacing.sm,
-      justifyContent: 'center',
     },
-    dateTimeButtonText: {
-      fontSize: theme.typography.fontSize.body,
+    dateInfoText: {
+      fontSize: theme.typography.fontSize.secondary,
       fontWeight: '600',
       color: theme.colors.textPrimary,
     },
+    note: {
+      backgroundColor: theme.colors.surfaceElevated,
+      borderRadius: theme.borderRadius.md,
+      padding: theme.spacing.md,
+      marginBottom: theme.spacing.lg,
+    },
+    noteText: {
+      fontSize: theme.typography.fontSize.caption,
+      color: theme.colors.textSecondary,
+      textAlign: 'center',
+      lineHeight: theme.typography.fontSize.caption * 1.4,
+    },
     buttonContainer: {
-      paddingTop: theme.spacing.lg,
-      paddingBottom: theme.spacing.md,
+      paddingHorizontal: theme.spacing.lg,
+      paddingBottom: theme.spacing.lg,
+      backgroundColor: theme.colors.background,
+      borderTopWidth: 1,
+      borderTopColor: theme.colors.divider,
     },
     continueButton: {
       backgroundColor: theme.colors.primary,
@@ -368,17 +339,37 @@ const TimingStep: React.FC<TimingStepProps> = ({
 
   return (
     <View style={styles.container}>
-      <View style={styles.content}>
+      <ScrollView 
+        style={styles.scrollContainer}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.content}
+      >
         <Text style={styles.subtitle}>
-          When are you planning to dine? This helps us show relevant restaurants and their availability.
+          When are you looking to dine? This helps us show restaurants that will be open and available.
         </Text>
+
+        <View style={styles.note}>
+          <Text style={styles.noteText}>
+            💡 Restaurant hours and availability will be filtered based on your selection
+          </Text>
+        </View>
 
         <View style={styles.timingOptionsContainer}>
           {TIMING_OPTIONS.map(renderTimingCard)}
         </View>
 
-        {renderScheduleDetails()}
-      </View>
+        {renderSelectedDateInfo()}
+
+        {showDatePicker && (
+          <DateTimePicker
+            value={selectedDate}
+            mode="date"
+            display="default"
+            onChange={handleDateChange}
+            minimumDate={new Date()}
+          />
+        )}
+      </ScrollView>
 
       <View style={styles.buttonContainer}>
         <Button

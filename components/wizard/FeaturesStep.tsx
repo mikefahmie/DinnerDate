@@ -1,6 +1,6 @@
-// components/wizard/FeaturesStep.tsx
+// components/wizard/FeaturesStep.tsx - Fixed layout issues
 import React, { useState } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import { Button, Icon } from '@rneui/themed'
 import { useTheme } from '../../hooks/useTheme'
 import { WizardState } from '../../screens/DiscoveryWizard'
@@ -24,28 +24,28 @@ const FEATURE_OPTIONS: FeatureOption[] = [
   {
     id: 'live_music',
     label: 'Live Music',
-    icon: { name: 'music', type: 'font-awesome' },
+    icon: { name: 'music', type: 'feather' },
     description: 'Entertainment while you dine',
     category: 'atmosphere'
   },
   {
-    id: 'good_for_watching_sports',
+    id: 'good_for_sports',
     label: 'Good for Sports',
-    icon: { name: 'tv', type: 'font-awesome' },
+    icon: { name: 'tv', type: 'feather' },
     description: 'TVs and sports atmosphere',
     category: 'atmosphere'
   },
   {
     id: 'good_for_groups',
     label: 'Good for Groups',
-    icon: { name: 'users', type: 'font-awesome' },
+    icon: { name: 'users', type: 'feather' },
     description: 'Large tables and group-friendly',
     category: 'atmosphere'
   },
   {
-    id: 'good_for_children',
-    label: 'Good for Kids',
-    icon: { name: 'child', type: 'font-awesome' },
+    id: 'family_friendly',
+    label: 'Family Friendly',
+    icon: { name: 'heart', type: 'feather' },
     description: 'Family-friendly environment',
     category: 'atmosphere'
   },
@@ -54,22 +54,8 @@ const FEATURE_OPTIONS: FeatureOption[] = [
   {
     id: 'outdoor_seating',
     label: 'Outdoor Seating',
-    icon: { name: 'tree', type: 'font-awesome' },
+    icon: { name: 'sun', type: 'feather' },
     description: 'Patio or outdoor dining',
-    category: 'amenities'
-  },
-  {
-    id: 'allows_dogs',
-    label: 'Dog Friendly',
-    icon: { name: 'paw', type: 'font-awesome' },
-    description: 'Pets welcome',
-    category: 'amenities'
-  },
-  {
-    id: 'reservable',
-    label: 'Takes Reservations',
-    icon: { name: 'calendar-check-o', type: 'font-awesome' },
-    description: 'Can book ahead',
     category: 'amenities'
   },
   {
@@ -169,14 +155,16 @@ const FeaturesStep: React.FC<FeaturesStepProps> = ({
           </Text>
         </View>
 
-        <View style={[
-          styles.selectionIndicator,
-          isSelected && styles.selectedIndicator
-        ]}>
-          <Text style={styles.checkmark}>
-            {isSelected ? '✓' : ''}
-          </Text>
-        </View>
+        {isSelected && (
+          <View style={styles.checkIconContainer}>
+            <Icon
+              name="check-circle"
+              type="feather"
+              size={20}
+              color={theme.colors.primary}
+            />
+          </View>
+        )}
       </TouchableOpacity>
     )
   }
@@ -198,7 +186,7 @@ const FeaturesStep: React.FC<FeaturesStepProps> = ({
     if (showMoreFeatures) {
       return Object.keys(CATEGORIES) as Array<keyof typeof CATEGORIES>
     }
-    // Show first 6 features when collapsed
+    // Show first category when collapsed
     return ['atmosphere']
   }
 
@@ -206,21 +194,39 @@ const FeaturesStep: React.FC<FeaturesStepProps> = ({
     return wizardState.features?.length || 0
   }
 
+  const selectedCount = getSelectedCount()
+
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      padding: theme.spacing.screenPadding,
-      justifyContent: 'space-between',
+    },
+    scrollContainer: {
+      flex: 1,
+      paddingHorizontal: theme.spacing.lg,
     },
     content: {
-      flex: 1,
+      paddingTop: theme.spacing.md,
+      paddingBottom: theme.spacing.xl,
     },
     subtitle: {
       fontSize: theme.typography.fontSize.body,
       color: theme.colors.textSecondary,
       textAlign: 'center',
       marginBottom: theme.spacing.xl,
-      lineHeight: 22,
+      lineHeight: theme.typography.fontSize.body * 1.5,
+      paddingHorizontal: theme.spacing.md,
+    },
+    infoBox: {
+      backgroundColor: theme.colors.accent + '15',
+      borderRadius: theme.borderRadius.md,
+      padding: theme.spacing.md,
+      marginBottom: theme.spacing.xl,
+    },
+    infoText: {
+      fontSize: theme.typography.fontSize.caption,
+      color: theme.colors.textSecondary,
+      textAlign: 'center',
+      lineHeight: theme.typography.fontSize.caption * 1.4,
     },
     selectionSummary: {
       backgroundColor: theme.colors.surface,
@@ -237,8 +243,8 @@ const FeaturesStep: React.FC<FeaturesStepProps> = ({
       flex: 1,
     },
     summaryCount: {
-      fontSize: theme.typography.fontSize.h2,
-      fontWeight: '600',
+      fontSize: theme.typography.fontSize.h3,
+      fontWeight: '700',
       color: theme.colors.primary,
     },
     summaryText: {
@@ -247,14 +253,16 @@ const FeaturesStep: React.FC<FeaturesStepProps> = ({
     },
     clearButton: {
       backgroundColor: 'transparent',
-      paddingHorizontal: 0,
+      paddingHorizontal: theme.spacing.md,
+      paddingVertical: theme.spacing.sm,
     },
     clearButtonTitle: {
       fontSize: theme.typography.fontSize.caption,
       color: theme.colors.error,
+      fontWeight: '600',
     },
     categorySection: {
-      marginBottom: theme.spacing.lg,
+      marginBottom: theme.spacing.xl,
     },
     categoryTitle: {
       fontSize: theme.typography.fontSize.secondary,
@@ -285,7 +293,7 @@ const FeaturesStep: React.FC<FeaturesStepProps> = ({
     },
     featureContent: {
       alignItems: 'center',
-      paddingRight: theme.spacing.sm, // Make room for selection indicator
+      paddingRight: theme.spacing.sm, // Make room for check icon
     },
     featureIconContainer: {
       width: 40,
@@ -299,9 +307,6 @@ const FeaturesStep: React.FC<FeaturesStepProps> = ({
     selectedIconContainer: {
       backgroundColor: theme.colors.primary,
     },
-    featureIcon: {
-      // Removed - now using Icon component
-    },
     featureLabel: {
       fontSize: theme.typography.fontSize.secondary,
       fontWeight: '600',
@@ -314,72 +319,56 @@ const FeaturesStep: React.FC<FeaturesStepProps> = ({
     },
     featureDescription: {
       fontSize: theme.typography.fontSize.caption,
-      color: theme.colors.textMuted,
+      color: theme.colors.textSecondary,
       textAlign: 'center',
-      lineHeight: 16,
+      lineHeight: theme.typography.fontSize.caption * 1.3,
     },
     selectedFeatureDescription: {
-      color: theme.colors.textSecondary,
+      color: theme.colors.textPrimary,
     },
-    selectionIndicator: {
+    checkIconContainer: {
       position: 'absolute',
       top: theme.spacing.xs,
       right: theme.spacing.xs,
-      width: 20,
-      height: 20,
-      borderRadius: 10,
-      borderWidth: 2,
-      borderColor: theme.colors.border,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    selectedIndicator: {
-      backgroundColor: theme.colors.primary,
-      borderColor: theme.colors.primary,
-    },
-    checkmark: {
-      color: theme.colors.textOnPrimary,
-      fontSize: 12,
-      fontWeight: '600',
     },
     expandButton: {
       backgroundColor: 'transparent',
       borderColor: theme.colors.border,
       borderWidth: 1,
       borderRadius: theme.borderRadius.md,
-      marginBottom: theme.spacing.lg,
+      marginTop: theme.spacing.md,
+      marginBottom: theme.spacing.xl,
     },
     expandButtonTitle: {
       color: theme.colors.textPrimary,
       fontSize: theme.typography.fontSize.secondary,
     },
     buttonContainer: {
-      paddingTop: theme.spacing.lg,
+      paddingHorizontal: theme.spacing.lg,
+      paddingBottom: theme.spacing.lg,
+      backgroundColor: theme.colors.background,
+      borderTopWidth: 1,
+      borderTopColor: theme.colors.divider,
     },
     continueButton: {
       backgroundColor: theme.colors.primary,
       borderRadius: theme.borderRadius.md,
-      height: theme.spacing.buttonHeight,
+      paddingVertical: theme.spacing.md,
     },
-    infoBox: {
-      backgroundColor: theme.colors.surfaceElevated,
-      borderRadius: theme.borderRadius.md,
-      padding: theme.spacing.md,
-      marginBottom: theme.spacing.lg,
-    },
-    infoText: {
-      fontSize: theme.typography.fontSize.caption,
-      color: theme.colors.textMuted,
-      textAlign: 'center',
-      lineHeight: 18,
+    continueButtonText: {
+      fontSize: theme.typography.fontSize.body,
+      fontWeight: '600',
+      color: theme.colors.textOnPrimary,
     },
   })
 
-  const selectedCount = getSelectedCount()
-
   return (
     <View style={styles.container}>
-      <View style={styles.content}>
+      <ScrollView 
+        style={styles.scrollContainer}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.content}
+      >
         <Text style={styles.subtitle}>
           Looking for anything specific? These features help us find restaurants that match your needs.
         </Text>
@@ -422,13 +411,14 @@ const FeaturesStep: React.FC<FeaturesStepProps> = ({
             onPress={() => setShowMoreFeatures(true)}
           />
         )}
-      </View>
+      </ScrollView>
 
       <View style={styles.buttonContainer}>
         <Button
           title="Find Restaurants"
           onPress={handleContinue}
           buttonStyle={styles.continueButton}
+          titleStyle={styles.continueButtonText}
         />
       </View>
     </View>

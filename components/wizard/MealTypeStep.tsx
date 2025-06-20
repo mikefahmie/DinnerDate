@@ -1,6 +1,6 @@
-// components/wizard/MealTypeStep.tsx
+// components/wizard/MealTypeStep.tsx - Added coffee/dessert + fixed layout
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import { Button, Icon } from '@rneui/themed'
 import { useTheme } from '../../hooks/useTheme'
 import { WizardState } from '../../screens/DiscoveryWizard'
@@ -40,6 +40,20 @@ const MEAL_OPTIONS: MealOption[] = [
     icon: { name: 'glass', type: 'font-awesome' },
     description: 'Evening dining',
     timeRange: '5:00 PM - 10:00 PM'
+  },
+  {
+    id: 'coffee',
+    label: 'Coffee & Drinks',
+    icon: { name: 'coffee', type: 'feather' },
+    description: 'Cafés and coffee shops',
+    timeRange: 'All day'
+  },
+  {
+    id: 'dessert',
+    label: 'Dessert',
+    icon: { name: 'gift', type: 'feather' },
+    description: 'Sweet treats and desserts',
+    timeRange: 'After meals'
   },
   {
     id: 'latenight',
@@ -83,12 +97,15 @@ const MealTypeStep: React.FC<MealTypeStepProps> = ({
         onPress={() => toggleMealType(meal.id)}
         activeOpacity={0.7}
       >
-        <View style={styles.mealIconContainer}>
+        <View style={[
+          styles.mealIconContainer,
+          isSelected && styles.selectedIconContainer
+        ]}>
           <Icon
             name={meal.icon.name}
             type={meal.icon.type}
             size={24}
-            color={theme.colors.textPrimary}
+            color={isSelected ? theme.colors.textOnPrimary : theme.colors.textPrimary}
           />
         </View>
         
@@ -113,14 +130,16 @@ const MealTypeStep: React.FC<MealTypeStepProps> = ({
           </Text>
         </View>
 
-        <View style={[
-          styles.selectionIndicator,
-          isSelected && styles.selectedIndicator
-        ]}>
-          <Text style={styles.checkmark}>
-            {isSelected ? '✓' : ''}
-          </Text>
-        </View>
+        {isSelected && (
+          <View style={styles.checkIconContainer}>
+            <Icon
+              name="check-circle"
+              type="feather"
+              size={24}
+              color={theme.colors.primary}
+            />
+          </View>
+        )}
       </TouchableOpacity>
     )
   }
@@ -128,19 +147,34 @@ const MealTypeStep: React.FC<MealTypeStepProps> = ({
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      padding: theme.spacing.screenPadding,
-      justifyContent: 'space-between',
+    },
+    scrollContainer: {
+      flex: 1,
+      paddingHorizontal: theme.spacing.lg,
     },
     content: {
-      flex: 1,
-      justifyContent: 'center',
+      paddingTop: theme.spacing.md,
+      paddingBottom: theme.spacing.xl,
     },
     subtitle: {
       fontSize: theme.typography.fontSize.body,
       color: theme.colors.textSecondary,
       textAlign: 'center',
       marginBottom: theme.spacing.xl,
-      lineHeight: 22,
+      lineHeight: theme.typography.fontSize.body * 1.5,
+      paddingHorizontal: theme.spacing.md,
+    },
+    note: {
+      backgroundColor: theme.colors.accent + '15',
+      borderRadius: theme.borderRadius.md,
+      padding: theme.spacing.md,
+      marginBottom: theme.spacing.xl,
+    },
+    noteText: {
+      fontSize: theme.typography.fontSize.caption,
+      color: theme.colors.textSecondary,
+      textAlign: 'center',
+      lineHeight: theme.typography.fontSize.caption * 1.4,
     },
     mealGrid: {
       marginBottom: theme.spacing.xl,
@@ -170,15 +204,15 @@ const MealTypeStep: React.FC<MealTypeStepProps> = ({
       alignItems: 'center',
       marginRight: theme.spacing.md,
     },
-    mealIcon: {
-      // Removed - now using Icon component
+    selectedIconContainer: {
+      backgroundColor: theme.colors.primary,
     },
     mealContent: {
       flex: 1,
     },
     mealLabel: {
-      fontSize: theme.typography.fontSize.h2,
-      fontWeight: '600',
+      fontSize: theme.typography.fontSize.h3,
+      fontWeight: '700',
       color: theme.colors.textPrimary,
       marginBottom: theme.spacing.xs,
     },
@@ -200,51 +234,37 @@ const MealTypeStep: React.FC<MealTypeStepProps> = ({
     selectedMealTimeRange: {
       color: theme.colors.primary,
     },
-    selectionIndicator: {
-      width: 24,
-      height: 24,
-      borderRadius: 12,
-      borderWidth: 2,
-      borderColor: theme.colors.border,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    selectedIndicator: {
-      backgroundColor: theme.colors.primary,
-      borderColor: theme.colors.primary,
-    },
-    checkmark: {
-      color: theme.colors.textOnPrimary,
-      fontSize: 14,
-      fontWeight: '600',
+    checkIconContainer: {
+      marginLeft: theme.spacing.md,
     },
     buttonContainer: {
-      paddingTop: theme.spacing.lg,
+      paddingHorizontal: theme.spacing.lg,
+      paddingBottom: theme.spacing.lg,
+      backgroundColor: theme.colors.background,
+      borderTopWidth: 1,
+      borderTopColor: theme.colors.divider,
     },
     continueButton: {
       backgroundColor: theme.colors.primary,
       borderRadius: theme.borderRadius.md,
-      height: theme.spacing.buttonHeight,
+      paddingVertical: theme.spacing.md,
     },
-    note: {
-      backgroundColor: theme.colors.surfaceElevated,
-      borderRadius: theme.borderRadius.md,
-      padding: theme.spacing.md,
-      marginBottom: theme.spacing.lg,
-    },
-    noteText: {
-      fontSize: theme.typography.fontSize.caption,
-      color: theme.colors.textMuted,
-      textAlign: 'center',
-      lineHeight: 18,
+    continueButtonText: {
+      fontSize: theme.typography.fontSize.body,
+      fontWeight: '600',
+      color: theme.colors.textOnPrimary,
     },
   })
 
   return (
     <View style={styles.container}>
-      <View style={styles.content}>
+      <ScrollView 
+        style={styles.scrollContainer}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.content}
+      >
         <Text style={styles.subtitle}>
-          What meal are you planning? You can select multiple options.
+          What meal are you planning? You can select multiple options to see more restaurant choices.
         </Text>
 
         <View style={styles.note}>
@@ -256,13 +276,14 @@ const MealTypeStep: React.FC<MealTypeStepProps> = ({
         <View style={styles.mealGrid}>
           {MEAL_OPTIONS.map(renderMealCard)}
         </View>
-      </View>
+      </ScrollView>
 
       <View style={styles.buttonContainer}>
         <Button
           title="Continue"
           onPress={handleContinue}
           buttonStyle={styles.continueButton}
+          titleStyle={styles.continueButtonText}
         />
       </View>
     </View>

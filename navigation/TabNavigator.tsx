@@ -1,129 +1,105 @@
-// navigation/TabNavigator.tsx
+// navigation/TabNavigator.tsx - Fixed Android navigation bar overlap
 import React from 'react'
+import { Platform, Dimensions } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { RouteProp } from '@react-navigation/native'
 import { Icon } from '@rneui/themed'
 import { useTheme } from '../hooks/useTheme'
-import { useFavorites } from '../hooks/useFavorites'
 
-// Screens
-import DiscoveryWizardScreen from '../screens/DiscoveryWizard'
+// Import screens
+import DiscoveryScreen from '../screens/RestaurantDiscoveryScreen'
 import FavoritesScreen from '../screens/FavoritesScreen'
 import ProfileScreen from '../screens/ProfileScreen'
 
-// Types
-import type { MainTabParamList } from './AppNavigator'
+import { MainTabParamList } from '../types/navigation'
 
 const Tab = createBottomTabNavigator<MainTabParamList>()
 
-interface TabIconProps {
-  focused: boolean
-  size: number
-}
-
 const TabNavigator: React.FC = () => {
   const { theme } = useTheme()
-  const { favorites } = useFavorites()
-
-  const getTabBarIcon = (routeName: string, focused: boolean, size: number) => {
-    let iconName: string
-    let iconType = 'font-awesome'
-
-    switch (routeName) {
-      case 'Discovery':
-        iconName = focused ? 'search' : 'search'
-        break
-      case 'Favorites':
-        iconName = focused ? 'heart' : 'heart-o'
-        break
-      case 'Profile':
-        iconName = focused ? 'user' : 'user-o'
-        break
-      default:
-        iconName = 'circle'
+  
+  // Get safe bottom padding for Android
+  const getTabBarHeight = () => {
+    const baseHeight = 60
+    if (Platform.OS === 'android') {
+      // Add extra padding for Android navigation bar
+      return baseHeight + 80
     }
-
-    return (
-      <Icon
-        name={iconName}
-        type={iconType}
-        size={size}
-        color={focused ? theme.colors.primary : theme.colors.textMuted}
-      />
-    )
-  }
-
-  const getBadgeCount = (routeName: string): number | undefined => {
-    switch (routeName) {
-      case 'Favorites':
-        return favorites.length > 0 ? favorites.length : undefined
-      default:
-        return undefined
-    }
+    return baseHeight
   }
 
   return (
     <Tab.Navigator
-      initialRouteName="Discovery"
-      screenOptions={({ route }: { route: RouteProp<MainTabParamList> }) => ({
+      screenOptions={{
         headerShown: false,
-        tabBarIcon: ({ focused, size }: TabIconProps) => 
-          getTabBarIcon(route.name, focused, size),
         tabBarActiveTintColor: theme.colors.primary,
-        tabBarInactiveTintColor: theme.colors.textMuted,
+        tabBarInactiveTintColor: theme.colors.textSecondary,
         tabBarStyle: {
           backgroundColor: theme.colors.surface,
           borderTopColor: theme.colors.divider,
           borderTopWidth: 1,
-          paddingBottom: 8,
-          paddingTop: 8,
-          height: 80,
-          ...theme.shadows.header,
+          height: getTabBarHeight(),
+          paddingBottom: Platform.OS === 'android' ? 80 : 20, // Extra padding for Android
+          paddingTop: 10,
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          elevation: 8, // Android shadow
+          shadowColor: theme.colors.textPrimary, // iOS shadow
+          shadowOffset: { width: 0, height: -2 },
+          shadowOpacity: 0.1,
+          shadowRadius: 4,
         },
         tabBarLabelStyle: {
           fontSize: theme.typography.fontSize.caption,
-          fontWeight: '500',
-          marginTop: 4,
-        },
-        tabBarItemStyle: {
-          paddingVertical: 4,
-        },
-        tabBarBadge: getBadgeCount(route.name),
-        tabBarBadgeStyle: {
-          backgroundColor: theme.colors.error,
-          color: theme.colors.textOnPrimary,
-          fontSize: theme.typography.fontSize.caption - 2,
           fontWeight: '600',
-          minWidth: 18,
-          height: 18,
-          borderRadius: 9,
+          marginBottom: Platform.OS === 'android' ? 5 : 0,
         },
-      })}
+        tabBarIconStyle: {
+          marginTop: 5,
+        },
+      }}
     >
-      <Tab.Screen 
-        name="Discovery" 
-        component={DiscoveryWizardScreen}
+      <Tab.Screen
+        name="Discovery"
+        component={DiscoveryScreen}
         options={{
-          tabBarLabel: 'Discover',
-          title: 'Discover Restaurants',
+          tabBarIcon: ({ color, size }) => (
+            <Icon
+              name="search"
+              type="feather"
+              size={size}
+              color={color}
+            />
+          ),
         }}
       />
-      
-      <Tab.Screen 
-        name="Favorites" 
+      <Tab.Screen
+        name="Favorites"
         component={FavoritesScreen}
         options={{
-          tabBarLabel: 'Favorites',
-          title: 'Your Favorites',
+          tabBarIcon: ({ color, size }) => (
+            <Icon
+              name="heart"
+              type="feather"
+              size={size}
+              color={color}
+            />
+          ),
         }}
       />
-      
-      <Tab.Screen 
-        name="Profile" 
+      <Tab.Screen
+        name="Profile"
         component={ProfileScreen}
         options={{
-          tabBarLabel: 'Profile',
-          title: 'Profile',
+          tabBarIcon: ({ color, size }) => (
+            <Icon
+              name="user"
+              type="feather"
+              size={size}
+              color={color}
+            />
+          ),
         }}
       />
     </Tab.Navigator>

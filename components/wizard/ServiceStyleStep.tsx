@@ -1,6 +1,6 @@
-// components/wizard/ServiceStyleStep.tsx
+// components/wizard/ServiceStyleStep.tsx - Fixed layout and spacing
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import { Button, Icon } from '@rneui/themed'
 import { useTheme } from '../../hooks/useTheme'
 import { WizardState } from '../../screens/DiscoveryWizard'
@@ -77,16 +77,19 @@ const ServiceStyleStep: React.FC<ServiceStyleStepProps> = ({
         activeOpacity={0.7}
       >
         <View style={styles.serviceHeader}>
-          <View style={styles.serviceIconContainer}>
+          <View style={[
+            styles.serviceIconContainer,
+            isSelected && styles.selectedIconContainer
+          ]}>
             <Icon
               name={service.icon.name}
               type={service.icon.type}
               size={24}
-              color={theme.colors.textPrimary}
+              color={isSelected ? theme.colors.textOnPrimary : theme.colors.textPrimary}
             />
           </View>
           
-          <View style={styles.serviceTitleContainer}>
+          <View style={styles.serviceContent}>
             <Text style={[
               styles.serviceLabel,
               isSelected && styles.selectedServiceLabel
@@ -101,20 +104,24 @@ const ServiceStyleStep: React.FC<ServiceStyleStepProps> = ({
             </Text>
           </View>
 
-          <View style={[
-            styles.selectionIndicator,
-            isSelected && styles.selectedIndicator
-          ]}>
-            <Text style={styles.checkmark}>
-              {isSelected ? '✓' : ''}
-            </Text>
-          </View>
+          {isSelected && (
+            <View style={styles.checkIconContainer}>
+              <Icon
+                name="check-circle"
+                type="feather"
+                size={24}
+                color={theme.colors.primary}
+              />
+            </View>
+          )}
         </View>
-
+        
         <View style={styles.benefitsContainer}>
           {service.benefits.map((benefit, index) => (
-            <View key={index} style={styles.benefitRow}>
-              <Text style={styles.benefitBullet}>•</Text>
+            <View key={index} style={[
+              styles.benefitChip,
+              isSelected && styles.selectedBenefitChip
+            ]}>
               <Text style={[
                 styles.benefitText,
                 isSelected && styles.selectedBenefitText
@@ -131,28 +138,43 @@ const ServiceStyleStep: React.FC<ServiceStyleStepProps> = ({
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      padding: theme.spacing.screenPadding,
-      justifyContent: 'space-between',
+    },
+    scrollContainer: {
+      flex: 1,
+      paddingHorizontal: theme.spacing.lg,
     },
     content: {
-      flex: 1,
-      justifyContent: 'center',
+      paddingTop: theme.spacing.md,
+      paddingBottom: theme.spacing.xl,
     },
     subtitle: {
       fontSize: theme.typography.fontSize.body,
       color: theme.colors.textSecondary,
       textAlign: 'center',
       marginBottom: theme.spacing.xl,
-      lineHeight: 22,
+      lineHeight: theme.typography.fontSize.body * 1.5,
+      paddingHorizontal: theme.spacing.md,
     },
-    serviceGrid: {
+    note: {
+      backgroundColor: theme.colors.accent + '15',
+      borderRadius: theme.borderRadius.md,
+      padding: theme.spacing.md,
+      marginBottom: theme.spacing.xl,
+    },
+    noteText: {
+      fontSize: theme.typography.fontSize.caption,
+      color: theme.colors.textSecondary,
+      textAlign: 'center',
+      lineHeight: theme.typography.fontSize.caption * 1.4,
+    },
+    serviceOptionsContainer: {
       marginBottom: theme.spacing.xl,
     },
     serviceCard: {
       backgroundColor: theme.colors.surface,
       borderRadius: theme.borderRadius.lg,
       padding: theme.spacing.lg,
-      marginBottom: theme.spacing.lg,
+      marginBottom: theme.spacing.md,
       borderWidth: 2,
       borderColor: theme.colors.border,
       ...theme.shadows.small,
@@ -170,21 +192,21 @@ const ServiceStyleStep: React.FC<ServiceStyleStepProps> = ({
     serviceIconContainer: {
       width: 50,
       height: 50,
-      borderRadius: 25,
+      borderRadius: theme.borderRadius.md,
       backgroundColor: theme.colors.surfaceElevated,
       justifyContent: 'center',
       alignItems: 'center',
       marginRight: theme.spacing.md,
     },
-    serviceIcon: {
-      // Removed - now using Icon component
+    selectedIconContainer: {
+      backgroundColor: theme.colors.primary,
     },
-    serviceTitleContainer: {
+    serviceContent: {
       flex: 1,
     },
     serviceLabel: {
-      fontSize: theme.typography.fontSize.h2,
-      fontWeight: '600',
+      fontSize: theme.typography.fontSize.h3,
+      fontWeight: '700',
       color: theme.colors.textPrimary,
       marginBottom: theme.spacing.xs,
     },
@@ -194,75 +216,62 @@ const ServiceStyleStep: React.FC<ServiceStyleStepProps> = ({
     serviceDescription: {
       fontSize: theme.typography.fontSize.secondary,
       color: theme.colors.textSecondary,
+      lineHeight: theme.typography.fontSize.secondary * 1.3,
     },
     selectedServiceDescription: {
       color: theme.colors.textPrimary,
     },
-    selectionIndicator: {
-      width: 24,
-      height: 24,
-      borderRadius: 12,
-      borderWidth: 2,
-      borderColor: theme.colors.border,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    selectedIndicator: {
-      backgroundColor: theme.colors.primary,
-      borderColor: theme.colors.primary,
-    },
-    checkmark: {
-      color: theme.colors.textOnPrimary,
-      fontSize: 14,
-      fontWeight: '600',
+    checkIconContainer: {
+      marginLeft: theme.spacing.md,
     },
     benefitsContainer: {
-      paddingLeft: theme.spacing.lg,
-    },
-    benefitRow: {
       flexDirection: 'row',
-      alignItems: 'center',
-      marginBottom: theme.spacing.xs,
+      flexWrap: 'wrap',
+      gap: theme.spacing.xs,
     },
-    benefitBullet: {
-      fontSize: theme.typography.fontSize.secondary,
-      color: theme.colors.textMuted,
-      marginRight: theme.spacing.sm,
-      width: 8,
+    benefitChip: {
+      backgroundColor: theme.colors.border + '40',
+      borderRadius: theme.borderRadius.sm,
+      paddingHorizontal: theme.spacing.sm,
+      paddingVertical: theme.spacing.xs,
+    },
+    selectedBenefitChip: {
+      backgroundColor: theme.colors.primary + '20',
     },
     benefitText: {
       fontSize: theme.typography.fontSize.caption,
-      color: theme.colors.textMuted,
-      flex: 1,
+      color: theme.colors.textSecondary,
+      fontWeight: '500',
     },
     selectedBenefitText: {
-      color: theme.colors.textSecondary,
+      color: theme.colors.primary,
     },
     buttonContainer: {
-      paddingTop: theme.spacing.lg,
+      paddingHorizontal: theme.spacing.lg,
+      paddingBottom: theme.spacing.lg,
+      backgroundColor: theme.colors.background,
+      borderTopWidth: 1,
+      borderTopColor: theme.colors.divider,
     },
     continueButton: {
       backgroundColor: theme.colors.primary,
       borderRadius: theme.borderRadius.md,
-      height: theme.spacing.buttonHeight,
+      paddingVertical: theme.spacing.md,
     },
-    note: {
-      backgroundColor: theme.colors.surfaceElevated,
-      borderRadius: theme.borderRadius.md,
-      padding: theme.spacing.md,
-      marginBottom: theme.spacing.lg,
-    },
-    noteText: {
-      fontSize: theme.typography.fontSize.caption,
-      color: theme.colors.textMuted,
-      textAlign: 'center',
-      lineHeight: 18,
+    continueButtonText: {
+      fontSize: theme.typography.fontSize.body,
+      fontWeight: '600',
+      color: theme.colors.textOnPrimary,
     },
   })
 
   return (
     <View style={styles.container}>
-      <View style={styles.content}>
+      <ScrollView 
+        style={styles.scrollContainer}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.content}
+      >
         <Text style={styles.subtitle}>
           How would you like to enjoy your meal? Select all that interest you.
         </Text>
@@ -273,16 +282,17 @@ const ServiceStyleStep: React.FC<ServiceStyleStepProps> = ({
           </Text>
         </View>
 
-        <View style={styles.serviceGrid}>
+        <View style={styles.serviceOptionsContainer}>
           {SERVICE_OPTIONS.map(renderServiceCard)}
         </View>
-      </View>
+      </ScrollView>
 
       <View style={styles.buttonContainer}>
         <Button
           title="Continue"
           onPress={handleContinue}
           buttonStyle={styles.continueButton}
+          titleStyle={styles.continueButtonText}
         />
       </View>
     </View>
