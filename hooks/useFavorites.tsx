@@ -31,19 +31,38 @@ export const useFavorites = () => {
         return
       }
 
+      // Check if user_favorites table exists and handle gracefully
       const { data, error } = await supabase
         .from('user_favorites')
         .select('restaurant_id')
         .eq('user_id', user.id)
 
-      if (error) throw error
+      if (error) {
+        // Handle specific database errors gracefully
+        if (error.code === '42P01') {
+          // Table doesn't exist - this is expected for new setups
+          console.log('user_favorites table not found - this is expected for new users')
+          setFavorites([])
+        } else if (error.code === '42701') {
+          // Column doesn't exist - graceful handling
+          console.log('user_favorites table exists but column structure is different - this is expected for new users')
+          setFavorites([])
+        } else {
+          console.error('Error loading favorites:', error)
+          setError('Unable to load favorites')
+        }
+        setLoading(false)
+        return
+      }
 
       const favoriteIds = data?.map(fav => fav.restaurant_id) || []
       setFavorites(favoriteIds)
       setError(null)
     } catch (error) {
       console.error('Error loading favorites:', error)
-      setError('Failed to load favorites')
+      // Don't throw error for new users - just set empty favorites
+      setFavorites([])
+      setError(null)
     } finally {
       setLoading(false)
     }
@@ -109,7 +128,15 @@ export const useFavorites = () => {
           restaurant_id: restaurantId,
         })
 
-      if (error) throw error
+      if (error) {
+        // Handle table not existing gracefully
+        if (error.code === '42P01' || error.code === '42701') {
+          console.log('Favorites feature not yet available - database setup needed')
+          setError('Favorites feature coming soon!')
+          return
+        }
+        throw error
+      }
 
       // Optimistically update local state
       setFavorites(prev => {
@@ -122,7 +149,7 @@ export const useFavorites = () => {
       setError(null)
     } catch (error) {
       console.error('Error adding favorite:', error)
-      setError('Failed to add favorite')
+      setError('Unable to add favorite')
       throw error
     }
   }
@@ -141,14 +168,22 @@ export const useFavorites = () => {
         .eq('user_id', user.id)
         .eq('restaurant_id', restaurantId)
 
-      if (error) throw error
+      if (error) {
+        // Handle table not existing gracefully
+        if (error.code === '42P01' || error.code === '42701') {
+          console.log('Favorites feature not yet available - database setup needed')
+          setError('Favorites feature coming soon!')
+          return
+        }
+        throw error
+      }
 
       // Optimistically update local state
       setFavorites(prev => prev.filter(id => id !== restaurantId))
       setError(null)
     } catch (error) {
       console.error('Error removing favorite:', error)
-      setError('Failed to remove favorite')
+      setError('Unable to remove favorite')
       throw error
     }
   }
@@ -180,7 +215,7 @@ export const useFavorites = () => {
       return data || []
     } catch (error) {
       console.error('Error fetching favorite restaurants:', error)
-      throw error
+      return []
     }
   }
 
@@ -197,13 +232,21 @@ export const useFavorites = () => {
         .delete()
         .eq('user_id', user.id)
 
-      if (error) throw error
+      if (error) {
+        // Handle table not existing gracefully
+        if (error.code === '42P01' || error.code === '42701') {
+          console.log('Favorites feature not yet available - database setup needed')
+          setFavorites([])
+          return
+        }
+        throw error
+      }
 
       setFavorites([])
       setError(null)
     } catch (error) {
       console.error('Error clearing favorites:', error)
-      setError('Failed to clear favorites')
+      setError('Unable to clear favorites')
       throw error
     }
   }

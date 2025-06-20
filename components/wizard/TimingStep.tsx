@@ -13,7 +13,7 @@ interface TimingStepProps {
 }
 
 interface TimingOption {
-  id: 'now' | 'later'
+  id: 'now' | 'later' | 'anytime'
   label: string
   icon: { name: string; type: string }
   description: string
@@ -31,6 +31,12 @@ const TIMING_OPTIONS: TimingOption[] = [
     label: 'Schedule for Later',
     icon: { name: 'calendar', type: 'font-awesome' },
     description: 'Plan for a specific time'
+  },
+  {
+    id: 'anytime',
+    label: 'Anytime',
+    icon: { name: 'clock-o', type: 'font-awesome' },
+    description: 'Show all restaurants regardless of hours'
   }
 ]
 
@@ -56,10 +62,10 @@ const TimingStep: React.FC<TimingStepProps> = ({
 
   const [selectedDate, setSelectedDate] = useState(getInitialScheduledTime())
 
-  const handleTimingChange = (timing: 'now' | 'later') => {
-    if (timing === 'now') {
+  const handleTimingChange = (timing: 'now' | 'later' | 'anytime') => {
+    if (timing === 'now' || timing === 'anytime') {
       updateWizardState({ 
-        timing: 'now',
+        timing: timing,
         scheduledTime: undefined
       })
     } else {
@@ -134,12 +140,15 @@ const TimingStep: React.FC<TimingStepProps> = ({
         activeOpacity={0.7}
       >
         <View style={styles.timingHeader}>
-          <View style={styles.timingIconContainer}>
+          <View style={[
+            styles.timingIconContainer,
+            isSelected && styles.selectedTimingIconContainer
+          ]}>
             <Icon
               name={option.icon.name}
               type={option.icon.type}
               size={24}
-              color={theme.colors.textPrimary}
+              color={isSelected ? theme.colors.textOnPrimary : theme.colors.textPrimary}
             />
           </View>
           
@@ -158,41 +167,57 @@ const TimingStep: React.FC<TimingStepProps> = ({
             </Text>
           </View>
 
-          <View style={[
-            styles.selectionIndicator,
-            isSelected && styles.selectedIndicator
-          ]}>
-            <Text style={styles.checkmark}>
-              {isSelected ? '✓' : ''}
-            </Text>
-          </View>
+          {isSelected && (
+            <View style={styles.checkIconContainer}>
+              <Icon
+                name="check-circle"
+                type="feather"
+                size={24}
+                color={theme.colors.primary}
+              />
+            </View>
+          )}
         </View>
       </TouchableOpacity>
     )
   }
 
-  const renderScheduleSelector = () => {
+  const renderScheduleDetails = () => {
     if (wizardState.timing !== 'later') return null
 
     return (
       <View style={styles.scheduleContainer}>
         <Text style={styles.scheduleTitle}>When would you like to dine?</Text>
         
-        <View style={styles.dateTimeRow}>
+        <View style={styles.dateTimeSelectors}>
           <TouchableOpacity
             style={styles.dateTimeButton}
             onPress={() => setShowDatePicker(true)}
           >
-            <Text style={styles.dateTimeLabel}>Date</Text>
-            <Text style={styles.dateTimeValue}>{formatDate(selectedDate)}</Text>
+            <Icon
+              name="calendar"
+              type="feather"
+              size={20}
+              color={theme.colors.primary}
+            />
+            <Text style={styles.dateTimeButtonText}>
+              {formatDate(selectedDate)}
+            </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.dateTimeButton}
             onPress={() => setShowTimePicker(true)}
           >
-            <Text style={styles.dateTimeLabel}>Time</Text>
-            <Text style={styles.dateTimeValue}>{formatTime(selectedDate)}</Text>
+            <Icon
+              name="clock"
+              type="feather"
+              size={20}
+              color={theme.colors.primary}
+            />
+            <Text style={styles.dateTimeButtonText}>
+              {formatTime(selectedDate)}
+            </Text>
           </TouchableOpacity>
         </View>
 
@@ -203,11 +228,6 @@ const TimingStep: React.FC<TimingStepProps> = ({
             display={Platform.OS === 'ios' ? 'spinner' : 'default'}
             onChange={handleDateChange}
             minimumDate={new Date()}
-            maximumDate={(() => {
-              const maxDate = new Date()
-              maxDate.setDate(maxDate.getDate() + 30) // 30 days from now
-              return maxDate
-            })()}
           />
         )}
 
@@ -226,21 +246,20 @@ const TimingStep: React.FC<TimingStepProps> = ({
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      padding: theme.spacing.screenPadding,
-      justifyContent: 'space-between',
     },
     content: {
       flex: 1,
-      justifyContent: 'center',
+      paddingTop: theme.spacing.md,
     },
     subtitle: {
       fontSize: theme.typography.fontSize.body,
       color: theme.colors.textSecondary,
       textAlign: 'center',
       marginBottom: theme.spacing.xl,
-      lineHeight: 22,
+      lineHeight: theme.typography.fontSize.body * 1.4,
+      paddingHorizontal: theme.spacing.md,
     },
-    timingGrid: {
+    timingOptionsContainer: {
       marginBottom: theme.spacing.xl,
     },
     timingCard: {
@@ -264,21 +283,21 @@ const TimingStep: React.FC<TimingStepProps> = ({
     timingIconContainer: {
       width: 50,
       height: 50,
-      borderRadius: 25,
+      borderRadius: theme.borderRadius.md,
       backgroundColor: theme.colors.surfaceElevated,
       justifyContent: 'center',
       alignItems: 'center',
       marginRight: theme.spacing.md,
     },
-    timingIcon: {
-      // Removed - now using Icon component
+    selectedTimingIconContainer: {
+      backgroundColor: theme.colors.primary,
     },
     timingContent: {
       flex: 1,
     },
     timingLabel: {
-      fontSize: theme.typography.fontSize.h2,
-      fontWeight: '600',
+      fontSize: theme.typography.fontSize.h3,
+      fontWeight: '700',
       color: theme.colors.textPrimary,
       marginBottom: theme.spacing.xs,
     },
@@ -288,84 +307,62 @@ const TimingStep: React.FC<TimingStepProps> = ({
     timingDescription: {
       fontSize: theme.typography.fontSize.secondary,
       color: theme.colors.textSecondary,
+      lineHeight: theme.typography.fontSize.secondary * 1.3,
     },
     selectedTimingDescription: {
       color: theme.colors.textPrimary,
     },
-    selectionIndicator: {
-      width: 24,
-      height: 24,
-      borderRadius: 12,
-      borderWidth: 2,
-      borderColor: theme.colors.border,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    selectedIndicator: {
-      backgroundColor: theme.colors.primary,
-      borderColor: theme.colors.primary,
-    },
-    checkmark: {
-      color: theme.colors.textOnPrimary,
-      fontSize: 14,
-      fontWeight: '600',
+    checkIconContainer: {
+      marginLeft: theme.spacing.md,
     },
     scheduleContainer: {
-      backgroundColor: theme.colors.surfaceElevated,
+      backgroundColor: theme.colors.accent + '10', // 6% opacity
       borderRadius: theme.borderRadius.lg,
       padding: theme.spacing.lg,
-      marginBottom: theme.spacing.xl,
-    },
-    scheduleTitle: {
-      fontSize: theme.typography.fontSize.secondary,
-      fontWeight: '600',
-      color: theme.colors.textPrimary,
-      textAlign: 'center',
       marginBottom: theme.spacing.lg,
     },
-    dateTimeRow: {
+    scheduleTitle: {
+      fontSize: theme.typography.fontSize.h3,
+      fontWeight: '600',
+      color: theme.colors.textPrimary,
+      marginBottom: theme.spacing.md,
+      textAlign: 'center',
+    },
+    dateTimeSelectors: {
       flexDirection: 'row',
       justifyContent: 'space-between',
+      gap: theme.spacing.md,
     },
     dateTimeButton: {
       flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
       backgroundColor: theme.colors.surface,
       borderRadius: theme.borderRadius.md,
       padding: theme.spacing.md,
-      marginHorizontal: theme.spacing.sm,
-      alignItems: 'center',
       borderWidth: 1,
       borderColor: theme.colors.border,
+      gap: theme.spacing.sm,
+      justifyContent: 'center',
     },
-    dateTimeLabel: {
-      fontSize: theme.typography.fontSize.caption,
-      color: theme.colors.textMuted,
-      marginBottom: theme.spacing.xs,
-    },
-    dateTimeValue: {
-      fontSize: theme.typography.fontSize.secondary,
+    dateTimeButtonText: {
+      fontSize: theme.typography.fontSize.body,
       fontWeight: '600',
       color: theme.colors.textPrimary,
     },
     buttonContainer: {
       paddingTop: theme.spacing.lg,
+      paddingBottom: theme.spacing.md,
     },
     continueButton: {
       backgroundColor: theme.colors.primary,
       borderRadius: theme.borderRadius.md,
-      height: theme.spacing.buttonHeight,
+      paddingVertical: theme.spacing.md,
     },
-    note: {
-      backgroundColor: theme.colors.surfaceElevated,
-      borderRadius: theme.borderRadius.md,
-      padding: theme.spacing.md,
-      marginBottom: theme.spacing.lg,
-    },
-    noteText: {
-      fontSize: theme.typography.fontSize.caption,
-      color: theme.colors.textMuted,
-      textAlign: 'center',
-      lineHeight: 18,
+    continueButtonText: {
+      fontSize: theme.typography.fontSize.body,
+      fontWeight: '600',
+      color: theme.colors.textOnPrimary,
     },
   })
 
@@ -373,20 +370,14 @@ const TimingStep: React.FC<TimingStepProps> = ({
     <View style={styles.container}>
       <View style={styles.content}>
         <Text style={styles.subtitle}>
-          When are you planning to dine? This helps us show current hours and availability.
+          When are you planning to dine? This helps us show relevant restaurants and their availability.
         </Text>
 
-        <View style={styles.note}>
-          <Text style={styles.noteText}>
-            🕒 "Right Now" shows restaurants that are currently open
-          </Text>
-        </View>
-
-        <View style={styles.timingGrid}>
+        <View style={styles.timingOptionsContainer}>
           {TIMING_OPTIONS.map(renderTimingCard)}
         </View>
 
-        {renderScheduleSelector()}
+        {renderScheduleDetails()}
       </View>
 
       <View style={styles.buttonContainer}>
@@ -394,6 +385,7 @@ const TimingStep: React.FC<TimingStepProps> = ({
           title="Continue"
           onPress={handleContinue}
           buttonStyle={styles.continueButton}
+          titleStyle={styles.continueButtonText}
         />
       </View>
     </View>

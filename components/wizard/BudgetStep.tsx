@@ -1,7 +1,7 @@
 // components/wizard/BudgetStep.tsx
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import { Button, Slider } from '@rneui/themed'
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
+import { Button, Icon } from '@rneui/themed'
 import { useTheme } from '../../hooks/useTheme'
 import { WizardState } from '../../screens/DiscoveryWizard'
 
@@ -15,8 +15,9 @@ interface PriceLevel {
   level: number
   symbol: string
   label: string
-  description: string
   range: string
+  examples: string[]
+  description: string
 }
 
 const PRICE_LEVELS: PriceLevel[] = [
@@ -24,29 +25,33 @@ const PRICE_LEVELS: PriceLevel[] = [
     level: 1,
     symbol: '$',
     label: 'Budget-Friendly',
-    description: 'Quick bites and casual spots',
-    range: 'Under $15'
+    range: 'Under $15',
+    examples: ['Fast food', 'Food trucks', 'Quick bites'],
+    description: 'Great for casual meals and quick eats'
   },
   {
     level: 2,
     symbol: '$$',
     label: 'Moderate',
-    description: 'Good value dining',
-    range: '$15 - $30'
+    range: '$15 - $30',
+    examples: ['Casual dining', 'Chain restaurants', 'Local favorites'],
+    description: 'Perfect for everyday dining out'
   },
   {
     level: 3,
     symbol: '$$$',
     label: 'Upscale',
-    description: 'Fine dining experience',
-    range: '$30 - $60'
+    range: '$30 - $50',
+    examples: ['Fine dining', 'Specialty cuisine', 'Date night spots'],
+    description: 'Special occasions and premium experiences'
   },
   {
     level: 4,
     symbol: '$$$$',
-    label: 'Luxury',
-    description: 'Premium establishments',
-    range: '$60+'
+    label: 'Premium',
+    range: '$50+',
+    examples: ['High-end restaurants', 'Chef-driven', 'Luxury dining'],
+    description: 'The finest dining experiences'
   }
 ]
 
@@ -57,113 +62,152 @@ const BudgetStep: React.FC<BudgetStepProps> = ({
 }) => {
   const { theme } = useTheme()
 
-  const handleBudgetChange = (value: number) => {
-    // For now, just update the max value, keep min at 1
-    updateWizardState({ budget: [1, value] })
-  }
-
-  const handlePresetSelect = (minLevel: number, maxLevel: number) => {
-    updateWizardState({ budget: [minLevel, maxLevel] })
+  const togglePriceLevel = (level: number) => {
+    const currentBudget = wizardState.budget || []
+    const isSelected = currentBudget.includes(level)
+    
+    if (isSelected) {
+      // Remove the level if it's already selected
+      const newBudget = currentBudget.filter(l => l !== level)
+      updateWizardState({ budget: newBudget })
+    } else {
+      // Add the level if it's not selected
+      const newBudget = [...currentBudget, level].sort((a, b) => a - b)
+      updateWizardState({ budget: newBudget })
+    }
   }
 
   const handleContinue = () => {
+    // If no budget selected, default to all levels
+    if (!wizardState.budget || wizardState.budget.length === 0) {
+      updateWizardState({ budget: [1, 2, 3, 4] })
+    }
     onNext()
   }
 
-  const getBudgetRangeText = () => {
-    const [min, max] = wizardState.budget || [1, 4]
-    if (min === max) {
-      const level = PRICE_LEVELS.find(p => p.level === min)
-      return `${level?.symbol} ${level?.label}`
-    }
-    
-    const minLevel = PRICE_LEVELS.find(p => p.level === min)
-    const maxLevel = PRICE_LEVELS.find(p => p.level === max)
-    return `${minLevel?.symbol} to ${maxLevel?.symbol}`
+  const handleQuickSelect = (levels: number[]) => {
+    updateWizardState({ budget: levels })
+  }
+
+  const isPriceLevelSelected = (level: number): boolean => {
+    return (wizardState.budget || []).includes(level)
   }
 
   const renderPriceLevelCard = (priceLevel: PriceLevel) => {
-    const [min, max] = wizardState.budget || [1, 4]
-    const isInRange = priceLevel.level >= min && priceLevel.level <= max
+    const isSelected = isPriceLevelSelected(priceLevel.level)
     
     return (
       <TouchableOpacity
         key={priceLevel.level}
         style={[
           styles.priceLevelCard,
-          isInRange && styles.selectedPriceLevelCard
+          isSelected && styles.selectedPriceLevelCard
         ]}
-        onPress={() => handlePresetSelect(priceLevel.level, priceLevel.level)}
+        onPress={() => togglePriceLevel(priceLevel.level)}
         activeOpacity={0.7}
       >
         <View style={styles.priceLevelHeader}>
           <View style={[
-            styles.symbolContainer,
-            isInRange && styles.selectedSymbolContainer
+            styles.priceSymbolContainer,
+            isSelected && styles.selectedPriceSymbolContainer
           ]}>
             <Text style={[
               styles.priceSymbol,
-              isInRange && styles.selectedPriceSymbol
+              isSelected && styles.selectedPriceSymbol
             ]}>
               {priceLevel.symbol}
             </Text>
           </View>
           
-          <View style={styles.priceLevelContent}>
+          <View style={styles.priceLevelInfo}>
+            <View style={styles.priceLevelTitleRow}>
+              <Text style={[
+                styles.priceLevelLabel,
+                isSelected && styles.selectedPriceLevelLabel
+              ]}>
+                {priceLevel.label}
+              </Text>
+              {isSelected && (
+                <Icon
+                  name="check-circle"
+                  type="feather"
+                  size={20}
+                  color={theme.colors.primary}
+                />
+              )}
+            </View>
             <Text style={[
-              styles.priceLevelLabel,
-              isInRange && styles.selectedPriceLevelLabel
-            ]}>
-              {priceLevel.label}
-            </Text>
-            <Text style={[
-              styles.priceLevelDescription,
-              isInRange && styles.selectedPriceLevelDescription
-            ]}>
-              {priceLevel.description}
-            </Text>
-            <Text style={[
-              styles.priceRange,
-              isInRange && styles.selectedPriceRange
+              styles.priceLevelRange,
+              isSelected && styles.selectedPriceLevelRange
             ]}>
               {priceLevel.range}
             </Text>
           </View>
         </View>
+        
+        <Text style={[
+          styles.priceLevelDescription,
+          isSelected && styles.selectedPriceLevelDescription
+        ]}>
+          {priceLevel.description}
+        </Text>
+        
+        <View style={styles.examplesContainer}>
+          {priceLevel.examples.map((example, index) => (
+            <View key={index} style={[
+              styles.exampleChip,
+              isSelected && styles.selectedExampleChip
+            ]}>
+              <Text style={[
+                styles.exampleText,
+                isSelected && styles.selectedExampleText
+              ]}>
+                {example}
+              </Text>
+            </View>
+          ))}
+        </View>
       </TouchableOpacity>
     )
   }
 
-  const renderQuickPresets = () => {
-    const presets = [
-      { label: 'Any Budget', min: 1, max: 4 },
-      { label: 'Budget & Moderate', min: 1, max: 2 },
-      { label: 'Moderate & Upscale', min: 2, max: 3 },
-      { label: 'Upscale Only', min: 3, max: 3 },
+  const renderQuickSelects = () => {
+    const quickSelectOptions = [
+      { label: 'Budget Only', levels: [1], icon: 'dollar-sign' },
+      { label: 'Casual Dining', levels: [1, 2], icon: 'coffee' },
+      { label: 'Date Night', levels: [2, 3], icon: 'heart' },
+      { label: 'Special Occasion', levels: [3, 4], icon: 'star' },
+      { label: 'Any Budget', levels: [1, 2, 3, 4], icon: 'menu' }
     ]
 
     return (
-      <View style={styles.presetsContainer}>
-        <Text style={styles.presetsTitle}>Quick Selections</Text>
-        <View style={styles.presetsGrid}>
-          {presets.map((preset, index) => {
-            const [min, max] = wizardState.budget || [1, 4]
-            const isSelected = min === preset.min && max === preset.max
+      <View style={styles.quickSelectContainer}>
+        <Text style={styles.quickSelectTitle}>Quick Selections</Text>
+        <View style={styles.quickSelectGrid}>
+          {quickSelectOptions.map((option, index) => {
+            const isActive = JSON.stringify(wizardState.budget?.sort()) === JSON.stringify(option.levels.sort())
             
             return (
               <TouchableOpacity
                 key={index}
                 style={[
-                  styles.presetChip,
-                  isSelected && styles.selectedPresetChip
+                  styles.quickSelectButton,
+                  isActive && styles.activeQuickSelectButton
                 ]}
-                onPress={() => handlePresetSelect(preset.min, preset.max)}
+                onPress={() => handleQuickSelect(option.levels)}
+                activeOpacity={0.7}
               >
+                <Icon
+                  name={option.icon}
+                  type="feather"
+                  size={16}
+                  color={isActive ? theme.colors.textOnPrimary : theme.colors.textSecondary}
+                />
                 <Text style={[
-                  styles.presetChipText,
-                  isSelected && styles.selectedPresetChipText
+                  styles.quickSelectText,
+                  isActive && styles.activeQuickSelectText
                 ]}>
-                  {preset.label}
+                  {option.label}
                 </Text>
               </TouchableOpacity>
             )
@@ -176,217 +220,196 @@ const BudgetStep: React.FC<BudgetStepProps> = ({
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      padding: theme.spacing.screenPadding,
-      justifyContent: 'space-between',
     },
     content: {
       flex: 1,
-      justifyContent: 'center',
+      paddingTop: theme.spacing.md,
     },
     subtitle: {
       fontSize: theme.typography.fontSize.body,
       color: theme.colors.textSecondary,
       textAlign: 'center',
       marginBottom: theme.spacing.xl,
-      lineHeight: 22,
+      lineHeight: theme.typography.fontSize.body * 1.4,
+      paddingHorizontal: theme.spacing.md,
     },
-    sliderContainer: {
-      backgroundColor: theme.colors.surface,
-      borderRadius: theme.borderRadius.lg,
-      padding: theme.spacing.lg,
-      marginBottom: theme.spacing.lg,
-      ...theme.shadows.small,
+    quickSelectContainer: {
+      marginBottom: theme.spacing.xl,
     },
-    sliderTitle: {
-      fontSize: theme.typography.fontSize.secondary,
-      fontWeight: '600',
-      color: theme.colors.textPrimary,
-      textAlign: 'center',
-      marginBottom: theme.spacing.sm,
-    },
-    budgetRangeText: {
-      fontSize: theme.typography.fontSize.h2,
-      fontWeight: '600',
-      color: theme.colors.primary,
-      textAlign: 'center',
-      marginBottom: theme.spacing.lg,
-    },
-    sliderWrapper: {
-      marginHorizontal: theme.spacing.md,
-    },
-    sliderLabels: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      marginTop: theme.spacing.sm,
-    },
-    sliderLabel: {
-      fontSize: theme.typography.fontSize.caption,
-      color: theme.colors.textMuted,
-    },
-    presetsContainer: {
-      marginBottom: theme.spacing.lg,
-    },
-    presetsTitle: {
+    quickSelectTitle: {
       fontSize: theme.typography.fontSize.secondary,
       fontWeight: '600',
       color: theme.colors.textPrimary,
       marginBottom: theme.spacing.md,
+      textAlign: 'center',
     },
-    presetsGrid: {
+    quickSelectGrid: {
       flexDirection: 'row',
       flexWrap: 'wrap',
-      justifyContent: 'space-between',
+      justifyContent: 'center',
+      gap: theme.spacing.sm,
     },
-    presetChip: {
-      backgroundColor: theme.colors.surfaceElevated,
-      borderRadius: theme.borderRadius.md,
+    quickSelectButton: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      backgroundColor: theme.colors.surface,
+      borderRadius: theme.borderRadius.full,
       paddingHorizontal: theme.spacing.md,
       paddingVertical: theme.spacing.sm,
-      marginBottom: theme.spacing.sm,
       borderWidth: 1,
       borderColor: theme.colors.border,
-      minWidth: '48%',
-      alignItems: 'center',
+      gap: theme.spacing.xs,
     },
-    selectedPresetChip: {
+    activeQuickSelectButton: {
       backgroundColor: theme.colors.primary,
       borderColor: theme.colors.primary,
     },
-    presetChipText: {
+    quickSelectText: {
       fontSize: theme.typography.fontSize.caption,
-      color: theme.colors.textPrimary,
+      color: theme.colors.textSecondary,
       fontWeight: '500',
     },
-    selectedPresetChipText: {
+    activeQuickSelectText: {
       color: theme.colors.textOnPrimary,
     },
     priceLevelsContainer: {
-      marginBottom: theme.spacing.lg,
-    },
-    priceLevelsTitle: {
-      fontSize: theme.typography.fontSize.secondary,
-      fontWeight: '600',
-      color: theme.colors.textPrimary,
-      marginBottom: theme.spacing.md,
+      flex: 1,
     },
     priceLevelCard: {
       backgroundColor: theme.colors.surface,
-      borderRadius: theme.borderRadius.md,
-      padding: theme.spacing.md,
-      marginBottom: theme.spacing.sm,
-      borderWidth: 1,
+      borderRadius: theme.borderRadius.lg,
+      padding: theme.spacing.lg,
+      marginBottom: theme.spacing.md,
+      borderWidth: 2,
       borderColor: theme.colors.border,
+      ...theme.shadows.small,
     },
     selectedPriceLevelCard: {
       backgroundColor: theme.colors.surfaceElevated,
       borderColor: theme.colors.primary,
+      ...theme.shadows.medium,
     },
     priceLevelHeader: {
       flexDirection: 'row',
-      alignItems: 'center',
+      alignItems: 'flex-start',
+      marginBottom: theme.spacing.sm,
     },
-    symbolContainer: {
-      width: 40,
-      height: 40,
-      borderRadius: 20,
+    priceSymbolContainer: {
+      width: 50,
+      height: 50,
+      borderRadius: theme.borderRadius.md,
       backgroundColor: theme.colors.surfaceElevated,
       justifyContent: 'center',
       alignItems: 'center',
       marginRight: theme.spacing.md,
     },
-    selectedSymbolContainer: {
+    selectedPriceSymbolContainer: {
       backgroundColor: theme.colors.primary,
     },
     priceSymbol: {
-      fontSize: 16,
+      fontSize: theme.typography.fontSize.h3,
       fontWeight: '700',
       color: theme.colors.textPrimary,
     },
     selectedPriceSymbol: {
       color: theme.colors.textOnPrimary,
     },
-    priceLevelContent: {
+    priceLevelInfo: {
       flex: 1,
     },
-    priceLevelLabel: {
-      fontSize: theme.typography.fontSize.secondary,
-      fontWeight: '600',
-      color: theme.colors.textPrimary,
+    priceLevelTitleRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
       marginBottom: theme.spacing.xs,
+    },
+    priceLevelLabel: {
+      fontSize: theme.typography.fontSize.h3,
+      fontWeight: '700',
+      color: theme.colors.textPrimary,
     },
     selectedPriceLevelLabel: {
       color: theme.colors.primary,
     },
-    priceLevelDescription: {
-      fontSize: theme.typography.fontSize.caption,
+    priceLevelRange: {
+      fontSize: theme.typography.fontSize.body,
       color: theme.colors.textSecondary,
-      marginBottom: theme.spacing.xs,
+      fontWeight: '500',
+    },
+    selectedPriceLevelRange: {
+      color: theme.colors.primary + '80', // 50% opacity
+    },
+    priceLevelDescription: {
+      fontSize: theme.typography.fontSize.secondary,
+      color: theme.colors.textSecondary,
+      marginBottom: theme.spacing.md,
+      lineHeight: theme.typography.fontSize.secondary * 1.4,
     },
     selectedPriceLevelDescription: {
       color: theme.colors.textPrimary,
     },
-    priceRange: {
+    examplesContainer: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      gap: theme.spacing.xs,
+    },
+    exampleChip: {
+      backgroundColor: theme.colors.border + '40', // 25% opacity
+      borderRadius: theme.borderRadius.sm,
+      paddingHorizontal: theme.spacing.sm,
+      paddingVertical: theme.spacing.xs,
+    },
+    selectedExampleChip: {
+      backgroundColor: theme.colors.primary + '20', // 12% opacity
+    },
+    exampleText: {
       fontSize: theme.typography.fontSize.caption,
-      color: theme.colors.textMuted,
+      color: theme.colors.textSecondary,
       fontWeight: '500',
     },
-    selectedPriceRange: {
+    selectedExampleText: {
       color: theme.colors.primary,
     },
     buttonContainer: {
       paddingTop: theme.spacing.lg,
+      paddingBottom: theme.spacing.md,
     },
     continueButton: {
       backgroundColor: theme.colors.primary,
       borderRadius: theme.borderRadius.md,
-      height: theme.spacing.buttonHeight,
+      paddingVertical: theme.spacing.md,
+    },
+    continueButtonText: {
+      fontSize: theme.typography.fontSize.body,
+      fontWeight: '600',
+      color: theme.colors.textOnPrimary,
     },
   })
 
   return (
     <View style={styles.container}>
-      <View style={styles.content}>
+      <ScrollView 
+        style={styles.content}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: theme.spacing.lg }}
+      >
         <Text style={styles.subtitle}>
-          What's your budget range? You can adjust this to see restaurants that fit your spending comfort.
+          What's your budget range? You can select multiple price levels to see more options.
         </Text>
 
-        <View style={styles.sliderContainer}>
-          <Text style={styles.sliderTitle}>Budget Range</Text>
-          <Text style={styles.budgetRangeText}>{getBudgetRangeText()}</Text>
-          
-          <View style={styles.sliderWrapper}>
-          <Slider
-            value={wizardState.budget?.[1] || 4}
-            onValueChange={handleBudgetChange}
-            minimumValue={1}
-            maximumValue={4}
-            step={1}
-            allowTouchTrack
-            trackStyle={{ height: 6, backgroundColor: theme.colors.border }}
-            thumbStyle={{ backgroundColor: theme.colors.primary, width: 20, height: 20 }}
-          />
-            <View style={styles.sliderLabels}>
-              <Text style={styles.sliderLabel}>$</Text>
-              <Text style={styles.sliderLabel}>$$</Text>
-              <Text style={styles.sliderLabel}>$$$</Text>
-              <Text style={styles.sliderLabel}>$$$$</Text>
-            </View>
-          </View>
-        </View>
-
-        {renderQuickPresets()}
+        {renderQuickSelects()}
 
         <View style={styles.priceLevelsContainer}>
-          <Text style={styles.priceLevelsTitle}>Price Level Guide</Text>
           {PRICE_LEVELS.map(renderPriceLevelCard)}
         </View>
-      </View>
+      </ScrollView>
 
       <View style={styles.buttonContainer}>
         <Button
           title="Continue"
           onPress={handleContinue}
           buttonStyle={styles.continueButton}
+          titleStyle={styles.continueButtonText}
         />
       </View>
     </View>

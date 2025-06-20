@@ -1,4 +1,4 @@
-// screens/DiscoveryWizardScreen.tsx
+// screens/DiscoveryWizard.tsx - Updated for new timing options and budget handling
 import React, { useState } from 'react'
 import { View, Text, StyleSheet, Animated } from 'react-native'
 import { Button } from '@rneui/themed'
@@ -17,9 +17,9 @@ export interface WizardState {
   location: string
   mealTypes: string[]
   serviceStyles: string[]
-  timing: 'now' | 'later'
+  timing: 'now' | 'later' | 'anytime'
   scheduledTime?: Date
-  budget: number[]
+  budget: number[] // Changed from range to array of selected price levels
   dietary: string[]
   features: string[]
 }
@@ -46,7 +46,7 @@ const DiscoveryWizardScreen: React.FC = () => {
     mealTypes: [],
     serviceStyles: [],
     timing: 'now',
-    budget: [1, 4], // Price levels 1-4
+    budget: [], // Start with empty budget array - user can select multiple
     dietary: [],
     features: []
   })
@@ -94,8 +94,14 @@ const DiscoveryWizardScreen: React.FC = () => {
   }
 
   const handleFinish = () => {
+    // Ensure budget has default values if empty
+    const finalWizardState = {
+      ...wizardState,
+      budget: wizardState.budget.length > 0 ? wizardState.budget : [1, 2, 3, 4]
+    }
+    
     // Navigate to results with wizard state
-    navigation.navigate('RestaurantDiscovery', { filters: wizardState })
+    navigation.navigate('RestaurantDiscovery', { filters: finalWizardState })
   }
 
   const getCurrentStepComponent = () => {
