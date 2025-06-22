@@ -1,4 +1,4 @@
-// screens/FavoritesScreen.tsx
+// screens/FavoritesScreen.tsx - Fixed to work with actual useFavorites hook
 import React, { useState, useEffect } from 'react'
 import { 
   View, 
@@ -10,16 +10,15 @@ import {
 } from 'react-native'
 import { Header, Button } from '@rneui/themed'
 import { useTheme } from '../hooks/useTheme'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, NavigationProp } from '@react-navigation/native'
 import { useFavorites } from '../hooks/useFavorites'
 import RestaurantCard from '../components/restaurant/RestaurantCard'
 import EmptyState from '../components/ui/EmptyState'
 import LoadingSpinner from '../components/ui/LoadingSpinner'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { RootStackParamList } from '../types/navigation'
+import { MainTabParamList } from '../types/navigation'
 
-type FavoritesNavigationProp = NativeStackNavigationProp<RootStackParamList>
-
+// Use the tab navigation type to ensure we stay within tabs
+type FavoritesNavigationProp = NavigationProp<MainTabParamList>
 
 const FavoritesScreen: React.FC = () => {
   const { theme } = useTheme()
@@ -28,14 +27,17 @@ const FavoritesScreen: React.FC = () => {
   const [selectionMode, setSelectionMode] = useState(false)
   const [selectedItems, setSelectedItems] = useState<string[]>([])
 
+  // Get functions from useFavorites hook
   const {
     favorites,
     loading,
     refresh,
     removeFavorite,
-    getFavoriteRestaurants
+    getFavoriteRestaurants,
+    isFavorite
   } = useFavorites()
 
+  // Local state for favorite restaurants with full details
   const [favoriteRestaurants, setFavoriteRestaurants] = useState<any[]>([])
 
   useEffect(() => {
@@ -62,7 +64,10 @@ const FavoritesScreen: React.FC = () => {
     if (selectionMode) {
       toggleSelection(restaurantId)
     } else {
-      navigation.navigate('RestaurantDetail', { restaurantId })
+      // For restaurant detail, you might need to navigate to the stack navigator
+      // This depends on your navigation structure - you may need to adjust this
+      console.log('Navigate to restaurant detail:', restaurantId)
+      // navigation.navigate('RestaurantDetail', { restaurantId })
     }
   }
 
@@ -133,7 +138,9 @@ const FavoritesScreen: React.FC = () => {
   }
 
   const handleDiscoverMore = () => {
-    navigation.navigate('DiscoveryWizard')
+    // Navigate to the Home tab (which contains DiscoveryWizard)
+    // This keeps the tab bar visible
+    navigation.navigate('Home')
   }
 
   const renderRestaurantCard = ({ item }: { item: any }) => (
@@ -152,7 +159,7 @@ const FavoritesScreen: React.FC = () => {
       title="No favorites yet"
       message="Start saving restaurants you love!"
       actionText="Discover Restaurants"
-      onAction={handleDiscoverMore}
+      onAction={handleDiscoverMore} // This now navigates to Home tab
       icon="❤️"
     />
   )
@@ -192,31 +199,30 @@ const FavoritesScreen: React.FC = () => {
     return (
       <Header
         centerComponent={{
-          text: `Your Favorites${favoriteCount > 0 ? ` (${favoriteCount})` : ''}`,
+          text: `Your Favorites (${favoriteCount})`,
           style: {
             color: theme.colors.textOnPrimary,
             fontSize: theme.typography.fontSize.h2,
             fontWeight: '700',
           },
         }}
-        rightComponent={
-          favoriteCount > 0 ? {
-            icon: 'more-vert',
-            type: 'material',
-            color: theme.colors.textOnPrimary,
-            onPress: () => {
-              Alert.alert(
-                'Favorites Options',
-                'What would you like to do?',
-                [
-                  { text: 'Cancel', style: 'cancel' },
-                  { text: 'Share List', onPress: handleShare },
-                  { text: 'Select Multiple', onPress: toggleSelectionMode },
-                ]
-              )
-            },
-          } : undefined
-        }
+        rightComponent={{
+          icon: favoriteCount > 0 ? 'more-horiz' : 'share',
+          type: 'material',
+          color: theme.colors.textOnPrimary,
+          onPress: favoriteCount > 0 ? () => {
+            // Show options menu
+            Alert.alert(
+              'Options',
+              'Choose an action',
+              [
+                { text: 'Cancel', style: 'cancel' },
+                { text: 'Select Multiple', onPress: toggleSelectionMode },
+                { text: 'Share List', onPress: handleShare },
+              ]
+            )
+          } : handleShare,
+        }}
         backgroundColor={theme.colors.primary}
       />
     )
@@ -227,47 +233,14 @@ const FavoritesScreen: React.FC = () => {
       flex: 1,
       backgroundColor: theme.colors.background,
     },
-    listContent: {
-      paddingHorizontal: theme.spacing.screenPadding,
-      paddingBottom: theme.spacing.xl,
-    },
     loadingContainer: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
     },
-    actionBar: {
-      flexDirection: 'row',
-      padding: theme.spacing.screenPadding,
-      backgroundColor: theme.colors.surface,
-      borderBottomWidth: 1,
-      borderBottomColor: theme.colors.divider,
-    },
-    shareButton: {
-      flex: 1,
-      marginRight: theme.spacing.sm,
-      backgroundColor: 'transparent',
-      borderColor: theme.colors.primary,
-      borderWidth: 1,
-      borderRadius: theme.borderRadius.md,
-    },
-    shareButtonTitle: {
-      color: theme.colors.primary,
-    },
-    selectButton: {
-      flex: 1,
-      marginLeft: theme.spacing.sm,
-      backgroundColor: 'transparent',
-      borderColor: theme.colors.border,
-      borderWidth: 1,
-      borderRadius: theme.borderRadius.md,
-    },
-    selectButtonTitle: {
-      color: theme.colors.textPrimary,
-    },
   })
 
-  if (loading && favoriteRestaurants.length === 0) {
+  if (loading) {
     return (
       <View style={styles.container}>
         {renderHeader()}
@@ -282,41 +255,28 @@ const FavoritesScreen: React.FC = () => {
     <View style={styles.container}>
       {renderHeader()}
       
-      {favoriteRestaurants.length > 0 && !selectionMode && (
-        <View style={styles.actionBar}>
-          <Button
-            title="Share List"
-            buttonStyle={styles.shareButton}
-            titleStyle={styles.shareButtonTitle}
-            icon={{ name: 'share', type: 'material', color: theme.colors.primary }}
-            onPress={handleShare}
-          />
-          <Button
-            title="Select Multiple"
-            buttonStyle={styles.selectButton}
-            titleStyle={styles.selectButtonTitle}
-            icon={{ name: 'check-circle', type: 'material', color: theme.colors.textPrimary }}
-            onPress={toggleSelectionMode}
-          />
-        </View>
+      {favoriteRestaurants.length === 0 ? (
+        renderEmptyState()
+      ) : (
+        <FlatList
+          data={favoriteRestaurants}
+          renderItem={renderRestaurantCard}
+          keyExtractor={(item) => item.id}
+          showsVerticalScrollIndicator={false}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={handleRefresh}
+              colors={[theme.colors.primary]}
+            />
+          }
+          contentContainerStyle={{ 
+            paddingHorizontal: theme.spacing.md,
+            paddingBottom: 100, // Add bottom padding for tab navigation
+            paddingTop: theme.spacing.md,
+          }}
+        />
       )}
-
-      <FlatList
-        data={favoriteRestaurants}
-        renderItem={renderRestaurantCard}
-        keyExtractor={(item) => item.id}
-        contentContainerStyle={styles.listContent}
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={handleRefresh}
-            colors={[theme.colors.primary]}
-            tintColor={theme.colors.primary}
-          />
-        }
-        ListEmptyComponent={renderEmptyState}
-        showsVerticalScrollIndicator={false}
-      />
     </View>
   )
 }

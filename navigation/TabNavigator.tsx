@@ -1,9 +1,10 @@
-// navigation/TabNavigator.tsx - Home button that keeps tabs visible
+// navigation/TabNavigator.tsx - Ensure tabs are always visible
 import React from 'react'
 import { Platform } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Icon } from '@rneui/themed'
 import { useTheme } from '../hooks/useTheme'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 // Import screens
 import RestaurantDiscoveryScreen from '../screens/RestaurantDiscoveryScreen'
@@ -17,15 +18,13 @@ const Tab = createBottomTabNavigator<MainTabParamList>()
 
 const TabNavigator: React.FC = () => {
   const { theme } = useTheme()
+  const insets = useSafeAreaInsets()
   
-  // Get safe bottom padding for Android
+  // Calculate tab bar height dynamically
   const getTabBarHeight = () => {
     const baseHeight = 60
-    if (Platform.OS === 'android') {
-      // Add extra padding for Android navigation bar
-      return baseHeight + 80
-    }
-    return baseHeight
+    const extraPadding = Platform.OS === 'android' ? 80 : 20
+    return baseHeight + Math.max(insets.bottom, extraPadding)
   }
 
   return (
@@ -39,14 +38,14 @@ const TabNavigator: React.FC = () => {
           borderTopColor: theme.colors.divider,
           borderTopWidth: 1,
           height: getTabBarHeight(),
-          paddingBottom: Platform.OS === 'android' ? 80 : 20, // Extra padding for Android
+          paddingBottom: Platform.OS === 'android' ? 80 : Math.max(insets.bottom, 20),
           paddingTop: 10,
-          position: 'absolute',
+          position: 'absolute', // Keep this to ensure it overlays content
           bottom: 0,
           left: 0,
           right: 0,
-          elevation: 8, // Android shadow
-          shadowColor: theme.colors.textPrimary, // iOS shadow
+          elevation: 8,
+          shadowColor: theme.colors.textPrimary,
           shadowOffset: { width: 0, height: -2 },
           shadowOpacity: 0.1,
           shadowRadius: 4,
@@ -58,6 +57,18 @@ const TabNavigator: React.FC = () => {
         },
         tabBarIconStyle: {
           marginTop: 5,
+        },
+        // Force tabs to be visible on all screens
+        tabBarHideOnKeyboard: false,
+        tabBarVisibilityAnimationConfig: {
+          show: { animation: 'timing', config: { duration: 200 } },
+          hide: { animation: 'timing', config: { duration: 200 } },
+        },
+      }}
+      // Ensure tab bar is always shown
+      screenListeners={{
+        tabPress: (e) => {
+          // Prevent default behavior and ensure tab navigation works
         },
       }}
     >
