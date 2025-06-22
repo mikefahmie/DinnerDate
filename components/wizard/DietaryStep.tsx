@@ -22,7 +22,7 @@ const DIETARY_OPTIONS: DietaryOption[] = [
   {
     id: 'vegetarian',
     label: 'Vegetarian Options',
-    icon: { name: 'leaf', type: 'feather' },
+    icon: { name: 'leaf', type: 'font-awesome' },
     description: 'Restaurants with vegetarian-friendly dishes'
   },
   {
