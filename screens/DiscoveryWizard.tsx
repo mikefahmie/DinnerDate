@@ -1,4 +1,4 @@
-// screens/DiscoveryWizard.tsx - Auto-reset when accessed via Home tab
+// screens/DiscoveryWizard.tsx - Updated with conditional logic
 import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, Animated } from 'react-native'
 import { Button } from '@rneui/themed'
@@ -9,42 +9,27 @@ import { RootStackParamList } from '../types/navigation'
 import WizardContainer from '../components/wizard/WizardContainer'
 import LocationStep from '../components/wizard/LocationStep'
 import MealTypeStep from '../components/wizard/MealTypeStep'
-import ServiceStyleStep from '../components/wizard/ServiceStyleStep'
-import TimingStep from '../components/wizard/TimingStep'
 import BudgetStep from '../components/wizard/BudgetStep'
+import CuisineStep from '../components/wizard/CuisineStep'
 import DietaryStep from '../components/wizard/DietaryStep'
 import FeaturesStep from '../components/wizard/FeaturesStep'
 
 export interface WizardState {
   location: string
   mealTypes: string[]
-  serviceStyles: string[]
-  timing: 'now' | 'later' | 'anytime'
-  scheduledTime?: Date
-  budget: number[] // Changed from range to array of selected price levels
+  budget: number[] // Price levels 1,2,3,4
+  cuisineTypes: string[]
   dietary: string[]
   features: string[]
 }
 
 type DiscoveryWizardNavigationProp = NativeStackNavigationProp<RootStackParamList, 'DiscoveryWizard'>
 
-const TOTAL_STEPS = 7
-const STEP_TITLES = [
-  'Where are you dining?',
-  'What meal are you planning?',
-  'How would you like to dine?',
-  'When are you dining?',
-  'What\'s your budget?',
-  'Any dietary preferences?',
-  'Looking for anything specific?'
-]
-
 const INITIAL_WIZARD_STATE: WizardState = {
   location: 'Ann Arbor, MI',
   mealTypes: [],
-  serviceStyles: [],
-  timing: 'now',
-  budget: [], // Start with empty budget array - user can select multiple
+  budget: [],
+  cuisineTypes: [],
   dietary: [],
   features: []
 }
@@ -57,10 +42,9 @@ const DiscoveryWizardScreen: React.FC = () => {
   
   const [wizardState, setWizardState] = useState<WizardState>(INITIAL_WIZARD_STATE)
 
-  // Reset wizard state whenever this screen is focused (i.e., when Home tab is tapped)
+  // Reset wizard state whenever this screen is focused
   useFocusEffect(
     React.useCallback(() => {
-      // Reset to initial state and step 1
       setWizardState(INITIAL_WIZARD_STATE)
       setCurrentStep(1)
       slideAnim.setValue(0)
@@ -71,8 +55,47 @@ const DiscoveryWizardScreen: React.FC = () => {
     setWizardState(prev => ({ ...prev, ...updates }))
   }
 
+  // Determine if we should skip the cuisine step
+  const shouldSkipCuisineStep = (): boolean => {
+    const mealTypes = wizardState.mealTypes
+    return mealTypes.includes('breakfast') || 
+           mealTypes.includes('coffee') || 
+           mealTypes.includes('dessert')
+  }
+
+  // Get total steps dynamically based on whether cuisine step is skipped
+  const getTotalSteps = (): number => {
+    return shouldSkipCuisineStep() ? 5 : 6 // Location, Meal, Budget, [Cuisine], Dietary, Features
+  }
+
+  // Get step title based on current step and whether cuisine is skipped
+  const getStepTitle = (step: number): string => {
+    if (shouldSkipCuisineStep()) {
+      const titles = [
+        'Where are you dining?',
+        'What meal are you planning?', 
+        'What\'s your budget?',
+        'Any dietary preferences?',
+        'Looking for anything specific?'
+      ]
+      return titles[step - 1] || ''
+    } else {
+      const titles = [
+        'Where are you dining?',
+        'What meal are you planning?',
+        'What\'s your budget?', 
+        'In the mood for anything specific?',
+        'Any dietary preferences?',
+        'Looking for anything specific?'
+      ]
+      return titles[step - 1] || ''
+    }
+  }
+
   const handleNext = () => {
-    if (currentStep < TOTAL_STEPS) {
+    const totalSteps = getTotalSteps()
+    
+    if (currentStep < totalSteps) {
       // Slide animation
       Animated.sequence([
         Animated.timing(slideAnim, {
@@ -105,7 +128,6 @@ const DiscoveryWizardScreen: React.FC = () => {
   }
 
   const handleSkip = () => {
-    // Skip current step (don't apply any filters for this category)
     handleNext()
   }
 
@@ -127,28 +149,46 @@ const DiscoveryWizardScreen: React.FC = () => {
       onNext: handleNext,
     }
 
-    switch (currentStep) {
-      case 1:
-        return <LocationStep {...commonProps} />
-      case 2:
-        return <MealTypeStep {...commonProps} />
-      case 3:
-        return <ServiceStyleStep {...commonProps} />
-      case 4:
-        return <TimingStep {...commonProps} />
-      case 5:
-        return <BudgetStep {...commonProps} />
-      case 6:
-        return <DietaryStep {...commonProps} />
-      case 7:
-        return <FeaturesStep {...commonProps} />
-      default:
-        return <LocationStep {...commonProps} />
+    if (shouldSkipCuisineStep()) {
+      // Skip cuisine step flow: Location -> Meal -> Budget -> Dietary -> Features
+      switch (currentStep) {
+        case 1:
+          return <LocationStep {...commonProps} />
+        case 2:
+          return <MealTypeStep {...commonProps} />
+        case 3:
+          return <BudgetStep {...commonProps} />
+        case 4:
+          return <DietaryStep {...commonProps} />
+        case 5:
+          return <FeaturesStep {...commonProps} />
+        default:
+          return <LocationStep {...commonProps} />
+      }
+    } else {
+      // Normal flow: Location -> Meal -> Budget -> Cuisine -> Dietary -> Features
+      switch (currentStep) {
+        case 1:
+          return <LocationStep {...commonProps} />
+        case 2:
+          return <MealTypeStep {...commonProps} />
+        case 3:
+          return <BudgetStep {...commonProps} />
+        case 4:
+          return <CuisineStep {...commonProps} />
+        case 5:
+          return <DietaryStep {...commonProps} />
+        case 6:
+          return <FeaturesStep {...commonProps} />
+        default:
+          return <LocationStep {...commonProps} />
+      }
     }
   }
 
   const canSkip = currentStep > 1 // Can't skip location step
-  const isLastStep = currentStep === TOTAL_STEPS
+  const totalSteps = getTotalSteps()
+  const isLastStep = currentStep === totalSteps
 
   const styles = StyleSheet.create({
     container: {
@@ -179,12 +219,12 @@ const DiscoveryWizardScreen: React.FC = () => {
     },
   })
 
-  if (isLastStep && currentStep === TOTAL_STEPS) {
+  if (isLastStep && currentStep === totalSteps) {
     return (
       <WizardContainer
         currentStep={currentStep}
-        totalSteps={TOTAL_STEPS}
-        title={STEP_TITLES[currentStep - 1]}
+        totalSteps={totalSteps}
+        title={getStepTitle(currentStep)}
         onBack={handleBack}
         canSkip={false}
         hideSkip={true}
@@ -222,8 +262,8 @@ const DiscoveryWizardScreen: React.FC = () => {
   return (
     <WizardContainer
       currentStep={currentStep}
-      totalSteps={TOTAL_STEPS}
-      title={STEP_TITLES[currentStep - 1]}
+      totalSteps={totalSteps}
+      title={getStepTitle(currentStep)}
       onBack={handleBack}
       onSkip={canSkip ? handleSkip : undefined}
       canSkip={canSkip}

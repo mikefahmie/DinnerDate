@@ -1,4 +1,4 @@
-// components/filters/FilterChips.tsx
+// components/filters/FilterChips.tsx - Updated for new WizardState interface
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import { Icon } from '@rneui/themed'
@@ -38,7 +38,8 @@ const FilterChips: React.FC<FilterChipsProps> = ({
         breakfast: 'Breakfast',
         lunch: 'Lunch', 
         dinner: 'Dinner',
-        latenight: 'Late Night',
+        coffee: 'Coffee',
+        dessert: 'Dessert',
       }
       
       filters.mealTypes.forEach(meal => {
@@ -50,112 +51,130 @@ const FilterChips: React.FC<FilterChipsProps> = ({
       })
     }
 
-    // Service Styles
-    if (filters.serviceStyles && filters.serviceStyles.length > 0) {
-      const serviceLabels = {
-        dine_in: 'Dine In',
-        takeout: 'Takeout',
-        delivery: 'Delivery',
+    // Budget (Price Levels)
+    if (filters.budget && filters.budget.length > 0 && filters.budget.length < 4) {
+      const budgetLabels = {
+        1: '$',
+        2: '$$',
+        3: '$$$',
+        4: '$$$$',
       }
       
-      filters.serviceStyles.forEach(service => {
-        chips.push({
-          id: `service-${service}`,
-          label: serviceLabels[service as keyof typeof serviceLabels] || service,
-          removable: true,
-        })
-      })
-    }
-
-    // Timing
-    if (filters.timing === 'later' && filters.scheduledTime) {
-      const date = new Date(filters.scheduledTime)
-      const timeStr = date.toLocaleDateString('en-US', { 
-        month: 'short', 
-        day: 'numeric',
-        hour: 'numeric',
-        minute: '2-digit'
-      })
-      chips.push({
-        id: 'timing',
-        label: `Scheduled: ${timeStr}`,
-        removable: true,
-      })
-    } else if (filters.timing === 'now') {
-      chips.push({
-        id: 'timing',
-        label: 'Right Now',
-        removable: true,
-      })
-    }
-
-    // Budget
-    if (filters.budget && (filters.budget[0] > 1 || filters.budget[1] < 4)) {
-      const [min, max] = filters.budget
-      const priceSymbols = { 1: '$', 2: '$$', 3: '$$$', 4: '$$$$' }
+      const budgetString = filters.budget
+        .sort((a, b) => a - b)
+        .map(level => budgetLabels[level as keyof typeof budgetLabels])
+        .join(', ')
       
-      if (min === max) {
-        chips.push({
-          id: 'budget',
-          label: priceSymbols[min as keyof typeof priceSymbols],
-          removable: true,
+      chips.push({
+        id: 'budget',
+        label: `Budget: ${budgetString}`,
+        removable: true,
+      })
+    }
+
+    // Cuisine Types
+    if (filters.cuisineTypes && filters.cuisineTypes.length > 0) {
+      const cuisineLabels = {
+        american_restaurant: 'American',
+        italian_restaurant: 'Italian',
+        japanese_restaurant: 'Japanese',
+        chinese_restaurant: 'Chinese',
+        mexican_restaurant: 'Mexican',
+        thai_restaurant: 'Thai',
+        indian_restaurant: 'Indian',
+        french_restaurant: 'French',
+        pizza_restaurant: 'Pizza',
+        burger_restaurant: 'Burgers',
+        seafood_restaurant: 'Seafood',
+        steakhouse: 'Steakhouse',
+        cafe: 'Cafe',
+        bakery: 'Bakery',
+        deli: 'Deli',
+        // Add more as needed
+      }
+      
+      if (filters.cuisineTypes.length <= 3) {
+        // Show individual cuisines if 3 or fewer
+        filters.cuisineTypes.forEach(cuisine => {
+          chips.push({
+            id: `cuisine-${cuisine}`,
+            label: cuisineLabels[cuisine as keyof typeof cuisineLabels] || cuisine,
+            removable: true,
+          })
         })
       } else {
+        // Show count if more than 3
         chips.push({
-          id: 'budget',
-          label: `${priceSymbols[min as keyof typeof priceSymbols]} - ${priceSymbols[max as keyof typeof priceSymbols]}`,
+          id: 'cuisines',
+          label: `${filters.cuisineTypes.length} Cuisines`,
           removable: true,
         })
       }
     }
 
-    // Dietary
-    if (filters.dietary && filters.dietary.length > 0 && !filters.dietary.includes('none')) {
+    // Dietary Restrictions
+    if (filters.dietary && filters.dietary.length > 0) {
       const dietaryLabels = {
         vegetarian: 'Vegetarian',
         vegan: 'Vegan',
         gluten_free: 'Gluten-Free',
       }
       
-      filters.dietary.forEach(diet => {
-        chips.push({
-          id: `dietary-${diet}`,
-          label: dietaryLabels[diet as keyof typeof dietaryLabels] || diet,
-          removable: true,
-        })
+      filters.dietary.forEach(restriction => {
+        if (restriction !== 'none') {
+          chips.push({
+            id: `dietary-${restriction}`,
+            label: dietaryLabels[restriction as keyof typeof dietaryLabels] || restriction,
+            removable: true,
+          })
+        }
       })
     }
 
     // Features
     if (filters.features && filters.features.length > 0) {
       const featureLabels = {
-        live_music: 'Live Music',
-        good_for_watching_sports: 'Sports',
-        good_for_groups: 'Groups',
-        good_for_children: 'Kid Friendly',
         outdoor_seating: 'Outdoor Seating',
-        allows_dogs: 'Dog Friendly',
-        reservable: 'Reservations',
-        parking_available: 'Parking',
+        live_music: 'Live Music',
+        good_for_groups: 'Groups',
+        family_friendly: 'Family',
         wheelchair_accessible: 'Accessible',
+        parking_available: 'Parking',
         wifi_available: 'WiFi',
+        serves_beer: 'Beer',
+        serves_wine: 'Wine',
+        serves_cocktails: 'Cocktails',
+        serves_coffee: 'Coffee',
+        reservable: 'Reservations',
+        allows_dogs: 'Dog Friendly',
+        good_for_sports: 'Sports',
       }
       
-      filters.features.forEach(feature => {
+      if (filters.features.length <= 2) {
+        // Show individual features if 2 or fewer
+        filters.features.forEach(feature => {
+          chips.push({
+            id: `feature-${feature}`,
+            label: featureLabels[feature as keyof typeof featureLabels] || feature,
+            removable: true,
+          })
+        })
+      } else {
+        // Show count if more than 2
         chips.push({
-          id: `feature-${feature}`,
-          label: featureLabels[feature as keyof typeof featureLabels] || feature,
+          id: 'features',
+          label: `${filters.features.length} Features`,
           removable: true,
         })
-      })
+      }
     }
 
     return chips
   }
 
   const handleRemoveChip = (chipId: string) => {
-    // This would need to be implemented based on your state management
-    // For now, just trigger the edit filters modal
+    // This triggers the edit filters modal since individual removal 
+    // is complex with the current state structure
     onEditFilters()
   }
 

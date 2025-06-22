@@ -1,5 +1,5 @@
-// components/wizard/FeaturesStep.tsx - Fixed layout issues
-import React, { useState } from 'react'
+// components/wizard/FeaturesStep.tsx - Updated with new features and conditional logic
+import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import { Button, Icon } from '@rneui/themed'
 import { useTheme } from '../../hooks/useTheme'
@@ -16,75 +16,138 @@ interface FeatureOption {
   label: string
   icon: { name: string; type: string }
   description: string
-  category: 'atmosphere' | 'amenities' | 'accessibility'
+  category: 'beverages' | 'amenities' | 'accessibility'
+  availableFor?: string[] // If specified, only show for these meal types
+  minPriceLevel?: number // If specified, only show for these price levels and above
 }
 
-const FEATURE_OPTIONS: FeatureOption[] = [
-  // Atmosphere
+const ALL_FEATURE_OPTIONS: FeatureOption[] = [
+  // Beverages
+  {
+    id: 'serves_beer',
+    label: 'Serves Beer',
+    icon: { name: 'beer', type: 'font-awesome' },
+    description: 'Beer selection available',
+    category: 'beverages',
+    availableFor: ['lunch', 'dinner'],
+    minPriceLevel: 1
+  },
+  {
+    id: 'serves_wine',
+    label: 'Serves Wine',
+    icon: { name: 'wine-glass', type: 'font-awesome' },
+    description: 'Wine list available',
+    category: 'beverages',
+    availableFor: ['lunch', 'dinner'],
+    minPriceLevel: 2
+  },
+  {
+    id: 'serves_cocktails',
+    label: 'Serves Cocktails',
+    icon: { name: 'cocktail', type: 'font-awesome' },
+    description: 'Craft cocktails and mixed drinks',
+    category: 'beverages',
+    availableFor: ['lunch', 'dinner'],
+    minPriceLevel: 2
+  },
+  {
+    id: 'serves_coffee',
+    label: 'Serves Coffee',
+    icon: { name: 'coffee', type: 'feather' },
+    description: 'Coffee and espresso drinks',
+    category: 'beverages',
+    minPriceLevel: 1
+  },
+  
+  // Amenities
+  {
+    id: 'reservable',
+    label: 'Takes Reservations',
+    icon: { name: 'calendar', type: 'feather' },
+    description: 'Can make reservations',
+    category: 'amenities',
+    minPriceLevel: 2
+  },
+  {
+    id: 'outdoor_seating',
+    label: 'Outdoor Seating',
+    icon: { name: 'sun', type: 'feather' },
+    description: 'Patio or outdoor dining',
+    category: 'amenities',
+    minPriceLevel: 1
+  },
   {
     id: 'live_music',
     label: 'Live Music',
     icon: { name: 'music', type: 'feather' },
-    description: 'Entertainment while you dine',
-    category: 'atmosphere'
+    description: 'Live entertainment',
+    category: 'amenities',
+    availableFor: ['lunch', 'dinner'],
+    minPriceLevel: 2
   },
   {
-    id: 'good_for_sports',
-    label: 'Good for Sports',
-    icon: { name: 'tv', type: 'feather' },
-    description: 'TVs and sports atmosphere',
-    category: 'atmosphere'
+    id: 'allows_dogs',
+    label: 'Dog Friendly',
+    icon: { name: 'heart', type: 'feather' },
+    description: 'Pets welcome',
+    category: 'amenities',
+    minPriceLevel: 1
   },
   {
     id: 'good_for_groups',
     label: 'Good for Groups',
     icon: { name: 'users', type: 'feather' },
     description: 'Large tables and group-friendly',
-    category: 'atmosphere'
+    category: 'amenities',
+    minPriceLevel: 1
   },
   {
     id: 'family_friendly',
     label: 'Family Friendly',
-    icon: { name: 'heart', type: 'feather' },
-    description: 'Family-friendly environment',
-    category: 'atmosphere'
+    icon: { name: 'home', type: 'feather' },
+    description: 'Great for families with kids',
+    category: 'amenities',
+    minPriceLevel: 1
+  },
+  {
+    id: 'good_for_sports',
+    label: 'Good for Sports',
+    icon: { name: 'tv', type: 'feather' },
+    description: 'TVs and sports atmosphere',
+    category: 'amenities',
+    availableFor: ['lunch', 'dinner'],
+    minPriceLevel: 1
   },
   
-  // Amenities
+  // Accessibility
   {
-    id: 'outdoor_seating',
-    label: 'Outdoor Seating',
-    icon: { name: 'sun', type: 'feather' },
-    description: 'Patio or outdoor dining',
-    category: 'amenities'
+    id: 'wheelchair_accessible',
+    label: 'Wheelchair Accessible',
+    icon: { name: 'accessibility', type: 'material' },
+    description: 'Accessible facilities',
+    category: 'accessibility',
+    minPriceLevel: 1
   },
   {
     id: 'parking_available',
     label: 'Parking Available',
     icon: { name: 'car', type: 'font-awesome' },
     description: 'Dedicated parking',
-    category: 'amenities'
-  },
-  
-  // Accessibility
-  {
-    id: 'wheelchair_accessible',
-    label: 'Accessible',
-    icon: { name: 'wheelchair', type: 'font-awesome' },
-    description: 'Wheelchair accessible',
-    category: 'accessibility'
+    category: 'accessibility',
+    minPriceLevel: 1
   },
   {
     id: 'wifi_available',
     label: 'WiFi Available',
     icon: { name: 'wifi', type: 'font-awesome' },
     description: 'Free internet access',
-    category: 'accessibility'
+    category: 'accessibility',
+    minPriceLevel: 1
   }
 ]
 
 const CATEGORIES = {
-  atmosphere: 'Atmosphere',
+  beverages: 'Beverages',
   amenities: 'Amenities',
   accessibility: 'Accessibility'
 }
@@ -96,6 +159,33 @@ const FeaturesStep: React.FC<FeaturesStepProps> = ({
 }) => {
   const { theme } = useTheme()
   const [showMoreFeatures, setShowMoreFeatures] = useState(false)
+  const [availableFeatures, setAvailableFeatures] = useState<FeatureOption[]>([])
+
+  // Filter features based on selected meal types and budget
+  useEffect(() => {
+    const selectedMealTypes = wizardState.mealTypes || []
+    const selectedBudget = wizardState.budget || [1, 2, 3, 4]
+    const maxBudget = Math.max(...selectedBudget)
+
+    const filtered = ALL_FEATURE_OPTIONS.filter(feature => {
+      // Check meal type availability
+      if (feature.availableFor) {
+        const mealTypeMatch = selectedMealTypes.some(mealType => 
+          feature.availableFor!.includes(mealType)
+        )
+        if (!mealTypeMatch) return false
+      }
+      
+      // Check budget compatibility
+      if (feature.minPriceLevel && feature.minPriceLevel > maxBudget) {
+        return false
+      }
+      
+      return true
+    })
+
+    setAvailableFeatures(filtered)
+  }, [wizardState.mealTypes, wizardState.budget])
 
   const toggleFeature = (featureId: string) => {
     const currentFeatures = wizardState.features || []
@@ -170,8 +260,10 @@ const FeaturesStep: React.FC<FeaturesStepProps> = ({
   }
 
   const renderFeaturesByCategory = (category: keyof typeof CATEGORIES) => {
-    const categoryFeatures = FEATURE_OPTIONS.filter(f => f.category === category)
+    const categoryFeatures = availableFeatures.filter(f => f.category === category)
     
+    if (categoryFeatures.length === 0) return null
+
     return (
       <View key={category} style={styles.categorySection}>
         <Text style={styles.categoryTitle}>{CATEGORIES[category]}</Text>
@@ -186,8 +278,8 @@ const FeaturesStep: React.FC<FeaturesStepProps> = ({
     if (showMoreFeatures) {
       return Object.keys(CATEGORIES) as Array<keyof typeof CATEGORIES>
     }
-    // Show first category when collapsed
-    return ['atmosphere']
+    // Show first two categories when collapsed
+    return ['beverages', 'amenities']
   }
 
   const getSelectedCount = () => {
@@ -202,59 +294,60 @@ const FeaturesStep: React.FC<FeaturesStepProps> = ({
     },
     scrollContainer: {
       flex: 1,
-      paddingHorizontal: theme.spacing.lg,
     },
     content: {
+      paddingHorizontal: theme.spacing.lg,
       paddingTop: theme.spacing.md,
-      paddingBottom: theme.spacing.xl,
     },
     subtitle: {
       fontSize: theme.typography.fontSize.body,
       color: theme.colors.textSecondary,
-      textAlign: 'center',
-      marginBottom: theme.spacing.xl,
       lineHeight: theme.typography.fontSize.body * 1.5,
-      paddingHorizontal: theme.spacing.md,
+      marginBottom: theme.spacing.lg,
+      textAlign: 'center',
     },
     infoBox: {
-      backgroundColor: theme.colors.accent + '15',
-      borderRadius: theme.borderRadius.md,
-      padding: theme.spacing.md,
-      marginBottom: theme.spacing.xl,
-    },
-    infoText: {
-      fontSize: theme.typography.fontSize.caption,
-      color: theme.colors.textSecondary,
-      textAlign: 'center',
-      lineHeight: theme.typography.fontSize.caption * 1.4,
-    },
-    selectionSummary: {
-      backgroundColor: theme.colors.surface,
+      backgroundColor: theme.colors.surfaceElevated,
       borderRadius: theme.borderRadius.md,
       padding: theme.spacing.md,
       marginBottom: theme.spacing.lg,
-      borderWidth: 1,
-      borderColor: theme.colors.border,
+    },
+    infoText: {
+      fontSize: theme.typography.fontSize.secondary,
+      color: theme.colors.textSecondary,
+      textAlign: 'center',
+      lineHeight: theme.typography.fontSize.secondary * 1.4,
+    },
+    selectionSummary: {
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
+      backgroundColor: theme.colors.primary + '10',
+      borderRadius: theme.borderRadius.md,
+      padding: theme.spacing.md,
+      marginBottom: theme.spacing.lg,
     },
     summaryLeft: {
-      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
     },
     summaryCount: {
       fontSize: theme.typography.fontSize.h3,
       fontWeight: '700',
       color: theme.colors.primary,
+      marginRight: theme.spacing.xs,
     },
     summaryText: {
-      fontSize: theme.typography.fontSize.caption,
-      color: theme.colors.textSecondary,
+      fontSize: theme.typography.fontSize.secondary,
+      color: theme.colors.textPrimary,
     },
     clearButton: {
       backgroundColor: 'transparent',
-      paddingHorizontal: theme.spacing.md,
-      paddingVertical: theme.spacing.sm,
+      borderWidth: 1,
+      borderColor: theme.colors.error,
+      borderRadius: theme.borderRadius.sm,
+      paddingHorizontal: theme.spacing.sm,
+      paddingVertical: theme.spacing.xs,
     },
     clearButtonTitle: {
       fontSize: theme.typography.fontSize.caption,
@@ -293,7 +386,7 @@ const FeaturesStep: React.FC<FeaturesStepProps> = ({
     },
     featureContent: {
       alignItems: 'center',
-      paddingRight: theme.spacing.sm, // Make room for check icon
+      paddingRight: theme.spacing.sm,
     },
     featureIconContainer: {
       width: 40,
@@ -333,15 +426,16 @@ const FeaturesStep: React.FC<FeaturesStepProps> = ({
     },
     expandButton: {
       backgroundColor: 'transparent',
-      borderColor: theme.colors.border,
       borderWidth: 1,
+      borderColor: theme.colors.border,
       borderRadius: theme.borderRadius.md,
-      marginTop: theme.spacing.md,
-      marginBottom: theme.spacing.xl,
+      paddingVertical: theme.spacing.sm,
+      marginBottom: theme.spacing.lg,
     },
     expandButtonTitle: {
-      color: theme.colors.textPrimary,
       fontSize: theme.typography.fontSize.secondary,
+      color: theme.colors.textPrimary,
+      fontWeight: '500',
     },
     buttonContainer: {
       paddingHorizontal: theme.spacing.lg,
@@ -370,7 +464,7 @@ const FeaturesStep: React.FC<FeaturesStepProps> = ({
         contentContainerStyle={styles.content}
       >
         <Text style={styles.subtitle}>
-          Looking for anything specific? These features help us find restaurants that match your needs.
+          Looking for anything specific? These features match your meal choice and budget.
         </Text>
 
         <View style={styles.infoBox}>
@@ -398,7 +492,7 @@ const FeaturesStep: React.FC<FeaturesStepProps> = ({
 
         {getVisibleFeatures().map((category) => renderFeaturesByCategory(category as keyof typeof CATEGORIES))}
 
-        {!showMoreFeatures && (
+        {!showMoreFeatures && availableFeatures.some(f => f.category === 'accessibility') && (
           <Button
             title="Show More Features"
             buttonStyle={styles.expandButton}
@@ -410,6 +504,14 @@ const FeaturesStep: React.FC<FeaturesStepProps> = ({
             }}
             onPress={() => setShowMoreFeatures(true)}
           />
+        )}
+
+        {availableFeatures.length === 0 && (
+          <View style={styles.infoBox}>
+            <Text style={styles.infoText}>
+              No special features match your current selections. Try adjusting your previous choices or continue to see all restaurants.
+            </Text>
+          </View>
         )}
       </ScrollView>
 

@@ -1,4 +1,4 @@
-// components/filters/FilterModal.tsx
+// components/filters/FilterModal.tsx - Updated to match new wizard structure
 import React, { useState } from 'react'
 import { 
   View, 
@@ -13,9 +13,8 @@ import { Button, Header, Icon } from '@rneui/themed'
 import { useTheme } from '../../hooks/useTheme'
 import { WizardState } from '../../screens/DiscoveryWizard'
 import MealTypeStep from '../wizard/MealTypeStep'
-import ServiceStyleStep from '../wizard/ServiceStyleStep'
-import TimingStep from '../wizard/TimingStep'
 import BudgetStep from '../wizard/BudgetStep'
+import CuisineStep from '../wizard/CuisineStep'
 import DietaryStep from '../wizard/DietaryStep'
 import FeaturesStep from '../wizard/FeaturesStep'
 
@@ -26,7 +25,7 @@ interface FilterModalProps {
   onClose: () => void
 }
 
-type FilterSection = 'meal' | 'service' | 'timing' | 'budget' | 'dietary' | 'features'
+type FilterSection = 'meal' | 'budget' | 'cuisine' | 'dietary' | 'features'
 
 const FilterModal: React.FC<FilterModalProps> = ({
   visible,
@@ -51,9 +50,8 @@ const FilterModal: React.FC<FilterModalProps> = ({
     const resetFilters: WizardState = {
       location: filters.location, // Keep location
       mealTypes: [],
-      serviceStyles: [],
-      timing: 'now',
-      budget: [1, 4],
+      budget: [],
+      cuisineTypes: [],
       dietary: [],
       features: [],
     }
@@ -65,12 +63,19 @@ const FilterModal: React.FC<FilterModalProps> = ({
     onClose()
   }
 
+  // Check if we should show cuisine step based on meal types
+  const shouldShowCuisineStep = (): boolean => {
+    const mealTypes = tempFilters.mealTypes
+    return !(mealTypes.includes('breakfast') || 
+             mealTypes.includes('coffee') || 
+             mealTypes.includes('dessert'))
+  }
+
   const getSectionIcon = (section: FilterSection): string => {
     const icons = {
       meal: 'cutlery',
-      service: 'shopping-bag',
-      timing: 'clock-o',
       budget: 'dollar',
+      cuisine: 'globe',
       dietary: 'leaf',
       features: 'star',
     }
@@ -80,9 +85,8 @@ const FilterModal: React.FC<FilterModalProps> = ({
   const getSectionTitle = (section: FilterSection): string => {
     const titles = {
       meal: 'Meal Type',
-      service: 'Service Style',
-      timing: 'Timing',
       budget: 'Budget',
+      cuisine: 'Cuisine',
       dietary: 'Dietary',
       features: 'Features',
     }
@@ -93,19 +97,28 @@ const FilterModal: React.FC<FilterModalProps> = ({
     switch (section) {
       case 'meal':
         return tempFilters.mealTypes?.length || 0
-      case 'service':
-        return tempFilters.serviceStyles?.length || 0
-      case 'timing':
-        return tempFilters.timing === 'now' ? 0 : 1
       case 'budget':
-        return (tempFilters.budget?.[0] !== 1 || tempFilters.budget?.[1] !== 4) ? 1 : 0
+        return tempFilters.budget?.length || 0
+      case 'cuisine':
+        return tempFilters.cuisineTypes?.length || 0
       case 'dietary':
-        return tempFilters.dietary?.filter(d => d !== 'none').length || 0
+        return tempFilters.dietary?.length || 0
       case 'features':
         return tempFilters.features?.length || 0
       default:
         return 0
     }
+  }
+
+  const getAvailableSections = (): FilterSection[] => {
+    const baseSections: FilterSection[] = ['meal', 'budget', 'dietary', 'features']
+    
+    // Only show cuisine if appropriate meal types are selected
+    if (shouldShowCuisineStep()) {
+      return ['meal', 'budget', 'cuisine', 'dietary', 'features']
+    }
+    
+    return baseSections
   }
 
   const renderSectionButton = (section: FilterSection) => {
@@ -117,7 +130,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
         key={section}
         style={[
           styles.sectionButton,
-          isActive && styles.activeSectionButton,
+          isActive && styles.activeSectionButton
         ]}
         onPress={() => setActiveSection(section)}
       >
@@ -127,30 +140,28 @@ const FilterModal: React.FC<FilterModalProps> = ({
             type="font-awesome"
             size={16}
             color={isActive ? theme.colors.textOnPrimary : theme.colors.textPrimary}
+            style={styles.sectionIcon}
           />
-          <Text
-            style={[
-              styles.sectionButtonText,
-              isActive && styles.activeSectionButtonText,
-            ]}
-          >
+          <Text style={[
+            styles.sectionTitle,
+            isActive && styles.activeSectionTitle
+          ]}>
             {getSectionTitle(section)}
           </Text>
-        </View>
-        
-        {count > 0 && (
-          <View style={[
-            styles.sectionBadge,
-            isActive && styles.activeSectionBadge,
-          ]}>
-            <Text style={[
-              styles.sectionBadgeText,
-              isActive && styles.activeSectionBadgeText,
+          {count > 0 && (
+            <View style={[
+              styles.countBadge,
+              isActive && styles.activeCountBadge
             ]}>
-              {count}
-            </Text>
-          </View>
-        )}
+              <Text style={[
+                styles.countText,
+                isActive && styles.activeCountText
+              ]}>
+                {count}
+              </Text>
+            </View>
+          )}
+        </View>
       </TouchableOpacity>
     )
   }
@@ -165,222 +176,195 @@ const FilterModal: React.FC<FilterModalProps> = ({
     switch (activeSection) {
       case 'meal':
         return <MealTypeStep {...commonProps} />
-      case 'service':
-        return <ServiceStyleStep {...commonProps} />
-      case 'timing':
-        return <TimingStep {...commonProps} />
       case 'budget':
         return <BudgetStep {...commonProps} />
+      case 'cuisine':
+        return <CuisineStep {...commonProps} />
       case 'dietary':
         return <DietaryStep {...commonProps} />
       case 'features':
         return <FeaturesStep {...commonProps} />
       default:
-        return null
+        return <MealTypeStep {...commonProps} />
     }
   }
 
-  const getTotalFilterCount = () => {
-    return Object.values({
-      meal: getSectionCount('meal'),
-      service: getSectionCount('service'),
-      timing: getSectionCount('timing'),
-      budget: getSectionCount('budget'),
-      dietary: getSectionCount('dietary'),
-      features: getSectionCount('features'),
-    }).reduce((sum, count) => sum + count, 0)
-  }
-
   const styles = StyleSheet.create({
-    modalContainer: {
+    overlay: {
       flex: 1,
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      justifyContent: 'flex-end',
+    },
+    container: {
       backgroundColor: theme.colors.background,
+      borderTopLeftRadius: theme.borderRadius.xl,
+      borderTopRightRadius: theme.borderRadius.xl,
+      maxHeight: '90%',
+      minHeight: '70%',
     },
-    contentContainer: {
-      flex: 1,
+    header: {
       flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      paddingHorizontal: theme.spacing.lg,
+      paddingVertical: theme.spacing.md,
+      borderBottomWidth: 1,
+      borderBottomColor: theme.colors.divider,
     },
-    sidebar: {
-      width: 120,
-      backgroundColor: theme.colors.surface,
-      borderRightWidth: 1,
-      borderRightColor: theme.colors.divider,
+    headerTitle: {
+      fontSize: theme.typography.fontSize.h2,
+      fontWeight: '700',
+      color: theme.colors.textPrimary,
     },
-    sidebarContent: {
+    closeButton: {
       padding: theme.spacing.sm,
+    },
+    sectionsContainer: {
+      flexDirection: 'row',
+      paddingHorizontal: theme.spacing.md,
+      paddingVertical: theme.spacing.sm,
+      borderBottomWidth: 1,
+      borderBottomColor: theme.colors.divider,
     },
     sectionButton: {
-      backgroundColor: 'transparent',
+      flex: 1,
+      marginHorizontal: theme.spacing.xs,
+      paddingVertical: theme.spacing.sm,
+      paddingHorizontal: theme.spacing.xs,
       borderRadius: theme.borderRadius.md,
-      padding: theme.spacing.sm,
-      marginBottom: theme.spacing.xs,
-      position: 'relative',
+      backgroundColor: theme.colors.surface,
+      borderWidth: 1,
+      borderColor: theme.colors.border,
     },
     activeSectionButton: {
       backgroundColor: theme.colors.primary,
+      borderColor: theme.colors.primary,
     },
     sectionButtonContent: {
       alignItems: 'center',
+      position: 'relative',
     },
-    sectionButtonText: {
+    sectionIcon: {
+      marginBottom: theme.spacing.xs,
+    },
+    sectionTitle: {
       fontSize: theme.typography.fontSize.caption,
+      fontWeight: '600',
       color: theme.colors.textPrimary,
       textAlign: 'center',
-      marginTop: theme.spacing.xs,
-      fontWeight: '500',
     },
-    activeSectionButtonText: {
+    activeSectionTitle: {
       color: theme.colors.textOnPrimary,
     },
-    sectionBadge: {
+    countBadge: {
       position: 'absolute',
-      top: 4,
-      right: 4,
+      top: -4,
+      right: -4,
       backgroundColor: theme.colors.error,
       borderRadius: 8,
       minWidth: 16,
       height: 16,
       justifyContent: 'center',
       alignItems: 'center',
+      paddingHorizontal: 4,
     },
-    activeSectionBadge: {
-      backgroundColor: theme.colors.textOnPrimary,
-    },
-    sectionBadgeText: {
-      fontSize: 10,
-      color: theme.colors.textOnPrimary,
-      fontWeight: '600',
-    },
-    activeSectionBadgeText: {
-      color: theme.colors.primary,
-    },
-    mainContent: {
-      flex: 1,
+    activeCountBadge: {
       backgroundColor: theme.colors.background,
     },
-    sectionHeader: {
-      padding: theme.spacing.md,
-      backgroundColor: theme.colors.surface,
-      borderBottomWidth: 1,
-      borderBottomColor: theme.colors.divider,
+    countText: {
+      fontSize: 10,
+      fontWeight: '700',
+      color: theme.colors.textOnPrimary,
     },
-    sectionTitle: {
-      fontSize: theme.typography.fontSize.h2,
-      fontWeight: '600',
-      color: theme.colors.textPrimary,
+    activeCountText: {
+      color: theme.colors.primary,
     },
-    sectionContent: {
+    content: {
       flex: 1,
     },
-    footerContainer: {
+    footer: {
       flexDirection: 'row',
-      padding: theme.spacing.md,
-      backgroundColor: theme.colors.surface,
+      paddingHorizontal: theme.spacing.lg,
+      paddingVertical: theme.spacing.md,
       borderTopWidth: 1,
       borderTopColor: theme.colors.divider,
+      gap: theme.spacing.md,
     },
     resetButton: {
       flex: 1,
-      marginRight: theme.spacing.sm,
       backgroundColor: 'transparent',
-      borderColor: theme.colors.border,
       borderWidth: 1,
+      borderColor: theme.colors.border,
       borderRadius: theme.borderRadius.md,
+      paddingVertical: theme.spacing.md,
     },
     resetButtonTitle: {
+      fontSize: theme.typography.fontSize.body,
+      fontWeight: '600',
       color: theme.colors.textPrimary,
     },
     applyButton: {
       flex: 2,
-      marginLeft: theme.spacing.sm,
       backgroundColor: theme.colors.primary,
       borderRadius: theme.borderRadius.md,
+      paddingVertical: theme.spacing.md,
     },
     applyButtonTitle: {
+      fontSize: theme.typography.fontSize.body,
+      fontWeight: '600',
       color: theme.colors.textOnPrimary,
     },
-    filterSummary: {
-      paddingHorizontal: theme.spacing.md,
-      paddingTop: theme.spacing.sm,
-    },
-    summaryText: {
-      fontSize: theme.typography.fontSize.caption,
-      color: theme.colors.textMuted,
-      textAlign: 'center',
-    },
   })
-
-  const totalFilters = getTotalFilterCount()
 
   return (
     <Modal
       visible={visible}
+      transparent
       animationType="slide"
-      presentationStyle="pageSheet"
       onRequestClose={handleClose}
     >
-      <SafeAreaView style={styles.modalContainer}>
-        <Header
-          centerComponent={{
-            text: 'Edit Filters',
-            style: {
-              color: theme.colors.textOnPrimary,
-              fontSize: theme.typography.fontSize.h2,
-              fontWeight: '600',
-            },
-          }}
-          rightComponent={{
-            icon: 'times',
-            type: 'font-awesome',
-            color: theme.colors.textOnPrimary,
-            onPress: handleClose,
-          }}
-          backgroundColor={theme.colors.primary}
-        />
-
-        {totalFilters > 0 && (
-          <View style={styles.filterSummary}>
-            <Text style={styles.summaryText}>
-              {totalFilters} filter{totalFilters !== 1 ? 's' : ''} applied
-            </Text>
-          </View>
-        )}
-
-        <View style={styles.contentContainer}>
-          <View style={styles.sidebar}>
-            <ScrollView style={styles.sidebarContent}>
-              {(['meal', 'service', 'timing', 'budget', 'dietary', 'features'] as FilterSection[]).map(renderSectionButton)}
-            </ScrollView>
+      <View style={styles.overlay}>
+        <SafeAreaView style={styles.container}>
+          <View style={styles.header}>
+            <Text style={styles.headerTitle}>Filter Restaurants</Text>
+            <TouchableOpacity style={styles.closeButton} onPress={handleClose}>
+              <Icon
+                name="x"
+                type="feather"
+                size={24}
+                color={theme.colors.textPrimary}
+              />
+            </TouchableOpacity>
           </View>
 
-          <View style={styles.mainContent}>
-            <View style={styles.sectionHeader}>
-              <Text style={styles.sectionTitle}>
-                {getSectionTitle(activeSection)}
-              </Text>
-            </View>
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            style={styles.sectionsContainer}
+          >
+            {getAvailableSections().map(renderSectionButton)}
+          </ScrollView>
 
-            <ScrollView style={styles.sectionContent}>
-              {renderActiveSection()}
-            </ScrollView>
+          <View style={styles.content}>
+            {renderActiveSection()}
           </View>
-        </View>
 
-        <View style={styles.footerContainer}>
-          <Button
-            title="Reset All"
-            onPress={handleReset}
-            buttonStyle={styles.resetButton}
-            titleStyle={styles.resetButtonTitle}
-          />
-          <Button
-            title={`Apply Filters${totalFilters > 0 ? ` (${totalFilters})` : ''}`}
-            onPress={handleApply}
-            buttonStyle={styles.applyButton}
-            titleStyle={styles.applyButtonTitle}
-          />
-        </View>
-      </SafeAreaView>
+          <View style={styles.footer}>
+            <Button
+              title="Reset"
+              buttonStyle={styles.resetButton}
+              titleStyle={styles.resetButtonTitle}
+              onPress={handleReset}
+            />
+            <Button
+              title="Apply Filters"
+              buttonStyle={styles.applyButton}
+              titleStyle={styles.applyButtonTitle}
+              onPress={handleApply}
+            />
+          </View>
+        </SafeAreaView>
+      </View>
     </Modal>
   )
 }
