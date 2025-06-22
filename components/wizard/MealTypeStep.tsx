@@ -46,7 +46,7 @@ const MEAL_OPTIONS: MealOption[] = [
   {
     id: 'dessert',
     label: 'Dessert',
-    icon: { name: 'cake', type: 'font-awesome' },
+    icon: { name: 'birthday-cake', type: 'font-awesome' },
     description: 'Sweet treats and desserts'
   }
 ]

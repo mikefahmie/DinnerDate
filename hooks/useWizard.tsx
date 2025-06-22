@@ -1,5 +1,5 @@
-// hooks/useWizard.tsx
-import { useState, useEffect, useCallback } from 'react'
+// hooks/useWizard.tsx - Updated to match new WizardState interface
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { WizardState } from '../screens/DiscoveryWizard'
 
@@ -12,16 +12,18 @@ interface UseWizardResult {
   clearSavedState: () => Promise<void>
   isComplete: boolean
   getCompletionProgress: () => number
+  shouldSkipCuisineStep: () => boolean
+  getCurrentStepTitle: (step: number) => string
+  getTotalSteps: () => number
 }
 
 const WIZARD_STORAGE_KEY = '@dinnerdate_wizard_state'
 
 const DEFAULT_WIZARD_STATE: WizardState = {
-  location: 'Ann Arbor, MI',
+  location: 'Ann Arbor/Ypsilanti',
   mealTypes: [],
-  serviceStyles: [],
-  timing: 'now',
-  budget: [1, 4],
+  budget: [1, 2, 3, 4], // Default to all price levels
+  cuisineTypes: [],
   dietary: [],
   features: [],
 }
@@ -52,88 +54,137 @@ export const useWizard = (persistState: boolean = true): UseWizardResult => {
     }
   }, [persistState])
 
-  // Save current wizard state to AsyncStorage
+  // Save wizard state to storage
   const saveWizardState = useCallback(async () => {
+    if (!persistState) return
+    
     try {
       await AsyncStorage.setItem(WIZARD_STORAGE_KEY, JSON.stringify(wizardState))
     } catch (error) {
       console.error('Error saving wizard state:', error)
-      throw error
     }
-  }, [wizardState])
+  }, [wizardState, persistState])
 
-  // Load wizard state from AsyncStorage
+  // Load wizard state from storage
   const loadWizardState = useCallback(async () => {
+    if (!persistState) return
+    
     try {
       const savedState = await AsyncStorage.getItem(WIZARD_STORAGE_KEY)
       if (savedState) {
         const parsedState = JSON.parse(savedState) as WizardState
-        setWizardState(parsedState)
+        
+        // Validate that saved state matches current interface
+        const validatedState: WizardState = {
+          location: parsedState.location || DEFAULT_WIZARD_STATE.location,
+          mealTypes: Array.isArray(parsedState.mealTypes) ? parsedState.mealTypes : [],
+          budget: Array.isArray(parsedState.budget) ? parsedState.budget : DEFAULT_WIZARD_STATE.budget,
+          cuisineTypes: Array.isArray(parsedState.cuisineTypes) ? parsedState.cuisineTypes : [],
+          dietary: Array.isArray(parsedState.dietary) ? parsedState.dietary : [],
+          features: Array.isArray(parsedState.features) ? parsedState.features : [],
+        }
+        
+        setWizardState(validatedState)
       }
     } catch (error) {
       console.error('Error loading wizard state:', error)
-      // If loading fails, keep default state
+      // If loading fails, reset to default
+      setWizardState(DEFAULT_WIZARD_STATE)
     }
-  }, [])
+  }, [persistState])
 
-  // Clear saved wizard state
+  // Clear saved state from storage
   const clearSavedState = useCallback(async () => {
     try {
       await AsyncStorage.removeItem(WIZARD_STORAGE_KEY)
     } catch (error) {
-      console.error('Error clearing wizard state:', error)
+      console.error('Error clearing saved wizard state:', error)
     }
   }, [])
 
-  // Check if wizard is considered "complete" (has meaningful selections)
-  const isComplete = useCallback((): boolean => {
-    // Wizard is complete if user has made at least some selections
-    return (
-      wizardState.location !== '' &&
-      (wizardState.mealTypes.length > 0 ||
-       wizardState.serviceStyles.length > 0 ||
-       wizardState.dietary.length > 0 ||
-       wizardState.features.length > 0 ||
-       wizardState.timing === 'later' ||
-       (wizardState.budget[0] > 1 || wizardState.budget[1] < 4))
+  // Determine if we should skip the cuisine step
+  const shouldSkipCuisineStep = useCallback((): boolean => {
+    const mealTypes = wizardState.mealTypes
+    return mealTypes.includes('breakfast') || 
+           mealTypes.includes('coffee') || 
+           mealTypes.includes('dessert')
+  }, [wizardState.mealTypes])
+
+  // Get total steps dynamically based on conditional logic
+  const getTotalSteps = useCallback((): number => {
+    return shouldSkipCuisineStep() ? 5 : 6 // Location, Meal, Budget, [Cuisine], Dietary, Features
+  }, [shouldSkipCuisineStep])
+
+  // Get step title based on current step and whether cuisine is skipped
+  const getCurrentStepTitle = useCallback((step: number): string => {
+    if (shouldSkipCuisineStep()) {
+      const titles = [
+        'Where are you dining?',
+        'What meal are you planning?', 
+        'What\'s your budget?',
+        'Any dietary preferences?',
+        'Looking for anything specific?'
+      ]
+      return titles[step - 1] || ''
+    } else {
+      const titles = [
+        'Where are you dining?',
+        'What meal are you planning?',
+        'What\'s your budget?',
+        'What type of cuisine?',
+        'Any dietary preferences?',
+        'Looking for anything specific?'
+      ]
+      return titles[step - 1] || ''
+    }
+  }, [shouldSkipCuisineStep])
+
+  // Check if wizard is complete (has minimum required fields)
+  const isComplete = useMemo(() => {
+    return !!(
+      wizardState.location &&
+      wizardState.budget.length > 0
+      // Note: mealTypes, cuisineTypes, dietary, and features are optional
     )
   }, [wizardState])
 
-  // Get completion progress as percentage (0-100)
+  // Get completion progress as percentage
   const getCompletionProgress = useCallback((): number => {
     let completedSteps = 0
-    const totalSteps = 7
-
-    // Step 1: Location (always considered complete if not empty)
+    const totalSteps = getTotalSteps()
+    
+    // Step 1: Location (required)
     if (wizardState.location) completedSteps++
-
-    // Step 2: Meal Types
+    
+    // Step 2: Meal types (optional but counts toward progress)
     if (wizardState.mealTypes.length > 0) completedSteps++
-
-    // Step 3: Service Styles
-    if (wizardState.serviceStyles.length > 0) completedSteps++
-
-    // Step 4: Timing
-    if (wizardState.timing === 'later' || wizardState.timing === 'now') completedSteps++
-
-    // Step 5: Budget (complete if changed from default)
-    if (wizardState.budget[0] > 1 || wizardState.budget[1] < 4) completedSteps++
-
-    // Step 6: Dietary
+    
+    // Step 3: Budget (required)
+    if (wizardState.budget.length > 0) completedSteps++
+    
+    // Step 4: Cuisine (conditional - only if not skipped)
+    if (!shouldSkipCuisineStep()) {
+      if (wizardState.cuisineTypes.length > 0) completedSteps++
+    } else {
+      // If skipped, automatically count as completed
+      completedSteps++
+    }
+    
+    // Step 5: Dietary (optional)
     if (wizardState.dietary.length > 0) completedSteps++
-
-    // Step 7: Features
+    
+    // Step 6: Features (optional) 
     if (wizardState.features.length > 0) completedSteps++
-
+    
     return Math.round((completedSteps / totalSteps) * 100)
-  }, [wizardState])
+  }, [wizardState, getTotalSteps, shouldSkipCuisineStep])
 
-  // Load saved state on mount if persistence is enabled
+  // Load saved state on mount
   useEffect(() => {
     if (persistState) {
       loadWizardState()
     }
-  }, [persistState, loadWizardState])
+  }, [loadWizardState, persistState])
 
   return {
     wizardState,
@@ -142,74 +193,36 @@ export const useWizard = (persistState: boolean = true): UseWizardResult => {
     saveWizardState,
     loadWizardState,
     clearSavedState,
-    isComplete: isComplete(),
+    isComplete,
     getCompletionProgress,
+    shouldSkipCuisineStep,
+    getCurrentStepTitle,
+    getTotalSteps,
   }
-}
-
-// Helper function to convert wizard state to human-readable summary
-export const getWizardSummary = (state: WizardState): string => {
-  const parts: string[] = []
-
-  if (state.location) {
-    parts.push(`📍 ${state.location}`)
-  }
-
-  if (state.mealTypes.length > 0) {
-    parts.push(`🍽️ ${state.mealTypes.join(', ')}`)
-  }
-
-  if (state.serviceStyles.length > 0) {
-    parts.push(`🥡 ${state.serviceStyles.join(', ')}`)
-  }
-
-  if (state.timing === 'later' && state.scheduledTime) {
-    const time = new Date(state.scheduledTime).toLocaleString()
-    parts.push(`⏰ ${time}`)
-  } else if (state.timing === 'now') {
-    parts.push(`⚡ Right now`)
-  }
-
-  if (state.budget[0] > 1 || state.budget[1] < 4) {
-    const priceSymbols = { 1: '$', 2: '$$', 3: '$$$', 4: '$$$$' }
-    const min = priceSymbols[state.budget[0] as keyof typeof priceSymbols]
-    const max = priceSymbols[state.budget[1] as keyof typeof priceSymbols]
-    parts.push(`💰 ${min} - ${max}`)
-  }
-
-  if (state.dietary.length > 0 && !state.dietary.includes('none')) {
-    parts.push(`🌱 ${state.dietary.join(', ')}`)
-  }
-
-  if (state.features.length > 0) {
-    parts.push(`✨ ${state.features.length} features`)
-  }
-
-  return parts.join(' • ')
 }
 
 // Helper function to validate wizard state
-export const validateWizardState = (state: WizardState): { isValid: boolean; errors: string[] } => {
-  const errors: string[] = []
-
-  if (!state.location || state.location.trim() === '') {
-    errors.push('Location is required')
-  }
-
-  if (state.timing === 'later' && !state.scheduledTime) {
-    errors.push('Scheduled time is required when timing is set to later')
-  }
-
-  if (state.budget.length !== 2 || state.budget[0] > state.budget[1]) {
-    errors.push('Invalid budget range')
-  }
-
-  if (state.budget[0] < 1 || state.budget[1] > 4) {
-    errors.push('Budget must be between $ and $$$$')
-  }
-
+export const validateWizardState = (state: any): WizardState => {
   return {
-    isValid: errors.length === 0,
-    errors,
+    location: typeof state.location === 'string' ? state.location : DEFAULT_WIZARD_STATE.location,
+    mealTypes: Array.isArray(state.mealTypes) ? state.mealTypes : [],
+    budget: Array.isArray(state.budget) ? state.budget : DEFAULT_WIZARD_STATE.budget,
+    cuisineTypes: Array.isArray(state.cuisineTypes) ? state.cuisineTypes : [],
+    dietary: Array.isArray(state.dietary) ? state.dietary : [],
+    features: Array.isArray(state.features) ? state.features : [],
   }
 }
+
+// Helper function to check if two wizard states are equal
+export const isWizardStateEqual = (state1: WizardState, state2: WizardState): boolean => {
+  return (
+    state1.location === state2.location &&
+    JSON.stringify(state1.mealTypes.sort()) === JSON.stringify(state2.mealTypes.sort()) &&
+    JSON.stringify(state1.budget.sort()) === JSON.stringify(state2.budget.sort()) &&
+    JSON.stringify(state1.cuisineTypes.sort()) === JSON.stringify(state2.cuisineTypes.sort()) &&
+    JSON.stringify(state1.dietary.sort()) === JSON.stringify(state2.dietary.sort()) &&
+    JSON.stringify(state1.features.sort()) === JSON.stringify(state2.features.sort())
+  )
+}
+
+export default useWizard

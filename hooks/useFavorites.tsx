@@ -1,4 +1,5 @@
-// hooks/useFavorites.tsx
+// hooks/useFavorites.tsx - SIMPLIFIED VERSION WITHOUT REAL-TIME
+// Since restaurant data is mostly static, we don't need real-time subscriptions
 import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
 
@@ -17,7 +18,6 @@ export const useFavorites = () => {
   // Load user's favorites on mount
   useEffect(() => {
     loadFavorites()
-    setupRealtimeSubscription()
   }, [])
 
   const loadFavorites = async () => {
@@ -31,85 +31,30 @@ export const useFavorites = () => {
         return
       }
 
-      // Check if user_favorites table exists and handle gracefully
+      console.log('Loading favorites for user:', user.id)
+
       const { data, error } = await supabase
         .from('user_favorites')
         .select('restaurant_id')
         .eq('user_id', user.id)
+        .order('created_at', { ascending: false })
 
       if (error) {
-        // Handle specific database errors gracefully
-        if (error.code === '42P01') {
-          // Table doesn't exist - this is expected for new setups
-          console.log('user_favorites table not found - this is expected for new users')
-          setFavorites([])
-        } else if (error.code === '42701') {
-          // Column doesn't exist - graceful handling
-          console.log('user_favorites table exists but column structure is different - this is expected for new users')
-          setFavorites([])
-        } else {
-          console.error('Error loading favorites:', error)
-          setError('Unable to load favorites')
-        }
+        console.error('Error loading favorites:', error)
+        setError('Unable to load favorites')
         setLoading(false)
         return
       }
 
       const favoriteIds = data?.map(fav => fav.restaurant_id) || []
+      console.log('Loaded favorites:', favoriteIds)
       setFavorites(favoriteIds)
       setError(null)
     } catch (error) {
       console.error('Error loading favorites:', error)
-      // Don't throw error for new users - just set empty favorites
-      setFavorites([])
-      setError(null)
+      setError('Unable to load favorites')
     } finally {
       setLoading(false)
-    }
-  }
-
-  const setupRealtimeSubscription = () => {
-    const channel = supabase
-      .channel('favorites')
-      .on(
-        'postgres_changes',
-        {
-          event: '*',
-          schema: 'public',
-          table: 'user_favorites',
-        },
-        (payload) => {
-          handleRealtimeUpdate(payload)
-        }
-      )
-      .subscribe()
-
-    return () => {
-      supabase.removeChannel(channel)
-    }
-  }
-
-  const handleRealtimeUpdate = (payload: any) => {
-    const { eventType, new: newRecord, old: oldRecord } = payload
-
-    switch (eventType) {
-      case 'INSERT':
-        if (newRecord) {
-          setFavorites(prev => {
-            if (!prev.includes(newRecord.restaurant_id)) {
-              return [...prev, newRecord.restaurant_id]
-            }
-            return prev
-          })
-        }
-        break
-      case 'DELETE':
-        if (oldRecord) {
-          setFavorites(prev => prev.filter(id => id !== oldRecord.restaurant_id))
-        }
-        break
-      default:
-        break
     }
   }
 
@@ -121,6 +66,17 @@ export const useFavorites = () => {
         throw new Error('User not authenticated')
       }
 
+      console.log('Adding favorite:', restaurantId)
+
+      // Check if already favorited to avoid duplicate errors
+      if (favorites.includes(restaurantId)) {
+        console.log('Restaurant already in favorites')
+        return
+      }
+
+      // Optimistically update UI first for better UX
+      setFavorites(prev => [...prev, restaurantId])
+
       const { error } = await supabase
         .from('user_favorites')
         .insert({
@@ -129,23 +85,13 @@ export const useFavorites = () => {
         })
 
       if (error) {
-        // Handle table not existing gracefully
-        if (error.code === '42P01' || error.code === '42701') {
-          console.log('Favorites feature not yet available - database setup needed')
-          setError('Favorites feature coming soon!')
-          return
-        }
+        // Revert optimistic update on error
+        setFavorites(prev => prev.filter(id => id !== restaurantId))
+        console.error('Error adding favorite:', error)
         throw error
       }
 
-      // Optimistically update local state
-      setFavorites(prev => {
-        if (!prev.includes(restaurantId)) {
-          return [...prev, restaurantId]
-        }
-        return prev
-      })
-
+      console.log('Successfully added favorite')
       setError(null)
     } catch (error) {
       console.error('Error adding favorite:', error)
@@ -162,6 +108,11 @@ export const useFavorites = () => {
         throw new Error('User not authenticated')
       }
 
+      console.log('Removing favorite:', restaurantId)
+
+      // Optimistically update UI first for better UX
+      setFavorites(prev => prev.filter(id => id !== restaurantId))
+
       const { error } = await supabase
         .from('user_favorites')
         .delete()
@@ -169,17 +120,18 @@ export const useFavorites = () => {
         .eq('restaurant_id', restaurantId)
 
       if (error) {
-        // Handle table not existing gracefully
-        if (error.code === '42P01' || error.code === '42701') {
-          console.log('Favorites feature not yet available - database setup needed')
-          setError('Favorites feature coming soon!')
-          return
-        }
+        // Revert optimistic update on error
+        setFavorites(prev => {
+          if (!prev.includes(restaurantId)) {
+            return [...prev, restaurantId]
+          }
+          return prev
+        })
+        console.error('Error removing favorite:', error)
         throw error
       }
 
-      // Optimistically update local state
-      setFavorites(prev => prev.filter(id => id !== restaurantId))
+      console.log('Successfully removed favorite')
       setError(null)
     } catch (error) {
       console.error('Error removing favorite:', error)
@@ -204,14 +156,21 @@ export const useFavorites = () => {
     try {
       if (favorites.length === 0) return []
 
+      console.log('Fetching favorite restaurant details for:', favorites)
+
       const { data, error } = await supabase
         .from('restaurants')
         .select('*')
         .in('id', favorites)
         .eq('is_active', true)
+        .order('name')
 
-      if (error) throw error
+      if (error) {
+        console.error('Error fetching favorite restaurants:', error)
+        throw error
+      }
 
+      console.log('Fetched favorite restaurants:', data?.length)
       return data || []
     } catch (error) {
       console.error('Error fetching favorite restaurants:', error)
@@ -227,22 +186,25 @@ export const useFavorites = () => {
         throw new Error('User not authenticated')
       }
 
+      console.log('Clearing all favorites for user:', user.id)
+
+      // Optimistically update UI
+      const previousFavorites = [...favorites]
+      setFavorites([])
+
       const { error } = await supabase
         .from('user_favorites')
         .delete()
         .eq('user_id', user.id)
 
       if (error) {
-        // Handle table not existing gracefully
-        if (error.code === '42P01' || error.code === '42701') {
-          console.log('Favorites feature not yet available - database setup needed')
-          setFavorites([])
-          return
-        }
+        // Revert on error
+        setFavorites(previousFavorites)
+        console.error('Error clearing favorites:', error)
         throw error
       }
 
-      setFavorites([])
+      console.log('Successfully cleared all favorites')
       setError(null)
     } catch (error) {
       console.error('Error clearing favorites:', error)
@@ -252,7 +214,12 @@ export const useFavorites = () => {
   }
 
   const refresh = async () => {
+    console.log('Refreshing favorites...')
     await loadFavorites()
+  }
+
+  const getFavoriteCount = (): number => {
+    return favorites.length
   }
 
   return {
@@ -266,5 +233,8 @@ export const useFavorites = () => {
     getFavoriteRestaurants,
     clearAllFavorites,
     refresh,
+    getFavoriteCount,
   }
 }
+
+export default useFavorites

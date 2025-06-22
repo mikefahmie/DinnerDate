@@ -35,7 +35,7 @@ const RestaurantDiscoveryScreen: React.FC = () => {
   // Updated default filters to match new WizardState interface
   const [filters, setFilters] = useState<WizardState>(
     route.params?.filters || {
-      location: 'Ann Arbor, MI',
+      location: 'Ann Arbor/Ypsilanti',
       mealTypes: [],
       budget: [1, 2, 3, 4], // Default to all price levels
       cuisineTypes: [],
@@ -44,7 +44,7 @@ const RestaurantDiscoveryScreen: React.FC = () => {
     }
   )
   
-  const [sortBy, setSortBy] = useState<SortOption>('distance')
+  const [sortBy, setSortBy] = useState<SortOption>('rating')
   const [filterModalVisible, setFilterModalVisible] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
 
@@ -76,73 +76,27 @@ const RestaurantDiscoveryScreen: React.FC = () => {
     setFilterModalVisible(false)
   }
 
-  // Updated clear filters to match new interface
   const handleClearFilters = () => {
-    setFilters({
-      location: 'Ann Arbor, MI',
+    const clearedFilters: WizardState = {
+      location: filters.location, // Keep location
       mealTypes: [],
-      budget: [1, 2, 3, 4],
+      budget: [1, 2, 3, 4], // Reset to all price levels
       cuisineTypes: [],
       dietary: [],
       features: []
-    })
-  }
-
-  const removeFilter = (filterType: string, value: string) => {
-    switch (filterType) {
-      case 'mealType':
-        setFilters(prev => ({
-          ...prev,
-          mealTypes: prev.mealTypes.filter(type => type !== value)
-        }))
-        break
-      case 'budget':
-        const budgetLevel = parseInt(value)
-        setFilters(prev => ({
-          ...prev,
-          budget: prev.budget.filter(level => level !== budgetLevel)
-        }))
-        break
-      case 'cuisine':
-        setFilters(prev => ({
-          ...prev,
-          cuisineTypes: prev.cuisineTypes.filter(type => type !== value)
-        }))
-        break
-      case 'dietary':
-        setFilters(prev => ({
-          ...prev,
-          dietary: prev.dietary.filter(restriction => restriction !== value)
-        }))
-        break
-      case 'feature':
-        setFilters(prev => ({
-          ...prev,
-          features: prev.features.filter(feature => feature !== value)
-        }))
-        break
     }
+    setFilters(clearedFilters)
   }
 
-  const renderRestaurantItem = ({ item }: { item: any }) => (
+  const handleSortChange = (newSort: SortOption) => {
+    setSortBy(newSort)
+  }
+
+  const renderRestaurant = ({ item }: { item: any }) => (
     <RestaurantCard
       restaurant={item}
       onPress={() => handleRestaurantPress(item.id)}
     />
-  )
-
-  const renderHeader = () => (
-    <View style={styles.headerContainer}>
-      <FilterChips
-        filters={filters}
-        onClearFilters={handleClearFilters}
-        onEditFilters={handleEditFilters}
-      />
-      <SortOptions
-        selectedSort={sortBy}
-        onSortChange={setSortBy}
-      />
-    </View>
   )
 
   const renderFooter = () => {
@@ -150,33 +104,73 @@ const RestaurantDiscoveryScreen: React.FC = () => {
     return <LoadingSpinner style={styles.footerLoader} />
   }
 
+  const getActiveFilterCount = (): number => {
+    let count = 0
+    if (filters.mealTypes.length > 0) count++
+    if (filters.budget.length < 4) count++ // Less than all price levels
+    if (filters.cuisineTypes.length > 0) count++
+    if (filters.dietary.length > 0) count++
+    if (filters.features.length > 0) count++
+    return count
+  }
+
   const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: theme.colors.background,
     },
-    headerContainer: {
-      backgroundColor: theme.colors.background,
-      paddingVertical: theme.spacing.md,
-      borderBottomWidth: 1,
-      borderBottomColor: theme.colors.divider,
+    header: {
+      paddingHorizontal: theme.spacing.md,
+      paddingVertical: theme.spacing.sm,
     },
-    list: {
+    filterSection: {
+      backgroundColor: theme.colors.surface,
+      paddingVertical: theme.spacing.sm,
+      borderBottomWidth: 1,
+      borderBottomColor: theme.colors.border,
+    },
+    sortSection: {
+      paddingHorizontal: theme.spacing.md,
+      paddingVertical: theme.spacing.sm,
+      backgroundColor: theme.colors.surface,
+      borderBottomWidth: 1,
+      borderBottomColor: theme.colors.border,
+    },
+    listContainer: {
       flex: 1,
     },
-    contentContainer: {
-      padding: theme.spacing.md,
+    restaurantList: {
+      paddingHorizontal: theme.spacing.md,
     },
     footerLoader: {
-      paddingVertical: theme.spacing.lg,
+      marginVertical: theme.spacing.lg,
+    },
+    emptyContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingHorizontal: theme.spacing.xl,
+    },
+    loadingContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
     },
   })
 
   if (loading && restaurants.length === 0) {
     return (
       <View style={styles.container}>
-        {renderHeader()}
-        <LoadingSpinner />
+        <Header
+          centerComponent={{
+            text: 'Restaurants',
+            style: { color: theme.colors.textPrimary, fontSize: 18, fontWeight: 'bold' }
+          }}
+          backgroundColor={theme.colors.surface}
+        />
+        <View style={styles.loadingContainer}>
+          <LoadingSpinner />
+        </View>
       </View>
     )
   }
@@ -184,53 +178,86 @@ const RestaurantDiscoveryScreen: React.FC = () => {
   if (error) {
     return (
       <View style={styles.container}>
-        {renderHeader()}
-        <EmptyState
-          title="Something went wrong"
-          message="We couldn't load restaurants right now. Please try again."
-          actionText="Retry"
-          onAction={handleRefresh}
+        <Header
+          centerComponent={{
+            text: 'Restaurants',
+            style: { color: theme.colors.textPrimary, fontSize: 18, fontWeight: 'bold' }
+          }}
+          backgroundColor={theme.colors.surface}
         />
-      </View>
-    )
-  }
-
-  if (restaurants.length === 0) {
-    return (
-      <View style={styles.container}>
-        {renderHeader()}
-        <EmptyState
-          title="No restaurants found"
-          message="Try adjusting your filters to see more options."
-          actionText="Clear Filters"
-          onAction={handleClearFilters}
-        />
+        <View style={styles.emptyContainer}>
+          <EmptyState
+            title="Connection Error"
+            message={error}
+            actionText="Try Again"
+            onAction={handleRefresh}
+          />
+        </View>
       </View>
     )
   }
 
   return (
     <View style={styles.container}>
-      <FlatList
-        style={styles.list}
-        data={restaurants}
-        renderItem={renderRestaurantItem}
-        keyExtractor={(item) => item.id}
-        ListHeaderComponent={renderHeader}
-        ListFooterComponent={renderFooter}
-        contentContainerStyle={styles.contentContainer}
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={handleRefresh}
-            tintColor={theme.colors.primary}
-          />
-        }
-        onEndReached={loadMore}
-        onEndReachedThreshold={0.5}
-        showsVerticalScrollIndicator={false}
+      <Header
+        centerComponent={{
+          text: `${restaurants.length} Restaurants`,
+          style: { color: theme.colors.textPrimary, fontSize: 18, fontWeight: 'bold' }
+        }}
+        backgroundColor={theme.colors.surface}
       />
+      
+      {/* Filter Chips Section */}
+      <View style={styles.filterSection}>
+        <FilterChips
+          filters={filters}
+          onEditFilters={handleEditFilters}
+          onClearFilters={handleClearFilters}
+          showEditButton={true}
+        />
+      </View>
 
+      {/* Sort Options Section */}
+      <View style={styles.sortSection}>
+        <SortOptions
+          selectedSort={sortBy}
+          onSortChange={handleSortChange}
+        />
+      </View>
+
+      {/* Restaurant List */}
+      <View style={styles.listContainer}>
+        {restaurants.length === 0 ? (
+          <View style={styles.emptyContainer}>
+            <EmptyState
+              title="No restaurants found"
+              message="Try adjusting your filters to see more options"
+              actionText="Edit Filters"
+              onAction={handleEditFilters}
+            />
+          </View>
+        ) : (
+          <FlatList
+            data={restaurants}
+            renderItem={renderRestaurant}
+            keyExtractor={(item) => item.id}
+            style={styles.restaurantList}
+            onEndReached={loadMore}
+            onEndReachedThreshold={0.1}
+            ListFooterComponent={renderFooter}
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={handleRefresh}
+                tintColor={theme.colors.primary}
+              />
+            }
+            showsVerticalScrollIndicator={false}
+          />
+        )}
+      </View>
+
+      {/* Filter Modal */}
       <FilterModal
         visible={filterModalVisible}
         filters={filters}

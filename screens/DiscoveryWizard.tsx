@@ -26,7 +26,7 @@ export interface WizardState {
 type DiscoveryWizardNavigationProp = NativeStackNavigationProp<RootStackParamList, 'DiscoveryWizard'>
 
 const INITIAL_WIZARD_STATE: WizardState = {
-  location: 'Ann Arbor, MI',
+  location: 'Ann Arbor/Ypsilanti',  // ✅ Use market field
   mealTypes: [],
   budget: [],
   cuisineTypes: [],

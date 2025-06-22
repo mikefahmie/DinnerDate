@@ -1,4 +1,4 @@
-// services/restaurantService.ts
+// services/restaurantService.ts - Updated to match new WizardState interface
 import { supabase } from '../lib/supabase'
 import { WizardState } from '../screens/DiscoveryWizard'
 import { Restaurant } from '../hooks/useRestaurants'
@@ -6,8 +6,8 @@ import { Restaurant } from '../hooks/useRestaurants'
 export interface RestaurantFilters {
   location?: string
   mealTypes?: string[]
-  serviceStyles?: string[]
-  priceRange?: [number, number]
+  budget?: number[]           // Changed from priceRange to budget array
+  cuisineTypes?: string[]     // Added cuisineTypes
   dietary?: string[]
   features?: string[]
   isOpen?: boolean
@@ -23,22 +23,22 @@ export interface RestaurantSearchOptions {
 }
 
 class RestaurantService {
-  // Get available markets/cities
+  // Get available markets
   async getAvailableMarkets(): Promise<string[]> {
     try {
       const { data, error } = await supabase
         .from('restaurants')
-        .select('location_city')
+        .select('market')
         .eq('is_active', true)
 
       if (error) throw error
 
-      // Get unique cities
-      const uniqueCities = [...new Set(data?.map(item => item.location_city) || [])]
-      return uniqueCities.sort()
+      // Get unique markets
+      const uniqueMarkets = [...new Set(data?.map(item => item.market) || [])]
+      return uniqueMarkets.sort()
     } catch (error) {
       console.error('Error fetching available markets:', error)
-      return ['Ann Arbor, MI'] // Fallback
+      return ['Ann Arbor/Ypsilanti'] // Fallback
     }
   }
 
@@ -60,7 +60,7 @@ class RestaurantService {
     }
   }
 
-  // Search restaurants with filters
+  // Search restaurants with filters - Updated to match WizardState
   async searchRestaurants(
     filters: RestaurantFilters,
     options: RestaurantSearchOptions = {}
@@ -71,53 +71,92 @@ class RestaurantService {
         .select('*', { count: 'exact' })
         .eq('is_active', true)
 
-      // Apply filters
+      // Market filter (not location_city)
       if (filters.location) {
-        query = query.eq('location_city', filters.location)
+        query = query.eq('market', filters.location)
       }
 
-      if (filters.priceRange) {
-        const [min, max] = filters.priceRange
-        query = query.gte('price_level', min).lte('price_level', max)
+      // Budget filter (price levels)
+      if (filters.budget && filters.budget.length > 0) {
+        query = query.in('price_level', filters.budget)
       }
 
-      if (filters.minRating) {
-        query = query.gte('rating', filters.minRating)
-      }
-
-      if (filters.hasPhotos) {
-        query = query.not('photos', 'is', null)
-        query = query.neq('photos', '{}')
-      }
-
-      // Meal type filters (OR logic)
+      // Meal types filter
       if (filters.mealTypes && filters.mealTypes.length > 0) {
-        const mealConditions = filters.mealTypes.map(meal => {
+        const mealConditions: string[] = []
+        
+        filters.mealTypes.forEach(meal => {
           switch (meal) {
             case 'breakfast':
-              return 'serves_breakfast.eq.true'
+              mealConditions.push('serves_breakfast.eq.true')
+              break
+            case 'brunch':
+              mealConditions.push('serves_brunch.eq.true')
+              break
             case 'lunch':
-              return 'serves_lunch.eq.true'
+              mealConditions.push('serves_lunch.eq.true')
+              break
             case 'dinner':
-              return 'serves_dinner.eq.true'
-            case 'latenight':
-              return 'serves_dinner.eq.true' // Assuming late night is dinner-serving places
-            default:
-              return null
+              mealConditions.push('serves_dinner.eq.true')
+              break
+            case 'coffee':
+              mealConditions.push('serves_coffee.eq.true')
+              break
+            case 'dessert':
+              mealConditions.push('serves_dessert.eq.true')
+              break
           }
-        }).filter(Boolean)
+        })
 
         if (mealConditions.length > 0) {
           query = query.or(mealConditions.join(','))
         }
       }
 
-      // Service style filters (AND logic)
-      if (filters.serviceStyles && filters.serviceStyles.length > 0) {
-        filters.serviceStyles.forEach(service => {
-          switch (service) {
-            case 'dine_in':
-              query = query.eq('dine_in', true)
+      // Cuisine types filter
+      if (filters.cuisineTypes && filters.cuisineTypes.length > 0) {
+        const cuisineConditions = filters.cuisineTypes.map(cuisine => 
+          `primary_type.eq.${cuisine}`
+        )
+        
+        if (cuisineConditions.length > 0) {
+          query = query.or(cuisineConditions.join(','))
+        }
+      }
+
+      // Dietary restrictions filter
+      if (filters.dietary && filters.dietary.length > 0) {
+        filters.dietary.forEach(diet => {
+          switch (diet) {
+            case 'vegetarian':
+              query = query.eq('serves_vegetarian_food', true)
+              break
+            // Add more dietary options as needed
+          }
+        })
+      }
+
+      // Features filter
+      if (filters.features && filters.features.length > 0) {
+        filters.features.forEach(feature => {
+          switch (feature) {
+            case 'outdoor_seating':
+              query = query.eq('outdoor_seating', true)
+              break
+            case 'serves_wine':
+              query = query.eq('serves_wine', true)
+              break
+            case 'serves_beer':
+              query = query.eq('serves_beer', true)
+              break
+            case 'serves_cocktails':
+              query = query.eq('serves_cocktails', true)
+              break
+            case 'good_for_groups':
+              query = query.eq('good_for_groups', true)
+              break
+            case 'reservable':
+              query = query.eq('reservable', true)
               break
             case 'takeout':
               query = query.eq('takeout', true)
@@ -125,56 +164,34 @@ class RestaurantService {
             case 'delivery':
               query = query.eq('delivery', true)
               break
-          }
-        })
-      }
-
-      // Dietary filters (AND logic)
-      if (filters.dietary && filters.dietary.length > 0 && !filters.dietary.includes('none')) {
-        filters.dietary.forEach(diet => {
-          switch (diet) {
-            case 'vegetarian':
-            case 'vegan':
-              query = query.eq('serves_vegetarian_food', true)
+            case 'good_for_children':
+              query = query.eq('good_for_children', true)
               break
-            // Note: gluten_free would require additional data in the schema
-          }
-        })
-      }
-
-      // Feature filters (AND logic)
-      if (filters.features && filters.features.length > 0) {
-        filters.features.forEach(feature => {
-          switch (feature) {
+            case 'allows_dogs':
+              query = query.eq('allows_dogs', true)
+              break
             case 'live_music':
               query = query.eq('live_music', true)
               break
             case 'good_for_watching_sports':
               query = query.eq('good_for_watching_sports', true)
               break
-            case 'good_for_groups':
-              query = query.eq('good_for_groups', true)
-              break
-            case 'good_for_children':
-              query = query.eq('good_for_children', true)
-              break
-            case 'outdoor_seating':
-              query = query.eq('outdoor_seating', true)
-              break
-            case 'allows_dogs':
-              query = query.eq('allows_dogs', true)
-              break
-            case 'reservable':
-              query = query.eq('reservable', true)
-              break
-            // Note: parking and accessibility would require JSON field queries
           }
         })
       }
 
+      // Additional filters
+      if (filters.minRating) {
+        query = query.gte('rating', filters.minRating)
+      }
+
+      if (filters.hasPhotos) {
+        query = query.not('photos', 'is', null)
+        query = query.neq('photos', '{}') // Not empty array
+      }
+
       // Apply sorting
-      const sortBy = options.sortBy || 'rating'
-      const sortOrder = options.sortOrder || 'desc'
+      const { limit = 20, offset = 0, sortBy = 'rating', sortOrder = 'desc' } = options
       
       switch (sortBy) {
         case 'rating':
@@ -184,10 +201,10 @@ class RestaurantService {
           query = query.order('price_level', { ascending: sortOrder === 'asc' })
           break
         case 'name':
-          query = query.order('display_name', { ascending: sortOrder === 'asc' })
+          query = query.order('name', { ascending: sortOrder === 'asc' })
           break
         case 'distance':
-          // Distance sorting would require PostGIS/geolocation
+          // For distance sorting, you'd need user location
           // For now, fall back to rating
           query = query.order('rating', { ascending: false })
           break
@@ -196,10 +213,7 @@ class RestaurantService {
       }
 
       // Apply pagination
-      if (options.limit) {
-        const offset = options.offset || 0
-        query = query.range(offset, offset + options.limit - 1)
-      }
+      query = query.range(offset, offset + limit - 1)
 
       const { data, error, count } = await query
 
@@ -207,54 +221,40 @@ class RestaurantService {
 
       return {
         restaurants: data || [],
-        total: count || 0,
+        total: count || 0
       }
     } catch (error) {
       console.error('Error searching restaurants:', error)
-      throw error
+      return {
+        restaurants: [],
+        total: 0
+      }
     }
   }
 
-  // Convert wizard state to restaurant filters
+  // Convert WizardState to RestaurantFilters
   wizardStateToFilters(wizardState: WizardState): RestaurantFilters {
     return {
       location: wizardState.location,
       mealTypes: wizardState.mealTypes,
-      serviceStyles: wizardState.serviceStyles,
-      priceRange: wizardState.budget as [number, number],
+      budget: wizardState.budget,
+      cuisineTypes: wizardState.cuisineTypes,
       dietary: wizardState.dietary,
       features: wizardState.features,
-      hasPhotos: true, // Only show restaurants with photos
-      minRating: 0, // No minimum rating filter by default
     }
   }
 
-  // Get restaurants by location with basic filters
-  async getRestaurantsByLocation(
-    location: string,
-    limit: number = 20,
-    offset: number = 0
-  ): Promise<{ restaurants: Restaurant[]; total: number }> {
-    return this.searchRestaurants(
-      { location, hasPhotos: true },
-      { limit, offset, sortBy: 'rating', sortOrder: 'desc' }
-    )
-  }
-
-  // Get top-rated restaurants
-  async getTopRatedRestaurants(
-    location?: string,
+  // Get featured restaurants for a market
+  async getFeaturedRestaurants(
+    market: string,
     limit: number = 10
   ): Promise<Restaurant[]> {
     const filters: RestaurantFilters = {
+      location: market,
       minRating: 4.0,
       hasPhotos: true,
     }
     
-    if (location) {
-      filters.location = location
-    }
-
     const { restaurants } = await this.searchRestaurants(filters, {
       limit,
       sortBy: 'rating',
@@ -267,35 +267,26 @@ class RestaurantService {
   // Get restaurants by cuisine type
   async getRestaurantsByCuisine(
     cuisineType: string,
-    location?: string,
+    market?: string,
     limit: number = 20
   ): Promise<Restaurant[]> {
-    try {
-      let query = supabase
-        .from('restaurants')
-        .select('*')
-        .eq('is_active', true)
-        .contains('types', [cuisineType])
-        .order('rating', { ascending: false })
-        .limit(limit)
-
-      if (location) {
-        query = query.eq('location_city', location)
-      }
-
-      const { data, error } = await query
-
-      if (error) throw error
-      return data || []
-    } catch (error) {
-      console.error('Error fetching restaurants by cuisine:', error)
-      return []
+    const filters: RestaurantFilters = {
+      cuisineTypes: [cuisineType],
+      location: market,
     }
+
+    const { restaurants } = await this.searchRestaurants(filters, {
+      limit,
+      sortBy: 'rating',
+      sortOrder: 'desc',
+    })
+
+    return restaurants
   }
 
   // Get random restaurant recommendations
   async getRandomRecommendations(
-    location: string,
+    market: string,
     count: number = 5
   ): Promise<Restaurant[]> {
     try {
@@ -304,7 +295,7 @@ class RestaurantService {
         .from('restaurants')
         .select('*', { count: 'exact', head: true })
         .eq('is_active', true)
-        .eq('location_city', location)
+        .eq('market', market)
         .gte('rating', 3.5)
 
       if (!total || total === 0) return []
@@ -322,7 +313,7 @@ class RestaurantService {
           .from('restaurants')
           .select('*')
           .eq('is_active', true)
-          .eq('location_city', location)
+          .eq('market', market)
           .gte('rating', 3.5)
           .range(offset, offset)
           .limit(1)
@@ -339,12 +330,12 @@ class RestaurantService {
     }
   }
 
-  // Get restaurant statistics
-  async getRestaurantStats(location?: string): Promise<{
+  // Get restaurant statistics for a market
+  async getRestaurantStats(market?: string): Promise<{
     total: number
     averageRating: number
-    priceDistribution: Record<number, number>
-    topCuisines: Array<{ type: string; count: number }>
+    priceDistribution: { [key: number]: number }
+    topCuisines: { type: string; count: number }[]
   }> {
     try {
       let query = supabase
@@ -352,218 +343,52 @@ class RestaurantService {
         .select('rating, price_level, primary_type')
         .eq('is_active', true)
 
-      if (location) {
-        query = query.eq('location_city', location)
+      if (market) {
+        query = query.eq('market', market)
       }
 
       const { data, error } = await query
 
       if (error) throw error
+      if (!data) return { total: 0, averageRating: 0, priceDistribution: {}, topCuisines: [] }
 
-      const restaurants = data || []
-      const total = restaurants.length
-      
-      // Calculate average rating
-      const averageRating = restaurants.reduce((sum, r) => sum + (r.rating || 0), 0) / total
+      // Calculate statistics
+      const total = data.length
+      const averageRating = data.reduce((sum, r) => sum + (r.rating || 0), 0) / total
 
       // Price distribution
-      const priceDistribution = restaurants.reduce((acc, r) => {
-        const price = r.price_level || 1
-        acc[price] = (acc[price] || 0) + 1
-        return acc
-      }, {} as Record<number, number>)
+      const priceDistribution: { [key: number]: number } = {}
+      data.forEach(r => {
+        if (r.price_level) {
+          priceDistribution[r.price_level] = (priceDistribution[r.price_level] || 0) + 1
+        }
+      })
 
       // Top cuisines
-      const cuisineCount = restaurants.reduce((acc, r) => {
-        const type = r.primary_type || 'restaurant'
-        acc[type] = (acc[type] || 0) + 1
-        return acc
-      }, {} as Record<string, number>)
+      const cuisineCounts: { [key: string]: number } = {}
+      data.forEach(r => {
+        if (r.primary_type) {
+          cuisineCounts[r.primary_type] = (cuisineCounts[r.primary_type] || 0) + 1
+        }
+      })
 
-      const topCuisines = Object.entries(cuisineCount)
+      const topCuisines = Object.entries(cuisineCounts)
         .map(([type, count]) => ({ type, count }))
         .sort((a, b) => b.count - a.count)
         .slice(0, 10)
 
       return {
         total,
-        averageRating: Math.round(averageRating * 10) / 10,
+        averageRating,
         priceDistribution,
-        topCuisines,
+        topCuisines
       }
     } catch (error) {
       console.error('Error fetching restaurant stats:', error)
-      return {
-        total: 0,
-        averageRating: 0,
-        priceDistribution: {},
-        topCuisines: [],
-      }
+      return { total: 0, averageRating: 0, priceDistribution: {}, topCuisines: [] }
     }
-  }
-
-  // Update restaurant sync status
-  async updateSyncStatus(restaurantIds: string[]): Promise<void> {
-    try {
-      const { error } = await supabase
-        .from('restaurants')
-        .update({ 
-          last_synced: new Date().toISOString(),
-          sync_version: Date.now()
-        })
-        .in('id', restaurantIds)
-
-      if (error) throw error
-    } catch (error) {
-      console.error('Error updating sync status:', error)
-      throw error
-    }
-  }
-
-  // Get restaurants that need sync update
-  async getRestaurantsNeedingSync(maxAge: number = 30): Promise<Restaurant[]> {
-    try {
-      const cutoffDate = new Date()
-      cutoffDate.setDate(cutoffDate.getDate() - maxAge)
-
-      const { data, error } = await supabase
-        .from('restaurants')
-        .select('*')
-        .eq('is_active', true)
-        .lt('last_synced', cutoffDate.toISOString())
-        .limit(100)
-
-      if (error) throw error
-      return data || []
-    } catch (error) {
-      console.error('Error fetching restaurants needing sync:', error)
-      return []
-    }
-  }
-
-  // Check if restaurant is currently open
-  isRestaurantOpen(restaurant: Restaurant): { isOpen: boolean; status: string } {
-    if (!restaurant.current_opening_hours) {
-      return { isOpen: false, status: 'Hours unavailable' }
-    }
-
-    try {
-      const now = new Date()
-      const currentDay = now.getDay() // 0 = Sunday, 6 = Saturday
-      const currentTime = now.getHours() * 100 + now.getMinutes() // HHMM format
-
-      const periods = restaurant.current_opening_hours.periods || []
-      const todaysPeriods = periods.filter((period: any) => period.open?.day === currentDay)
-
-      if (todaysPeriods.length === 0) {
-        return { isOpen: false, status: 'Closed today' }
-      }
-
-      for (const period of todaysPeriods) {
-        const openTime = period.open?.hour * 100 + (period.open?.minute || 0)
-        let closeTime = 2400 // Default to end of day
-
-        if (period.close) {
-          closeTime = period.close.hour * 100 + (period.close.minute || 0)
-          // Handle next day closing (e.g., close at 2 AM)
-          if (closeTime < openTime) {
-            closeTime += 2400
-          }
-        }
-
-        let currentTimeAdjusted = currentTime
-        // If we're past midnight and close time is next day
-        if (closeTime > 2400 && currentTime < 600) {
-          currentTimeAdjusted += 2400
-        }
-
-        if (currentTimeAdjusted >= openTime && currentTimeAdjusted < closeTime) {
-          const closeHour = period.close?.hour || 24
-          const closeMinute = period.close?.minute || 0
-          const closeTimeStr = new Date()
-          closeTimeStr.setHours(closeHour, closeMinute, 0, 0)
-          
-          return { 
-            isOpen: true, 
-            status: `Open until ${closeTimeStr.toLocaleTimeString('en-US', { 
-              hour: 'numeric', 
-              minute: '2-digit', 
-              hour12: true 
-            })}` 
-          }
-        }
-      }
-
-      // Find next opening time
-      const nextPeriod = this.findNextOpenPeriod(periods, now)
-      return { 
-        isOpen: false, 
-        status: nextPeriod || 'Closed' 
-      }
-    } catch (error) {
-      console.error('Error checking restaurant hours:', error)
-      return { isOpen: false, status: 'Hours unavailable' }
-    }
-  }
-
-  // Find the next opening time for a restaurant
-  private findNextOpenPeriod(periods: any[], currentTime: Date): string | null {
-    const currentDay = currentTime.getDay()
-    const currentTimeNum = currentTime.getHours() * 100 + currentTime.getMinutes()
-
-    // Check if opens later today
-    const todaysPeriods = periods.filter((p: any) => p.open?.day === currentDay)
-    for (const period of todaysPeriods) {
-      const openTime = period.open?.hour * 100 + (period.open?.minute || 0)
-      if (openTime > currentTimeNum) {
-        const openTimeStr = new Date()
-        openTimeStr.setHours(period.open.hour, period.open.minute, 0, 0)
-        return `Opens at ${openTimeStr.toLocaleTimeString('en-US', { 
-          hour: 'numeric', 
-          minute: '2-digit', 
-          hour12: true 
-        })}`
-      }
-    }
-
-    // Check tomorrow
-    const tomorrow = (currentDay + 1) % 7
-    const tomorrowPeriods = periods.filter((p: any) => p.open?.day === tomorrow)
-    if (tomorrowPeriods.length > 0) {
-      const firstPeriod = tomorrowPeriods[0]
-      const openTimeStr = new Date()
-      openTimeStr.setHours(firstPeriod.open.hour, firstPeriod.open.minute, 0, 0)
-      return `Opens tomorrow at ${openTimeStr.toLocaleTimeString('en-US', { 
-        hour: 'numeric', 
-        minute: '2-digit', 
-        hour12: true 
-      })}`
-    }
-
-    return null
-  }
-
-  // Calculate distance between two points (Haversine formula)
-  calculateDistance(
-    lat1: number, 
-    lng1: number, 
-    lat2: number, 
-    lng2: number
-  ): number {
-    const R = 3959 // Earth's radius in miles
-    const dLat = this.toRadians(lat2 - lat1)
-    const dLng = this.toRadians(lng2 - lng1)
-    const a = 
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(this.toRadians(lat1)) * Math.cos(this.toRadians(lat2)) *
-      Math.sin(dLng / 2) * Math.sin(dLng / 2)
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
-    return R * c // Distance in miles
-  }
-
-  private toRadians(degrees: number): number {
-    return degrees * (Math.PI / 180)
   }
 }
 
 export const restaurantService = new RestaurantService()
+export default restaurantService

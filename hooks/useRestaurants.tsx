@@ -89,151 +89,119 @@ export const useRestaurants = (
   const [totalCount, setTotalCount] = useState(0)
   const [currentPage, setCurrentPage] = useState(0)
 
-  // Build the SQL query based on filters
   const buildQuery = useCallback(() => {
-    let query = supabase
-      .from('restaurants')
-      .select('*', { count: 'exact' })
-      .eq('is_active', true)
+  console.log('🔍 Building query with filters:', filters)
+  
+  let query = supabase
+    .from('restaurants')
+    .select('*', { count: 'exact' })
+    .eq('is_active', true)
 
-    // Location filter
-    if (filters.location) {
-      query = query.eq('location_city', filters.location)
-    }
+  // Market filter instead of location_city
+  if (filters.location) {
+    console.log('🏙️ Filtering for market:', filters.location)
+    query = query.eq('market', filters.location)  // ✅ Use market field
+  }
 
-    // Meal type filters
-    if (filters.mealTypes && filters.mealTypes.length > 0) {
-      const mealConditions = filters.mealTypes.map(meal => {
-        switch (meal) {
-          case 'breakfast':
-            return 'serves_breakfast.eq.true'
-          case 'lunch':
-            return 'serves_lunch.eq.true'
-          case 'dinner':
-            return 'serves_dinner.eq.true'
-          case 'latenight':
-            // For late night, we could filter by current hours or just dinner
-            return 'serves_dinner.eq.true'
-          default:
-            return null
-        }
-      }).filter(Boolean)
-
-      if (mealConditions.length > 0) {
-        // Use OR logic for meal types
-        query = query.or(mealConditions.join(','))
+  // Rest of your existing meal type filters...
+  if (filters.mealTypes && filters.mealTypes.length > 0) {
+    const mealConditions: string[] = []
+    
+    filters.mealTypes.forEach(meal => {
+      switch (meal) {
+        case 'breakfast':
+          mealConditions.push('serves_breakfast.eq.true')
+          break
+        case 'brunch':
+          mealConditions.push('serves_brunch.eq.true')
+          break
+        case 'lunch':
+          mealConditions.push('serves_lunch.eq.true')
+          break
+        case 'dinner':
+          mealConditions.push('serves_dinner.eq.true')
+          break
+        case 'coffee':
+          mealConditions.push('serves_coffee.eq.true')
+          break
+        case 'dessert':
+          mealConditions.push('serves_dessert.eq.true')
+          break
       }
-    }
+    })
 
-    // Service style filters
-    if (filters.serviceStyles && filters.serviceStyles.length > 0) {
-      filters.serviceStyles.forEach(service => {
-        switch (service) {
-          case 'dine_in':
-            query = query.eq('dine_in', true)
-            break
-          case 'takeout':
-            query = query.eq('takeout', true)
-            break
-          case 'delivery':
-            query = query.eq('delivery', true)
-            break
-        }
-      })
+    if (mealConditions.length > 0) {
+      query = query.or(mealConditions.join(','))
     }
+  }
 
-    // Budget filters
-    if (filters.budget && filters.budget.length === 2) {
-      const [minPrice, maxPrice] = filters.budget
-      query = query.gte('price_level', minPrice).lte('price_level', maxPrice)
+  // Budget filter
+  if (filters.budget && filters.budget.length > 0) {
+    query = query.in('price_level', filters.budget)
+  }
+
+  // Cuisine filter
+  if (filters.cuisineTypes && filters.cuisineTypes.length > 0) {
+    const cuisineConditions = filters.cuisineTypes.map(cuisine => 
+      `primary_type.eq.${cuisine}`
+    )
+    
+    if (cuisineConditions.length > 0) {
+      query = query.or(cuisineConditions.join(','))
     }
+  }
 
-    // Dietary filters
-    if (filters.dietary && filters.dietary.length > 0 && !filters.dietary.includes('none')) {
-      filters.dietary.forEach(diet => {
-        switch (diet) {
-          case 'vegetarian':
-            query = query.eq('serves_vegetarian_food', true)
-            break
-          case 'vegan':
-            // For vegan, we might need additional logic
-            query = query.eq('serves_vegetarian_food', true)
-            break
-          case 'gluten_free':
-            // This would require additional data in the restaurant table
-            break
-        }
-      })
-    }
+  // Dietary restrictions
+  if (filters.dietary && filters.dietary.length > 0) {
+    filters.dietary.forEach(diet => {
+      switch (diet) {
+        case 'vegetarian':
+          query = query.eq('serves_vegetarian_food', true)
+          break
+      }
+    })
+  }
 
-    // Feature filters
-    if (filters.features && filters.features.length > 0) {
-      filters.features.forEach(feature => {
-        switch (feature) {
-          case 'live_music':
-            query = query.eq('live_music', true)
-            break
-          case 'good_for_watching_sports':
-            query = query.eq('good_for_watching_sports', true)
-            break
-          case 'good_for_groups':
-            query = query.eq('good_for_groups', true)
-            break
-          case 'good_for_children':
-            query = query.eq('good_for_children', true)
-            break
-          case 'outdoor_seating':
-            query = query.eq('outdoor_seating', true)
-            break
-          case 'allows_dogs':
-            query = query.eq('allows_dogs', true)
-            break
-          case 'reservable':
-            query = query.eq('reservable', true)
-            break
-          case 'parking_available':
-            // This would need to be checked in parking_options JSON
-            break
-          case 'wheelchair_accessible':
-            // This would need to be checked in accessibility_options JSON
-            break
-          case 'wifi_available':
-            // This would require additional data
-            break
-        }
-      })
-    }
+  // Features filter
+  if (filters.features && filters.features.length > 0) {
+    filters.features.forEach(feature => {
+      switch (feature) {
+        case 'outdoor_seating':
+          query = query.eq('outdoor_seating', true)
+          break
+        case 'serves_wine':
+          query = query.eq('serves_wine', true)
+          break
+        case 'serves_beer':
+          query = query.eq('serves_beer', true)
+          break
+        case 'good_for_groups':
+          query = query.eq('good_for_groups', true)
+          break
+        case 'reservable':
+          query = query.eq('reservable', true)
+          break
+        case 'takeout':
+          query = query.eq('takeout', true)
+          break
+        case 'delivery':
+          query = query.eq('delivery', true)
+          break
+        case 'good_for_children':
+          query = query.eq('good_for_children', true)
+          break
+        case 'allows_dogs':
+          query = query.eq('allows_dogs', true)
+          break
+        case 'live_music':
+          query = query.eq('live_music', true)
+          break
+      }
+    })
+  }
 
-    // Timing filters
-    if (filters.timing === 'now') {
-      // Filter for currently open restaurants
-      // This would require complex current hours logic
-      // For now, we'll skip this filter and handle it client-side
-    }
-
-    // Apply sorting
-    switch (sortBy) {
-      case 'rating':
-        query = query.order('rating', { ascending: false })
-        break
-      case 'price':
-        query = query.order('price_level', { ascending: true })
-        break
-      case 'distance':
-        // For distance sorting, we'd need PostGIS functions
-        // For now, fall back to name sorting
-        query = query.order('name', { ascending: true })
-        break
-      case 'openNow':
-        // This would require current hours calculation
-        query = query.order('rating', { ascending: false })
-        break
-      default:
-        query = query.order('rating', { ascending: false })
-    }
-
-    return query
-  }, [filters, sortBy])
+  return query
+}, [filters, sortBy, userLocation])
 
   // Load restaurants with pagination
   const loadRestaurants = useCallback(async (page: number = 0, append: boolean = false) => {
