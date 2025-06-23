@@ -1,7 +1,7 @@
-// Updated RestaurantCard component with photo support
+// Updated RestaurantCard component with photo support and debugging
 // File: components/restaurant/RestaurantCard.tsx
 
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, Pressable, Dimensions } from 'react-native';
 import { Icon } from '@rneui/themed';
 import { Restaurant } from '../../types/database';
@@ -29,6 +29,18 @@ export default function RestaurantCard({
   showDistance = false 
 }: RestaurantCardProps) {
   
+  const [imageLoading, setImageLoading] = useState(true);
+  const [imageError, setImageError] = useState(false);
+
+  // Debug logging
+  const photoUrl = restaurant.primary_photo_url;
+  
+  console.log('🔍 RestaurantCard Debug for:', restaurant.name);
+  console.log('📸 primary_photo_url:', photoUrl);
+  console.log('📊 primary_photo_url type:', typeof photoUrl);
+  console.log('📏 primary_photo_url length:', photoUrl?.length);
+  console.log('✅ Has photo URL:', !!photoUrl);
+
   // Render price level as dollar signs
   const renderPriceLevel = (level: number) => {
     return '$'.repeat(Math.max(1, Math.min(4, level)));
@@ -48,6 +60,22 @@ export default function RestaurantCard({
   // Determine if restaurant is currently open
   const isOpen = restaurant.current_opening_hours?.open_now ?? null;
 
+  // Handle image loading
+  const handleImageLoad = () => {
+    console.log('✅ Image loaded successfully for:', restaurant.name);
+    setImageLoading(false);
+  };
+
+  const handleImageError = (error: any) => {
+    console.log('❌ Image load error for:', restaurant.name);
+    console.log('❌ Error details:', error.nativeEvent);
+    setImageError(true);
+    setImageLoading(false);
+  };
+
+  // Simple validation
+  const shouldShowImage = photoUrl && photoUrl.trim().length > 0 && !imageError;
+
   return (
     <Pressable 
       style={[styles.container, styles.shadowCard]} 
@@ -57,15 +85,41 @@ export default function RestaurantCard({
     >
       {/* Photo Section */}
       <View style={styles.photoContainer}>
-        {restaurant.primary_photo_url ? (
-          <Image 
-            source={{ uri: restaurant.primary_photo_url }}
-            style={styles.photo}
-            resizeMode="cover"
-          />
+        {shouldShowImage ? (
+          <>
+            {imageLoading && (
+              <View style={[styles.photo, styles.loadingPhoto]}>
+                <Icon 
+                  name="image" 
+                  type="font-awesome" 
+                  size={30} 
+                  color="#999" 
+                />
+                <Text style={styles.loadingText}>Loading...</Text>
+              </View>
+            )}
+            <Image 
+              source={{ uri: photoUrl }}
+              style={[styles.photo, imageLoading && { position: 'absolute' }]}
+              resizeMode="cover"
+              onLoad={handleImageLoad}
+              onError={handleImageError}
+            />
+          </>
         ) : (
           <View style={[styles.photo, styles.placeholderPhoto]}>
-            <Text style={styles.placeholderText}>No Photo</Text>
+            <Icon 
+              name="utensils" 
+              type="font-awesome-5" 
+              size={30} 
+              color="#B8860B" 
+            />
+            <Text style={styles.placeholderText}>
+              No Photo{'\n'}
+              <Text style={styles.debugText}>
+                URL: {photoUrl ? 'Present' : 'Missing'}
+              </Text>
+            </Text>
           </View>
         )}
         
@@ -85,12 +139,16 @@ export default function RestaurantCard({
             </View>
           )}
           
-          {restaurant.price_level && (
-            <View style={styles.priceBadge}>
-              <Text style={styles.priceText}>
-                {renderPriceLevel(restaurant.price_level)}
-              </Text>
-            </View>
+          {/* Favorite button */}
+          {showFavoriteButton && (
+            <Pressable style={styles.favoriteButton}>
+              <Icon 
+                name="heart" 
+                type="font-awesome" 
+                size={18} 
+                color="#FF6B6B" 
+              />
+            </Pressable>
           )}
         </View>
       </View>
@@ -99,53 +157,61 @@ export default function RestaurantCard({
       <View style={styles.content}>
         {/* Restaurant Name */}
         <Text style={styles.name} numberOfLines={1}>
-          {restaurant.name}
+          {restaurant.display_name || restaurant.name}
         </Text>
-
-        {/* Rating and Reviews */}
-        {restaurant.rating && (
-          <View style={styles.ratingContainer}>
-            <Icon name="star" type="font-awesome" size={16} color="#FFD700" />
-            <Text style={styles.rating}>{restaurant.rating}</Text>
-            {restaurant.user_rating_count && (
-              <Text style={styles.reviewCount}>
-                ({restaurant.user_rating_count})
+        
+        {/* Rating and Price Row */}
+        <View style={styles.ratingPriceRow}>
+          {restaurant.rating && (
+            <View style={styles.ratingContainer}>
+              <Icon 
+                name="star" 
+                type="font-awesome" 
+                size={14} 
+                color="#FFD700" 
+              />
+              <Text style={styles.rating}>
+                {restaurant.rating.toFixed(1)}
               </Text>
-            )}
-          </View>
-        )}
-
-        {/* Cuisine Types */}
-        {restaurant.cuisine_types && restaurant.cuisine_types.length > 0 && (
-          <Text style={styles.cuisine} numberOfLines={1}>
-            {restaurant.cuisine_types.slice(0, 3).join(' • ')}
-          </Text>
-        )}
-
-        {/* Address */}
-        <View style={styles.addressContainer}>
-          <Icon name="map-marker" type="font-awesome" size={14} color="#666" />
-          <Text style={styles.address} numberOfLines={1}>
-            {restaurant.formatted_address}
-          </Text>
+              {restaurant.user_rating_count && (
+                <Text style={styles.reviewCount}>
+                  ({restaurant.user_rating_count})
+                </Text>
+              )}
+            </View>
+          )}
+          
+          {restaurant.price_level && (
+            <Text style={styles.priceLevel}>
+              {renderPriceLevel(restaurant.price_level)}
+            </Text>
+          )}
         </View>
-
+        
+        {/* Cuisine Types */}
+        {restaurant.types && restaurant.types.length > 0 && (
+          <Text style={styles.cuisineTypes} numberOfLines={1}>
+            {restaurant.types
+              .filter(type => !['food', 'point_of_interest', 'establishment'].includes(type))
+              .map(type => type.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()))
+              .slice(0, 3)
+              .join(' • ')}
+          </Text>
+        )}
+        
         {/* Operating Hours */}
         {formatOperatingHours() && (
-          <View style={styles.hoursContainer}>
-            <Icon name="clock-o" type="font-awesome" size={14} color="#666" />
-            <Text style={styles.hours}>
-              {formatOperatingHours()}
-            </Text>
-          </View>
+          <Text style={styles.hours}>
+            {formatOperatingHours()}
+          </Text>
         )}
-
-        {/* Distance (if provided) */}
+        
+        {/* Distance */}
         {showDistance && restaurant.distance && (
           <Text style={styles.distance}>
-            {restaurant.distance < 1000 
-              ? `${Math.round(restaurant.distance)}m away`
-              : `${(restaurant.distance / 1000).toFixed(1)}km away`
+            {restaurant.distance < 1 
+              ? `${(restaurant.distance * 1000).toFixed(0)}m away`
+              : `${restaurant.distance.toFixed(1)}km away`
             }
           </Text>
         )}
@@ -156,14 +222,13 @@ export default function RestaurantCard({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    width: CARD_WIDTH,
+    backgroundColor: '#FFFFFF',
     borderRadius: 12,
     marginBottom: 16,
     overflow: 'hidden',
-    width: CARD_WIDTH,
   },
   shadowCard: {
-    // iOS shadow
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -171,7 +236,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.1,
     shadowRadius: 4,
-    // Android shadow
     elevation: 3,
   },
   photoContainer: {
@@ -180,112 +244,123 @@ const styles = StyleSheet.create({
   },
   photo: {
     width: '100%',
-    height: '100%',
+    height: 200,
   },
   placeholderPhoto: {
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#FFD700', // Golden background
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loadingPhoto: {
+    backgroundColor: '#f0f0f0',
     justifyContent: 'center',
     alignItems: 'center',
   },
   placeholderText: {
-    color: '#999',
     fontSize: 14,
+    color: '#B8860B',
+    marginTop: 8,
     fontWeight: '500',
+    textAlign: 'center',
+  },
+  loadingText: {
+    fontSize: 12,
+    color: '#999',
+    marginTop: 8,
+  },
+  debugText: {
+    fontSize: 10,
+    color: '#999',
+    textAlign: 'center',
   },
   overlayBadges: {
     position: 'absolute',
     top: 12,
+    left: 12,
     right: 12,
-    gap: 6,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
   },
   statusBadge: {
     paddingHorizontal: 8,
     paddingVertical: 4,
-    borderRadius: 6,
-    alignSelf: 'flex-end',
+    borderRadius: 12,
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
   },
   openBadge: {
-    backgroundColor: 'rgba(34, 197, 94, 0.9)', // green with opacity
+    backgroundColor: 'rgba(76, 175, 80, 0.9)',
   },
   closedBadge: {
-    backgroundColor: 'rgba(239, 68, 68, 0.9)', // red with opacity
+    backgroundColor: 'rgba(244, 67, 54, 0.9)',
   },
   statusText: {
     fontSize: 12,
     fontWeight: '600',
   },
   openText: {
-    color: 'white',
+    color: '#FFFFFF',
   },
   closedText: {
-    color: 'white',
+    color: '#FFFFFF',
   },
-  priceBadge: {
-    backgroundColor: 'rgba(0, 0, 0, 0.7)',
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 6,
-    alignSelf: 'flex-end',
-  },
-  priceText: {
-    color: 'white',
-    fontSize: 12,
-    fontWeight: '600',
+  favoriteButton: {
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    borderRadius: 20,
+    width: 36,
+    height: 36,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   content: {
     padding: 16,
   },
   name: {
     fontSize: 18,
-    fontWeight: '700',
-    color: '#1f2937',
+    fontWeight: '600',
+    color: '#333',
+    marginBottom: 8,
+  },
+  ratingPriceRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     marginBottom: 6,
   },
   ratingContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 6,
-    gap: 4,
+    flex: 1,
   },
   rating: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#1f2937',
+    color: '#333',
+    marginLeft: 4,
   },
   reviewCount: {
+    fontSize: 12,
+    color: '#666',
+    marginLeft: 4,
+  },
+  priceLevel: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#4CAF50',
+  },
+  cuisineTypes: {
     fontSize: 14,
-    color: '#6b7280',
-  },
-  cuisine: {
-    fontSize: 14,
-    color: '#6b7280',
-    marginBottom: 8,
-  },
-  addressContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 6,
-    gap: 6,
-  },
-  address: {
-    fontSize: 14,
-    color: '#6b7280',
-    flex: 1,
-  },
-  hoursContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 6,
-    gap: 6,
+    color: '#666',
+    marginBottom: 4,
   },
   hours: {
-    fontSize: 14,
-    color: '#6b7280',
+    fontSize: 12,
+    color: '#888',
+    marginBottom: 4,
   },
   distance: {
     fontSize: 12,
-    color: '#9ca3af',
-    marginTop: 4,
+    color: '#2196F3',
     fontWeight: '500',
   },
 });
