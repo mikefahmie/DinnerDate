@@ -1,7 +1,7 @@
-// Updated RestaurantCard component with photo support and debugging
+// Updated RestaurantCard component with fixed hours parsing
 // File: components/restaurant/RestaurantCard.tsx
 
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, Image, StyleSheet, Pressable, Dimensions } from 'react-native';
 import { Icon } from '@rneui/themed';
 import { Restaurant } from '../../types/database';
@@ -29,52 +29,69 @@ export default function RestaurantCard({
   showDistance = false 
 }: RestaurantCardProps) {
   
-  const [imageLoading, setImageLoading] = useState(true);
-  const [imageError, setImageError] = useState(false);
-
-  // Debug logging
-  const photoUrl = restaurant.primary_photo_url;
-  
-  console.log('🔍 RestaurantCard Debug for:', restaurant.name);
-  console.log('📸 primary_photo_url:', photoUrl);
-  console.log('📊 primary_photo_url type:', typeof photoUrl);
-  console.log('📏 primary_photo_url length:', photoUrl?.length);
-  console.log('✅ Has photo URL:', !!photoUrl);
-
   // Render price level as dollar signs
   const renderPriceLevel = (level: number) => {
     return '$'.repeat(Math.max(1, Math.min(4, level)));
   };
 
-  // Format operating hours for display
+  // Helper function to format time from hour and minute
+  const formatTime = (hour: number, minute: number = 0): string => {
+    const date = new Date();
+    date.setHours(hour, minute, 0, 0);
+    return date.toLocaleTimeString('en-US', {
+      hour: 'numeric',
+      minute: minute > 0 ? '2-digit' : undefined,
+      hour12: true,
+    });
+  };
+
+  // Format operating hours for display - Fixed to use proper data structure
   const formatOperatingHours = () => {
-    if (!restaurant.current_opening_hours?.periods?.[0]) return null;
-    
-    const todayPeriod = restaurant.current_opening_hours.periods[0];
-    if (todayPeriod.open && todayPeriod.close) {
-      return `${todayPeriod.open.time} - ${todayPeriod.close.time}`;
+    // First try to get today's hours from regular_opening_hours
+    if (restaurant.regular_opening_hours?.periods) {
+      const now = new Date();
+      const currentDay = now.getDay(); // 0 = Sunday, 1 = Monday, etc.
+      
+      // Find today's periods
+      const todaysPeriods = restaurant.regular_opening_hours.periods.filter(
+        (period: any) => period.open?.day === currentDay
+      );
+      
+      if (todaysPeriods.length > 0) {
+        const firstPeriod = todaysPeriods[0];
+        if (firstPeriod.open && firstPeriod.close) {
+          const openTime = formatTime(firstPeriod.open.hour, firstPeriod.open.minute);
+          const closeTime = formatTime(firstPeriod.close.hour, firstPeriod.close.minute);
+          return `${openTime} - ${closeTime}`;
+        }
+      }
     }
+    
+    // Fallback: if no periods found for today, try to show first available hours
+    if (restaurant.regular_opening_hours?.weekday_descriptions) {
+      const now = new Date();
+      const currentDay = now.getDay(); // 0 = Sunday, 1 = Monday, etc.
+      const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      
+      // Find today's description
+      const todayDesc = restaurant.regular_opening_hours.weekday_descriptions.find((desc: string) => 
+        desc.startsWith(dayNames[currentDay])
+      );
+      
+      if (todayDesc) {
+        // Extract just the time part (everything after the colon and space)
+        const timePart = todayDesc.split(': ')[1];
+        if (timePart && timePart !== 'Closed') {
+          return timePart;
+        }
+      }
+    }
+    
     return null;
   };
 
-  // Determine if restaurant is currently open
+  // Determine if restaurant is currently open - using the open_now from current_opening_hours
   const isOpen = restaurant.current_opening_hours?.open_now ?? null;
-
-  // Handle image loading
-  const handleImageLoad = () => {
-    console.log('✅ Image loaded successfully for:', restaurant.name);
-    setImageLoading(false);
-  };
-
-  const handleImageError = (error: any) => {
-    console.log('❌ Image load error for:', restaurant.name);
-    console.log('❌ Error details:', error.nativeEvent);
-    setImageError(true);
-    setImageLoading(false);
-  };
-
-  // Simple validation
-  const shouldShowImage = photoUrl && photoUrl.trim().length > 0 && !imageError;
 
   return (
     <Pressable 
@@ -85,41 +102,15 @@ export default function RestaurantCard({
     >
       {/* Photo Section */}
       <View style={styles.photoContainer}>
-        {shouldShowImage ? (
-          <>
-            {imageLoading && (
-              <View style={[styles.photo, styles.loadingPhoto]}>
-                <Icon 
-                  name="image" 
-                  type="font-awesome" 
-                  size={30} 
-                  color="#999" 
-                />
-                <Text style={styles.loadingText}>Loading...</Text>
-              </View>
-            )}
-            <Image 
-              source={{ uri: photoUrl }}
-              style={[styles.photo, imageLoading && { position: 'absolute' }]}
-              resizeMode="cover"
-              onLoad={handleImageLoad}
-              onError={handleImageError}
-            />
-          </>
+        {restaurant.primary_photo_url ? (
+          <Image 
+            source={{ uri: restaurant.primary_photo_url }}
+            style={styles.photo}
+            resizeMode="cover"
+          />
         ) : (
           <View style={[styles.photo, styles.placeholderPhoto]}>
-            <Icon 
-              name="utensils" 
-              type="font-awesome-5" 
-              size={30} 
-              color="#B8860B" 
-            />
-            <Text style={styles.placeholderText}>
-              No Photo{'\n'}
-              <Text style={styles.debugText}>
-                URL: {photoUrl ? 'Present' : 'Missing'}
-              </Text>
-            </Text>
+            <Text style={styles.placeholderText}>No Photo</Text>
           </View>
         )}
         
@@ -139,16 +130,12 @@ export default function RestaurantCard({
             </View>
           )}
           
-          {/* Favorite button */}
-          {showFavoriteButton && (
-            <Pressable style={styles.favoriteButton}>
-              <Icon 
-                name="heart" 
-                type="font-awesome" 
-                size={18} 
-                color="#FF6B6B" 
-              />
-            </Pressable>
+          {restaurant.price_level && (
+            <View style={styles.priceBadge}>
+              <Text style={styles.priceText}>
+                {renderPriceLevel(restaurant.price_level)}
+              </Text>
+            </View>
           )}
         </View>
       </View>
@@ -157,61 +144,53 @@ export default function RestaurantCard({
       <View style={styles.content}>
         {/* Restaurant Name */}
         <Text style={styles.name} numberOfLines={1}>
-          {restaurant.display_name || restaurant.name}
+          {restaurant.name}
         </Text>
-        
-        {/* Rating and Price Row */}
-        <View style={styles.ratingPriceRow}>
-          {restaurant.rating && (
-            <View style={styles.ratingContainer}>
-              <Icon 
-                name="star" 
-                type="font-awesome" 
-                size={14} 
-                color="#FFD700" 
-              />
-              <Text style={styles.rating}>
-                {restaurant.rating.toFixed(1)}
+
+        {/* Rating and Reviews */}
+        {restaurant.rating && (
+          <View style={styles.ratingContainer}>
+            <Icon name="star" type="font-awesome" size={16} color="#FFD700" />
+            <Text style={styles.rating}>{restaurant.rating}</Text>
+            {restaurant.user_rating_count && (
+              <Text style={styles.reviewCount}>
+                ({restaurant.user_rating_count})
               </Text>
-              {restaurant.user_rating_count && (
-                <Text style={styles.reviewCount}>
-                  ({restaurant.user_rating_count})
-                </Text>
-              )}
-            </View>
-          )}
-          
-          {restaurant.price_level && (
-            <Text style={styles.priceLevel}>
-              {renderPriceLevel(restaurant.price_level)}
-            </Text>
-          )}
-        </View>
-        
+            )}
+          </View>
+        )}
+
         {/* Cuisine Types */}
-        {restaurant.types && restaurant.types.length > 0 && (
-          <Text style={styles.cuisineTypes} numberOfLines={1}>
-            {restaurant.types
-              .filter(type => !['food', 'point_of_interest', 'establishment'].includes(type))
-              .map(type => type.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()))
-              .slice(0, 3)
-              .join(' • ')}
+        {restaurant.cuisine_types && restaurant.cuisine_types.length > 0 && (
+          <Text style={styles.cuisine} numberOfLines={1}>
+            {restaurant.cuisine_types.slice(0, 3).join(' • ')}
           </Text>
         )}
-        
-        {/* Operating Hours */}
+
+        {/* Address */}
+        <View style={styles.addressContainer}>
+          <Icon name="map-marker" type="font-awesome" size={14} color="#666" />
+          <Text style={styles.address} numberOfLines={1}>
+            {restaurant.formatted_address}
+          </Text>
+        </View>
+
+        {/* Operating Hours - Fixed */}
         {formatOperatingHours() && (
-          <Text style={styles.hours}>
-            {formatOperatingHours()}
-          </Text>
+          <View style={styles.hoursContainer}>
+            <Icon name="clock-o" type="font-awesome" size={14} color="#666" />
+            <Text style={styles.hours}>
+              {formatOperatingHours()}
+            </Text>
+          </View>
         )}
-        
-        {/* Distance */}
+
+        {/* Distance (if provided) */}
         {showDistance && restaurant.distance && (
           <Text style={styles.distance}>
-            {restaurant.distance < 1 
-              ? `${(restaurant.distance * 1000).toFixed(0)}m away`
-              : `${restaurant.distance.toFixed(1)}km away`
+            {restaurant.distance < 1000 
+              ? `${Math.round(restaurant.distance)}m` 
+              : `${(restaurant.distance / 1000).toFixed(1)}km`
             }
           </Text>
         )}
@@ -222,8 +201,7 @@ export default function RestaurantCard({
 
 const styles = StyleSheet.create({
   container: {
-    width: CARD_WIDTH,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#fff',
     borderRadius: 12,
     marginBottom: 16,
     overflow: 'hidden',
@@ -235,8 +213,8 @@ const styles = StyleSheet.create({
       height: 2,
     },
     shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   photoContainer: {
     position: 'relative',
@@ -244,34 +222,17 @@ const styles = StyleSheet.create({
   },
   photo: {
     width: '100%',
-    height: 200,
+    height: '100%',
   },
   placeholderPhoto: {
-    backgroundColor: '#FFD700', // Golden background
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  loadingPhoto: {
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#FFD700',
     justifyContent: 'center',
     alignItems: 'center',
   },
   placeholderText: {
-    fontSize: 14,
-    color: '#B8860B',
-    marginTop: 8,
+    color: '#8B7355',
+    fontSize: 16,
     fontWeight: '500',
-    textAlign: 'center',
-  },
-  loadingText: {
-    fontSize: 12,
-    color: '#999',
-    marginTop: 8,
-  },
-  debugText: {
-    fontSize: 10,
-    color: '#999',
-    textAlign: 'center',
   },
   overlayBadges: {
     position: 'absolute',
@@ -286,81 +247,89 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 12,
-    backgroundColor: 'rgba(0, 0, 0, 0.7)',
   },
   openBadge: {
-    backgroundColor: 'rgba(76, 175, 80, 0.9)',
+    backgroundColor: 'rgba(34, 197, 94, 0.9)',
   },
   closedBadge: {
-    backgroundColor: 'rgba(244, 67, 54, 0.9)',
+    backgroundColor: 'rgba(239, 68, 68, 0.9)',
   },
   statusText: {
     fontSize: 12,
     fontWeight: '600',
   },
   openText: {
-    color: '#FFFFFF',
+    color: '#fff',
   },
   closedText: {
-    color: '#FFFFFF',
+    color: '#fff',
   },
-  favoriteButton: {
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
-    borderRadius: 20,
-    width: 36,
-    height: 36,
-    justifyContent: 'center',
-    alignItems: 'center',
+  priceBadge: {
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 12,
+  },
+  priceText: {
+    color: '#fff',
+    fontSize: 12,
+    fontWeight: '600',
   },
   content: {
     padding: 16,
   },
   name: {
     fontSize: 18,
-    fontWeight: '600',
-    color: '#333',
-    marginBottom: 8,
-  },
-  ratingPriceRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 6,
+    fontWeight: '700',
+    color: '#1f2937',
+    marginBottom: 4,
   },
   ratingContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    flex: 1,
+    marginBottom: 4,
   },
   rating: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#333',
+    color: '#1f2937',
     marginLeft: 4,
   },
   reviewCount: {
-    fontSize: 12,
-    color: '#666',
+    fontSize: 14,
+    color: '#6b7280',
     marginLeft: 4,
   },
-  priceLevel: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#4CAF50',
-  },
-  cuisineTypes: {
+  cuisine: {
     fontSize: 14,
-    color: '#666',
+    color: '#6b7280',
+    marginBottom: 8,
+  },
+  addressContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 4,
+  },
+  address: {
+    fontSize: 14,
+    color: '#6b7280',
+    marginLeft: 4,
+    flex: 1,
+  },
+  hoursContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
     marginBottom: 4,
   },
   hours: {
-    fontSize: 12,
-    color: '#888',
-    marginBottom: 4,
+    fontSize: 14,
+    color: '#6b7280',
+    marginLeft: 4,
   },
   distance: {
     fontSize: 12,
-    color: '#2196F3',
-    fontWeight: '500',
+    color: '#6b7280',
+    textAlign: 'right',
+    marginTop: 4,
   },
 });

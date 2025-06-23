@@ -1,4 +1,4 @@
-// Updated RestaurantDetailScreen.tsx with single photo support
+// Updated RestaurantDetailScreen.tsx with single photo support and FIXED hours parsing
 // File: screens/RestaurantDetailScreen.tsx
 
 import React, { useState, useEffect } from 'react'
@@ -205,27 +205,87 @@ const RestaurantDetailScreen: React.FC = () => {
     )
   }
 
+  // FIXED: Updated renderFullHours function to parse hours correctly
   const renderFullHours = () => {
-    if (!restaurant?.regular_opening_hours?.periods) return null
+    // First try to use weekday_descriptions (most reliable and pre-formatted)
+    if (restaurant?.regular_opening_hours?.weekday_descriptions) {
+      return (
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Hours</Text>
+          {restaurant.regular_opening_hours.weekday_descriptions.map((dayHours: string, index: number) => {
+            // Split the day and hours
+            const [dayName, hours] = dayHours.split(': ');
+            return (
+              <View key={index} style={styles.hoursRow}>
+                <Text style={styles.dayName}>{dayName}</Text>
+                <Text style={styles.hours}>{hours || 'Closed'}</Text>
+              </View>
+            );
+          })}
+        </View>
+      );
+    }
 
-    const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-    
-    return (
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Hours</Text>
-        {restaurant.regular_opening_hours.periods.map((period: any, index: number) => (
-          <View key={index} style={styles.hoursRow}>
-            <Text style={styles.dayName}>{dayNames[period.open?.day || 0]}</Text>
-            <Text style={styles.hours}>
-              {period.open && period.close 
-                ? `${period.open.time} - ${period.close.time}`
-                : 'Closed'
-              }
-            </Text>
-          </View>
-        ))}
-      </View>
-    )
+    // Fallback: Build hours from periods if weekday_descriptions is missing
+    if (restaurant?.regular_opening_hours?.periods) {
+      const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      
+      // Helper function to format time from hour and minute
+      const formatTime = (hour: number, minute: number = 0): string => {
+        const date = new Date();
+        date.setHours(hour, minute, 0, 0);
+        return date.toLocaleTimeString('en-US', {
+          hour: 'numeric',
+          minute: minute > 0 ? '2-digit' : undefined,
+          hour12: true,
+        });
+      };
+
+      // Build hours for each day
+      const weeklyHours: Array<{day: string, hours: string}> = [];
+      
+      for (let dayIndex = 0; dayIndex < 7; dayIndex++) {
+        const dayPeriods = restaurant.regular_opening_hours.periods.filter(
+          (period: any) => period.open?.day === dayIndex
+        );
+        
+        if (dayPeriods.length === 0) {
+          weeklyHours.push({
+            day: dayNames[dayIndex],
+            hours: 'Closed'
+          });
+        } else {
+          const periods = dayPeriods.map((period: any) => {
+            if (period.open && period.close) {
+              const openTime = formatTime(period.open.hour, period.open.minute);
+              const closeTime = formatTime(period.close.hour, period.close.minute);
+              return `${openTime} - ${closeTime}`;
+            }
+            return 'Hours unavailable';
+          });
+          
+          weeklyHours.push({
+            day: dayNames[dayIndex],
+            hours: periods.join(', ')
+          });
+        }
+      }
+
+      return (
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Hours</Text>
+          {weeklyHours.map((dayData, index) => (
+            <View key={index} style={styles.hoursRow}>
+              <Text style={styles.dayName}>{dayData.day}</Text>
+              <Text style={styles.hours}>{dayData.hours}</Text>
+            </View>
+          ))}
+        </View>
+      );
+    }
+
+    // No hours data available
+    return null;
   }
 
   if (loading) {
