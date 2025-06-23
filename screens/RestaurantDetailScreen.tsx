@@ -31,6 +31,22 @@ type RouteParams = {
 
 type RestaurantDetailRouteProp = RouteProp<RouteParams, 'RestaurantDetail'>
 
+const formatPrimaryType = (primaryType: string): string => {
+  if (!primaryType) return ''
+  
+  // Split by underscores and capitalize each word
+  return primaryType
+    .split('_')
+    .map(word => {
+      // Keep "and" lowercase, capitalize everything else
+      if (word.toLowerCase() === 'and') {
+        return 'and'
+      }
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+    })
+    .join(' ')
+}
+
 const { width: screenWidth } = Dimensions.get('window')
 const HERO_HEIGHT = 250
 
@@ -342,7 +358,7 @@ const RestaurantDetailScreen: React.FC = () => {
 
         <View style={styles.headerSection}>
           <Text style={styles.restaurantName}>{restaurant.display_name || restaurant.name}</Text>
-          <Text style={styles.cuisineType}>{restaurant.primary_type}</Text>
+          <Text style={styles.cuisineType}>{formatPrimaryType(restaurant.primary_type)}</Text>
           
           <View style={styles.ratingRow}>
             <RatingDisplay 
