@@ -1,27 +1,16 @@
-// components/wizard/LocationStep.tsx
+// components/wizard/LocationStep.tsx - Fixed to use your exact theme structure
 import React, { useState, useEffect } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import { Button, Icon } from '@rneui/themed'
 import { useTheme } from '../../hooks/useTheme'
 import { WizardState } from '../../screens/DiscoveryWizard'
+import { MarketConfig, Market } from '../../config/markets'
 
 interface LocationStepProps {
   wizardState: WizardState
   updateWizardState: (updates: Partial<WizardState>) => void
   onNext: () => void
 }
-
-// Available markets - currently just Ann Arbor, but structured for expansion
-const AVAILABLE_MARKETS = [
-  {
-    id: 'ann-arbor',
-    name: 'Ann Arbor, MI',
-    displayName: 'Ann Arbor',
-    state: 'Michigan',
-    isActive: true,
-  },
-  // Future markets would be added here
-]
 
 const LocationStep: React.FC<LocationStepProps> = ({
   wizardState,
@@ -31,18 +20,24 @@ const LocationStep: React.FC<LocationStepProps> = ({
   const { theme } = useTheme()
   const [selectedMarket, setSelectedMarket] = useState(wizardState.location)
 
-  // Auto-select Ann Arbor as default since it's the only option
-  useEffect(() => {
-    if (!selectedMarket) {
-      const defaultMarket = AVAILABLE_MARKETS.find(market => market.isActive)?.name || 'Ann Arbor, MI'
-      setSelectedMarket(defaultMarket)
-      updateWizardState({ location: defaultMarket })
-    }
-  }, [])
+  // Get markets for display
+  const activeMarkets = MarketConfig.getActiveMarkets()
+  const comingSoonMarkets = MarketConfig.getComingSoonMarkets()
 
-  const handleMarketSelect = (marketName: string) => {
-    setSelectedMarket(marketName)
-    updateWizardState({ location: marketName })
+  // Auto-select default market if none selected
+  useEffect(() => {
+    if (!selectedMarket && activeMarkets.length > 0) {
+      const defaultMarket = MarketConfig.getDefaultMarket()
+      setSelectedMarket(defaultMarket.name)
+      updateWizardState({ location: defaultMarket.name })
+    }
+  }, [selectedMarket, activeMarkets, updateWizardState])
+
+  const handleMarketSelect = (market: Market) => {
+    if (!market.isActive) return // Prevent selection of inactive markets
+    
+    setSelectedMarket(market.name)
+    updateWizardState({ location: market.name })
   }
 
   const handleContinue = () => {
@@ -51,199 +46,201 @@ const LocationStep: React.FC<LocationStepProps> = ({
     }
   }
 
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      paddingTop: theme.spacing.lg,
-    },
-    content: {
-      flex: 1,
-      justifyContent: 'space-between',
-    },
-    selectionArea: {
-      flex: 1,
-    },
-    subtitle: {
-      fontSize: theme.typography.fontSize.body,
-      color: theme.colors.textSecondary,
-      textAlign: 'center',
-      marginBottom: theme.spacing.xl,
-      lineHeight: theme.typography.fontSize.body * 1.4,
-    },
-    marketContainer: {
-      marginBottom: theme.spacing.lg,
-    },
-    marketCard: {
-      backgroundColor: theme.colors.surface,
-      borderRadius: theme.borderRadius.lg,
-      padding: theme.spacing.lg,
-      borderWidth: 2,
-      borderColor: theme.colors.border,
-      ...theme.shadows.small,
-    },
-    selectedMarketCard: {
-      backgroundColor: theme.colors.surfaceElevated,
-      borderColor: theme.colors.primary,
-      ...theme.shadows.medium,
-    },
-    marketHeader: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      marginBottom: theme.spacing.sm,
-    },
-    marketInfo: {
-      flex: 1,
-    },
-    marketName: {
-      fontSize: theme.typography.fontSize.h3,
-      fontWeight: '700',
-      color: theme.colors.textPrimary,
-      marginBottom: theme.spacing.xs,
-    },
-    selectedMarketName: {
-      color: theme.colors.primary,
-    },
-    marketState: {
-      fontSize: theme.typography.fontSize.body,
-      color: theme.colors.textSecondary,
-      fontWeight: '500',
-    },
-    checkIcon: {
-      marginLeft: theme.spacing.md,
-    },
-    expansionMessage: {
-      backgroundColor: theme.colors.accent + '20', // 20% opacity
-      borderRadius: theme.borderRadius.md,
-      padding: theme.spacing.md,
-      marginTop: theme.spacing.md,
-    },
-    expansionText: {
-      fontSize: theme.typography.fontSize.secondary,
-      color: theme.colors.textSecondary,
-      textAlign: 'center',
-      fontWeight: '500',
-    },
-    comingSoonText: {
-      fontSize: theme.typography.fontSize.caption,
-      color: theme.colors.textSecondary,
-      textAlign: 'center',
-      marginTop: theme.spacing.xs,
-      fontStyle: 'italic',
-    },
-    futureMarkets: {
-      marginTop: theme.spacing.md,
-    },
-    futureMarketsList: {
-      fontSize: theme.typography.fontSize.caption,
-      color: theme.colors.textSecondary,
-      textAlign: 'center',
-      lineHeight: theme.typography.fontSize.caption * 1.4,
-    },
-    buttonContainer: {
-      paddingTop: theme.spacing.lg,
-      paddingBottom: theme.spacing.md,
-    },
-    continueButton: {
-      backgroundColor: theme.colors.primary,
-      borderRadius: theme.borderRadius.md,
-      paddingVertical: theme.spacing.md,
-    },
-    continueButtonDisabled: {
-      backgroundColor: theme.colors.border,
-    },
-    continueButtonText: {
-      fontSize: theme.typography.fontSize.body,
-      fontWeight: '600',
-      color: theme.colors.textOnPrimary,
-    },
-    continueButtonTextDisabled: {
-      color: theme.colors.textSecondary,
-    },
-  })
+  const renderMarketCard = (market: Market, isComingSoon: boolean = false) => (
+    <TouchableOpacity
+      key={market.id}
+      style={[
+        styles.marketCard,
+        {
+          backgroundColor: theme.colors.surface,
+          borderColor: selectedMarket === market.name ? theme.colors.primary : theme.colors.border,
+          borderWidth: selectedMarket === market.name ? 2 : 1,
+          opacity: isComingSoon ? 0.6 : 1,
+        },
+      ]}
+      onPress={() => !isComingSoon && handleMarketSelect(market)}
+      disabled={isComingSoon}
+    >
+      <View style={styles.marketInfo}>
+        <Text style={[styles.marketName, { color: theme.colors.textPrimary }]}>
+          {market.displayName}
+        </Text>
+        <Text style={[styles.marketState, { color: theme.colors.textSecondary }]}>
+          {market.state}
+        </Text>
+        {market.cities && market.cities.length > 0 && (
+          <Text style={[styles.marketCities, { color: theme.colors.textMuted }]}>
+            {market.cities.slice(0, 3).join(', ')}
+            {market.cities.length > 3 && ` +${market.cities.length - 3} more`}
+          </Text>
+        )}
+      </View>
+      
+      <View style={styles.marketStatus}>
+        {isComingSoon ? (
+          <View style={[styles.comingSoonBadge, { backgroundColor: theme.colors.accent }]}>
+            <Text style={[styles.comingSoonText, { color: theme.colors.textOnDark }]}>
+              Coming Soon
+            </Text>
+          </View>
+        ) : selectedMarket === market.name ? (
+          <Icon name="check-circle" size={24} color={theme.colors.primary} />
+        ) : (
+          <Icon name="radio-button-unchecked" size={24} color={theme.colors.border} />
+        )}
+      </View>
+    </TouchableOpacity>
+  )
 
   return (
-    <View style={styles.container}>
-      <View style={styles.content}>
-        <View style={styles.selectionArea}>
-          <Text style={styles.subtitle}>
-            Let's start by choosing your location for the best restaurant recommendations.
+    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+      <View style={styles.header}>
+        <Text style={[styles.title, { color: theme.colors.textPrimary }]}>
+          Choose Your Location
+        </Text>
+        <Text style={[styles.subtitle, { color: theme.colors.textSecondary }]}>
+          Select your area to find restaurants near you
+        </Text>
+      </View>
+
+      <ScrollView style={styles.marketsList} showsVerticalScrollIndicator={false}>
+        {/* Active Markets */}
+        <View style={styles.marketsSection}>
+          <Text style={[styles.sectionTitle, { color: theme.colors.textPrimary }]}>
+            Available Now
           </Text>
-
-          <View style={styles.marketContainer}>
-            {AVAILABLE_MARKETS.map((market) => (
-              <TouchableOpacity
-                key={market.id}
-                style={[
-                  styles.marketCard,
-                  selectedMarket === market.name && styles.selectedMarketCard,
-                ]}
-                onPress={() => handleMarketSelect(market.name)}
-                activeOpacity={0.7}
-              >
-                <View style={styles.marketHeader}>
-                  <View style={styles.marketInfo}>
-                    <Text style={[
-                      styles.marketName,
-                      selectedMarket === market.name && styles.selectedMarketName,
-                    ]}>
-                      {market.displayName}
-                    </Text>
-                    <Text style={styles.marketState}>
-                      {market.state}
-                    </Text>
-                  </View>
-                  
-                  {selectedMarket === market.name && (
-                    <View style={styles.checkIcon}>
-                      <Icon
-                        name="check-circle"
-                        type="feather"
-                        size={24}
-                        color={theme.colors.primary}
-                      />
-                    </View>
-                  )}
-                </View>
-              </TouchableOpacity>
-            ))}
-          </View>
-
-          <View style={styles.expansionMessage}>
-            <Text style={styles.expansionText}>
-              Currently serving Ann Arbor
-            </Text>
-            <Text style={styles.comingSoonText}>
-              More cities coming soon!
-            </Text>
-            
-            <View style={styles.futureMarkets}>
-              <Text style={styles.futureMarketsList}>
-                Detroit • Grand Rapids • East Lansing • Kalamazoo{'\n'}
-                Chicago • Columbus • Madison
-              </Text>
-            </View>
-          </View>
+          {activeMarkets.map(market => renderMarketCard(market, false))}
         </View>
 
-        <View style={styles.buttonContainer}>
-          <Button
-            title="Continue"
-            onPress={handleContinue}
-            disabled={!selectedMarket}
-            buttonStyle={[
-              styles.continueButton,
-              !selectedMarket && styles.continueButtonDisabled,
-            ]}
-            titleStyle={[
-              styles.continueButtonText,
-              !selectedMarket && styles.continueButtonTextDisabled,
-            ]}
-          />
-        </View>
+        {/* Coming Soon Markets */}
+        {comingSoonMarkets.length > 0 && (
+          <View style={styles.marketsSection}>
+            <Text style={[styles.sectionTitle, { color: theme.colors.textPrimary }]}>
+              Coming Soon
+            </Text>
+            {comingSoonMarkets.slice(0, 3).map(market => renderMarketCard(market, true))}
+          </View>
+        )}
+
+        {/* Request New Market */}
+        <TouchableOpacity
+          style={[styles.requestCard, { backgroundColor: theme.colors.surface }]}
+          onPress={() => {
+            // Handle request new market - could open modal, email, etc.
+            console.log('Request new market')
+          }}
+        >
+          <Icon name="add-location" size={24} color={theme.colors.primary} />
+          <Text style={[styles.requestText, { color: theme.colors.textPrimary }]}>
+            Don't see your city? Request it here
+          </Text>
+        </TouchableOpacity>
+      </ScrollView>
+
+      <View style={styles.footer}>
+        <Button
+          title="Continue"
+          onPress={handleContinue}
+          disabled={!selectedMarket}
+          buttonStyle={[
+            styles.continueButton,
+            { backgroundColor: selectedMarket ? theme.colors.primary : theme.colors.disabled }
+          ]}
+          titleStyle={{
+            color: selectedMarket ? theme.colors.textOnPrimary : theme.colors.textMuted
+          }}
+        />
       </View>
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingHorizontal: 20,
+  },
+  header: {
+    marginTop: 20,
+    marginBottom: 24,
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  subtitle: {
+    fontSize: 16,
+    textAlign: 'center',
+    lineHeight: 22,
+  },
+  marketsList: {
+    flex: 1,
+  },
+  marketsSection: {
+    marginBottom: 24,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    marginBottom: 12,
+  },
+  marketCard: {
+    flexDirection: 'row',
+    padding: 16,
+    borderRadius: 12,
+    marginBottom: 12,
+    alignItems: 'center',
+  },
+  marketInfo: {
+    flex: 1,
+  },
+  marketName: {
+    fontSize: 18,
+    fontWeight: '600',
+    marginBottom: 4,
+  },
+  marketState: {
+    fontSize: 14,
+    marginBottom: 4,
+  },
+  marketCities: {
+    fontSize: 12,
+    fontStyle: 'italic',
+  },
+  marketStatus: {
+    alignItems: 'center',
+  },
+  comingSoonBadge: {
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 6,
+  },
+  comingSoonText: {
+    fontSize: 12,
+    fontWeight: '500',
+  },
+  requestCard: {
+    flexDirection: 'row',
+    padding: 16,
+    borderRadius: 12,
+    alignItems: 'center',
+    marginTop: 8,
+  },
+  requestText: {
+    fontSize: 16,
+    marginLeft: 12,
+    flex: 1,
+  },
+  footer: {
+    paddingVertical: 20,
+  },
+  continueButton: {
+    paddingVertical: 16,
+    borderRadius: 12,
+  },
+})
 
 export default LocationStep

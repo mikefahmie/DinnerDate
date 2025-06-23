@@ -1,13 +1,14 @@
-// services/restaurantService.ts - Updated to match new WizardState interface
+// services/restaurantService.ts - Updated to use centralized market config
 import { supabase } from '../lib/supabase'
 import { WizardState } from '../screens/DiscoveryWizard'
 import { Restaurant } from '../hooks/useRestaurants'
+import { MarketConfig, getDefaultMarket } from '../config/markets'
 
 export interface RestaurantFilters {
   location?: string
   mealTypes?: string[]
-  budget?: number[]           // Changed from priceRange to budget array
-  cuisineTypes?: string[]     // Added cuisineTypes
+  budget?: number[]
+  cuisineTypes?: string[]
   dietary?: string[]
   features?: string[]
   isOpen?: boolean
@@ -23,7 +24,7 @@ export interface RestaurantSearchOptions {
 }
 
 class RestaurantService {
-  // Get available markets
+  // Get available markets from database
   async getAvailableMarkets(): Promise<string[]> {
     try {
       const { data, error } = await supabase
@@ -33,12 +34,17 @@ class RestaurantService {
 
       if (error) throw error
 
-      // Get unique markets
+      // Get unique markets and filter by active markets only
       const uniqueMarkets = [...new Set(data?.map(item => item.market) || [])]
-      return uniqueMarkets.sort()
+      const activeMarkets = MarketConfig.getActiveMarkets().map(m => m.name)
+      
+      // Return intersection of database markets and active config markets
+      return uniqueMarkets
+        .filter(market => activeMarkets.includes(market))
+        .sort()
     } catch (error) {
       console.error('Error fetching available markets:', error)
-      return ['Ann Arbor/Ypsilanti'] // Fallback
+      return [getDefaultMarket()] // Fallback to default market
     }
   }
 
@@ -60,7 +66,7 @@ class RestaurantService {
     }
   }
 
-  // Search restaurants with filters - Updated to match WizardState
+  // Search restaurants with filters - Updated to use market config
   async searchRestaurants(
     filters: RestaurantFilters,
     options: RestaurantSearchOptions = {}
@@ -71,9 +77,14 @@ class RestaurantService {
         .select('*', { count: 'exact' })
         .eq('is_active', true)
 
-      // Market filter (not location_city)
+      // Market filter using centralized config
       if (filters.location) {
-        query = query.eq('market', filters.location)
+        // Normalize the location to the correct market name
+        const normalizedMarket = MarketConfig.normalizeToMarketName(filters.location)
+        query = query.eq('market', normalizedMarket)
+      } else {
+        // Default to current active market
+        query = query.eq('market', getDefaultMarket())
       }
 
       // Budget filter (price levels)
@@ -85,8 +96,8 @@ class RestaurantService {
       if (filters.mealTypes && filters.mealTypes.length > 0) {
         const mealConditions: string[] = []
         
-        filters.mealTypes.forEach(meal => {
-          switch (meal) {
+        filters.mealTypes.forEach(mealType => {
+          switch (mealType) {
             case 'breakfast':
               mealConditions.push('serves_breakfast.eq.true')
               break
@@ -109,29 +120,24 @@ class RestaurantService {
         })
 
         if (mealConditions.length > 0) {
+          // Use OR condition for meal types
           query = query.or(mealConditions.join(','))
         }
       }
 
       // Cuisine types filter
       if (filters.cuisineTypes && filters.cuisineTypes.length > 0) {
-        const cuisineConditions = filters.cuisineTypes.map(cuisine => 
-          `primary_type.eq.${cuisine}`
-        )
-        
-        if (cuisineConditions.length > 0) {
-          query = query.or(cuisineConditions.join(','))
-        }
+        query = query.in('primary_type', filters.cuisineTypes)
       }
 
       // Dietary restrictions filter
       if (filters.dietary && filters.dietary.length > 0) {
-        filters.dietary.forEach(diet => {
-          switch (diet) {
+        filters.dietary.forEach(dietary => {
+          switch (dietary) {
             case 'vegetarian':
               query = query.eq('serves_vegetarian_food', true)
               break
-            // Add more dietary options as needed
+            // Add more dietary filters as needed
           }
         })
       }
@@ -244,13 +250,16 @@ class RestaurantService {
     }
   }
 
-  // Get featured restaurants for a market
+  // Get featured restaurants for a market - Updated with centralized config
   async getFeaturedRestaurants(
-    market: string,
+    market?: string,
     limit: number = 10
   ): Promise<Restaurant[]> {
+    // Use provided market or default to current active market
+    const targetMarket = market ? MarketConfig.normalizeToMarketName(market) : getDefaultMarket()
+    
     const filters: RestaurantFilters = {
-      location: market,
+      location: targetMarket,
       minRating: 4.0,
       hasPhotos: true,
     }
@@ -264,15 +273,18 @@ class RestaurantService {
     return restaurants
   }
 
-  // Get restaurants by cuisine type
+  // Get restaurants by cuisine type - Updated with centralized config
   async getRestaurantsByCuisine(
     cuisineType: string,
     market?: string,
     limit: number = 20
   ): Promise<Restaurant[]> {
+    // Use provided market or default to current active market
+    const targetMarket = market ? MarketConfig.normalizeToMarketName(market) : getDefaultMarket()
+    
     const filters: RestaurantFilters = {
       cuisineTypes: [cuisineType],
-      location: market,
+      location: targetMarket,
     }
 
     const { restaurants } = await this.searchRestaurants(filters, {
@@ -284,18 +296,21 @@ class RestaurantService {
     return restaurants
   }
 
-  // Get random restaurant recommendations
+  // Get random restaurant recommendations - Updated with centralized config
   async getRandomRecommendations(
-    market: string,
+    market?: string,
     count: number = 5
   ): Promise<Restaurant[]> {
     try {
+      // Use provided market or default to current active market
+      const targetMarket = market ? MarketConfig.normalizeToMarketName(market) : getDefaultMarket()
+      
       // Get total count first
       const { count: total } = await supabase
         .from('restaurants')
         .select('*', { count: 'exact', head: true })
         .eq('is_active', true)
-        .eq('market', market)
+        .eq('market', targetMarket)
         .gte('rating', 3.5)
 
       if (!total || total === 0) return []
@@ -313,7 +328,7 @@ class RestaurantService {
           .from('restaurants')
           .select('*')
           .eq('is_active', true)
-          .eq('market', market)
+          .eq('market', targetMarket)
           .gte('rating', 3.5)
           .range(offset, offset)
           .limit(1)
@@ -330,7 +345,7 @@ class RestaurantService {
     }
   }
 
-  // Get restaurant statistics for a market
+  // Get restaurant statistics for a market - Updated with centralized config
   async getRestaurantStats(market?: string): Promise<{
     total: number
     averageRating: number
@@ -344,7 +359,10 @@ class RestaurantService {
         .eq('is_active', true)
 
       if (market) {
-        query = query.eq('market', market)
+        const targetMarket = MarketConfig.normalizeToMarketName(market)
+        query = query.eq('market', targetMarket)
+      } else {
+        query = query.eq('market', getDefaultMarket())
       }
 
       const { data, error } = await query
