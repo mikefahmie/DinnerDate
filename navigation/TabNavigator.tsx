@@ -1,4 +1,4 @@
-// navigation/TabNavigator.tsx - Ensure tabs are always visible
+// navigation/TabNavigator.tsx - Fixed to sit directly over safe area
 import React from 'react'
 import { Platform } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
@@ -20,11 +20,10 @@ const TabNavigator: React.FC = () => {
   const { theme } = useTheme()
   const insets = useSafeAreaInsets()
   
-  // Calculate tab bar height dynamically
+  // Simplified tab bar height - just base height + safe area
   const getTabBarHeight = () => {
-    const baseHeight = 60
-    const extraPadding = Platform.OS === 'android' ? 80 : 20
-    return baseHeight + Math.max(insets.bottom, extraPadding)
+    const baseHeight = 60 // Base tab bar height
+    return baseHeight + insets.bottom // Just add the actual safe area
   }
 
   return (
@@ -38,9 +37,9 @@ const TabNavigator: React.FC = () => {
           borderTopColor: theme.colors.divider,
           borderTopWidth: 1,
           height: getTabBarHeight(),
-          paddingBottom: Platform.OS === 'android' ? 80 : Math.max(insets.bottom, 20),
+          paddingBottom: insets.bottom, // Only actual safe area
           paddingTop: 10,
-          position: 'absolute', // Keep this to ensure it overlays content
+          position: 'absolute',
           bottom: 0,
           left: 0,
           right: 0,
@@ -58,17 +57,10 @@ const TabNavigator: React.FC = () => {
         tabBarIconStyle: {
           marginTop: 5,
         },
-        // Force tabs to be visible on all screens
         tabBarHideOnKeyboard: false,
         tabBarVisibilityAnimationConfig: {
           show: { animation: 'timing', config: { duration: 200 } },
           hide: { animation: 'timing', config: { duration: 200 } },
-        },
-      }}
-      // Ensure tab bar is always shown
-      screenListeners={{
-        tabPress: (e) => {
-          // Prevent default behavior and ensure tab navigation works
         },
       }}
     >

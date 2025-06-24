@@ -1,4 +1,4 @@
-// components/wizard/LocationStep.tsx - Fixed to use your exact theme structure
+// components/wizard/LocationStep.tsx - Fixed to use compact header and safe area
 import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import { Button, Icon } from '@rneui/themed'
@@ -94,10 +94,8 @@ const LocationStep: React.FC<LocationStepProps> = ({
 
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+      {/* Compact header - much smaller */}
       <View style={styles.header}>
-        <Text style={[styles.title, { color: theme.colors.textPrimary }]}>
-          Choose Your Location
-        </Text>
         <Text style={[styles.subtitle, { color: theme.colors.textSecondary }]}>
           Select your area to find restaurants near you
         </Text>
@@ -137,6 +135,7 @@ const LocationStep: React.FC<LocationStepProps> = ({
         </TouchableOpacity>
       </ScrollView>
 
+      {/* Use original footer but with proper safe area padding */}
       <View style={styles.footer}>
         <Button
           title="Continue"
@@ -161,16 +160,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   header: {
-    marginTop: 20,
-    marginBottom: 24,
+    marginTop: 1, // Even smaller
+    marginBottom: 12, // Even smaller  
     alignItems: 'center',
   },
-  title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    marginBottom: 8,
-    textAlign: 'center',
-  },
+  // Remove the large title - WizardContainer already shows it
   subtitle: {
     fontSize: 16,
     textAlign: 'center',
@@ -236,9 +230,10 @@ const styles = StyleSheet.create({
   },
   footer: {
     paddingVertical: 20,
+    paddingBottom: 120, // Much more padding for tabs + safe area
   },
   continueButton: {
-    paddingVertical: 16,
+    paddingVertical: 4,
     borderRadius: 12,
   },
 })

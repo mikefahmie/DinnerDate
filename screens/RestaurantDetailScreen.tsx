@@ -1,5 +1,6 @@
 // Updated RestaurantDetailScreen.tsx with single photo support and FIXED hours parsing
 // File: screens/RestaurantDetailScreen.tsx
+// ONLY CHANGE: Added ButtonContainer for safe area handling
 
 import React, { useState, useEffect } from 'react'
 import { 
@@ -22,6 +23,7 @@ import RatingDisplay from '../components/restaurant/RatingDisplay'
 import HoursStatus from '../components/restaurant/HoursStatus'
 import ActionIcons from '../components/restaurant/ActionIcons'
 import LoadingSpinner from '../components/ui/LoadingSpinner'
+import ButtonContainer from '../components/layout/ButtonContainer'
 
 type RouteParams = {
   RestaurantDetail: {
@@ -387,27 +389,34 @@ const RestaurantDetailScreen: React.FC = () => {
               onPhone={handleCall}
             />
           </View>
-          
-          <View style={styles.mainActionsRow}>
-            {restaurant.phone_number && (
-              <Button
-                title="Call Restaurant"
-                onPress={handleCall}
-                buttonStyle={styles.callButton}
-                icon={{ name: 'phone', type: 'material', color: 'white' }}
-              />
-            )}
-            
-            <Button
-              title="Get Directions"
-              onPress={handleDirections}
-              buttonStyle={styles.directionsButton}
-              titleStyle={styles.directionsButtonTitle}
-              icon={{ name: 'directions', type: 'material', color: theme.colors.primary }}
-            />
-          </View>
         </View>
       </ScrollView>
+
+      {/* ONLY CHANGE: Replace the inline buttons with ButtonContainer for safe area */}
+      <ButtonContainer
+        direction="row"
+        spacing={12}
+        hasTabBar={false}
+        withBorder={true}
+        backgroundColor="#FFFFFF"
+      >
+        {restaurant.phone_number && (
+          <Button
+            title="Call Restaurant"
+            onPress={handleCall}
+            buttonStyle={styles.callButton}
+            icon={{ name: 'phone', type: 'material', color: 'white' }}
+          />
+        )}
+        
+        <Button
+          title="Get Directions"
+          onPress={handleDirections}
+          buttonStyle={styles.directionsButton}
+          titleStyle={styles.directionsButtonTitle}
+          icon={{ name: 'directions', type: 'material', color: '#2196F3' }}
+        />
+      </ButtonContainer>
     </View>
   )
 }
@@ -574,10 +583,7 @@ const styles = StyleSheet.create({
   actionButtonsRow: {
     marginBottom: 20,
   },
-  mainActionsRow: {
-    flexDirection: 'row',
-    gap: 12,
-  },
+  // Keep existing button styles for ButtonContainer
   callButton: {
     backgroundColor: '#4CAF50',
     borderRadius: 8,

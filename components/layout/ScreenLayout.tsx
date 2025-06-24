@@ -1,15 +1,15 @@
-// components/layout/ScreenLayout.tsx
+// components/layout/ScreenLayout.tsx - Fixed version with safe area handling
 import React from 'react'
-import { 
-  View, 
-  StyleSheet, 
-  SafeAreaView, 
-  StatusBar, 
-  ViewStyle,
+import {
+  View,
   ScrollView,
+  StyleSheet,
+  Platform,
+  StatusBar,
   KeyboardAvoidingView,
-  Platform
+  ViewStyle,
 } from 'react-native'
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 import { Header as RNEHeader } from '@rneui/themed'
 import { useTheme } from '../../hooks/useTheme'
 
@@ -33,6 +33,10 @@ interface ScreenLayoutProps {
   style?: ViewStyle
   contentStyle?: ViewStyle
   headerStyle?: ViewStyle
+  // Safe area props
+  hasTabBar?: boolean
+  hasBottomButtons?: boolean
+  bottomButtonHeight?: number
 }
 
 const ScreenLayout: React.FC<ScreenLayoutProps> = ({
@@ -52,12 +56,48 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
   style,
   contentStyle,
   headerStyle,
+  hasTabBar = false,
+  hasBottomButtons = false,
+  bottomButtonHeight = 0,
 }) => {
   const { theme } = useTheme()
+  const insets = useSafeAreaInsets()
+
+  // Calculate safe area considerations
+  const calculateBottomPadding = () => {
+    let bottomPadding = 0
+
+    // Add tab bar height if present
+    if (hasTabBar) {
+      const baseTabHeight = 60
+      const tabExtraPadding = Platform.OS === 'android' ? 80 : 20
+      const totalTabHeight = baseTabHeight + Math.max(insets.bottom, tabExtraPadding)
+      bottomPadding = Math.max(bottomPadding, totalTabHeight)
+    }
+
+    // Add bottom button height if present
+    if (hasBottomButtons) {
+      const buttonContainerHeight = bottomButtonHeight || (
+        // Estimate button container height
+        theme.spacing.buttonHeight + // Button height
+        (theme.spacing.lg * 2) + // Top and bottom padding
+        Math.max(insets.bottom, Platform.OS === 'android' ? 100 : 34) // Safe area
+      )
+      bottomPadding = Math.max(bottomPadding, buttonContainerHeight)
+    }
+
+    // Minimum safe area for platform
+    if (!hasTabBar && !hasBottomButtons) {
+      bottomPadding = Math.max(bottomPadding, insets.bottom)
+    }
+
+    return bottomPadding
+  }
 
   const screenBackgroundColor = backgroundColor || theme.colors.background
-  const headerBgColor = headerBackgroundColor || theme.colors.primary
-  const statusBgColor = statusBarBackground || headerBgColor
+  const headerBgColorFinal = headerBackgroundColor || theme.colors.primary
+  const statusBgColorFinal = statusBarBackground || headerBgColorFinal
+  const bottomPadding = calculateBottomPadding()
 
   const renderHeader = () => {
     if (!showHeader) return null
@@ -67,7 +107,7 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
       style: {
         color: theme.colors.textOnPrimary,
         fontSize: theme.typography.fontSize.h2,
-        fontWeight: '600',
+        fontWeight: '600' as const,
       },
     } : undefined)
 
@@ -76,7 +116,7 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
         leftComponent={headerLeft}
         centerComponent={centerComponent}
         rightComponent={headerRight}
-        backgroundColor={headerBgColor}
+        backgroundColor={headerBgColorFinal}
         style={[
           {
             borderBottomWidth: 0,
@@ -93,7 +133,10 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
       style: [
         styles.content,
         padding && styles.contentPadding,
-        { backgroundColor: screenBackgroundColor },
+        { 
+          backgroundColor: screenBackgroundColor,
+          paddingBottom: bottomPadding,
+        },
         contentStyle,
       ],
     }
@@ -104,6 +147,9 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
           {...contentProps}
           contentContainerStyle={[
             padding && styles.contentPadding,
+            { 
+              paddingBottom: bottomPadding + theme.spacing.lg,
+            },
             contentStyle,
           ]}
           showsVerticalScrollIndicator={false}
@@ -164,7 +210,7 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
     <SafeAreaView style={[styles.container, { backgroundColor: screenBackgroundColor }, style]}>
       <StatusBar
         barStyle={statusBarStyle}
-        backgroundColor={statusBgColor}
+        backgroundColor={statusBgColorFinal}
         translucent={false}
       />
       {renderLayout()}
