@@ -80,7 +80,7 @@ const ALL_FEATURE_OPTIONS: FeatureOption[] = [
     id: 'live_music',
     label: 'Live Music',
     icon: { name: 'music', type: 'feather' },
-    description: 'Live entertainment',
+    description: 'Live performances',
     category: 'amenities',
     availableFor: ['lunch', 'dinner'],
     minPriceLevel: 2
@@ -97,14 +97,14 @@ const ALL_FEATURE_OPTIONS: FeatureOption[] = [
     id: 'good_for_groups',
     label: 'Good for Groups',
     icon: { name: 'users', type: 'feather' },
-    description: 'Large tables and group-friendly',
+    description: 'Accommodates large parties',
     category: 'amenities',
     minPriceLevel: 1
   },
   {
     id: 'family_friendly',
     label: 'Family Friendly',
-    icon: { name: 'home', type: 'feather' },
+    icon: { name: 'smile', type: 'feather' },
     description: 'Great for families with kids',
     category: 'amenities',
     minPriceLevel: 1
@@ -113,7 +113,7 @@ const ALL_FEATURE_OPTIONS: FeatureOption[] = [
     id: 'good_for_sports',
     label: 'Good for Sports',
     icon: { name: 'tv', type: 'feather' },
-    description: 'TVs and sports atmosphere',
+    description: 'TVs and sports viewing',
     category: 'amenities',
     availableFor: ['lunch', 'dinner'],
     minPriceLevel: 1
@@ -124,15 +124,15 @@ const ALL_FEATURE_OPTIONS: FeatureOption[] = [
     id: 'wheelchair_accessible',
     label: 'Wheelchair Accessible',
     icon: { name: 'accessibility', type: 'material' },
-    description: 'Accessible facilities',
+    description: 'Accessible entrance and seating',
     category: 'accessibility',
     minPriceLevel: 1
   },
   {
     id: 'parking_available',
     label: 'Parking Available',
-    icon: { name: 'car', type: 'font-awesome' },
-    description: 'Dedicated parking',
+    icon: { name: 'car', type: 'feather' },
+    description: 'Parking on-site or nearby',
     category: 'accessibility',
     minPriceLevel: 1
   },
@@ -291,18 +291,21 @@ const FeaturesStep: React.FC<FeaturesStepProps> = ({
   const styles = StyleSheet.create({
     container: {
       flex: 1,
+      paddingHorizontal: 20,
     },
     scrollContainer: {
       flex: 1,
     },
-    content: {
-      paddingHorizontal: theme.spacing.lg,
-      paddingTop: theme.spacing.md,
+    // Compact header styling to match LocationStep
+    header: {
+      marginTop: 8,
+      marginBottom: 12,
+      alignItems: 'center',
     },
     subtitle: {
-      fontSize: theme.typography.fontSize.body,
+      fontSize: 16,
       color: theme.colors.textSecondary,
-      lineHeight: theme.typography.fontSize.body * 1.5,
+      lineHeight: 22,
       marginBottom: theme.spacing.lg,
       textAlign: 'center',
     },
@@ -424,6 +427,10 @@ const FeaturesStep: React.FC<FeaturesStepProps> = ({
       top: theme.spacing.xs,
       right: theme.spacing.xs,
     },
+    featuresContainer: {
+      flex: 1,
+      paddingBottom: 120, // Extra padding for safe area and tabs
+    },
     expandButton: {
       backgroundColor: 'transparent',
       borderWidth: 1,
@@ -437,20 +444,20 @@ const FeaturesStep: React.FC<FeaturesStepProps> = ({
       color: theme.colors.textPrimary,
       fontWeight: '500',
     },
-    buttonContainer: {
-      paddingHorizontal: theme.spacing.lg,
-      paddingBottom: theme.spacing.lg,
-      backgroundColor: theme.colors.background,
-      borderTopWidth: 1,
-      borderTopColor: theme.colors.divider,
+    // Footer button styling - positioned above safe area
+    footer: {
+      paddingVertical: 10,
+      paddingBottom: 100, // Much more padding for tabs + safe area
     },
     continueButton: {
+      marginBottom: 8,
+      paddingHorizontal: 24,
+      borderRadius: 12,
+      minHeight: 52,
       backgroundColor: theme.colors.primary,
-      borderRadius: theme.borderRadius.md,
-      paddingVertical: theme.spacing.md,
     },
     continueButtonText: {
-      fontSize: theme.typography.fontSize.body,
+      fontSize: 16,
       fontWeight: '600',
       color: theme.colors.textOnPrimary,
     },
@@ -458,15 +465,17 @@ const FeaturesStep: React.FC<FeaturesStepProps> = ({
 
   return (
     <View style={styles.container}>
-      <ScrollView 
-        style={styles.scrollContainer}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.content}
-      >
+      {/* Compact header */}
+      <View style={styles.header}>
         <Text style={styles.subtitle}>
           Looking for anything specific? These features match your meal choice and budget.
         </Text>
+      </View>
 
+      <ScrollView 
+        style={styles.featuresContainer}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={styles.infoBox}>
           <Text style={styles.infoText}>
             ✨ Optional: Select features that matter to you, or skip to see all restaurants
@@ -515,7 +524,8 @@ const FeaturesStep: React.FC<FeaturesStepProps> = ({
         )}
       </ScrollView>
 
-      <View style={styles.buttonContainer}>
+      {/* Use original footer with proper safe area padding */}
+      <View style={styles.footer}>
         <Button
           title="Find Restaurants"
           onPress={handleContinue}

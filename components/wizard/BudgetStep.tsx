@@ -93,6 +93,39 @@ const BudgetStep: React.FC<BudgetStepProps> = ({
     return (wizardState.budget || []).includes(level)
   }
 
+  const renderQuickSelects = () => {
+    const quickSelections = [
+      { label: 'Budget-friendly', levels: [1, 2] },
+      { label: 'All prices', levels: [1, 2, 3, 4] }
+    ]
+
+    return (
+      <View style={styles.quickSelectsContainer}>
+        {quickSelections.map((selection, index) => {
+          const isActive = JSON.stringify(wizardState.budget?.sort()) === JSON.stringify(selection.levels.sort())
+          
+          return (
+            <TouchableOpacity
+              key={index}
+              style={[
+                styles.quickSelectChip,
+                isActive && styles.activeQuickSelectChip
+              ]}
+              onPress={() => handleQuickSelect(selection.levels)}
+            >
+              <Text style={[
+                styles.quickSelectText,
+                isActive && styles.activeQuickSelectText
+              ]}>
+                {selection.label}
+              </Text>
+            </TouchableOpacity>
+          )
+        })}
+      </View>
+    )
+  }
+
   const renderPriceLevelCard = (priceLevel: PriceLevel) => {
     const isSelected = isPriceLevelSelected(priceLevel.level)
     
@@ -171,101 +204,45 @@ const BudgetStep: React.FC<BudgetStepProps> = ({
     )
   }
 
-  const renderQuickSelects = () => {
-    const quickSelectOptions = [
-      { label: 'Budget Only', levels: [1], icon: 'dollar-sign' },
-      { label: 'Casual Dining', levels: [1, 2], icon: 'coffee' },
-      { label: 'Date Night', levels: [2, 3], icon: 'heart' },
-      { label: 'Special Occasion', levels: [3, 4], icon: 'star' },
-      { label: 'Any Budget', levels: [1, 2, 3, 4], icon: 'menu' }
-    ]
-
-    return (
-      <View style={styles.quickSelectContainer}>
-        <Text style={styles.quickSelectTitle}>Quick Selections</Text>
-        <View style={styles.quickSelectGrid}>
-          {quickSelectOptions.map((option, index) => {
-            const isActive = JSON.stringify(wizardState.budget?.sort()) === JSON.stringify(option.levels.sort())
-            
-            return (
-              <TouchableOpacity
-                key={index}
-                style={[
-                  styles.quickSelectButton,
-                  isActive && styles.activeQuickSelectButton
-                ]}
-                onPress={() => handleQuickSelect(option.levels)}
-                activeOpacity={0.7}
-              >
-                <Icon
-                  name={option.icon}
-                  type="feather"
-                  size={16}
-                  color={isActive ? theme.colors.textOnPrimary : theme.colors.textSecondary}
-                />
-                <Text style={[
-                  styles.quickSelectText,
-                  isActive && styles.activeQuickSelectText
-                ]}>
-                  {option.label}
-                </Text>
-              </TouchableOpacity>
-            )
-          })}
-        </View>
-      </View>
-    )
-  }
-
   const styles = StyleSheet.create({
     container: {
       flex: 1,
+      paddingHorizontal: 20,
     },
-    content: {
-      flex: 1,
-      paddingTop: theme.spacing.md,
+    // Compact header styling to match LocationStep
+    header: {
+      marginTop: 8,
+      marginBottom: 12,
+      alignItems: 'center',
     },
     subtitle: {
-      fontSize: theme.typography.fontSize.body,
-      color: theme.colors.textSecondary,
+      fontSize: 16,
       textAlign: 'center',
+      lineHeight: 22,
+      color: theme.colors.textSecondary,
+      marginBottom: theme.spacing.lg,
+    },
+    quickSelectsContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-around',
       marginBottom: theme.spacing.xl,
-      lineHeight: theme.typography.fontSize.body * 1.4,
       paddingHorizontal: theme.spacing.md,
     },
-    quickSelectContainer: {
-      marginBottom: theme.spacing.xl,
-    },
-    quickSelectTitle: {
-      fontSize: theme.typography.fontSize.secondary,
-      fontWeight: '600',
-      color: theme.colors.textPrimary,
-      marginBottom: theme.spacing.md,
-      textAlign: 'center',
-    },
-    quickSelectGrid: {
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      justifyContent: 'center',
-      gap: theme.spacing.sm,
-    },
-    quickSelectButton: {
-      flexDirection: 'row',
-      alignItems: 'center',
+    quickSelectChip: {
       backgroundColor: theme.colors.surface,
       borderRadius: theme.borderRadius.full,
-      paddingHorizontal: theme.spacing.md,
-      paddingVertical: theme.spacing.sm,
+      paddingHorizontal: theme.spacing.lg,
+      paddingVertical: theme.spacing.md,
       borderWidth: 1,
       borderColor: theme.colors.border,
-      gap: theme.spacing.xs,
+      ...theme.shadows.small,
     },
-    activeQuickSelectButton: {
+    activeQuickSelectChip: {
       backgroundColor: theme.colors.primary,
       borderColor: theme.colors.primary,
     },
     quickSelectText: {
-      fontSize: theme.typography.fontSize.caption,
+      fontSize: theme.typography.fontSize.body,
       color: theme.colors.textSecondary,
       fontWeight: '500',
     },
@@ -274,6 +251,7 @@ const BudgetStep: React.FC<BudgetStepProps> = ({
     },
     priceLevelsContainer: {
       flex: 1,
+      paddingBottom: 120, // Extra padding for safe area and tabs
     },
     priceLevelCard: {
       backgroundColor: theme.colors.surface,
@@ -370,17 +348,20 @@ const BudgetStep: React.FC<BudgetStepProps> = ({
     selectedExampleText: {
       color: theme.colors.primary,
     },
-    buttonContainer: {
-      paddingTop: theme.spacing.lg,
-      paddingBottom: theme.spacing.md,
+    // Footer button styling - positioned above safe area
+    footer: {
+      paddingVertical: 10,
+      paddingBottom: 100, // Much more padding for tabs + safe area
     },
     continueButton: {
+      marginBottom: 8,
+      paddingHorizontal: 24,
+      borderRadius: 12,
+      minHeight: 52,
       backgroundColor: theme.colors.primary,
-      borderRadius: theme.borderRadius.md,
-      paddingVertical: theme.spacing.md,
     },
     continueButtonText: {
-      fontSize: theme.typography.fontSize.body,
+      fontSize: 16,
       fontWeight: '600',
       color: theme.colors.textOnPrimary,
     },
@@ -388,23 +369,23 @@ const BudgetStep: React.FC<BudgetStepProps> = ({
 
   return (
     <View style={styles.container}>
-      <ScrollView 
-        style={styles.content}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: theme.spacing.lg }}
-      >
+      {/* Compact header */}
+      <View style={styles.header}>
         <Text style={styles.subtitle}>
           What's your budget range? You can select multiple price levels to see more options.
         </Text>
+      </View>
 
+      <ScrollView 
+        style={styles.priceLevelsContainer}
+        showsVerticalScrollIndicator={false}
+      >
         {renderQuickSelects()}
-
-        <View style={styles.priceLevelsContainer}>
-          {PRICE_LEVELS.map(renderPriceLevelCard)}
-        </View>
+        {PRICE_LEVELS.map(renderPriceLevelCard)}
       </ScrollView>
 
-      <View style={styles.buttonContainer}>
+      {/* Use original footer with proper safe area padding */}
+      <View style={styles.footer}>
         <Button
           title="Continue"
           onPress={handleContinue}

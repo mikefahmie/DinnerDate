@@ -71,75 +71,67 @@ const ALL_CUISINE_OPTIONS: CuisineOption[] = [
     minPriceLevel: 2
   },
   {
-    id: 'brazilian_restaurant',
-    label: 'Brazilian',
+    id: 'breakfast_restaurant',
+    label: 'Breakfast',
     icon: { name: 'sun', type: 'feather' },
-    description: 'Brazilian specialties',
-    availableFor: ['lunch', 'dinner'],
-    minPriceLevel: 2
-  },
-  {
-    id: 'cafe',
-    label: 'Cafe',
-    icon: { name: 'coffee', type: 'feather' },
-    description: 'Coffee and light meals',
-    availableFor: ['breakfast', 'lunch', 'coffee'],
-    minPriceLevel: 1
-  },
-  {
-    id: 'deli',
-    label: 'Deli',
-    icon: { name: 'sandwich', type: 'font-awesome' },
-    description: 'Sandwiches and salads',
+    description: 'All-day breakfast',
     availableFor: ['breakfast', 'lunch'],
     minPriceLevel: 1
   },
   {
-    id: 'dessert_shop',
-    label: 'Dessert Shop',
-    icon: { name: 'ice-cream', type: 'font-awesome' },
-    description: 'Sweet treats and desserts',
-    availableFor: ['dessert'],
-    minPriceLevel: 1
+    id: 'brunch_restaurant',
+    label: 'Brunch',
+    icon: { name: 'coffee', type: 'feather' },
+    description: 'Weekend brunch specials',
+    availableFor: ['breakfast', 'lunch'],
+    minPriceLevel: 2
   },
   {
-    id: 'diner',
-    label: 'Diner',
-    icon: { name: 'utensils', type: 'font-awesome' },
-    description: 'All-day comfort food',
-    availableFor: ['breakfast', 'lunch', 'dinner'],
-    minPriceLevel: 1
+    id: 'chinese_restaurant',
+    label: 'Chinese',
+    icon: { name: 'bowl', type: 'font-awesome' },
+    description: 'Traditional Chinese cuisine',
+    availableFor: ['lunch', 'dinner'],
+    minPriceLevel: 2
   },
   {
-    id: 'donut_shop',
-    label: 'Donuts',
-    icon: { name: 'donut', type: 'font-awesome' },
-    description: 'Fresh donuts and coffee',
-    availableFor: ['breakfast', 'coffee', 'dessert'],
+    id: 'fast_food_restaurant',
+    label: 'Fast Food',
+    icon: { name: 'zap', type: 'feather' },
+    description: 'Quick service dining',
+    availableFor: ['lunch', 'dinner'],
     minPriceLevel: 1
   },
   {
     id: 'french_restaurant',
     label: 'French',
     icon: { name: 'wine', type: 'font-awesome' },
-    description: 'Classic French cuisine',
+    description: 'French cuisine',
     availableFor: ['lunch', 'dinner'],
     minPriceLevel: 3
   },
   {
     id: 'greek_restaurant',
     label: 'Greek',
-    icon: { name: 'leaf', type: 'feather' },
-    description: 'Mediterranean Greek dishes',
+    icon: { name: 'star', type: 'feather' },
+    description: 'Greek specialties',
     availableFor: ['lunch', 'dinner'],
     minPriceLevel: 2
   },
   {
     id: 'hamburger_restaurant',
     label: 'Burgers',
-    icon: { name: 'hamburger', type: 'font-awesome' },
-    description: 'Burgers and fries',
+    icon: { name: 'circle', type: 'feather' },
+    description: 'Gourmet burgers',
     availableFor: ['lunch', 'dinner'],
+    minPriceLevel: 1
+  },
+  {
+    id: 'ice_cream_shop',
+    label: 'Ice Cream',
+    icon: { name: 'snowflake', type: 'feather' },
+    description: 'Ice cream and desserts',
+    availableFor: ['dessert'],
     minPriceLevel: 1
   },
   {
@@ -299,17 +291,55 @@ const CuisineStep: React.FC<CuisineStepProps> = ({
   }
 
   const handleSelectAll = () => {
-    const allAvailableIds = availableCuisines.map(cuisine => cuisine.id)
-    updateWizardState({ cuisineTypes: allAvailableIds })
+    const allCuisineIds = availableCuisines.map(cuisine => cuisine.id)
+    updateWizardState({ cuisineTypes: allCuisineIds })
   }
 
   const handleClearAll = () => {
     updateWizardState({ cuisineTypes: [] })
   }
 
-  const renderCuisineCard = (cuisine: CuisineOption) => {
-    const isSelected = wizardState.cuisineTypes?.includes(cuisine.id) || false
+  const isCuisineSelected = (cuisineId: string): boolean => {
+    return (wizardState.cuisineTypes || []).includes(cuisineId)
+  }
 
+  const renderSelectionSummary = () => {
+    const selectedCount = (wizardState.cuisineTypes || []).length
+    const totalCount = availableCuisines.length
+    
+    if (selectedCount === 0) return null
+
+    return (
+      <View style={styles.selectionSummary}>
+        <View style={styles.summaryLeft}>
+          <Text style={styles.summaryCount}>{selectedCount}</Text>
+          <Text style={styles.summaryText}>
+            of {totalCount} cuisines selected
+          </Text>
+        </View>
+        <View style={styles.quickActions}>
+          <TouchableOpacity
+            style={styles.quickActionButton}
+            onPress={handleClearAll}
+          >
+            <Text style={styles.quickActionText}>Clear</Text>
+          </TouchableOpacity>
+          {selectedCount < totalCount && (
+            <TouchableOpacity
+              style={styles.quickActionButton}
+              onPress={handleSelectAll}
+            >
+              <Text style={styles.quickActionText}>All</Text>
+            </TouchableOpacity>
+          )}
+        </View>
+      </View>
+    )
+  }
+
+  const renderCuisineCard = (cuisine: CuisineOption) => {
+    const isSelected = isCuisineSelected(cuisine.id)
+    
     return (
       <TouchableOpacity
         key={cuisine.id}
@@ -323,13 +353,13 @@ const CuisineStep: React.FC<CuisineStepProps> = ({
         <View style={styles.cuisineContent}>
           <View style={[
             styles.cuisineIconContainer,
-            isSelected && styles.selectedIconContainer
+            isSelected && styles.selectedCuisineIconContainer
           ]}>
             <Icon
               name={cuisine.icon.name}
               type={cuisine.icon.type}
               size={20}
-              color={isSelected ? theme.colors.textOnPrimary : theme.colors.textPrimary}
+              color={isSelected ? theme.colors.textOnPrimary : theme.colors.textSecondary}
             />
           </View>
           
@@ -340,7 +370,6 @@ const CuisineStep: React.FC<CuisineStepProps> = ({
             ]}>
               {cuisine.label}
             </Text>
-            
             <Text style={[
               styles.cuisineDescription,
               isSelected && styles.selectedCuisineDescription
@@ -349,7 +378,7 @@ const CuisineStep: React.FC<CuisineStepProps> = ({
             </Text>
           </View>
         </View>
-
+        
         {isSelected && (
           <View style={styles.checkIconContainer}>
             <Icon
@@ -364,33 +393,49 @@ const CuisineStep: React.FC<CuisineStepProps> = ({
     )
   }
 
-  const selectedCount = wizardState.cuisineTypes?.length || 0
+  const renderInfoBox = () => {
+    const selectedMealTypes = wizardState.mealTypes || []
+    const selectedBudget = wizardState.budget || []
+    const budgetLabels = selectedBudget.map(level => '$'.repeat(level)).join(', ')
+    
+    return (
+      <View style={styles.infoBox}>
+        <Text style={styles.infoText}>
+          Showing cuisines available for {selectedMealTypes.join(', ')} 
+          {budgetLabels && ` within ${budgetLabels} budget`}
+        </Text>
+      </View>
+    )
+  }
 
   const styles = StyleSheet.create({
     container: {
       flex: 1,
+      paddingHorizontal: 20,
     },
     scrollContainer: {
       flex: 1,
     },
-    content: {
-      paddingHorizontal: theme.spacing.lg,
-      paddingTop: theme.spacing.md,
+    // Compact header styling to match LocationStep
+    header: {
+      marginTop: 8,
+      marginBottom: 12,
+      alignItems: 'center',
     },
     subtitle: {
-      fontSize: theme.typography.fontSize.body,
+      fontSize: 16,
       color: theme.colors.textSecondary,
-      lineHeight: theme.typography.fontSize.body * 1.5,
+      lineHeight: 22,
       marginBottom: theme.spacing.lg,
       textAlign: 'center',
     },
-    note: {
+    infoBox: {
       backgroundColor: theme.colors.surfaceElevated,
       borderRadius: theme.borderRadius.md,
       padding: theme.spacing.md,
       marginBottom: theme.spacing.lg,
     },
-    noteText: {
+    infoText: {
       fontSize: theme.typography.fontSize.secondary,
       color: theme.colors.textSecondary,
       textAlign: 'center',
@@ -438,6 +483,7 @@ const CuisineStep: React.FC<CuisineStepProps> = ({
     },
     cuisineGrid: {
       flex: 1,
+      paddingBottom: 120, // Extra padding for safe area and tabs
     },
     cuisineCard: {
       backgroundColor: theme.colors.surface,
@@ -468,14 +514,14 @@ const CuisineStep: React.FC<CuisineStepProps> = ({
       alignItems: 'center',
       marginRight: theme.spacing.md,
     },
-    selectedIconContainer: {
+    selectedCuisineIconContainer: {
       backgroundColor: theme.colors.primary,
     },
     cuisineInfo: {
       flex: 1,
     },
     cuisineLabel: {
-      fontSize: theme.typography.fontSize.secondary,
+      fontSize: theme.typography.fontSize.body,
       fontWeight: '600',
       color: theme.colors.textPrimary,
       marginBottom: theme.spacing.xs,
@@ -484,31 +530,32 @@ const CuisineStep: React.FC<CuisineStepProps> = ({
       color: theme.colors.primary,
     },
     cuisineDescription: {
-      fontSize: theme.typography.fontSize.caption,
+      fontSize: theme.typography.fontSize.secondary,
       color: theme.colors.textSecondary,
+      lineHeight: theme.typography.fontSize.secondary * 1.3,
     },
     selectedCuisineDescription: {
       color: theme.colors.textPrimary,
     },
     checkIconContainer: {
       position: 'absolute',
-      top: theme.spacing.sm,
-      right: theme.spacing.sm,
+      top: theme.spacing.md,
+      right: theme.spacing.md,
     },
-    buttonContainer: {
-      paddingHorizontal: theme.spacing.lg,
-      paddingBottom: theme.spacing.lg,
-      backgroundColor: theme.colors.background,
-      borderTopWidth: 1,
-      borderTopColor: theme.colors.divider,
+    // Footer button styling - positioned above safe area
+    footer: {
+      paddingVertical: 10,
+      paddingBottom: 100, // Much more padding for tabs + safe area
     },
     continueButton: {
+      marginBottom: 10,
+      paddingHorizontal: 24,
+      borderRadius: 12,
+      minHeight: 52,
       backgroundColor: theme.colors.primary,
-      borderRadius: theme.borderRadius.md,
-      paddingVertical: theme.spacing.md,
     },
     continueButtonText: {
-      fontSize: theme.typography.fontSize.body,
+      fontSize: 16,
       fontWeight: '600',
       color: theme.colors.textOnPrimary,
     },
@@ -516,60 +563,24 @@ const CuisineStep: React.FC<CuisineStepProps> = ({
 
   return (
     <View style={styles.container}>
-      <ScrollView 
-        style={styles.scrollContainer}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.content}
-      >
+      {/* Compact header */}
+      <View style={styles.header}>
         <Text style={styles.subtitle}>
-          In the mood for anything specific? These cuisines match your meal choice and budget.
+          What type of cuisine are you in the mood for? You can select multiple options.
         </Text>
+      </View>
 
-        <View style={styles.note}>
-          <Text style={styles.noteText}>
-            💡 Leave blank to see all restaurants, or select specific cuisines you're craving
-          </Text>
-        </View>
-
-        {selectedCount > 0 && (
-          <View style={styles.selectionSummary}>
-            <View style={styles.summaryLeft}>
-              <Text style={styles.summaryCount}>{selectedCount}</Text>
-              <Text style={styles.summaryText}>
-                {selectedCount === 1 ? 'cuisine selected' : 'cuisines selected'}
-              </Text>
-            </View>
-            <View style={styles.quickActions}>
-              <Button
-                title="Select All"
-                buttonStyle={styles.quickActionButton}
-                titleStyle={styles.quickActionText}
-                onPress={handleSelectAll}
-              />
-              <Button
-                title="Clear"
-                buttonStyle={styles.quickActionButton}
-                titleStyle={styles.quickActionText}
-                onPress={handleClearAll}
-              />
-            </View>
-          </View>
-        )}
-
-        <View style={styles.cuisineGrid}>
-          {availableCuisines.map(renderCuisineCard)}
-        </View>
-
-        {availableCuisines.length === 0 && (
-          <View style={styles.note}>
-            <Text style={styles.noteText}>
-              No cuisines match your current meal and budget selections. Try adjusting your previous choices or continue to see all restaurants.
-            </Text>
-          </View>
-        )}
+      <ScrollView 
+        style={styles.cuisineGrid}
+        showsVerticalScrollIndicator={false}
+      >
+        {renderInfoBox()}
+        {renderSelectionSummary()}
+        {availableCuisines.map(renderCuisineCard)}
       </ScrollView>
 
-      <View style={styles.buttonContainer}>
+      {/* Use original footer with proper safe area padding */}
+      <View style={styles.footer}>
         <Button
           title="Continue"
           onPress={handleContinue}

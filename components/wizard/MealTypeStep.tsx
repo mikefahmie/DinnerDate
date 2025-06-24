@@ -96,7 +96,7 @@ const MealTypeStep: React.FC<MealTypeStepProps> = ({
               name={meal.icon.name}
               type={meal.icon.type}
               size={24}
-              color={isSelected ? theme.colors.textOnPrimary : theme.colors.textPrimary}
+              color={isSelected ? theme.colors.textOnPrimary : theme.colors.textSecondary}
             />
           </View>
           
@@ -107,7 +107,6 @@ const MealTypeStep: React.FC<MealTypeStepProps> = ({
             ]}>
               {meal.label}
             </Text>
-            
             <Text style={[
               styles.mealDescription,
               isSelected && styles.selectedMealDescription
@@ -116,7 +115,7 @@ const MealTypeStep: React.FC<MealTypeStepProps> = ({
             </Text>
           </View>
         </View>
-
+        
         {isSelected && (
           <View style={styles.checkIconContainer}>
             <Icon
@@ -134,35 +133,39 @@ const MealTypeStep: React.FC<MealTypeStepProps> = ({
   const styles = StyleSheet.create({
     container: {
       flex: 1,
+      paddingHorizontal: 20,
     },
     scrollContainer: {
       flex: 1,
     },
-    content: {
-      paddingHorizontal: theme.spacing.lg,
-      paddingTop: theme.spacing.md,
+    // Compact header styling to match LocationStep
+    header: {
+      marginTop: 8,
+      marginBottom: 12,
+      alignItems: 'center',
     },
     subtitle: {
-      fontSize: theme.typography.fontSize.body,
+      fontSize: 16,
       color: theme.colors.textSecondary,
-      lineHeight: theme.typography.fontSize.body * 1.5,
+      lineHeight: 22,
       marginBottom: theme.spacing.lg,
       textAlign: 'center',
     },
     note: {
-      backgroundColor: theme.colors.surfaceElevated,
+      backgroundColor: theme.colors.accent + '15',
       borderRadius: theme.borderRadius.md,
       padding: theme.spacing.md,
       marginBottom: theme.spacing.xl,
     },
     noteText: {
-      fontSize: theme.typography.fontSize.secondary,
+      fontSize: theme.typography.fontSize.caption,
       color: theme.colors.textSecondary,
       textAlign: 'center',
-      lineHeight: theme.typography.fontSize.secondary * 1.4,
+      lineHeight: theme.typography.fontSize.caption * 1.4,
     },
     mealGrid: {
       flex: 1,
+      paddingBottom: 120, // Extra padding for safe area and tabs
     },
     mealCard: {
       backgroundColor: theme.colors.surface,
@@ -182,7 +185,6 @@ const MealTypeStep: React.FC<MealTypeStepProps> = ({
     mealContent: {
       flexDirection: 'row',
       alignItems: 'center',
-      paddingRight: theme.spacing.lg, // Make room for check icon
     },
     mealIconContainer: {
       width: 50,
@@ -220,20 +222,20 @@ const MealTypeStep: React.FC<MealTypeStepProps> = ({
       top: theme.spacing.md,
       right: theme.spacing.md,
     },
-    buttonContainer: {
-      paddingHorizontal: theme.spacing.lg,
-      paddingBottom: theme.spacing.lg,
-      backgroundColor: theme.colors.background,
-      borderTopWidth: 1,
-      borderTopColor: theme.colors.divider,
+    // Footer button styling - positioned above safe area
+    footer: {
+      paddingVertical: 10,
+      paddingBottom: 100, // Much more padding for tabs + safe area
     },
     continueButton: {
+      marginBottom: 8,
+      paddingHorizontal: 24,
+      borderRadius: 12,
+      minHeight: 52,
       backgroundColor: theme.colors.primary,
-      borderRadius: theme.borderRadius.md,
-      paddingVertical: theme.spacing.md,
     },
     continueButtonText: {
-      fontSize: theme.typography.fontSize.body,
+      fontSize: 16,
       fontWeight: '600',
       color: theme.colors.textOnPrimary,
     },
@@ -249,27 +251,28 @@ const MealTypeStep: React.FC<MealTypeStepProps> = ({
 
   return (
     <View style={styles.container}>
-      <ScrollView 
-        style={styles.scrollContainer}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.content}
-      >
+      {/* Compact header */}
+      <View style={styles.header}>
         <Text style={styles.subtitle}>
           What meal are you planning? You can select multiple options to see more restaurant choices.
         </Text>
+      </View>
 
+      <ScrollView 
+        style={styles.mealGrid}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={styles.note}>
           <Text style={styles.noteText}>
             💡 Tip: Select all meals you might be interested in to see more restaurant options
           </Text>
         </View>
 
-        <View style={styles.mealGrid}>
-          {MEAL_OPTIONS.map(renderMealCard)}
-        </View>
+        {MEAL_OPTIONS.map(renderMealCard)}
       </ScrollView>
 
-      <View style={styles.buttonContainer}>
+      {/* Use original footer with proper safe area padding */}
+      <View style={styles.footer}>
         <Button
           title="Continue"
           onPress={handleContinue}

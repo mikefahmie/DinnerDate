@@ -88,6 +88,7 @@ const DietaryStep: React.FC<DietaryStepProps> = ({
         ]}
         onPress={() => !isDisabled && toggleDietaryOption(option.id)}
         activeOpacity={isDisabled ? 1 : 0.7}
+        disabled={isDisabled}
       >
         <View style={styles.dietaryHeader}>
           <View style={[
@@ -104,7 +105,7 @@ const DietaryStep: React.FC<DietaryStepProps> = ({
                   ? theme.colors.textMuted 
                   : isSelected 
                     ? theme.colors.textOnPrimary 
-                    : theme.colors.textPrimary
+                    : theme.colors.textSecondary
               }
             />
           </View>
@@ -125,13 +126,13 @@ const DietaryStep: React.FC<DietaryStepProps> = ({
               {option.description}
             </Text>
           </View>
-
+          
           {isSelected && !isDisabled && (
             <View style={styles.checkIconContainer}>
               <Icon
                 name="check-circle"
                 type="feather"
-                size={24}
+                size={20}
                 color={theme.colors.primary}
               />
             </View>
@@ -144,22 +145,23 @@ const DietaryStep: React.FC<DietaryStepProps> = ({
   const styles = StyleSheet.create({
     container: {
       flex: 1,
+      paddingHorizontal: 20,
     },
     scrollContainer: {
       flex: 1,
-      paddingHorizontal: theme.spacing.lg,
     },
-    content: {
-      paddingTop: theme.spacing.md,
-      paddingBottom: theme.spacing.xl,
+    // Compact header styling to match LocationStep
+    header: {
+      marginTop: 8,
+      marginBottom: 12,
+      alignItems: 'center',
     },
     subtitle: {
-      fontSize: theme.typography.fontSize.body,
-      color: theme.colors.textSecondary,
+      fontSize: 16,
       textAlign: 'center',
-      marginBottom: theme.spacing.xl,
-      lineHeight: theme.typography.fontSize.body * 1.5,
-      paddingHorizontal: theme.spacing.md,
+      lineHeight: 22,
+      color: theme.colors.textSecondary,
+      marginBottom: theme.spacing.lg,
     },
     note: {
       backgroundColor: theme.colors.accent + '15',
@@ -174,7 +176,8 @@ const DietaryStep: React.FC<DietaryStepProps> = ({
       lineHeight: theme.typography.fontSize.caption * 1.4,
     },
     dietaryOptionsContainer: {
-      marginBottom: theme.spacing.xl,
+      flex: 1,
+      paddingBottom: 120, // Extra padding for safe area and tabs
     },
     dietaryCard: {
       backgroundColor: theme.colors.surface,
@@ -242,20 +245,20 @@ const DietaryStep: React.FC<DietaryStepProps> = ({
     checkIconContainer: {
       marginLeft: theme.spacing.md,
     },
-    buttonContainer: {
-      paddingHorizontal: theme.spacing.lg,
-      paddingBottom: theme.spacing.lg,
-      backgroundColor: theme.colors.background,
-      borderTopWidth: 1,
-      borderTopColor: theme.colors.divider,
+    // Footer button styling - positioned above safe area
+    footer: {
+      paddingVertical: 10,
+      paddingBottom: 100, // Much more padding for tabs + safe area
     },
     continueButton: {
+      marginBottom: 8,
+      paddingHorizontal: 24,
+      borderRadius: 12,
+      minHeight: 52,
       backgroundColor: theme.colors.primary,
-      borderRadius: theme.borderRadius.md,
-      paddingVertical: theme.spacing.md,
     },
     continueButtonText: {
-      fontSize: theme.typography.fontSize.body,
+      fontSize: 16,
       fontWeight: '600',
       color: theme.colors.textOnPrimary,
     },
@@ -263,27 +266,28 @@ const DietaryStep: React.FC<DietaryStepProps> = ({
 
   return (
     <View style={styles.container}>
-      <ScrollView 
-        style={styles.scrollContainer}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.content}
-      >
+      {/* Compact header */}
+      <View style={styles.header}>
         <Text style={styles.subtitle}>
           Any dietary preferences? We'll help you find restaurants with suitable options.
         </Text>
+      </View>
 
+      <ScrollView 
+        style={styles.dietaryOptionsContainer}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={styles.note}>
           <Text style={styles.noteText}>
             💡 Select dietary needs to filter restaurants with appropriate options
           </Text>
         </View>
 
-        <View style={styles.dietaryOptionsContainer}>
-          {DIETARY_OPTIONS.map(renderDietaryCard)}
-        </View>
+        {DIETARY_OPTIONS.map(renderDietaryCard)}
       </ScrollView>
 
-      <View style={styles.buttonContainer}>
+      {/* Use original footer with proper safe area padding */}
+      <View style={styles.footer}>
         <Button
           title="Continue"
           onPress={handleContinue}
