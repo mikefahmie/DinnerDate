@@ -1,4 +1,4 @@
-// components/filters/FilterModal.tsx - Updated to match new wizard structure
+// components/filters/FilterModal.tsx - Complete fix for styling and functionality
 import React, { useState } from 'react'
 import { 
   View, 
@@ -9,14 +9,16 @@ import {
   TouchableOpacity,
   SafeAreaView 
 } from 'react-native'
-import { Button, Header, Icon } from '@rneui/themed'
+import { Button, Icon } from '@rneui/themed'
 import { useTheme } from '../../hooks/useTheme'
 import { WizardState } from '../../screens/DiscoveryWizard'
-import MealTypeStep from '../wizard/MealTypeStep'
-import BudgetStep from '../wizard/BudgetStep'
-import CuisineStep from '../wizard/CuisineStep'
-import DietaryStep from '../wizard/DietaryStep'
-import FeaturesStep from '../wizard/FeaturesStep'
+import { 
+  ModalMealTypeStep, 
+  ModalBudgetStep, 
+  ModalCuisineStep, 
+  ModalDietaryStep, 
+  ModalFeaturesStep 
+} from './ModalStepComponents'
 
 interface FilterModalProps {
   visible: boolean
@@ -24,6 +26,7 @@ interface FilterModalProps {
   onFiltersUpdate: (filters: WizardState) => void
   onClose: () => void
 }
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 type FilterSection = 'meal' | 'budget' | 'cuisine' | 'dietary' | 'features'
 
@@ -36,6 +39,15 @@ const FilterModal: React.FC<FilterModalProps> = ({
   const { theme } = useTheme()
   const [activeSection, setActiveSection] = useState<FilterSection>('meal')
   const [tempFilters, setTempFilters] = useState<WizardState>(filters)
+  const insets = useSafeAreaInsets()
+
+  // Reset tempFilters when modal becomes visible
+  React.useEffect(() => {
+    if (visible) {
+      setTempFilters(filters)
+      setActiveSection('meal') // Reset to first section
+    }
+  }, [visible, filters])
 
   const updateTempFilters = (updates: Partial<WizardState>) => {
     setTempFilters(prev => ({ ...prev, ...updates }))
@@ -50,7 +62,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
     const resetFilters: WizardState = {
       location: filters.location, // Keep location
       mealTypes: [],
-      budget: [],
+      budget: [1, 2, 3, 4], // Reset to all price levels
       cuisineTypes: [],
       dietary: [],
       features: [],
@@ -66,20 +78,21 @@ const FilterModal: React.FC<FilterModalProps> = ({
   // Check if we should show cuisine step based on meal types
   const shouldShowCuisineStep = (): boolean => {
     const mealTypes = tempFilters.mealTypes
-    return !(mealTypes.includes('breakfast') || 
-             mealTypes.includes('coffee') || 
-             mealTypes.includes('dessert'))
+    return !mealTypes.includes('coffee') && !mealTypes.includes('drinks')
   }
 
-  const getSectionIcon = (section: FilterSection): string => {
-    const icons = {
-      meal: 'cutlery',
-      budget: 'dollar',
-      cuisine: 'globe',
-      dietary: 'leaf',
-      features: 'star',
+  const getAvailableSections = (): FilterSection[] => {
+    const baseSections: FilterSection[] = ['meal', 'budget']
+    
+    // Add cuisine if applicable
+    if (shouldShowCuisineStep()) {
+      baseSections.push('cuisine')
     }
-    return icons[section]
+    
+    // Always show dietary and features
+    baseSections.push('dietary', 'features')
+    
+    return baseSections
   }
 
   const getSectionTitle = (section: FilterSection): string => {
@@ -93,38 +106,38 @@ const FilterModal: React.FC<FilterModalProps> = ({
     return titles[section]
   }
 
+  const getSectionIcon = (section: FilterSection): string => {
+    const icons = {
+      meal: 'utensils',
+      budget: 'dollar-sign',
+      cuisine: 'globe',
+      dietary: 'leaf',
+      features: 'star',
+    }
+    return icons[section]
+  }
+
   const getSectionCount = (section: FilterSection): number => {
     switch (section) {
       case 'meal':
-        return tempFilters.mealTypes?.length || 0
+        return tempFilters.mealTypes.length
       case 'budget':
-        return tempFilters.budget?.length || 0
+        return tempFilters.budget.length < 4 ? tempFilters.budget.length : 0 // Don't show count if all selected
       case 'cuisine':
-        return tempFilters.cuisineTypes?.length || 0
+        return tempFilters.cuisineTypes.length
       case 'dietary':
-        return tempFilters.dietary?.length || 0
+        return tempFilters.dietary.length
       case 'features':
-        return tempFilters.features?.length || 0
+        return tempFilters.features.length
       default:
         return 0
     }
   }
 
-  const getAvailableSections = (): FilterSection[] => {
-    const baseSections: FilterSection[] = ['meal', 'budget', 'dietary', 'features']
-    
-    // Only show cuisine if appropriate meal types are selected
-    if (shouldShowCuisineStep()) {
-      return ['meal', 'budget', 'cuisine', 'dietary', 'features']
-    }
-    
-    return baseSections
-  }
-
   const renderSectionButton = (section: FilterSection) => {
     const isActive = activeSection === section
     const count = getSectionCount(section)
-    
+
     return (
       <TouchableOpacity
         key={section}
@@ -137,7 +150,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
         <View style={styles.sectionButtonContent}>
           <Icon
             name={getSectionIcon(section)}
-            type="font-awesome"
+            type="feather"
             size={16}
             color={isActive ? theme.colors.textOnPrimary : theme.colors.textPrimary}
             style={styles.sectionIcon}
@@ -170,22 +183,21 @@ const FilterModal: React.FC<FilterModalProps> = ({
     const commonProps = {
       wizardState: tempFilters,
       updateWizardState: updateTempFilters,
-      onNext: () => {}, // Not used in modal context
     }
 
     switch (activeSection) {
       case 'meal':
-        return <MealTypeStep {...commonProps} />
+        return <ModalMealTypeStep {...commonProps} />
       case 'budget':
-        return <BudgetStep {...commonProps} />
+        return <ModalBudgetStep {...commonProps} />
       case 'cuisine':
-        return <CuisineStep {...commonProps} />
+        return <ModalCuisineStep {...commonProps} />
       case 'dietary':
-        return <DietaryStep {...commonProps} />
+        return <ModalDietaryStep {...commonProps} />
       case 'features':
-        return <FeaturesStep {...commonProps} />
+        return <ModalFeaturesStep {...commonProps} />
       default:
-        return <MealTypeStep {...commonProps} />
+        return <ModalMealTypeStep {...commonProps} />
     }
   }
 
@@ -194,6 +206,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
       flex: 1,
       backgroundColor: 'rgba(0, 0, 0, 0.5)',
       justifyContent: 'flex-end',
+      
     },
     container: {
       backgroundColor: theme.colors.background,
@@ -201,6 +214,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
       borderTopRightRadius: theme.borderRadius.xl,
       maxHeight: '90%',
       minHeight: '70%',
+      flex: 1,
     },
     header: {
       flexDirection: 'row',
@@ -210,6 +224,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
       paddingVertical: theme.spacing.md,
       borderBottomWidth: 1,
       borderBottomColor: theme.colors.divider,
+      backgroundColor: theme.colors.background,
     },
     headerTitle: {
       fontSize: theme.typography.fontSize.h2,
@@ -218,19 +233,21 @@ const FilterModal: React.FC<FilterModalProps> = ({
     },
     closeButton: {
       padding: theme.spacing.sm,
+      borderRadius: theme.borderRadius.sm,
     },
     sectionsContainer: {
-      flexDirection: 'row',
       paddingHorizontal: theme.spacing.md,
       paddingVertical: theme.spacing.sm,
       borderBottomWidth: 1,
       borderBottomColor: theme.colors.divider,
+      backgroundColor: theme.colors.background,
+      maxHeight: 70,
     },
     sectionButton: {
-      flex: 1,
+      minWidth: 80,
       marginHorizontal: theme.spacing.xs,
       paddingVertical: theme.spacing.sm,
-      paddingHorizontal: theme.spacing.xs,
+      paddingHorizontal: theme.spacing.sm,
       borderRadius: theme.borderRadius.md,
       backgroundColor: theme.colors.surface,
       borderWidth: 1,
@@ -281,14 +298,17 @@ const FilterModal: React.FC<FilterModalProps> = ({
     },
     content: {
       flex: 1,
+      backgroundColor: theme.colors.background,
     },
     footer: {
       flexDirection: 'row',
       paddingHorizontal: theme.spacing.lg,
       paddingVertical: theme.spacing.md,
+      paddingBottom: theme.spacing.xl,
       borderTopWidth: 1,
       borderTopColor: theme.colors.divider,
       gap: theme.spacing.md,
+      backgroundColor: theme.colors.background,
     },
     resetButton: {
       flex: 1,
@@ -297,6 +317,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
       borderColor: theme.colors.border,
       borderRadius: theme.borderRadius.md,
       paddingVertical: theme.spacing.md,
+      minHeight: 48,
     },
     resetButtonTitle: {
       fontSize: theme.typography.fontSize.body,
@@ -308,6 +329,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
       backgroundColor: theme.colors.primary,
       borderRadius: theme.borderRadius.md,
       paddingVertical: theme.spacing.md,
+      minHeight: 48,
     },
     applyButtonTitle: {
       fontSize: theme.typography.fontSize.body,
@@ -341,6 +363,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
             horizontal
             showsHorizontalScrollIndicator={false}
             style={styles.sectionsContainer}
+            contentContainerStyle={{ paddingHorizontal: theme.spacing.sm }}
           >
             {getAvailableSections().map(renderSectionButton)}
           </ScrollView>
