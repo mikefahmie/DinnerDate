@@ -39,7 +39,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
   const { theme } = useTheme()
   const [activeSection, setActiveSection] = useState<FilterSection>('meal')
   const [tempFilters, setTempFilters] = useState<WizardState>(filters)
-  const insets = useSafeAreaInsets()
+  const insets = useSafeAreaInsets() // For safe area padding
 
   // Reset tempFilters when modal becomes visible
   React.useEffect(() => {
@@ -206,13 +206,12 @@ const FilterModal: React.FC<FilterModalProps> = ({
       flex: 1,
       backgroundColor: 'rgba(0, 0, 0, 0.5)',
       justifyContent: 'flex-end',
-      
     },
     container: {
       backgroundColor: theme.colors.background,
       borderTopLeftRadius: theme.borderRadius.xl,
       borderTopRightRadius: theme.borderRadius.xl,
-      maxHeight: '90%',
+      maxHeight: '85%',
       minHeight: '70%',
       flex: 1,
     },
@@ -318,6 +317,8 @@ const FilterModal: React.FC<FilterModalProps> = ({
       borderRadius: theme.borderRadius.md,
       paddingVertical: theme.spacing.md,
       minHeight: 48,
+      maxHeight: 48,
+      marginBottom: 22, // Adjusted for safe area
     },
     resetButtonTitle: {
       fontSize: theme.typography.fontSize.body,
@@ -330,6 +331,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
       borderRadius: theme.borderRadius.md,
       paddingVertical: theme.spacing.md,
       minHeight: 48,
+      maxHeight: 48,
     },
     applyButtonTitle: {
       fontSize: theme.typography.fontSize.body,
