@@ -1,15 +1,116 @@
-// utils/fontAwesome.ts - FontAwesome Pro Kit Setup with Fallbacks
-// Import your FontAwesome Kit
-import '@awesome.me/kit-7b1e712fca'
+// utils/fontAwesome.ts - Fixed FontAwesome Setup
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { 
+  faLeaf,
+  faUtensils,
+  faPizzaSlice,
+  faBowlFood,
+  faHamburger,
+  faCoffee,
+  faFish,
+  faSun,
+  faCheckCircle,
+  faSeedling,
+  faBan,
+  faWineGlass,
+  faCocktail,
+  faBeer,
+  faCalendar,
+  faMusic,
+  faDog,
+  faUsers,
+  faChild,
+  faTv,
+  faWheelchair,
+  faParking,
+  faWifi,
+  faShoppingBag,
+  faTruck,
+  faCompass,
+  faUser,
+  faDollarSign,
+  faMoneyBillWave,
+  faGlobeAfrica,
+  faCircle,
+  faBreadSlice,
+  faFire,
+  faIceCream,
+  faBars,
+  faChevronLeft,
+  faTimes,
+  faCheck,
+  faCog,
+  faSearch,
+  faFilter,
+  faSort,
+  faShare,
+  faEllipsisH
+} from '@fortawesome/pro-solid-svg-icons'
+
+import { 
+  faHeart 
+} from '@fortawesome/pro-regular-svg-icons'
+
 import { IconPrefix, IconName } from '@fortawesome/fontawesome-svg-core'
 
-// Icon style constants - let's try the actual FontAwesome styles available
+// Add all icons to the library BEFORE using them
+library.add(
+  // Solid icons
+  faLeaf,
+  faUtensils,
+  faPizzaSlice,
+  faBowlFood,
+  faHamburger,
+  faCoffee,
+  faFish,
+  faSun,
+  faCheckCircle,
+  faSeedling,
+  faBan,
+  faWineGlass,
+  faCocktail,
+  faBeer,
+  faCalendar,
+  faMusic,
+  faDog,
+  faUsers,
+  faChild,
+  faTv,
+  faWheelchair,
+  faParking,
+  faWifi,
+  faShoppingBag,
+  faTruck,
+  faCompass,
+  faUser,
+  faDollarSign,
+  faMoneyBillWave,
+  faGlobeAfrica,
+  faCircle,
+  faBreadSlice,
+  faFire,
+  faIceCream,
+  faBars,
+  faChevronLeft,
+  faTimes,
+  faCheck,
+  faCog,
+  faSearch,
+  faFilter,
+  faSort,
+  faShare,
+  faEllipsisH,
+  
+  // Regular icons
+  faHeart
+)
+
+// Icon style constants
 export const IconStyles = {
-  // Try these common styles that are more likely to be available
-  SOLID: 'fas' as IconPrefix,     // Solid (most common)
-  REGULAR: 'far' as IconPrefix,   // Regular  
-  DUOTONE: 'fad' as IconPrefix,   // Duotone (if available in your kit)
-  BRANDS: 'fab' as IconPrefix     // Brands
+  SOLID: 'fas' as IconPrefix,
+  REGULAR: 'far' as IconPrefix,
+  DUOTONE: 'fad' as IconPrefix,
+  BRANDS: 'fab' as IconPrefix
 } as const
 
 // Helper function to create FontAwesome icon arrays with proper typing
@@ -17,9 +118,9 @@ export const createIcon = (style: IconPrefix, name: string): [IconPrefix, IconNa
   return [style, name as IconName]
 }
 
-// Common icons using more standard FontAwesome icons that are likely available
+// App icons with ONLY icons that are imported above
 export const AppIcons = {
-  // Navigation & System (using solid as fallback)
+  // Navigation & System
   MENU: createIcon(IconStyles.SOLID, 'bars'),
   BACK: createIcon(IconStyles.SOLID, 'chevron-left'),
   CLOSE: createIcon(IconStyles.SOLID, 'times'),
@@ -32,18 +133,18 @@ export const AppIcons = {
   SHARE: createIcon(IconStyles.SOLID, 'share'),
   MORE: createIcon(IconStyles.SOLID, 'ellipsis-h'),
 
-  // Meal Types (using available icons)
+  // Meal Types
   BREAKFAST: createIcon(IconStyles.SOLID, 'sun'),
   LUNCH: createIcon(IconStyles.SOLID, 'hamburger'),
   DINNER: createIcon(IconStyles.SOLID, 'utensils'),
   COFFEE: createIcon(IconStyles.SOLID, 'coffee'),
   DESSERT: createIcon(IconStyles.SOLID, 'ice-cream'),
 
-  // Budget (simple icons)
+  // Budget
   DOLLAR: createIcon(IconStyles.SOLID, 'dollar-sign'),
   MONEY: createIcon(IconStyles.SOLID, 'money-bill-wave'),
 
-  // Cuisine Types (using standard available icons)
+  // Cuisine Types (only using imported icons)
   AFRICAN: createIcon(IconStyles.SOLID, 'globe-africa'),
   BAGEL: createIcon(IconStyles.SOLID, 'circle'),
   BAKERY: createIcon(IconStyles.SOLID, 'bread-slice'),
@@ -57,14 +158,12 @@ export const AppIcons = {
   MEDITERRANEAN: createIcon(IconStyles.SOLID, 'leaf'),
   MIDDLE_EASTERN: createIcon(IconStyles.SOLID, 'utensils'),
   PIZZA: createIcon(IconStyles.SOLID, 'pizza-slice'),
-  RAMEN: createIcon(IconStyles.SOLID, 'bowl-food'),
-  SANDWICH: createIcon(IconStyles.SOLID, 'bread-slice'),
   SEAFOOD: createIcon(IconStyles.SOLID, 'fish'),
   SUSHI: createIcon(IconStyles.SOLID, 'fish'),
   ICE_CREAM: createIcon(IconStyles.SOLID, 'ice-cream'),
   STEAK: createIcon(IconStyles.SOLID, 'utensils'),
 
-  // Dietary (simple icons)
+  // Dietary
   NO_RESTRICTIONS: createIcon(IconStyles.SOLID, 'check-circle'),
   VEGETARIAN: createIcon(IconStyles.SOLID, 'leaf'),
   VEGAN: createIcon(IconStyles.SOLID, 'seedling'),
