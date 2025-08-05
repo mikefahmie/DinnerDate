@@ -1,9 +1,12 @@
-// components/wizard/CuisineStep.tsx - New cuisine filtering step
+// components/wizard/CuisineStep.tsx - Fixed and Complete
 import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
-import { Button, Icon } from '@rneui/themed'
+import { Button } from '@rneui/themed'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { IconPrefix, IconName } from '@fortawesome/fontawesome-svg-core'
 import { useTheme } from '../../hooks/useTheme'
 import { WizardState } from '../../screens/DiscoveryWizard'
+import AppIcons from '../../utils/fontAwesome'
 
 interface CuisineStepProps {
   wizardState: WizardState
@@ -14,34 +17,27 @@ interface CuisineStepProps {
 interface CuisineOption {
   id: string
   label: string
-  icon: { name: string; type: string }
+  icon: [IconPrefix, IconName] | { emoji: string }
   description: string
-  availableFor: string[] // Which meal types this cuisine is available for
-  minPriceLevel: number // Minimum price level for this cuisine
+  availableFor: string[]
+  minPriceLevel: number
 }
 
-// All available cuisine options
+// Complete cuisine options array
 const ALL_CUISINE_OPTIONS: CuisineOption[] = [
+  // Food types with FontAwesome Pro icons
   {
     id: 'african_restaurant',
     label: 'African',
-    icon: { name: 'globe', type: 'feather' },
+    icon: AppIcons.AFRICAN,
     description: 'Traditional African dishes',
     availableFor: ['lunch', 'dinner'],
     minPriceLevel: 2
   },
   {
-    id: 'american_restaurant',
-    label: 'American',
-    icon: { name: 'flag', type: 'feather' },
-    description: 'Classic American fare',
-    availableFor: ['lunch', 'dinner'],
-    minPriceLevel: 1
-  },
-  {
     id: 'bagel_shop',
     label: 'Bagels',
-    icon: { name: 'circle', type: 'feather' },
+    icon: AppIcons.BAGEL,
     description: 'Fresh bagels and spreads',
     availableFor: ['breakfast', 'lunch'],
     minPriceLevel: 1
@@ -49,7 +45,7 @@ const ALL_CUISINE_OPTIONS: CuisineOption[] = [
   {
     id: 'bakery',
     label: 'Bakery',
-    icon: { name: 'cake', type: 'font-awesome' },
+    icon: AppIcons.BAKERY,
     description: 'Fresh baked goods',
     availableFor: ['breakfast', 'lunch', 'dessert'],
     minPriceLevel: 1
@@ -57,7 +53,7 @@ const ALL_CUISINE_OPTIONS: CuisineOption[] = [
   {
     id: 'bar_and_grill',
     label: 'Bar & Grill',
-    icon: { name: 'beer', type: 'font-awesome' },
+    icon: AppIcons.BAR_GRILL,
     description: 'Casual dining with drinks',
     availableFor: ['lunch', 'dinner'],
     minPriceLevel: 2
@@ -65,7 +61,7 @@ const ALL_CUISINE_OPTIONS: CuisineOption[] = [
   {
     id: 'barbecue_restaurant',
     label: 'BBQ',
-    icon: { name: 'fire', type: 'feather' },
+    icon: AppIcons.BBQ,
     description: 'Smoked meats and sides',
     availableFor: ['lunch', 'dinner'],
     minPriceLevel: 2
@@ -73,7 +69,7 @@ const ALL_CUISINE_OPTIONS: CuisineOption[] = [
   {
     id: 'breakfast_restaurant',
     label: 'Breakfast',
-    icon: { name: 'sun', type: 'feather' },
+    icon: AppIcons.BREAKFAST_FOOD,
     description: 'All-day breakfast',
     availableFor: ['breakfast', 'lunch'],
     minPriceLevel: 1
@@ -81,7 +77,7 @@ const ALL_CUISINE_OPTIONS: CuisineOption[] = [
   {
     id: 'brunch_restaurant',
     label: 'Brunch',
-    icon: { name: 'coffee', type: 'feather' },
+    icon: AppIcons.BRUNCH,
     description: 'Weekend brunch specials',
     availableFor: ['breakfast', 'lunch'],
     minPriceLevel: 2
@@ -89,7 +85,7 @@ const ALL_CUISINE_OPTIONS: CuisineOption[] = [
   {
     id: 'chinese_restaurant',
     label: 'Chinese',
-    icon: { name: 'bowl', type: 'font-awesome' },
+    icon: AppIcons.CHINESE,
     description: 'Traditional Chinese cuisine',
     availableFor: ['lunch', 'dinner'],
     minPriceLevel: 2
@@ -97,79 +93,23 @@ const ALL_CUISINE_OPTIONS: CuisineOption[] = [
   {
     id: 'fast_food_restaurant',
     label: 'Fast Food',
-    icon: { name: 'zap', type: 'feather' },
+    icon: AppIcons.FAST_FOOD,
     description: 'Quick service dining',
     availableFor: ['lunch', 'dinner'],
     minPriceLevel: 1
   },
   {
-    id: 'french_restaurant',
-    label: 'French',
-    icon: { name: 'wine', type: 'font-awesome' },
-    description: 'French cuisine',
-    availableFor: ['lunch', 'dinner'],
-    minPriceLevel: 3
-  },
-  {
-    id: 'greek_restaurant',
-    label: 'Greek',
-    icon: { name: 'star', type: 'feather' },
-    description: 'Greek specialties',
-    availableFor: ['lunch', 'dinner'],
-    minPriceLevel: 2
-  },
-  {
     id: 'hamburger_restaurant',
     label: 'Burgers',
-    icon: { name: 'circle', type: 'feather' },
+    icon: AppIcons.BURGER,
     description: 'Gourmet burgers',
     availableFor: ['lunch', 'dinner'],
     minPriceLevel: 1
   },
   {
-    id: 'ice_cream_shop',
-    label: 'Ice Cream',
-    icon: { name: 'snowflake', type: 'feather' },
-    description: 'Ice cream and desserts',
-    availableFor: ['dessert'],
-    minPriceLevel: 1
-  },
-  {
-    id: 'indian_restaurant',
-    label: 'Indian',
-    icon: { name: 'pepper-hot', type: 'font-awesome' },
-    description: 'Authentic Indian cuisine',
-    availableFor: ['lunch', 'dinner'],
-    minPriceLevel: 2
-  },
-  {
-    id: 'italian_restaurant',
-    label: 'Italian',
-    icon: { name: 'pizza-slice', type: 'font-awesome' },
-    description: 'Italian classics',
-    availableFor: ['lunch', 'dinner'],
-    minPriceLevel: 2
-  },
-  {
-    id: 'japanese_restaurant',
-    label: 'Japanese',
-    icon: { name: 'fish', type: 'feather' },
-    description: 'Japanese specialties',
-    availableFor: ['lunch', 'dinner'],
-    minPriceLevel: 2
-  },
-  {
-    id: 'korean_restaurant',
-    label: 'Korean',
-    icon: { name: 'bowl', type: 'font-awesome' },
-    description: 'Korean favorites',
-    availableFor: ['lunch', 'dinner'],
-    minPriceLevel: 2
-  },
-  {
     id: 'mediterranean_restaurant',
     label: 'Mediterranean',
-    icon: { name: 'olives', type: 'font-awesome' },
+    icon: AppIcons.MEDITERRANEAN,
     description: 'Mediterranean flavors',
     availableFor: ['lunch', 'dinner'],
     minPriceLevel: 2
@@ -177,7 +117,7 @@ const ALL_CUISINE_OPTIONS: CuisineOption[] = [
   {
     id: 'middle_eastern_restaurant',
     label: 'Middle Eastern',
-    icon: { name: 'star', type: 'feather' },
+    icon: AppIcons.MIDDLE_EASTERN,
     description: 'Middle Eastern cuisine',
     availableFor: ['lunch', 'dinner'],
     minPriceLevel: 2
@@ -185,7 +125,7 @@ const ALL_CUISINE_OPTIONS: CuisineOption[] = [
   {
     id: 'pizza_restaurant',
     label: 'Pizza',
-    icon: { name: 'pizza-slice', type: 'font-awesome' },
+    icon: AppIcons.PIZZA,
     description: 'Fresh pizza',
     availableFor: ['lunch', 'dinner'],
     minPriceLevel: 1
@@ -193,7 +133,7 @@ const ALL_CUISINE_OPTIONS: CuisineOption[] = [
   {
     id: 'ramen_restaurant',
     label: 'Ramen',
-    icon: { name: 'bowl-food', type: 'font-awesome' },
+    icon: AppIcons.RAMEN,
     description: 'Authentic ramen bowls',
     availableFor: ['lunch', 'dinner'],
     minPriceLevel: 2
@@ -201,7 +141,7 @@ const ALL_CUISINE_OPTIONS: CuisineOption[] = [
   {
     id: 'sandwich_shop',
     label: 'Sandwiches',
-    icon: { name: 'sandwich', type: 'font-awesome' },
+    icon: AppIcons.SANDWICH,
     description: 'Fresh sandwiches',
     availableFor: ['breakfast', 'lunch'],
     minPriceLevel: 1
@@ -209,31 +149,96 @@ const ALL_CUISINE_OPTIONS: CuisineOption[] = [
   {
     id: 'seafood_restaurant',
     label: 'Seafood',
-    icon: { name: 'fish', type: 'feather' },
+    icon: AppIcons.SEAFOOD,
     description: 'Fresh seafood dishes',
     availableFor: ['lunch', 'dinner'],
     minPriceLevel: 3
   },
   {
-    id: 'steak_house',
-    label: 'Steakhouse',
-    icon: { name: 'utensils', type: 'feather' },
-    description: 'Premium steaks',
-    availableFor: ['dinner'],
-    minPriceLevel: 4
-  },
-  {
     id: 'sushi_restaurant',
     label: 'Sushi',
-    icon: { name: 'fish', type: 'feather' },
+    icon: AppIcons.SUSHI,
     description: 'Fresh sushi and sashimi',
     availableFor: ['lunch', 'dinner'],
     minPriceLevel: 3
   },
   {
+    id: 'ice_cream_shop',
+    label: 'Ice Cream',
+    icon: AppIcons.ICE_CREAM,
+    description: 'Ice cream and desserts',
+    availableFor: ['dessert'],
+    minPriceLevel: 1
+  },
+  {
+    id: 'steak_house',
+    label: 'Steakhouse',
+    icon: AppIcons.STEAK,
+    description: 'Premium steaks',
+    availableFor: ['dinner'],
+    minPriceLevel: 4
+  },
+  // Cuisines with country flags
+  {
+    id: 'american_restaurant',
+    label: 'American',
+    icon: { emoji: '🇺🇸' },
+    description: 'Classic American fare',
+    availableFor: ['lunch', 'dinner'],
+    minPriceLevel: 1
+  },
+  {
+    id: 'french_restaurant',
+    label: 'French',
+    icon: { emoji: '🇫🇷' },
+    description: 'French cuisine and pastries',
+    availableFor: ['lunch', 'dinner'],
+    minPriceLevel: 3
+  },
+  {
+    id: 'italian_restaurant',
+    label: 'Italian',
+    icon: { emoji: '🇮🇹' },
+    description: 'Italian classics and pasta',
+    availableFor: ['lunch', 'dinner'],
+    minPriceLevel: 2
+  },
+  {
+    id: 'greek_restaurant',
+    label: 'Greek',
+    icon: { emoji: '🇬🇷' },
+    description: 'Greek specialties',
+    availableFor: ['lunch', 'dinner'],
+    minPriceLevel: 2
+  },
+  {
+    id: 'japanese_restaurant',
+    label: 'Japanese',
+    icon: { emoji: '🇯🇵' },
+    description: 'Japanese cuisine',
+    availableFor: ['lunch', 'dinner'],
+    minPriceLevel: 2
+  },
+  {
+    id: 'korean_restaurant',
+    label: 'Korean',
+    icon: { emoji: '🇰🇷' },
+    description: 'Korean favorites',
+    availableFor: ['lunch', 'dinner'],
+    minPriceLevel: 2
+  },
+  {
+    id: 'indian_restaurant',
+    label: 'Indian',
+    icon: { emoji: '🇮🇳' },
+    description: 'Authentic Indian cuisine',
+    availableFor: ['lunch', 'dinner'],
+    minPriceLevel: 2
+  },
+  {
     id: 'thai_restaurant',
     label: 'Thai',
-    icon: { name: 'pepper-hot', type: 'font-awesome' },
+    icon: { emoji: '🇹🇭' },
     description: 'Authentic Thai dishes',
     availableFor: ['lunch', 'dinner'],
     minPriceLevel: 2
@@ -241,8 +246,16 @@ const ALL_CUISINE_OPTIONS: CuisineOption[] = [
   {
     id: 'vietnamese_restaurant',
     label: 'Vietnamese',
-    icon: { name: 'bowl', type: 'font-awesome' },
-    description: 'Vietnamese specialties',
+    icon: { emoji: '🇻🇳' },
+    description: 'Vietnamese specialties',  
+    availableFor: ['lunch', 'dinner'],
+    minPriceLevel: 2
+  },
+  {
+    id: 'mexican_restaurant',
+    label: 'Mexican',
+    icon: { emoji: '🇲🇽' },
+    description: 'Mexican cuisine and tacos',
     availableFor: ['lunch', 'dinner'],
     minPriceLevel: 2
   }
@@ -263,14 +276,10 @@ const CuisineStep: React.FC<CuisineStepProps> = ({
     const maxBudget = Math.max(...selectedBudget)
 
     const filtered = ALL_CUISINE_OPTIONS.filter(cuisine => {
-      // Check if cuisine is available for at least one selected meal type
       const mealTypeMatch = selectedMealTypes.some(mealType => 
         cuisine.availableFor.includes(mealType)
       )
-      
-      // Check if cuisine fits within budget
       const budgetMatch = cuisine.minPriceLevel <= maxBudget
-      
       return mealTypeMatch && budgetMatch
     })
 
@@ -290,56 +299,61 @@ const CuisineStep: React.FC<CuisineStepProps> = ({
     onNext()
   }
 
-  const handleSelectAll = () => {
-    const allCuisineIds = availableCuisines.map(cuisine => cuisine.id)
-    updateWizardState({ cuisineTypes: allCuisineIds })
+  // Render the appropriate icon based on type
+  const renderCuisineIcon = (cuisine: CuisineOption, isSelected: boolean) => {
+    if ('emoji' in cuisine.icon) {
+      return (
+        <Text style={styles.flagEmoji}>
+          {cuisine.icon.emoji}
+        </Text>
+      )
+    } else {
+      return (
+        <FontAwesomeIcon
+          icon={cuisine.icon}
+          size={24}
+          color={isSelected ? theme.colors.primary : theme.colors.textSecondary}
+        />
+      )
+    }
   }
 
-  const handleClearAll = () => {
-    updateWizardState({ cuisineTypes: [] })
-  }
+  const renderInfoBox = () => {
+    if (availableCuisines.length === 0) {
+      return (
+        <View style={styles.infoBox}>
+          <Text style={styles.infoText}>
+            No cuisines match your current selections. Try expanding your budget or meal types.
+          </Text>
+        </View>
+      )
+    }
 
-  const isCuisineSelected = (cuisineId: string): boolean => {
-    return (wizardState.cuisineTypes || []).includes(cuisineId)
+    return (
+      <View style={styles.infoBox}>
+        <Text style={styles.infoText}>
+          {availableCuisines.length} cuisines match your meal choice and budget
+        </Text>
+      </View>
+    )
   }
 
   const renderSelectionSummary = () => {
-    const selectedCount = (wizardState.cuisineTypes || []).length
-    const totalCount = availableCuisines.length
-    
+    const selectedCount = wizardState.cuisineTypes?.length || 0
     if (selectedCount === 0) return null
 
     return (
       <View style={styles.selectionSummary}>
-        <View style={styles.summaryLeft}>
-          <Text style={styles.summaryCount}>{selectedCount}</Text>
-          <Text style={styles.summaryText}>
-            of {totalCount} cuisines selected
-          </Text>
-        </View>
-        <View style={styles.quickActions}>
-          <TouchableOpacity
-            style={styles.quickActionButton}
-            onPress={handleClearAll}
-          >
-            <Text style={styles.quickActionText}>Clear</Text>
-          </TouchableOpacity>
-          {selectedCount < totalCount && (
-            <TouchableOpacity
-              style={styles.quickActionButton}
-              onPress={handleSelectAll}
-            >
-              <Text style={styles.quickActionText}>All</Text>
-            </TouchableOpacity>
-          )}
-        </View>
+        <Text style={styles.selectionText}>
+          {selectedCount} cuisine{selectedCount !== 1 ? 's' : ''} selected
+        </Text>
       </View>
     )
   }
 
   const renderCuisineCard = (cuisine: CuisineOption) => {
-    const isSelected = isCuisineSelected(cuisine.id)
-    
+    const isSelected = wizardState.cuisineTypes?.includes(cuisine.id) || false
+
     return (
       <TouchableOpacity
         key={cuisine.id}
@@ -355,12 +369,7 @@ const CuisineStep: React.FC<CuisineStepProps> = ({
             styles.cuisineIconContainer,
             isSelected && styles.selectedCuisineIconContainer
           ]}>
-            <Icon
-              name={cuisine.icon.name}
-              type={cuisine.icon.type}
-              size={20}
-              color={isSelected ? theme.colors.textOnPrimary : theme.colors.textSecondary}
-            />
+            {renderCuisineIcon(cuisine, isSelected)}
           </View>
           
           <View style={styles.cuisineInfo}>
@@ -378,12 +387,11 @@ const CuisineStep: React.FC<CuisineStepProps> = ({
             </Text>
           </View>
         </View>
-        
+
         {isSelected && (
           <View style={styles.checkIconContainer}>
-            <Icon
-              name="check-circle"
-              type="feather"
+            <FontAwesomeIcon
+              icon={AppIcons.CHECK}
               size={20}
               color={theme.colors.primary}
             />
@@ -393,97 +401,48 @@ const CuisineStep: React.FC<CuisineStepProps> = ({
     )
   }
 
-  const renderInfoBox = () => {
-    const selectedMealTypes = wizardState.mealTypes || []
-    const selectedBudget = wizardState.budget || []
-    const budgetLabels = selectedBudget.map(level => '$'.repeat(level)).join(', ')
-    
-    return (
-      <View style={styles.infoBox}>
-        <Text style={styles.infoText}>
-          Showing cuisines available for {selectedMealTypes.join(', ')} 
-          {budgetLabels && ` within ${budgetLabels} budget`}
-        </Text>
-      </View>
-    )
-  }
-
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      paddingHorizontal: 20,
+      paddingHorizontal: theme.spacing.lg,
     },
-    scrollContainer: {
-      flex: 1,
-    },
-    // Compact header styling to match LocationStep
     header: {
-      marginTop: 8,
-      marginBottom: 12,
+      paddingVertical: theme.spacing.md,
       alignItems: 'center',
     },
     subtitle: {
-      fontSize: 16,
+      fontSize: theme.typography.fontSize.body,
       color: theme.colors.textSecondary,
-      lineHeight: 22,
-      marginBottom: theme.spacing.lg,
       textAlign: 'center',
+      marginBottom: theme.spacing.md,
     },
     infoBox: {
       backgroundColor: theme.colors.surfaceElevated,
       borderRadius: theme.borderRadius.md,
       padding: theme.spacing.md,
-      marginBottom: theme.spacing.lg,
+      marginBottom: theme.spacing.md,
+      borderLeftWidth: 4,
+      borderLeftColor: theme.colors.primary,
     },
     infoText: {
       fontSize: theme.typography.fontSize.secondary,
       color: theme.colors.textSecondary,
       textAlign: 'center',
-      lineHeight: theme.typography.fontSize.secondary * 1.4,
     },
     selectionSummary: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      backgroundColor: theme.colors.primary + '10',
+      backgroundColor: theme.colors.primary + '15',
       borderRadius: theme.borderRadius.md,
-      padding: theme.spacing.md,
-      marginBottom: theme.spacing.lg,
-    },
-    summaryLeft: {
-      flexDirection: 'row',
+      padding: theme.spacing.sm,
+      marginBottom: theme.spacing.md,
       alignItems: 'center',
     },
-    summaryCount: {
-      fontSize: theme.typography.fontSize.h3,
-      fontWeight: '700',
-      color: theme.colors.primary,
-      marginRight: theme.spacing.xs,
-    },
-    summaryText: {
+    selectionText: {
       fontSize: theme.typography.fontSize.secondary,
-      color: theme.colors.textPrimary,
-    },
-    quickActions: {
-      flexDirection: 'row',
-      gap: theme.spacing.sm,
-    },
-    quickActionButton: {
-      backgroundColor: 'transparent',
-      borderWidth: 1,
-      borderColor: theme.colors.primary,
-      borderRadius: theme.borderRadius.sm,
-      paddingHorizontal: theme.spacing.sm,
-      paddingVertical: theme.spacing.xs,
-    },
-    quickActionText: {
-      fontSize: theme.typography.fontSize.caption,
       color: theme.colors.primary,
       fontWeight: '600',
     },
     cuisineGrid: {
       flex: 1,
-      paddingBottom: 120, // Extra padding for safe area and tabs
     },
     cuisineCard: {
       backgroundColor: theme.colors.surface,
@@ -493,7 +452,6 @@ const CuisineStep: React.FC<CuisineStepProps> = ({
       borderWidth: 2,
       borderColor: theme.colors.border,
       ...theme.shadows.small,
-      position: 'relative',
     },
     selectedCuisineCard: {
       backgroundColor: theme.colors.surfaceElevated,
@@ -515,7 +473,11 @@ const CuisineStep: React.FC<CuisineStepProps> = ({
       marginRight: theme.spacing.md,
     },
     selectedCuisineIconContainer: {
-      backgroundColor: theme.colors.primary,
+      backgroundColor: theme.colors.primary + '20',
+    },
+    flagEmoji: {
+      fontSize: 24,
+      textAlign: 'center',
     },
     cuisineInfo: {
       flex: 1,
@@ -542,10 +504,9 @@ const CuisineStep: React.FC<CuisineStepProps> = ({
       top: theme.spacing.md,
       right: theme.spacing.md,
     },
-    // Footer button styling - positioned above safe area
     footer: {
       paddingVertical: 10,
-      paddingBottom: 100, // Much more padding for tabs + safe area
+      paddingBottom: 100,
     },
     continueButton: {
       marginBottom: 10,
@@ -563,7 +524,6 @@ const CuisineStep: React.FC<CuisineStepProps> = ({
 
   return (
     <View style={styles.container}>
-      {/* Compact header */}
       <View style={styles.header}>
         <Text style={styles.subtitle}>
           What type of cuisine are you in the mood for? You can select multiple options.
@@ -579,7 +539,6 @@ const CuisineStep: React.FC<CuisineStepProps> = ({
         {availableCuisines.map(renderCuisineCard)}
       </ScrollView>
 
-      {/* Use original footer with proper safe area padding */}
       <View style={styles.footer}>
         <Button
           title="Continue"

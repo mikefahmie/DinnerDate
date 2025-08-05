@@ -1,9 +1,12 @@
-// components/wizard/FeaturesStep.tsx - Updated with new features and conditional logic
+// components/wizard/FeaturesStep.tsx - Updated with FontAwesome Pro icons
 import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
-import { Button, Icon } from '@rneui/themed'
+import { Button } from '@rneui/themed'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { IconPrefix, IconName } from '@fortawesome/fontawesome-svg-core'
 import { useTheme } from '../../hooks/useTheme'
 import { WizardState } from '../../screens/DiscoveryWizard'
+import AppIcons from '../../utils/fontAwesome'
 
 interface FeaturesStepProps {
   wizardState: WizardState
@@ -14,29 +17,21 @@ interface FeaturesStepProps {
 interface FeatureOption {
   id: string
   label: string
-  icon: { name: string; type: string }
+  icon: [IconPrefix, IconName]
   description: string
   category: 'beverages' | 'amenities' | 'accessibility'
-  availableFor?: string[] // If specified, only show for these meal types
-  minPriceLevel?: number // If specified, only show for these price levels and above
+  availableFor?: string[] // Which meal types this feature is available for
+  minPriceLevel?: number // Minimum price level for this feature
 }
 
+// All available feature options with updated FontAwesome Pro icons
 const ALL_FEATURE_OPTIONS: FeatureOption[] = [
   // Beverages
   {
-    id: 'serves_beer',
-    label: 'Serves Beer',
-    icon: { name: 'beer', type: 'font-awesome' },
-    description: 'Beer selection available',
-    category: 'beverages',
-    availableFor: ['lunch', 'dinner'],
-    minPriceLevel: 1
-  },
-  {
     id: 'serves_wine',
     label: 'Serves Wine',
-    icon: { name: 'wine-glass', type: 'font-awesome' },
-    description: 'Wine list available',
+    icon: AppIcons.WINE,
+    description: 'Wine selection available',
     category: 'beverages',
     availableFor: ['lunch', 'dinner'],
     minPriceLevel: 2
@@ -44,42 +39,51 @@ const ALL_FEATURE_OPTIONS: FeatureOption[] = [
   {
     id: 'serves_cocktails',
     label: 'Serves Cocktails',
-    icon: { name: 'cocktail', type: 'font-awesome' },
-    description: 'Craft cocktails and mixed drinks',
+    icon: AppIcons.COCKTAILS,
+    description: 'Cocktail menu available',
     category: 'beverages',
     availableFor: ['lunch', 'dinner'],
     minPriceLevel: 2
   },
   {
+    id: 'serves_beer',
+    label: 'Serves Beer',
+    icon: AppIcons.BEER,
+    description: 'Beer selection available',
+    category: 'beverages',
+    availableFor: ['lunch', 'dinner'],
+    minPriceLevel: 1
+  },
+  {
     id: 'serves_coffee',
     label: 'Serves Coffee',
-    icon: { name: 'coffee', type: 'feather' },
+    icon: AppIcons.COFFEE_SERVICE,
     description: 'Coffee and espresso drinks',
     category: 'beverages',
     minPriceLevel: 1
   },
-  
+
   // Amenities
-  {
-    id: 'reservable',
-    label: 'Takes Reservations',
-    icon: { name: 'calendar', type: 'feather' },
-    description: 'Can make reservations',
-    category: 'amenities',
-    minPriceLevel: 2
-  },
   {
     id: 'outdoor_seating',
     label: 'Outdoor Seating',
-    icon: { name: 'sun', type: 'feather' },
+    icon: AppIcons.OUTDOOR_SEATING,
     description: 'Patio or outdoor dining',
     category: 'amenities',
     minPriceLevel: 1
   },
   {
+    id: 'reservable',
+    label: 'Takes Reservations',
+    icon: AppIcons.RESERVATIONS,
+    description: 'Accepts reservations',
+    category: 'amenities',
+    minPriceLevel: 2
+  },
+  {
     id: 'live_music',
     label: 'Live Music',
-    icon: { name: 'music', type: 'feather' },
+    icon: AppIcons.LIVE_MUSIC,
     description: 'Live performances',
     category: 'amenities',
     availableFor: ['lunch', 'dinner'],
@@ -88,7 +92,7 @@ const ALL_FEATURE_OPTIONS: FeatureOption[] = [
   {
     id: 'allows_dogs',
     label: 'Dog Friendly',
-    icon: { name: 'heart', type: 'feather' },
+    icon: AppIcons.DOG_FRIENDLY,
     description: 'Pets welcome',
     category: 'amenities',
     minPriceLevel: 1
@@ -96,7 +100,7 @@ const ALL_FEATURE_OPTIONS: FeatureOption[] = [
   {
     id: 'good_for_groups',
     label: 'Good for Groups',
-    icon: { name: 'users', type: 'feather' },
+    icon: AppIcons.GROUP_DINING,
     description: 'Accommodates large parties',
     category: 'amenities',
     minPriceLevel: 1
@@ -104,7 +108,7 @@ const ALL_FEATURE_OPTIONS: FeatureOption[] = [
   {
     id: 'family_friendly',
     label: 'Family Friendly',
-    icon: { name: 'smile', type: 'feather' },
+    icon: AppIcons.FAMILY_FRIENDLY,
     description: 'Great for families with kids',
     category: 'amenities',
     minPriceLevel: 1
@@ -112,7 +116,7 @@ const ALL_FEATURE_OPTIONS: FeatureOption[] = [
   {
     id: 'good_for_sports',
     label: 'Good for Sports',
-    icon: { name: 'tv', type: 'feather' },
+    icon: AppIcons.SPORTS,
     description: 'TVs and sports viewing',
     category: 'amenities',
     availableFor: ['lunch', 'dinner'],
@@ -123,7 +127,7 @@ const ALL_FEATURE_OPTIONS: FeatureOption[] = [
   {
     id: 'wheelchair_accessible',
     label: 'Wheelchair Accessible',
-    icon: { name: 'accessibility', type: 'material' },
+    icon: AppIcons.WHEELCHAIR,
     description: 'Accessible entrance and seating',
     category: 'accessibility',
     minPriceLevel: 1
@@ -131,7 +135,7 @@ const ALL_FEATURE_OPTIONS: FeatureOption[] = [
   {
     id: 'parking_available',
     label: 'Parking Available',
-    icon: { name: 'car', type: 'feather' },
+    icon: AppIcons.PARKING,
     description: 'Parking on-site or nearby',
     category: 'accessibility',
     minPriceLevel: 1
@@ -139,18 +143,28 @@ const ALL_FEATURE_OPTIONS: FeatureOption[] = [
   {
     id: 'wifi_available',
     label: 'WiFi Available',
-    icon: { name: 'wifi', type: 'font-awesome' },
-    description: 'Free internet access',
+    icon: AppIcons.WIFI,
+    description: 'Free WiFi for customers',
+    category: 'accessibility',
+    minPriceLevel: 1
+  },
+  {
+    id: 'takeout',
+    label: 'Takeout Available',
+    icon: AppIcons.TAKEOUT,
+    description: 'Food available for takeout',
+    category: 'accessibility',
+    minPriceLevel: 1
+  },
+  {
+    id: 'delivery',
+    label: 'Delivery Available',
+    icon: AppIcons.DELIVERY,
+    description: 'Delivery service available',
     category: 'accessibility',
     minPriceLevel: 1
   }
 ]
-
-const CATEGORIES = {
-  beverages: 'Beverages',
-  amenities: 'Amenities',
-  accessibility: 'Accessibility'
-}
 
 const FeaturesStep: React.FC<FeaturesStepProps> = ({
   wizardState,
@@ -158,8 +172,8 @@ const FeaturesStep: React.FC<FeaturesStepProps> = ({
   onNext,
 }) => {
   const { theme } = useTheme()
-  const [showMoreFeatures, setShowMoreFeatures] = useState(false)
   const [availableFeatures, setAvailableFeatures] = useState<FeatureOption[]>([])
+  const [showAllFeatures, setShowAllFeatures] = useState(false)
 
   // Filter features based on selected meal types and budget
   useEffect(() => {
@@ -176,9 +190,10 @@ const FeaturesStep: React.FC<FeaturesStepProps> = ({
         if (!mealTypeMatch) return false
       }
       
-      // Check budget compatibility
-      if (feature.minPriceLevel && feature.minPriceLevel > maxBudget) {
-        return false
+      // Check budget requirement
+      if (feature.minPriceLevel) {
+        const budgetMatch = feature.minPriceLevel <= maxBudget
+        if (!budgetMatch) return false
       }
       
       return true
@@ -200,8 +215,8 @@ const FeaturesStep: React.FC<FeaturesStepProps> = ({
     onNext()
   }
 
-  const clearAllFeatures = () => {
-    updateWizardState({ features: [] })
+  const getFeaturesByCategory = (category: string) => {
+    return availableFeatures.filter(feature => feature.category === category)
   }
 
   const renderFeatureCard = (feature: FeatureOption) => {
@@ -220,36 +235,35 @@ const FeaturesStep: React.FC<FeaturesStepProps> = ({
         <View style={styles.featureContent}>
           <View style={[
             styles.featureIconContainer,
-            isSelected && styles.selectedIconContainer
+            isSelected && styles.selectedFeatureIconContainer
           ]}>
-            <Icon
-              name={feature.icon.name}
-              type={feature.icon.type}
-              size={20}
-              color={isSelected ? theme.colors.textOnPrimary : theme.colors.textPrimary}
+            <FontAwesomeIcon
+              icon={feature.icon}
+              size={24}
+              color={isSelected ? theme.colors.primary : theme.colors.textSecondary}
             />
           </View>
           
-          <Text style={[
-            styles.featureLabel,
-            isSelected && styles.selectedFeatureLabel
-          ]}>
-            {feature.label}
-          </Text>
-          
-          <Text style={[
-            styles.featureDescription,
-            isSelected && styles.selectedFeatureDescription
-          ]}>
-            {feature.description}
-          </Text>
+          <View style={styles.featureInfo}>
+            <Text style={[
+              styles.featureLabel,
+              isSelected && styles.selectedFeatureLabel
+            ]}>
+              {feature.label}
+            </Text>
+            <Text style={[
+              styles.featureDescription,
+              isSelected && styles.selectedFeatureDescription
+            ]}>
+              {feature.description}
+            </Text>
+          </View>
         </View>
 
         {isSelected && (
           <View style={styles.checkIconContainer}>
-            <Icon
-              name="check-circle"
-              type="feather"
+            <FontAwesomeIcon
+              icon={AppIcons.CHECK}
               size={20}
               color={theme.colors.primary}
             />
@@ -259,128 +273,120 @@ const FeaturesStep: React.FC<FeaturesStepProps> = ({
     )
   }
 
-  const renderFeaturesByCategory = (category: keyof typeof CATEGORIES) => {
-    const categoryFeatures = availableFeatures.filter(f => f.category === category)
-    
+  const renderCategorySection = (category: string, title: string) => {
+    const categoryFeatures = getFeaturesByCategory(category)
     if (categoryFeatures.length === 0) return null
 
+    // For accessibility category, only show if user wants to see all features
+    if (category === 'accessibility' && !showAllFeatures) return null
+
     return (
-      <View key={category} style={styles.categorySection}>
-        <Text style={styles.categoryTitle}>{CATEGORIES[category]}</Text>
-        <View style={styles.featuresGrid}>
-          {categoryFeatures.map(renderFeatureCard)}
-        </View>
+      <View style={styles.categorySection}>
+        <Text style={styles.categoryTitle}>{title}</Text>
+        {categoryFeatures.map(renderFeatureCard)}
       </View>
     )
   }
 
-  const getVisibleFeatures = () => {
-    if (showMoreFeatures) {
-      return Object.keys(CATEGORIES) as Array<keyof typeof CATEGORIES>
-    }
-    // Show first two categories when collapsed
-    return ['beverages', 'amenities']
+  const renderInfoBox = () => {
+    const totalAvailable = availableFeatures.length
+    const beveragesCount = getFeaturesByCategory('beverages').length
+    const amenitiesCount = getFeaturesByCategory('amenities').length
+    const accessibilityCount = getFeaturesByCategory('accessibility').length
+
+    return (
+      <View style={styles.infoBox}>
+        <Text style={styles.infoText}>
+          {totalAvailable} features match your selections
+        </Text>
+        <Text style={styles.infoSubtext}>
+          {beveragesCount} beverage • {amenitiesCount} amenity • {accessibilityCount} accessibility options
+        </Text>
+      </View>
+    )
   }
 
-  const getSelectedCount = () => {
-    return wizardState.features?.length || 0
-  }
+  const renderSelectionSummary = () => {
+    const selectedCount = wizardState.features?.length || 0
+    if (selectedCount === 0) return null
 
-  const selectedCount = getSelectedCount()
+    return (
+      <View style={styles.selectionSummary}>
+        <Text style={styles.selectionText}>
+          {selectedCount} feature{selectedCount !== 1 ? 's' : ''} selected
+        </Text>
+      </View>
+    )
+  }
 
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      paddingHorizontal: 20,
+      paddingHorizontal: theme.spacing.lg,
     },
-    scrollContainer: {
-      flex: 1,
-    },
-    // Compact header styling to match LocationStep
     header: {
-      marginTop: 8,
-      marginBottom: 12,
+      paddingVertical: theme.spacing.md,
       alignItems: 'center',
     },
     subtitle: {
-      fontSize: 16,
+      fontSize: theme.typography.fontSize.body,
       color: theme.colors.textSecondary,
-      lineHeight: 22,
-      marginBottom: theme.spacing.lg,
       textAlign: 'center',
+      marginBottom: theme.spacing.md,
     },
     infoBox: {
       backgroundColor: theme.colors.surfaceElevated,
       borderRadius: theme.borderRadius.md,
       padding: theme.spacing.md,
-      marginBottom: theme.spacing.lg,
+      marginBottom: theme.spacing.md,
+      borderLeftWidth: 4,
+      borderLeftColor: theme.colors.primary,
     },
     infoText: {
       fontSize: theme.typography.fontSize.secondary,
       color: theme.colors.textSecondary,
       textAlign: 'center',
-      lineHeight: theme.typography.fontSize.secondary * 1.4,
+      marginBottom: theme.spacing.xs,
+    },
+    infoSubtext: {
+      fontSize: theme.typography.fontSize.caption,
+      color: theme.colors.textSecondary,
+      textAlign: 'center',
+      opacity: 0.7,
     },
     selectionSummary: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      backgroundColor: theme.colors.primary + '10',
+      backgroundColor: theme.colors.primary + '15',
       borderRadius: theme.borderRadius.md,
-      padding: theme.spacing.md,
-      marginBottom: theme.spacing.lg,
-    },
-    summaryLeft: {
-      flexDirection: 'row',
+      padding: theme.spacing.sm,
+      marginBottom: theme.spacing.md,
       alignItems: 'center',
     },
-    summaryCount: {
-      fontSize: theme.typography.fontSize.h3,
-      fontWeight: '700',
-      color: theme.colors.primary,
-      marginRight: theme.spacing.xs,
-    },
-    summaryText: {
+    selectionText: {
       fontSize: theme.typography.fontSize.secondary,
-      color: theme.colors.textPrimary,
-    },
-    clearButton: {
-      backgroundColor: 'transparent',
-      borderWidth: 1,
-      borderColor: theme.colors.error,
-      borderRadius: theme.borderRadius.sm,
-      paddingHorizontal: theme.spacing.sm,
-      paddingVertical: theme.spacing.xs,
-    },
-    clearButtonTitle: {
-      fontSize: theme.typography.fontSize.caption,
-      color: theme.colors.error,
+      color: theme.colors.primary,
       fontWeight: '600',
     },
+    featuresGrid: {
+      flex: 1,
+    },
     categorySection: {
-      marginBottom: theme.spacing.xl,
+      marginBottom: theme.spacing.lg,
     },
     categoryTitle: {
-      fontSize: theme.typography.fontSize.secondary,
+      fontSize: theme.typography.fontSize.body,
       fontWeight: '600',
       color: theme.colors.textPrimary,
       marginBottom: theme.spacing.md,
-    },
-    featuresGrid: {
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      justifyContent: 'space-between',
+      paddingLeft: theme.spacing.sm,
     },
     featureCard: {
-      width: '48%',
       backgroundColor: theme.colors.surface,
       borderRadius: theme.borderRadius.lg,
       padding: theme.spacing.md,
-      marginBottom: theme.spacing.md,
+      marginBottom: theme.spacing.sm,
       borderWidth: 2,
       borderColor: theme.colors.border,
       ...theme.shadows.small,
-      position: 'relative',
     },
     selectedFeatureCard: {
       backgroundColor: theme.colors.surfaceElevated,
@@ -388,69 +394,67 @@ const FeaturesStep: React.FC<FeaturesStepProps> = ({
       ...theme.shadows.medium,
     },
     featureContent: {
+      flexDirection: 'row',
       alignItems: 'center',
-      paddingRight: theme.spacing.sm,
+      paddingRight: theme.spacing.lg,
     },
     featureIconContainer: {
       width: 40,
       height: 40,
-      borderRadius: 20,
+      borderRadius: theme.borderRadius.md,
       backgroundColor: theme.colors.surfaceElevated,
       justifyContent: 'center',
       alignItems: 'center',
-      marginBottom: theme.spacing.sm,
+      marginRight: theme.spacing.md,
     },
-    selectedIconContainer: {
-      backgroundColor: theme.colors.primary,
+    selectedFeatureIconContainer: {
+      backgroundColor: theme.colors.primary + '20',
+    },
+    featureInfo: {
+      flex: 1,
     },
     featureLabel: {
-      fontSize: theme.typography.fontSize.secondary,
+      fontSize: theme.typography.fontSize.body,
       fontWeight: '600',
       color: theme.colors.textPrimary,
-      textAlign: 'center',
       marginBottom: theme.spacing.xs,
     },
     selectedFeatureLabel: {
       color: theme.colors.primary,
     },
     featureDescription: {
-      fontSize: theme.typography.fontSize.caption,
+      fontSize: theme.typography.fontSize.secondary,
       color: theme.colors.textSecondary,
-      textAlign: 'center',
-      lineHeight: theme.typography.fontSize.caption * 1.3,
+      lineHeight: theme.typography.fontSize.secondary * 1.3,
     },
     selectedFeatureDescription: {
       color: theme.colors.textPrimary,
     },
     checkIconContainer: {
       position: 'absolute',
-      top: theme.spacing.xs,
-      right: theme.spacing.xs,
+      top: theme.spacing.md,
+      right: theme.spacing.md,
     },
-    featuresContainer: {
-      flex: 1,
-      paddingBottom: 120, // Extra padding for safe area and tabs
-    },
-    expandButton: {
-      backgroundColor: 'transparent',
+    showMoreButton: {
+      backgroundColor: theme.colors.surfaceElevated,
+      borderRadius: theme.borderRadius.md,
+      padding: theme.spacing.md,
+      marginBottom: theme.spacing.lg,
+      alignItems: 'center',
       borderWidth: 1,
       borderColor: theme.colors.border,
-      borderRadius: theme.borderRadius.md,
-      paddingVertical: theme.spacing.sm,
-      marginBottom: theme.spacing.lg,
     },
-    expandButtonTitle: {
-      fontSize: theme.typography.fontSize.secondary,
-      color: theme.colors.textPrimary,
-      fontWeight: '500',
+    showMoreText: {
+      fontSize: theme.typography.fontSize.body,
+      color: theme.colors.primary,
+      fontWeight: '600',
     },
-    // Footer button styling - positioned above safe area
     footer: {
       paddingVertical: 10,
-      paddingBottom: 100, // Much more padding for tabs + safe area
+      paddingBottom: 100,
     },
     continueButton: {
-      marginBottom: 8,
+      marginBottom: 10,
       paddingHorizontal: 24,
       borderRadius: 12,
       minHeight: 52,
@@ -465,69 +469,40 @@ const FeaturesStep: React.FC<FeaturesStepProps> = ({
 
   return (
     <View style={styles.container}>
-      {/* Compact header */}
       <View style={styles.header}>
         <Text style={styles.subtitle}>
-          Looking for anything specific? These features match your meal choice and budget.
+          Looking for anything specific? Select any features that matter to you.
         </Text>
       </View>
 
       <ScrollView 
-        style={styles.featuresContainer}
+        style={styles.featuresGrid}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.infoBox}>
-          <Text style={styles.infoText}>
-            ✨ Optional: Select features that matter to you, or skip to see all restaurants
-          </Text>
-        </View>
-
-        {selectedCount > 0 && (
-          <View style={styles.selectionSummary}>
-            <View style={styles.summaryLeft}>
-              <Text style={styles.summaryCount}>{selectedCount}</Text>
-              <Text style={styles.summaryText}>
-                {selectedCount === 1 ? 'feature selected' : 'features selected'}
-              </Text>
-            </View>
-            <Button
-              title="Clear All"
-              buttonStyle={styles.clearButton}
-              titleStyle={styles.clearButtonTitle}
-              onPress={clearAllFeatures}
-            />
-          </View>
-        )}
-
-        {getVisibleFeatures().map((category) => renderFeaturesByCategory(category as keyof typeof CATEGORIES))}
-
-        {!showMoreFeatures && availableFeatures.some(f => f.category === 'accessibility') && (
-          <Button
-            title="Show More Features"
-            buttonStyle={styles.expandButton}
-            titleStyle={styles.expandButtonTitle}
-            icon={{
-              name: 'expand-more',
-              type: 'material',
-              color: theme.colors.textPrimary,
-            }}
-            onPress={() => setShowMoreFeatures(true)}
-          />
-        )}
-
-        {availableFeatures.length === 0 && (
-          <View style={styles.infoBox}>
-            <Text style={styles.infoText}>
-              No special features match your current selections. Try adjusting your previous choices or continue to see all restaurants.
+        {renderInfoBox()}
+        {renderSelectionSummary()}
+        
+        {renderCategorySection('beverages', 'Beverages')}
+        {renderCategorySection('amenities', 'Amenities')}
+        
+        {!showAllFeatures && getFeaturesByCategory('accessibility').length > 0 && (
+          <TouchableOpacity
+            style={styles.showMoreButton}
+            onPress={() => setShowAllFeatures(true)}
+            activeOpacity={0.7}
+          >
+            <Text style={styles.showMoreText}>
+              Show More Features ({getFeaturesByCategory('accessibility').length} more)
             </Text>
-          </View>
+          </TouchableOpacity>
         )}
+        
+        {renderCategorySection('accessibility', 'Accessibility & Services')}
       </ScrollView>
 
-      {/* Use original footer with proper safe area padding */}
       <View style={styles.footer}>
         <Button
-          title="Find Restaurants"
+          title="Continue"
           onPress={handleContinue}
           buttonStyle={styles.continueButton}
           titleStyle={styles.continueButtonText}

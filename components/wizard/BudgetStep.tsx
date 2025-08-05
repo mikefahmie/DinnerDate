@@ -1,9 +1,12 @@
-// components/wizard/BudgetStep.tsx
+// components/wizard/BudgetStep.tsx - Clean version with no syntax errors
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
-import { Button, Icon } from '@rneui/themed'
+import { Button } from '@rneui/themed'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { IconPrefix, IconName } from '@fortawesome/fontawesome-svg-core'
 import { useTheme } from '../../hooks/useTheme'
 import { WizardState } from '../../screens/DiscoveryWizard'
+import AppIcons from '../../utils/fontAwesome'
 
 interface BudgetStepProps {
   wizardState: WizardState
@@ -11,47 +14,47 @@ interface BudgetStepProps {
   onNext: () => void
 }
 
-interface PriceLevel {
-  level: number
-  symbol: string
+interface BudgetOption {
+  id: number
   label: string
+  icon: [IconPrefix, IconName]
+  description: string
   range: string
   examples: string[]
-  description: string
 }
 
-const PRICE_LEVELS: PriceLevel[] = [
+const BUDGET_OPTIONS: BudgetOption[] = [
   {
-    level: 1,
-    symbol: '$',
-    label: 'Budget-Friendly',
-    range: 'Under $15',
-    examples: ['Fast food', 'Food trucks', 'Quick bites'],
-    description: 'Great for casual meals and quick eats'
+    id: 1,
+    label: '$r',
+    icon: AppIcons.DOLLAR,
+    description: 'Budget-friendly',
+    range: 'Under $15 per person',
+    examples: ['Fast food', 'Coffee shops', 'Casual dining']
   },
   {
-    level: 2,
-    symbol: '$$',
-    label: 'Moderate',
-    range: '$15 - $30',
-    examples: ['Casual dining', 'Chain restaurants', 'Local favorites'],
-    description: 'Perfect for everyday dining out'
+    id: 2,
+    label: '$$',
+    icon: AppIcons.MONEY,
+    description: 'Moderate',
+    range: '$15-30 per person',
+    examples: ['Family restaurants', 'Pubs', 'Chain restaurants']
   },
   {
-    level: 3,
-    symbol: '$$$',
-    label: 'Upscale',
-    range: '$30 - $50',
-    examples: ['Fine dining', 'Specialty cuisine', 'Date night spots'],
-    description: 'Special occasions and premium experiences'
+    id: 3,
+    label: '$$$',
+    icon: AppIcons.MONEY,
+    description: 'Higher-end',
+    range: '$30-50 per person',
+    examples: ['Fine dining', 'Steakhouses', 'Upscale bistros']
   },
   {
-    level: 4,
-    symbol: '$$$$',
-    label: 'Premium',
-    range: '$50+',
-    examples: ['High-end restaurants', 'Chef-driven', 'Luxury dining'],
-    description: 'The finest dining experiences'
+    id: 4,
+    label: '$$$$',
+    icon: AppIcons.MONEY,
+    description: 'Premium',
+    range: '$50+ per person',
+    examples: ['Luxury dining', 'High-end steakhouses', 'Celebrity chef restaurants']
   }
 ]
 
@@ -62,198 +65,196 @@ const BudgetStep: React.FC<BudgetStepProps> = ({
 }) => {
   const { theme } = useTheme()
 
-  const togglePriceLevel = (level: number) => {
+  const toggleBudgetLevel = (budgetId: number) => {
     const currentBudget = wizardState.budget || []
-    const isSelected = currentBudget.includes(level)
+    const updatedBudget = currentBudget.includes(budgetId)
+      ? currentBudget.filter(id => id !== budgetId)
+      : [...currentBudget, budgetId].sort()
     
-    if (isSelected) {
-      // Remove the level if it's already selected
-      const newBudget = currentBudget.filter(l => l !== level)
-      updateWizardState({ budget: newBudget })
-    } else {
-      // Add the level if it's not selected
-      const newBudget = [...currentBudget, level].sort((a, b) => a - b)
-      updateWizardState({ budget: newBudget })
-    }
+    updateWizardState({ budget: updatedBudget })
+  }
+
+  const handleSelectAll = () => {
+    updateWizardState({ budget: [1, 2, 3, 4] })
   }
 
   const handleContinue = () => {
-    // If no budget selected, default to all levels
-    if (!wizardState.budget || wizardState.budget.length === 0) {
-      updateWizardState({ budget: [1, 2, 3, 4] })
-    }
     onNext()
   }
 
-  const handleQuickSelect = (levels: number[]) => {
-    updateWizardState({ budget: levels })
-  }
+  const renderSelectionSummary = () => {
+    const selectedCount = wizardState.budget?.length || 0
+    if (selectedCount === 0) return null
 
-  const isPriceLevelSelected = (level: number): boolean => {
-    return (wizardState.budget || []).includes(level)
-  }
-
-  const renderQuickSelects = () => {
-    const quickSelections = [
-      { label: 'Budget-friendly', levels: [1, 2] },
-      { label: 'All prices', levels: [1, 2, 3, 4] }
-    ]
+    const selectedLabels = wizardState.budget
+      ?.sort()
+      .map(id => BUDGET_OPTIONS.find(opt => opt.id === id)?.label)
+      .join(', ')
 
     return (
-      <View style={styles.quickSelectsContainer}>
-        {quickSelections.map((selection, index) => {
-          const isActive = JSON.stringify(wizardState.budget?.sort()) === JSON.stringify(selection.levels.sort())
-          
-          return (
-            <TouchableOpacity
-              key={index}
-              style={[
-                styles.quickSelectChip,
-                isActive && styles.activeQuickSelectChip
-              ]}
-              onPress={() => handleQuickSelect(selection.levels)}
-            >
-              <Text style={[
-                styles.quickSelectText,
-                isActive && styles.activeQuickSelectText
-              ]}>
-                {selection.label}
-              </Text>
-            </TouchableOpacity>
-          )
-        })}
+      <View style={styles.selectionSummary}>
+        <Text style={styles.selectionText}>
+          Selected: {selectedLabels}
+        </Text>
       </View>
     )
   }
 
-  const renderPriceLevelCard = (priceLevel: PriceLevel) => {
-    const isSelected = isPriceLevelSelected(priceLevel.level)
-    
+  const renderBudgetCard = (budget: BudgetOption) => {
+    const isSelected = wizardState.budget?.includes(budget.id) || false
+
     return (
       <TouchableOpacity
-        key={priceLevel.level}
+        key={budget.id}
         style={[
-          styles.priceLevelCard,
-          isSelected && styles.selectedPriceLevelCard
+          styles.budgetCard,
+          isSelected && styles.selectedBudgetCard
         ]}
-        onPress={() => togglePriceLevel(priceLevel.level)}
+        onPress={() => toggleBudgetLevel(budget.id)}
         activeOpacity={0.7}
       >
-        <View style={styles.priceLevelHeader}>
+        <View style={styles.budgetContent}>
           <View style={[
-            styles.priceSymbolContainer,
-            isSelected && styles.selectedPriceSymbolContainer
+            styles.budgetIconContainer,
+            isSelected && styles.selectedBudgetIconContainer
           ]}>
-            <Text style={[
-              styles.priceSymbol,
-              isSelected && styles.selectedPriceSymbol
-            ]}>
-              {priceLevel.symbol}
-            </Text>
+            <FontAwesomeIcon
+              icon={budget.icon}
+              size={24}
+              color={isSelected ? theme.colors.primary : theme.colors.textSecondary}
+            />
           </View>
           
-          <View style={styles.priceLevelInfo}>
-            <View style={styles.priceLevelTitleRow}>
+          <View style={styles.budgetInfo}>
+            <View style={styles.budgetHeader}>
               <Text style={[
-                styles.priceLevelLabel,
-                isSelected && styles.selectedPriceLevelLabel
+                styles.budgetLabel,
+                isSelected && styles.selectedBudgetLabel
               ]}>
-                {priceLevel.label}
+                {budget.label}
               </Text>
-              {isSelected && (
-                <Icon
-                  name="check-circle"
-                  type="feather"
-                  size={20}
-                  color={theme.colors.primary}
-                />
-              )}
+              <Text style={[
+                styles.budgetDescription,
+                isSelected && styles.selectedBudgetDescription
+              ]}>
+                {budget.description}
+              </Text>
             </View>
+            
             <Text style={[
-              styles.priceLevelRange,
-              isSelected && styles.selectedPriceLevelRange
+              styles.budgetRange,
+              isSelected && styles.selectedBudgetRange
             ]}>
-              {priceLevel.range}
+              {budget.range}
+            </Text>
+            
+            <Text style={[
+              styles.budgetExamples,
+              isSelected && styles.selectedBudgetExamples
+            ]}>
+              {budget.examples.join(' • ')}
             </Text>
           </View>
         </View>
-        
-        <Text style={[
-          styles.priceLevelDescription,
-          isSelected && styles.selectedPriceLevelDescription
-        ]}>
-          {priceLevel.description}
-        </Text>
-        
-        <View style={styles.examplesContainer}>
-          {priceLevel.examples.map((example, index) => (
-            <View key={index} style={[
-              styles.exampleChip,
-              isSelected && styles.selectedExampleChip
-            ]}>
-              <Text style={[
-                styles.exampleText,
-                isSelected && styles.selectedExampleText
-              ]}>
-                {example}
-              </Text>
-            </View>
-          ))}
-        </View>
+
+        {isSelected && (
+          <View style={styles.checkIconContainer}>
+            <FontAwesomeIcon
+              icon={AppIcons.CHECK}
+              size={20}
+              color={theme.colors.primary}
+            />
+          </View>
+        )}
       </TouchableOpacity>
+    )
+  }
+
+  const renderInfoBox = () => {
+    return (
+      <View style={styles.infoBox}>
+        <Text style={styles.infoText}>
+          Select your price range(s) per person. You can choose multiple levels to see more options.
+        </Text>
+      </View>
+    )
+  }
+
+  const renderQuickActions = () => {
+    return (
+      <View style={styles.quickActions}>
+        <TouchableOpacity
+          style={styles.quickActionButton}
+          onPress={handleSelectAll}
+          activeOpacity={0.7}
+        >
+          <Text style={styles.quickActionText}>Select All Prices</Text>
+        </TouchableOpacity>
+      </View>
     )
   }
 
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      paddingHorizontal: 20,
+      paddingHorizontal: theme.spacing.lg,
     },
-    // Compact header styling to match LocationStep
     header: {
-      marginTop: 8,
-      marginBottom: 12,
+      paddingVertical: theme.spacing.md,
       alignItems: 'center',
     },
     subtitle: {
-      fontSize: 16,
-      textAlign: 'center',
-      lineHeight: 22,
-      color: theme.colors.textSecondary,
-      marginBottom: theme.spacing.lg,
-    },
-    quickSelectsContainer: {
-      flexDirection: 'row',
-      justifyContent: 'space-around',
-      marginBottom: theme.spacing.xl,
-      paddingHorizontal: theme.spacing.md,
-    },
-    quickSelectChip: {
-      backgroundColor: theme.colors.surface,
-      borderRadius: theme.borderRadius.full,
-      paddingHorizontal: theme.spacing.lg,
-      paddingVertical: theme.spacing.md,
-      borderWidth: 1,
-      borderColor: theme.colors.border,
-      ...theme.shadows.small,
-    },
-    activeQuickSelectChip: {
-      backgroundColor: theme.colors.primary,
-      borderColor: theme.colors.primary,
-    },
-    quickSelectText: {
       fontSize: theme.typography.fontSize.body,
       color: theme.colors.textSecondary,
-      fontWeight: '500',
+      textAlign: 'center',
+      marginBottom: theme.spacing.md,
     },
-    activeQuickSelectText: {
-      color: theme.colors.textOnPrimary,
+    infoBox: {
+      backgroundColor: theme.colors.surfaceElevated,
+      borderRadius: theme.borderRadius.md,
+      padding: theme.spacing.md,
+      marginBottom: theme.spacing.md,
+      borderLeftWidth: 4,
+      borderLeftColor: theme.colors.primary,
     },
-    priceLevelsContainer: {
+    infoText: {
+      fontSize: theme.typography.fontSize.secondary,
+      color: theme.colors.textSecondary,
+      textAlign: 'center',
+    },
+    selectionSummary: {
+      backgroundColor: theme.colors.primary + '15',
+      borderRadius: theme.borderRadius.md,
+      padding: theme.spacing.sm,
+      marginBottom: theme.spacing.md,
+      alignItems: 'center',
+    },
+    selectionText: {
+      fontSize: theme.typography.fontSize.secondary,
+      color: theme.colors.primary,
+      fontWeight: '600',
+    },
+    quickActions: {
+      marginBottom: theme.spacing.md,
+      alignItems: 'center',
+    },
+    quickActionButton: {
+      backgroundColor: theme.colors.surfaceElevated,
+      borderRadius: theme.borderRadius.md,
+      paddingVertical: theme.spacing.sm,
+      paddingHorizontal: theme.spacing.lg,
+      borderWidth: 1,
+      borderColor: theme.colors.border,
+    },
+    quickActionText: {
+      fontSize: theme.typography.fontSize.secondary,
+      color: theme.colors.primary,
+      fontWeight: '600',
+    },
+    budgetGrid: {
       flex: 1,
-      paddingBottom: 120, // Extra padding for safe area and tabs
     },
-    priceLevelCard: {
+    budgetCard: {
       backgroundColor: theme.colors.surface,
       borderRadius: theme.borderRadius.lg,
       padding: theme.spacing.lg,
@@ -262,99 +263,82 @@ const BudgetStep: React.FC<BudgetStepProps> = ({
       borderColor: theme.colors.border,
       ...theme.shadows.small,
     },
-    selectedPriceLevelCard: {
+    selectedBudgetCard: {
       backgroundColor: theme.colors.surfaceElevated,
       borderColor: theme.colors.primary,
       ...theme.shadows.medium,
     },
-    priceLevelHeader: {
+    budgetContent: {
       flexDirection: 'row',
       alignItems: 'flex-start',
-      marginBottom: theme.spacing.sm,
+      paddingRight: theme.spacing.lg,
     },
-    priceSymbolContainer: {
-      width: 50,
-      height: 50,
+    budgetIconContainer: {
+      width: 40,
+      height: 40,
       borderRadius: theme.borderRadius.md,
       backgroundColor: theme.colors.surfaceElevated,
       justifyContent: 'center',
       alignItems: 'center',
       marginRight: theme.spacing.md,
+      marginTop: theme.spacing.xs,
     },
-    selectedPriceSymbolContainer: {
-      backgroundColor: theme.colors.primary,
+    selectedBudgetIconContainer: {
+      backgroundColor: theme.colors.primary + '20',
     },
-    priceSymbol: {
-      fontSize: theme.typography.fontSize.h3,
-      fontWeight: '700',
-      color: theme.colors.textPrimary,
-    },
-    selectedPriceSymbol: {
-      color: theme.colors.textOnPrimary,
-    },
-    priceLevelInfo: {
+    budgetInfo: {
       flex: 1,
     },
-    priceLevelTitleRow: {
+    budgetHeader: {
       flexDirection: 'row',
       alignItems: 'center',
-      justifyContent: 'space-between',
-      marginBottom: theme.spacing.xs,
+      marginBottom: theme.spacing.sm,
     },
-    priceLevelLabel: {
+    budgetLabel: {
       fontSize: theme.typography.fontSize.h3,
       fontWeight: '700',
       color: theme.colors.textPrimary,
+      marginRight: theme.spacing.sm,
     },
-    selectedPriceLevelLabel: {
+    selectedBudgetLabel: {
       color: theme.colors.primary,
     },
-    priceLevelRange: {
+    budgetDescription: {
       fontSize: theme.typography.fontSize.body,
+      fontWeight: '600',
       color: theme.colors.textSecondary,
+    },
+    selectedBudgetDescription: {
+      color: theme.colors.primary,
+    },
+    budgetRange: {
+      fontSize: theme.typography.fontSize.body,
+      color: theme.colors.textPrimary,
+      marginBottom: theme.spacing.xs,
       fontWeight: '500',
     },
-    selectedPriceLevelRange: {
-      color: theme.colors.primary + '80', // 50% opacity
+    selectedBudgetRange: {
+      color: theme.colors.primary,
     },
-    priceLevelDescription: {
+    budgetExamples: {
       fontSize: theme.typography.fontSize.secondary,
       color: theme.colors.textSecondary,
-      marginBottom: theme.spacing.md,
-      lineHeight: theme.typography.fontSize.secondary * 1.4,
+      lineHeight: theme.typography.fontSize.secondary * 1.3,
     },
-    selectedPriceLevelDescription: {
+    selectedBudgetExamples: {
       color: theme.colors.textPrimary,
     },
-    examplesContainer: {
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      gap: theme.spacing.xs,
+    checkIconContainer: {
+      position: 'absolute',
+      top: theme.spacing.md,
+      right: theme.spacing.md,
     },
-    exampleChip: {
-      backgroundColor: theme.colors.border + '40', // 25% opacity
-      borderRadius: theme.borderRadius.sm,
-      paddingHorizontal: theme.spacing.sm,
-      paddingVertical: theme.spacing.xs,
-    },
-    selectedExampleChip: {
-      backgroundColor: theme.colors.primary + '20', // 12% opacity
-    },
-    exampleText: {
-      fontSize: theme.typography.fontSize.caption,
-      color: theme.colors.textSecondary,
-      fontWeight: '500',
-    },
-    selectedExampleText: {
-      color: theme.colors.primary,
-    },
-    // Footer button styling - positioned above safe area
     footer: {
       paddingVertical: 10,
-      paddingBottom: 100, // Much more padding for tabs + safe area
+      paddingBottom: 100,
     },
     continueButton: {
-      marginBottom: 8,
+      marginBottom: 10,
       paddingHorizontal: 24,
       borderRadius: 12,
       minHeight: 52,
@@ -369,22 +353,22 @@ const BudgetStep: React.FC<BudgetStepProps> = ({
 
   return (
     <View style={styles.container}>
-      {/* Compact header */}
       <View style={styles.header}>
         <Text style={styles.subtitle}>
-          What's your budget range? You can select multiple price levels to see more options.
+          What's your budget per person?
         </Text>
       </View>
 
       <ScrollView 
-        style={styles.priceLevelsContainer}
+        style={styles.budgetGrid}
         showsVerticalScrollIndicator={false}
       >
-        {renderQuickSelects()}
-        {PRICE_LEVELS.map(renderPriceLevelCard)}
+        {renderInfoBox()}
+        {renderSelectionSummary()}
+        {renderQuickActions()}
+        {BUDGET_OPTIONS.map(renderBudgetCard)}
       </ScrollView>
 
-      {/* Use original footer with proper safe area padding */}
       <View style={styles.footer}>
         <Button
           title="Continue"

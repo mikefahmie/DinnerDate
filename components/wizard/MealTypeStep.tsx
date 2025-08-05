@@ -1,9 +1,12 @@
-// components/wizard/MealTypeStep.tsx - Updated without time restrictions
+// components/wizard/MealTypeStep.tsx - Updated with FontAwesome Pro icons
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
-import { Button, Icon } from '@rneui/themed'
+import { Button } from '@rneui/themed'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { IconPrefix, IconName } from '@fortawesome/fontawesome-svg-core'
 import { useTheme } from '../../hooks/useTheme'
 import { WizardState } from '../../screens/DiscoveryWizard'
+import AppIcons from '../../utils/fontAwesome'
 
 interface MealTypeStepProps {
   wizardState: WizardState
@@ -14,40 +17,46 @@ interface MealTypeStepProps {
 interface MealOption {
   id: string
   label: string
-  icon: { name: string; type: string }
+  icon: [IconPrefix, IconName]
   description: string
+  maps_to: string // Database field mapping
 }
 
 const MEAL_OPTIONS: MealOption[] = [
   {
     id: 'breakfast',
     label: 'Breakfast',
-    icon: { name: 'coffee', type: 'feather' },
-    description: 'Start your day right'
+    icon: AppIcons.BREAKFAST,
+    description: 'Morning meal',
+    maps_to: 'serves_breakfast'
   },
   {
     id: 'lunch',
     label: 'Lunch',
-    icon: { name: 'sun', type: 'feather' },
-    description: 'Midday meals and quick bites'
+    icon: AppIcons.LUNCH,
+    description: 'Midday meal',
+    maps_to: 'serves_lunch'
   },
   {
     id: 'dinner',
     label: 'Dinner',
-    icon: { name: 'moon', type: 'feather' },
-    description: 'Evening dining experiences'
+    icon: AppIcons.DINNER,
+    description: 'Evening meal',
+    maps_to: 'serves_dinner'
   },
   {
     id: 'coffee',
     label: 'Coffee',
-    icon: { name: 'coffee', type: 'font-awesome' },
-    description: 'Coffee shops and cafes'
+    icon: AppIcons.COFFEE,
+    description: 'Coffee shops and cafes',
+    maps_to: 'serves_coffee'
   },
   {
     id: 'dessert',
     label: 'Dessert',
-    icon: { name: 'birthday-cake', type: 'font-awesome' },
-    description: 'Sweet treats and desserts'
+    icon: AppIcons.DESSERT,
+    description: 'Sweet treats',
+    maps_to: 'serves_dessert'
   }
 ]
 
@@ -68,10 +77,20 @@ const MealTypeStep: React.FC<MealTypeStepProps> = ({
   }
 
   const handleContinue = () => {
-    // Ensure at least one meal type is selected
-    if (wizardState.mealTypes?.length > 0) {
-      onNext()
-    }
+    onNext()
+  }
+
+  const renderSelectionSummary = () => {
+    const selectedCount = wizardState.mealTypes?.length || 0
+    if (selectedCount === 0) return null
+
+    return (
+      <View style={styles.selectionSummary}>
+        <Text style={styles.selectionText}>
+          {selectedCount} meal type{selectedCount !== 1 ? 's' : ''} selected
+        </Text>
+      </View>
+    )
   }
 
   const renderMealCard = (meal: MealOption) => {
@@ -90,13 +109,12 @@ const MealTypeStep: React.FC<MealTypeStepProps> = ({
         <View style={styles.mealContent}>
           <View style={[
             styles.mealIconContainer,
-            isSelected && styles.selectedIconContainer
+            isSelected && styles.selectedMealIconContainer
           ]}>
-            <Icon
-              name={meal.icon.name}
-              type={meal.icon.type}
+            <FontAwesomeIcon
+              icon={meal.icon}
               size={24}
-              color={isSelected ? theme.colors.textOnPrimary : theme.colors.textSecondary}
+              color={isSelected ? theme.colors.primary : theme.colors.textSecondary}
             />
           </View>
           
@@ -115,12 +133,11 @@ const MealTypeStep: React.FC<MealTypeStepProps> = ({
             </Text>
           </View>
         </View>
-        
+
         {isSelected && (
           <View style={styles.checkIconContainer}>
-            <Icon
-              name="check-circle"
-              type="feather"
+            <FontAwesomeIcon
+              icon={AppIcons.CHECK}
               size={20}
               color={theme.colors.primary}
             />
@@ -130,52 +147,67 @@ const MealTypeStep: React.FC<MealTypeStepProps> = ({
     )
   }
 
+  const renderInfoBox = () => {
+    return (
+      <View style={styles.infoBox}>
+        <Text style={styles.infoText}>
+          Select all meal types you're interested in. This helps us show relevant restaurants and cuisines.
+        </Text>
+      </View>
+    )
+  }
+
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      paddingHorizontal: 20,
+      paddingHorizontal: theme.spacing.lg,
     },
-    scrollContainer: {
-      flex: 1,
-    },
-    // Compact header styling to match LocationStep
     header: {
-      marginTop: 8,
-      marginBottom: 12,
+      paddingVertical: theme.spacing.md,
       alignItems: 'center',
     },
     subtitle: {
-      fontSize: 16,
+      fontSize: theme.typography.fontSize.body,
       color: theme.colors.textSecondary,
-      lineHeight: 22,
-      marginBottom: theme.spacing.lg,
       textAlign: 'center',
+      marginBottom: theme.spacing.md,
     },
-    note: {
-      backgroundColor: theme.colors.accent + '15',
+    infoBox: {
+      backgroundColor: theme.colors.surfaceElevated,
       borderRadius: theme.borderRadius.md,
       padding: theme.spacing.md,
-      marginBottom: theme.spacing.xl,
+      marginBottom: theme.spacing.md,
+      borderLeftWidth: 4,
+      borderLeftColor: theme.colors.primary,
     },
-    noteText: {
-      fontSize: theme.typography.fontSize.caption,
+    infoText: {
+      fontSize: theme.typography.fontSize.secondary,
       color: theme.colors.textSecondary,
       textAlign: 'center',
-      lineHeight: theme.typography.fontSize.caption * 1.4,
+    },
+    selectionSummary: {
+      backgroundColor: theme.colors.primary + '15',
+      borderRadius: theme.borderRadius.md,
+      padding: theme.spacing.sm,
+      marginBottom: theme.spacing.md,
+      alignItems: 'center',
+    },
+    selectionText: {
+      fontSize: theme.typography.fontSize.secondary,
+      color: theme.colors.primary,
+      fontWeight: '600',
     },
     mealGrid: {
       flex: 1,
-      paddingBottom: 120, // Extra padding for safe area and tabs
     },
     mealCard: {
       backgroundColor: theme.colors.surface,
       borderRadius: theme.borderRadius.lg,
-      padding: theme.spacing.lg,
-      marginBottom: theme.spacing.md,
+      padding: theme.spacing.md,
+      marginBottom: theme.spacing.sm,
       borderWidth: 2,
       borderColor: theme.colors.border,
       ...theme.shadows.small,
-      position: 'relative',
     },
     selectedMealCard: {
       backgroundColor: theme.colors.surfaceElevated,
@@ -185,25 +217,26 @@ const MealTypeStep: React.FC<MealTypeStepProps> = ({
     mealContent: {
       flexDirection: 'row',
       alignItems: 'center',
+      paddingRight: theme.spacing.lg,
     },
     mealIconContainer: {
-      width: 50,
-      height: 50,
+      width: 40,
+      height: 40,
       borderRadius: theme.borderRadius.md,
       backgroundColor: theme.colors.surfaceElevated,
       justifyContent: 'center',
       alignItems: 'center',
       marginRight: theme.spacing.md,
     },
-    selectedIconContainer: {
-      backgroundColor: theme.colors.primary,
+    selectedMealIconContainer: {
+      backgroundColor: theme.colors.primary + '20',
     },
     mealInfo: {
       flex: 1,
     },
     mealLabel: {
-      fontSize: theme.typography.fontSize.h3,
-      fontWeight: '700',
+      fontSize: theme.typography.fontSize.body,
+      fontWeight: '600',
       color: theme.colors.textPrimary,
       marginBottom: theme.spacing.xs,
     },
@@ -213,6 +246,7 @@ const MealTypeStep: React.FC<MealTypeStepProps> = ({
     mealDescription: {
       fontSize: theme.typography.fontSize.secondary,
       color: theme.colors.textSecondary,
+      lineHeight: theme.typography.fontSize.secondary * 1.3,
     },
     selectedMealDescription: {
       color: theme.colors.textPrimary,
@@ -222,13 +256,12 @@ const MealTypeStep: React.FC<MealTypeStepProps> = ({
       top: theme.spacing.md,
       right: theme.spacing.md,
     },
-    // Footer button styling - positioned above safe area
     footer: {
       paddingVertical: 10,
-      paddingBottom: 100, // Much more padding for tabs + safe area
+      paddingBottom: 100,
     },
     continueButton: {
-      marginBottom: 8,
+      marginBottom: 10,
       paddingHorizontal: 24,
       borderRadius: 12,
       minHeight: 52,
@@ -239,22 +272,13 @@ const MealTypeStep: React.FC<MealTypeStepProps> = ({
       fontWeight: '600',
       color: theme.colors.textOnPrimary,
     },
-    continueButtonDisabled: {
-      backgroundColor: theme.colors.border,
-    },
-    continueButtonTextDisabled: {
-      color: theme.colors.textMuted,
-    },
   })
-
-  const hasSelection = wizardState.mealTypes?.length > 0
 
   return (
     <View style={styles.container}>
-      {/* Compact header */}
       <View style={styles.header}>
         <Text style={styles.subtitle}>
-          What meal are you planning? You can select multiple options to see more restaurant choices.
+          What meal are you planning? You can select multiple options.
         </Text>
       </View>
 
@@ -262,29 +286,17 @@ const MealTypeStep: React.FC<MealTypeStepProps> = ({
         style={styles.mealGrid}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.note}>
-          <Text style={styles.noteText}>
-            💡 Tip: Select all meals you might be interested in to see more restaurant options
-          </Text>
-        </View>
-
+        {renderInfoBox()}
+        {renderSelectionSummary()}
         {MEAL_OPTIONS.map(renderMealCard)}
       </ScrollView>
 
-      {/* Use original footer with proper safe area padding */}
       <View style={styles.footer}>
         <Button
           title="Continue"
           onPress={handleContinue}
-          disabled={!hasSelection}
-          buttonStyle={[
-            styles.continueButton,
-            !hasSelection && styles.continueButtonDisabled
-          ]}
-          titleStyle={[
-            styles.continueButtonText,
-            !hasSelection && styles.continueButtonTextDisabled
-          ]}
+          buttonStyle={styles.continueButton}
+          titleStyle={styles.continueButtonText}
         />
       </View>
     </View>

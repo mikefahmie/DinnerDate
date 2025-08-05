@@ -1,9 +1,12 @@
-// components/wizard/DietaryStep.tsx - Fixed layout and spacing
+// components/wizard/DietaryStep.tsx - Updated with FontAwesome Pro icons
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
-import { Button, Icon } from '@rneui/themed'
+import { Button } from '@rneui/themed'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { IconPrefix, IconName } from '@fortawesome/fontawesome-svg-core'
 import { useTheme } from '../../hooks/useTheme'
 import { WizardState } from '../../screens/DiscoveryWizard'
+import AppIcons from '../../utils/fontAwesome'
 
 interface DietaryStepProps {
   wizardState: WizardState
@@ -14,34 +17,40 @@ interface DietaryStepProps {
 interface DietaryOption {
   id: string
   label: string
-  icon: { name: string; type: string }
+  icon: [IconPrefix, IconName]
   description: string
+  category: 'dietary' | 'none'
 }
 
+// All available dietary options with updated FontAwesome Pro icons (reordered)
 const DIETARY_OPTIONS: DietaryOption[] = [
+  {
+    id: 'none',
+    label: 'No Dietary Restrictions',
+    icon: AppIcons.NO_RESTRICTIONS,
+    description: 'I eat everything',
+    category: 'none'
+  },
   {
     id: 'vegetarian',
     label: 'Vegetarian Options',
-    icon: { name: 'leaf', type: 'font-awesome' },
-    description: 'Restaurants with vegetarian-friendly dishes'
+    icon: AppIcons.VEGETARIAN,
+    description: 'Restaurants with vegetarian dishes',
+    category: 'dietary'
   },
   {
     id: 'vegan',
     label: 'Vegan Options',
-    icon: { name: 'heart', type: 'feather' },
-    description: 'Restaurants with plant-based options'
+    icon: AppIcons.VEGAN,
+    description: 'Restaurants with plant-based options',
+    category: 'dietary'
   },
   {
     id: 'gluten_free',
     label: 'Gluten-Free Options',
-    icon: { name: 'shield', type: 'feather' },
-    description: 'Restaurants with gluten-free dishes'
-  },
-  {
-    id: 'none',
-    label: 'No Dietary Restrictions',
-    icon: { name: 'check', type: 'feather' },
-    description: 'Show all restaurants without filtering'
+    icon: AppIcons.GLUTEN_FREE,
+    description: 'Restaurants with gluten-free dishes',
+    category: 'dietary'
   }
 ]
 
@@ -52,138 +61,163 @@ const DietaryStep: React.FC<DietaryStepProps> = ({
 }) => {
   const { theme } = useTheme()
 
-  const toggleDietaryOption = (optionId: string) => {
+  const toggleDietaryPreference = (dietaryId: string) => {
     const currentDietary = wizardState.dietary || []
     
-    if (optionId === 'none') {
-      // If selecting "none", clear all other options
-      updateWizardState({ dietary: ['none'] })
-    } else {
-      // If selecting a specific dietary option, remove "none"
-      const filteredDietary = currentDietary.filter(id => id !== 'none')
-      const updatedDietary = filteredDietary.includes(optionId)
-        ? filteredDietary.filter(id => id !== optionId)
-        : [...filteredDietary, optionId]
-      
+    // If selecting "none", clear all other selections
+    if (dietaryId === 'none') {
+      const updatedDietary = currentDietary.includes('none') ? [] : ['none']
       updateWizardState({ dietary: updatedDietary })
+      return
     }
+    
+    // If selecting a dietary restriction, remove "none" if it's selected
+    let updatedDietary = currentDietary.filter(id => id !== 'none')
+    
+    // Toggle the selected dietary preference
+    if (updatedDietary.includes(dietaryId)) {
+      updatedDietary = updatedDietary.filter(id => id !== dietaryId)
+    } else {
+      updatedDietary = [...updatedDietary, dietaryId]
+    }
+    
+    updateWizardState({ dietary: updatedDietary })
   }
 
   const handleContinue = () => {
     onNext()
   }
 
-  const renderDietaryCard = (option: DietaryOption) => {
-    const currentDietary = wizardState.dietary || []
-    const isSelected = currentDietary.includes(option.id)
-    const isDisabled = option.id !== 'none' && currentDietary.includes('none')
+  const renderSelectionSummary = () => {
+    const selectedCount = wizardState.dietary?.length || 0
+    if (selectedCount === 0) return null
+
+    const hasNone = wizardState.dietary?.includes('none')
+    const displayText = hasNone 
+      ? 'No dietary restrictions'
+      : `${selectedCount} dietary preference${selectedCount !== 1 ? 's' : ''} selected`
+
+    return (
+      <View style={styles.selectionSummary}>
+        <Text style={styles.selectionText}>
+          {displayText}
+        </Text>
+      </View>
+    )
+  }
+
+  const renderDietaryCard = (dietary: DietaryOption) => {
+    const isSelected = wizardState.dietary?.includes(dietary.id) || false
 
     return (
       <TouchableOpacity
-        key={option.id}
+        key={dietary.id}
         style={[
           styles.dietaryCard,
-          isSelected && styles.selectedDietaryCard,
-          isDisabled && styles.disabledDietaryCard
+          isSelected && styles.selectedDietaryCard
         ]}
-        onPress={() => !isDisabled && toggleDietaryOption(option.id)}
-        activeOpacity={isDisabled ? 1 : 0.7}
-        disabled={isDisabled}
+        onPress={() => toggleDietaryPreference(dietary.id)}
+        activeOpacity={0.7}
       >
-        <View style={styles.dietaryHeader}>
+        <View style={styles.dietaryContent}>
           <View style={[
             styles.dietaryIconContainer,
-            isSelected && styles.selectedIconContainer,
-            isDisabled && styles.disabledIconContainer
+            isSelected && styles.selectedDietaryIconContainer
           ]}>
-            <Icon
-              name={option.icon.name}
-              type={option.icon.type}
+            <FontAwesomeIcon
+              icon={dietary.icon}
               size={24}
-              color={
-                isDisabled 
-                  ? theme.colors.textMuted 
-                  : isSelected 
-                    ? theme.colors.textOnPrimary 
-                    : theme.colors.textSecondary
-              }
+              color={isSelected ? theme.colors.primary : theme.colors.textSecondary}
             />
           </View>
           
-          <View style={styles.dietaryContent}>
+          <View style={styles.dietaryInfo}>
             <Text style={[
               styles.dietaryLabel,
-              isSelected && styles.selectedDietaryLabel,
-              isDisabled && styles.disabledDietaryLabel
+              isSelected && styles.selectedDietaryLabel
             ]}>
-              {option.label}
+              {dietary.label}
             </Text>
             <Text style={[
               styles.dietaryDescription,
-              isSelected && styles.selectedDietaryDescription,
-              isDisabled && styles.disabledDietaryDescription
+              isSelected && styles.selectedDietaryDescription
             ]}>
-              {option.description}
+              {dietary.description}
             </Text>
           </View>
-          
-          {isSelected && !isDisabled && (
-            <View style={styles.checkIconContainer}>
-              <Icon
-                name="check-circle"
-                type="feather"
-                size={20}
-                color={theme.colors.primary}
-              />
-            </View>
-          )}
         </View>
+
+        {isSelected && (
+          <View style={styles.checkIconContainer}>
+            <FontAwesomeIcon
+              icon={AppIcons.CHECK}
+              size={20}
+              color={theme.colors.primary}
+            />
+          </View>
+        )}
       </TouchableOpacity>
+    )
+  }
+
+  const renderInfoBox = () => {
+    return (
+      <View style={styles.infoBox}>
+        <Text style={styles.infoText}>
+          We'll show restaurants that accommodate your dietary needs
+        </Text>
+      </View>
     )
   }
 
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      paddingHorizontal: 20,
+      paddingHorizontal: theme.spacing.lg,
     },
-    scrollContainer: {
-      flex: 1,
-    },
-    // Compact header styling to match LocationStep
     header: {
-      marginTop: 8,
-      marginBottom: 12,
+      paddingVertical: theme.spacing.md,
       alignItems: 'center',
     },
     subtitle: {
-      fontSize: 16,
-      textAlign: 'center',
-      lineHeight: 22,
+      fontSize: theme.typography.fontSize.body,
       color: theme.colors.textSecondary,
-      marginBottom: theme.spacing.lg,
+      textAlign: 'center',
+      marginBottom: theme.spacing.md,
     },
-    note: {
-      backgroundColor: theme.colors.accent + '15',
+    infoBox: {
+      backgroundColor: theme.colors.surfaceElevated,
       borderRadius: theme.borderRadius.md,
       padding: theme.spacing.md,
-      marginBottom: theme.spacing.xl,
+      marginBottom: theme.spacing.md,
+      borderLeftWidth: 4,
+      borderLeftColor: theme.colors.primary,
     },
-    noteText: {
-      fontSize: theme.typography.fontSize.caption,
+    infoText: {
+      fontSize: theme.typography.fontSize.secondary,
       color: theme.colors.textSecondary,
       textAlign: 'center',
-      lineHeight: theme.typography.fontSize.caption * 1.4,
     },
-    dietaryOptionsContainer: {
+    selectionSummary: {
+      backgroundColor: theme.colors.primary + '15',
+      borderRadius: theme.borderRadius.md,
+      padding: theme.spacing.sm,
+      marginBottom: theme.spacing.md,
+      alignItems: 'center',
+    },
+    selectionText: {
+      fontSize: theme.typography.fontSize.secondary,
+      color: theme.colors.primary,
+      fontWeight: '600',
+    },
+    dietaryGrid: {
       flex: 1,
-      paddingBottom: 120, // Extra padding for safe area and tabs
     },
     dietaryCard: {
       backgroundColor: theme.colors.surface,
       borderRadius: theme.borderRadius.lg,
-      padding: theme.spacing.lg,
-      marginBottom: theme.spacing.md,
+      padding: theme.spacing.md,
+      marginBottom: theme.spacing.sm,
       borderWidth: 2,
       borderColor: theme.colors.border,
       ...theme.shadows.small,
@@ -193,43 +227,34 @@ const DietaryStep: React.FC<DietaryStepProps> = ({
       borderColor: theme.colors.primary,
       ...theme.shadows.medium,
     },
-    disabledDietaryCard: {
-      opacity: 0.5,
-      backgroundColor: theme.colors.surfaceElevated,
-    },
-    dietaryHeader: {
+    dietaryContent: {
       flexDirection: 'row',
       alignItems: 'center',
+      paddingRight: theme.spacing.lg,
     },
     dietaryIconContainer: {
-      width: 50,
-      height: 50,
+      width: 40,
+      height: 40,
       borderRadius: theme.borderRadius.md,
       backgroundColor: theme.colors.surfaceElevated,
       justifyContent: 'center',
       alignItems: 'center',
       marginRight: theme.spacing.md,
     },
-    selectedIconContainer: {
-      backgroundColor: theme.colors.primary,
+    selectedDietaryIconContainer: {
+      backgroundColor: theme.colors.primary + '20',
     },
-    disabledIconContainer: {
-      backgroundColor: theme.colors.border,
-    },
-    dietaryContent: {
+    dietaryInfo: {
       flex: 1,
     },
     dietaryLabel: {
-      fontSize: theme.typography.fontSize.h3,
-      fontWeight: '700',
+      fontSize: theme.typography.fontSize.body,
+      fontWeight: '600',
       color: theme.colors.textPrimary,
       marginBottom: theme.spacing.xs,
     },
     selectedDietaryLabel: {
       color: theme.colors.primary,
-    },
-    disabledDietaryLabel: {
-      color: theme.colors.textMuted,
     },
     dietaryDescription: {
       fontSize: theme.typography.fontSize.secondary,
@@ -239,19 +264,17 @@ const DietaryStep: React.FC<DietaryStepProps> = ({
     selectedDietaryDescription: {
       color: theme.colors.textPrimary,
     },
-    disabledDietaryDescription: {
-      color: theme.colors.textMuted,
-    },
     checkIconContainer: {
-      marginLeft: theme.spacing.md,
+      position: 'absolute',
+      top: theme.spacing.md,
+      right: theme.spacing.md,
     },
-    // Footer button styling - positioned above safe area
     footer: {
       paddingVertical: 10,
-      paddingBottom: 100, // Much more padding for tabs + safe area
+      paddingBottom: 100,
     },
     continueButton: {
-      marginBottom: 8,
+      marginBottom: 10,
       paddingHorizontal: 24,
       borderRadius: 12,
       minHeight: 52,
@@ -266,27 +289,21 @@ const DietaryStep: React.FC<DietaryStepProps> = ({
 
   return (
     <View style={styles.container}>
-      {/* Compact header */}
       <View style={styles.header}>
         <Text style={styles.subtitle}>
-          Any dietary preferences? We'll help you find restaurants with suitable options.
+          Any dietary preferences we should know about?
         </Text>
       </View>
 
       <ScrollView 
-        style={styles.dietaryOptionsContainer}
+        style={styles.dietaryGrid}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.note}>
-          <Text style={styles.noteText}>
-            💡 Select dietary needs to filter restaurants with appropriate options
-          </Text>
-        </View>
-
+        {renderInfoBox()}
+        {renderSelectionSummary()}
         {DIETARY_OPTIONS.map(renderDietaryCard)}
       </ScrollView>
 
-      {/* Use original footer with proper safe area padding */}
       <View style={styles.footer}>
         <Button
           title="Continue"

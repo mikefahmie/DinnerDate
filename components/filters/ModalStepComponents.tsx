@@ -150,7 +150,7 @@ export const ModalMealTypeStep: React.FC<ModalStepProps> = ({ wizardState, updat
           What type of meal are you planning? You can select multiple options.
         </Text>
       </View>
-
+      
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
         {mealTypes.map((meal) => {
           const isSelected = wizardState.mealTypes?.includes(meal.id) || false
@@ -158,8 +158,12 @@ export const ModalMealTypeStep: React.FC<ModalStepProps> = ({ wizardState, updat
           return (
             <TouchableOpacity
               key={meal.id}
-              style={[styles.mealCard, isSelected && styles.selectedMealCard]}
+              style={[
+                styles.mealCard,
+                isSelected && styles.selectedMealCard
+              ]}
               onPress={() => handleMealToggle(meal.id)}
+              activeOpacity={0.7}
             >
               <View style={styles.mealContent}>
                 <View style={[
@@ -213,30 +217,10 @@ export const ModalBudgetStep: React.FC<ModalStepProps> = ({ wizardState, updateW
   const { theme } = useTheme()
 
   const budgetOptions = [
-    {
-      level: 1,
-      label: 'Budget-Friendly',
-      description: 'Under $15 per person',
-      symbol: '$',
-    },
-    {
-      level: 2,
-      label: 'Moderate',
-      description: '$15-30 per person',
-      symbol: '$$',
-    },
-    {
-      level: 3,
-      label: 'Upscale',
-      description: '$30-60 per person',
-      symbol: '$$$',
-    },
-    {
-      level: 4,
-      label: 'Fine Dining',
-      description: '$60+ per person',
-      symbol: '$$$$',
-    },
+    { level: 1, label: '$', description: 'Under $15 per person' },
+    { level: 2, label: '$$', description: '$15-30 per person' },
+    { level: 3, label: '$$$', description: '$30-60 per person' },
+    { level: 4, label: '$$$$', description: '$60+ per person' },
   ]
 
   const handleBudgetToggle = (level: number) => {
@@ -283,7 +267,7 @@ export const ModalBudgetStep: React.FC<ModalStepProps> = ({ wizardState, updateW
       flexDirection: 'row',
       alignItems: 'center',
     },
-    budgetSymbolContainer: {
+    budgetIconContainer: {
       width: 40,
       height: 40,
       borderRadius: theme.borderRadius.md,
@@ -292,23 +276,15 @@ export const ModalBudgetStep: React.FC<ModalStepProps> = ({ wizardState, updateW
       alignItems: 'center',
       marginRight: theme.spacing.md,
     },
-    selectedSymbolContainer: {
+    selectedBudgetIconContainer: {
       backgroundColor: theme.colors.primary,
-    },
-    budgetSymbol: {
-      fontSize: 16,
-      fontWeight: '700',
-      color: theme.colors.textSecondary,
-    },
-    selectedBudgetSymbol: {
-      color: theme.colors.textOnPrimary,
     },
     budgetInfo: {
       flex: 1,
     },
     budgetLabel: {
-      fontSize: theme.typography.fontSize.body,
-      fontWeight: '600',
+      fontSize: theme.typography.fontSize.h3,
+      fontWeight: '700',
       color: theme.colors.textPrimary,
       marginBottom: theme.spacing.xs,
     },
@@ -336,7 +312,7 @@ export const ModalBudgetStep: React.FC<ModalStepProps> = ({ wizardState, updateW
           What's your budget range? You can select multiple price levels.
         </Text>
       </View>
-
+      
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
         {budgetOptions.map((budget) => {
           const isSelected = wizardState.budget?.includes(budget.level) || false
@@ -344,20 +320,24 @@ export const ModalBudgetStep: React.FC<ModalStepProps> = ({ wizardState, updateW
           return (
             <TouchableOpacity
               key={budget.level}
-              style={[styles.budgetCard, isSelected && styles.selectedBudgetCard]}
+              style={[
+                styles.budgetCard,
+                isSelected && styles.selectedBudgetCard
+              ]}
               onPress={() => handleBudgetToggle(budget.level)}
+              activeOpacity={0.7}
             >
               <View style={styles.budgetContent}>
                 <View style={[
-                  styles.budgetSymbolContainer,
-                  isSelected && styles.selectedSymbolContainer
+                  styles.budgetIconContainer,
+                  isSelected && styles.selectedBudgetIconContainer
                 ]}>
-                  <Text style={[
-                    styles.budgetSymbol,
-                    isSelected && styles.selectedBudgetSymbol
-                  ]}>
-                    {budget.symbol}
-                  </Text>
+                  <Icon
+                    name="dollar-sign"
+                    type="feather"
+                    size={20}
+                    color={isSelected ? theme.colors.textOnPrimary : theme.colors.textSecondary}
+                  />
                 </View>
                 
                 <View style={styles.budgetInfo}>
@@ -394,22 +374,174 @@ export const ModalBudgetStep: React.FC<ModalStepProps> = ({ wizardState, updateW
   )
 }
 
-// Modal Cuisine Step
+// Modal Cuisine Step - UPDATED WITH ALL 27 OPTIONS FROM WIZARD
 export const ModalCuisineStep: React.FC<ModalStepProps> = ({ wizardState, updateWizardState }) => {
   const { theme } = useTheme()
 
-  // Available cuisines based on meal types and budget
-  const availableCuisines = [
-    { id: 'american', label: 'American', description: 'Burgers, steaks, comfort food', icon: 'flag' },
-    { id: 'italian', label: 'Italian', description: 'Pizza, pasta, Mediterranean', icon: 'globe' },
-    { id: 'asian', label: 'Asian', description: 'Chinese, Japanese, Thai, Vietnamese', icon: 'globe' },
-    { id: 'mexican', label: 'Mexican', description: 'Tacos, burritos, authentic dishes', icon: 'globe' },
-    { id: 'indian', label: 'Indian', description: 'Curry, spices, traditional dishes', icon: 'globe' },
-    { id: 'mediterranean', label: 'Mediterranean', description: 'Greek, Middle Eastern, fresh ingredients', icon: 'globe' },
-    { id: 'french', label: 'French', description: 'Classic French cuisine, pastries', icon: 'globe' },
-    { id: 'seafood', label: 'Seafood', description: 'Fresh fish, shellfish, coastal cuisine', icon: 'anchor' },
-    { id: 'steakhouse', label: 'Steakhouse', description: 'Premium cuts, traditional sides', icon: 'knife' },
-    { id: 'vegetarian', label: 'Vegetarian/Vegan', description: 'Plant-based, healthy options', icon: 'leaf' },
+  // Complete list of all 27 cuisine options from the wizard
+  const cuisineOptions = [
+    {
+      id: 'african_restaurant',
+      label: 'African',
+      description: 'Traditional African dishes',
+      icon: 'globe',
+    },
+    {
+      id: 'american_restaurant',
+      label: 'American',
+      description: 'Classic American fare',
+      icon: 'flag',
+    },
+    {
+      id: 'bagel_shop',
+      label: 'Bagels',
+      description: 'Fresh bagels and spreads',
+      icon: 'circle',
+    },
+    {
+      id: 'bakery',
+      label: 'Bakery',
+      description: 'Fresh baked goods',
+      icon: 'heart',
+    },
+    {
+      id: 'bar_and_grill',
+      label: 'Bar & Grill',
+      description: 'Casual dining with drinks',
+      icon: 'home',
+    },
+    {
+      id: 'barbecue_restaurant',
+      label: 'BBQ',
+      description: 'Smoked meats and sides',
+      icon: 'fire',
+    },
+    {
+      id: 'breakfast_restaurant',
+      label: 'Breakfast',
+      description: 'All-day breakfast',
+      icon: 'sun',
+    },
+    {
+      id: 'brunch_restaurant',
+      label: 'Brunch',
+      description: 'Weekend brunch specials',
+      icon: 'coffee',
+    },
+    {
+      id: 'chinese_restaurant',
+      label: 'Chinese',
+      description: 'Traditional Chinese cuisine',
+      icon: 'globe',
+    },
+    {
+      id: 'fast_food_restaurant',
+      label: 'Fast Food',
+      description: 'Quick service dining',
+      icon: 'zap',
+    },
+    {
+      id: 'french_restaurant',
+      label: 'French',
+      description: 'French cuisine',
+      icon: 'wine',
+    },
+    {
+      id: 'greek_restaurant',
+      label: 'Greek',
+      description: 'Greek specialties',
+      icon: 'star',
+    },
+    {
+      id: 'hamburger_restaurant',
+      label: 'Burgers',
+      description: 'Gourmet burgers',
+      icon: 'circle',
+    },
+    {
+      id: 'ice_cream_shop',
+      label: 'Ice Cream',
+      description: 'Ice cream and desserts',
+      icon: 'hexagon',
+    },
+    {
+      id: 'indian_restaurant',
+      label: 'Indian',
+      description: 'Authentic Indian cuisine',
+      icon: 'globe',
+    },
+    {
+      id: 'italian_restaurant',
+      label: 'Italian',
+      description: 'Italian classics',
+      icon: 'globe',
+    },
+    {
+      id: 'japanese_restaurant',
+      label: 'Japanese',
+      description: 'Japanese specialties',
+      icon: 'fish',
+    },
+    {
+      id: 'korean_restaurant',
+      label: 'Korean',
+      description: 'Korean favorites',
+      icon: 'globe',
+    },
+    {
+      id: 'mediterranean_restaurant',
+      label: 'Mediterranean',
+      description: 'Mediterranean flavors',
+      icon: 'globe',
+    },
+    {
+      id: 'middle_eastern_restaurant',
+      label: 'Middle Eastern',
+      description: 'Middle Eastern cuisine',
+      icon: 'star',
+    },
+    {
+      id: 'pizza_restaurant',
+      label: 'Pizza',
+      description: 'Fresh pizza',
+      icon: 'circle',
+    },
+    {
+      id: 'ramen_restaurant',
+      label: 'Ramen',
+      description: 'Authentic ramen bowls',
+      icon: 'globe',
+    },
+    {
+      id: 'sandwich_shop',
+      label: 'Sandwiches',
+      description: 'Fresh sandwiches',
+      icon: 'square',
+    },
+    {
+      id: 'seafood_restaurant',
+      label: 'Seafood',
+      description: 'Fresh seafood dishes',
+      icon: 'fish',
+    },
+    {
+      id: 'steak_house',
+      label: 'Steakhouse',
+      description: 'Premium steaks and chops',
+      icon: 'square',
+    },
+    {
+      id: 'thai_restaurant',
+      label: 'Thai',
+      description: 'Authentic Thai dishes',
+      icon: 'globe',
+    },
+    {
+      id: 'vietnamese_restaurant',
+      label: 'Vietnamese',
+      description: 'Vietnamese specialties',
+      icon: 'globe',
+    },
   ]
 
   const handleCuisineToggle = (cuisineId: string) => {
@@ -501,16 +633,20 @@ export const ModalCuisineStep: React.FC<ModalStepProps> = ({ wizardState, update
           What type of cuisine are you in the mood for? You can select multiple options.
         </Text>
       </View>
-
+      
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-        {availableCuisines.map((cuisine) => {
+        {cuisineOptions.map((cuisine) => {
           const isSelected = wizardState.cuisineTypes?.includes(cuisine.id) || false
           
           return (
             <TouchableOpacity
               key={cuisine.id}
-              style={[styles.cuisineCard, isSelected && styles.selectedCuisineCard]}
+              style={[
+                styles.cuisineCard,
+                isSelected && styles.selectedCuisineCard
+              ]}
               onPress={() => handleCuisineToggle(cuisine.id)}
+              activeOpacity={0.7}
             >
               <View style={styles.cuisineContent}>
                 <View style={[
@@ -566,44 +702,44 @@ export const ModalDietaryStep: React.FC<ModalStepProps> = ({ wizardState, update
   const dietaryOptions = [
     {
       id: 'vegetarian',
-      label: 'Vegetarian',
-      description: 'No meat, but may include dairy and eggs',
+      label: 'Vegetarian Options',
+      description: 'Plant-based dishes available',
       icon: 'leaf',
     },
     {
       id: 'vegan',
-      label: 'Vegan',
-      description: 'No animal products whatsoever',
+      label: 'Vegan Options',
+      description: 'Completely plant-based options',
       icon: 'leaf',
     },
     {
       id: 'gluten-free',
-      label: 'Gluten-Free',
-      description: 'No wheat, barley, rye, or gluten',
+      label: 'Gluten-Free Options',
+      description: 'Dishes without gluten',
       icon: 'shield',
     },
     {
       id: 'dairy-free',
-      label: 'Dairy-Free',
-      description: 'No milk, cheese, or dairy products',
-      icon: 'shield',
+      label: 'Dairy-Free Options',
+      description: 'Options without dairy products',
+      icon: 'droplet',
     },
     {
-      id: 'nut-free',
-      label: 'Nut-Free',
-      description: 'No tree nuts or peanuts',
-      icon: 'shield',
-    },
-    {
-      id: 'kosher',
-      label: 'Kosher',
-      description: 'Follows Jewish dietary laws',
-      icon: 'star',
+      id: 'keto-friendly',
+      label: 'Keto-Friendly',
+      description: 'Low-carb, high-fat options',
+      icon: 'zap',
     },
     {
       id: 'halal',
-      label: 'Halal',
-      description: 'Follows Islamic dietary laws',
+      label: 'Halal Options',
+      description: 'Halal-certified dishes',
+      icon: 'star',
+    },
+    {
+      id: 'kosher',
+      label: 'Kosher Options',
+      description: 'Kosher-certified dishes',
       icon: 'star',
     },
   ]
@@ -694,10 +830,10 @@ export const ModalDietaryStep: React.FC<ModalStepProps> = ({ wizardState, update
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.subtitle}>
-          Any dietary restrictions or preferences? Select all that apply.
+          Any dietary preferences or restrictions? Select what applies to you.
         </Text>
       </View>
-
+      
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
         {dietaryOptions.map((dietary) => {
           const isSelected = wizardState.dietary?.includes(dietary.id) || false
@@ -705,8 +841,12 @@ export const ModalDietaryStep: React.FC<ModalStepProps> = ({ wizardState, update
           return (
             <TouchableOpacity
               key={dietary.id}
-              style={[styles.dietaryCard, isSelected && styles.selectedDietaryCard]}
+              style={[
+                styles.dietaryCard,
+                isSelected && styles.selectedDietaryCard
+              ]}
               onPress={() => handleDietaryToggle(dietary.id)}
+              activeOpacity={0.7}
             >
               <View style={styles.dietaryContent}>
                 <View style={[
@@ -761,40 +901,64 @@ export const ModalFeaturesStep: React.FC<ModalStepProps> = ({ wizardState, updat
 
   const featureOptions = [
     {
-      id: 'outdoor-seating',
+      id: 'outdoor_seating',
       label: 'Outdoor Seating',
       description: 'Patio, terrace, or sidewalk dining',
       icon: 'sun',
     },
     {
-      id: 'live-music',
-      label: 'Live Music',
-      description: 'Live performances or entertainment',
-      icon: 'music',
-    },
-    {
-      id: 'romantic',
-      label: 'Romantic Atmosphere',
-      description: 'Intimate setting, dim lighting',
-      icon: 'heart',
-    },
-    {
-      id: 'family-friendly',
-      label: 'Family-Friendly',
-      description: 'Kids menu, high chairs, welcoming to families',
-      icon: 'users',
-    },
-    {
-      id: 'bar',
-      label: 'Full Bar',
-      description: 'Cocktails, wine, extensive drink menu',
+      id: 'serves_wine',
+      label: 'Serves Wine',
+      description: 'Wine selection available',
       icon: 'wine',
     },
     {
-      id: 'quick-service',
-      label: 'Quick Service',
-      description: 'Fast casual, counter service',
-      icon: 'clock',
+      id: 'serves_beer',
+      label: 'Serves Beer',
+      description: 'Beer selection available',
+      icon: 'coffee',
+    },
+    {
+      id: 'good_for_groups',
+      label: 'Good for Groups',
+      description: 'Large parties welcome',
+      icon: 'users',
+    },
+    {
+      id: 'reservable',
+      label: 'Reservations',
+      description: 'Accept table reservations',
+      icon: 'calendar',
+    },
+    {
+      id: 'takeout',
+      label: 'Takeout',
+      description: 'Food available for pickup',
+      icon: 'shopping-bag',
+    },
+    {
+      id: 'delivery',
+      label: 'Delivery',
+      description: 'Food delivery available',
+      icon: 'truck',
+    },
+    {
+      id: 'good_for_children',
+      label: 'Family-Friendly',
+      description: 'Kids menu, high chairs, welcoming to families',
+      icon: 'heart',
+    },
+    {
+      id: 'allows_dogs',
+      label: 'Dog-Friendly',
+      description: 'Pets welcome',
+      icon: 'heart',
+    },
+    {
+      id: 'live_music',
+      label: 'Live Music',
+      description: 'Live performances or entertainment',
+      icon: 'music',
     },
     {
       id: 'wifi',
@@ -806,7 +970,7 @@ export const ModalFeaturesStep: React.FC<ModalStepProps> = ({ wizardState, updat
       id: 'parking',
       label: 'Parking Available',
       description: 'On-site or nearby parking',
-      icon: 'car',
+      icon: 'navigation',
     },
     {
       id: 'accessible',
@@ -905,7 +1069,7 @@ export const ModalFeaturesStep: React.FC<ModalStepProps> = ({ wizardState, updat
           Looking for anything specific? Select features that matter to you.
         </Text>
       </View>
-
+      
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
         {featureOptions.map((feature) => {
           const isSelected = wizardState.features?.includes(feature.id) || false
@@ -913,8 +1077,12 @@ export const ModalFeaturesStep: React.FC<ModalStepProps> = ({ wizardState, updat
           return (
             <TouchableOpacity
               key={feature.id}
-              style={[styles.featureCard, isSelected && styles.selectedFeatureCard]}
+              style={[
+                styles.featureCard,
+                isSelected && styles.selectedFeatureCard
+              ]}
               onPress={() => handleFeatureToggle(feature.id)}
+              activeOpacity={0.7}
             >
               <View style={styles.featureContent}>
                 <View style={[
