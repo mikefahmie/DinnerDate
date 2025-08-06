@@ -1,4 +1,4 @@
-// components/filters/FilterModal.tsx - Complete fix for styling and functionality
+// components/filters/FilterModal.tsx - Updated with FontAwesome Pro icons
 import React, { useState } from 'react'
 import { 
   View, 
@@ -9,9 +9,11 @@ import {
   TouchableOpacity,
   SafeAreaView 
 } from 'react-native'
-import { Button, Icon } from '@rneui/themed'
+import { Button } from '@rneui/themed'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { useTheme } from '../../hooks/useTheme'
 import { WizardState } from '../../screens/DiscoveryWizard'
+import AppIcons from '../../utils/fontAwesome'
 import { 
   ModalMealTypeStep, 
   ModalBudgetStep, 
@@ -26,7 +28,6 @@ interface FilterModalProps {
   onFiltersUpdate: (filters: WizardState) => void
   onClose: () => void
 }
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 type FilterSection = 'meal' | 'budget' | 'cuisine' | 'dietary' | 'features'
 
@@ -39,7 +40,6 @@ const FilterModal: React.FC<FilterModalProps> = ({
   const { theme } = useTheme()
   const [activeSection, setActiveSection] = useState<FilterSection>('meal')
   const [tempFilters, setTempFilters] = useState<WizardState>(filters)
-  const insets = useSafeAreaInsets() // For safe area padding
 
   // Reset tempFilters when modal becomes visible
   React.useEffect(() => {
@@ -78,57 +78,68 @@ const FilterModal: React.FC<FilterModalProps> = ({
   // Check if we should show cuisine step based on meal types
   const shouldShowCuisineStep = (): boolean => {
     const mealTypes = tempFilters.mealTypes
-    return !mealTypes.includes('coffee') && !mealTypes.includes('drinks')
+    return !mealTypes.includes('coffee') && 
+           !mealTypes.includes('dessert') && 
+           !(mealTypes.length === 1 && mealTypes.includes('breakfast'))
   }
 
   const getAvailableSections = (): FilterSection[] => {
-    const baseSections: FilterSection[] = ['meal', 'budget']
+    const sections: FilterSection[] = ['meal', 'budget']
     
-    // Add cuisine if applicable
     if (shouldShowCuisineStep()) {
-      baseSections.push('cuisine')
+      sections.push('cuisine')
     }
     
-    // Always show dietary and features
-    baseSections.push('dietary', 'features')
-    
-    return baseSections
+    sections.push('dietary', 'features')
+    return sections
+  }
+
+  const getSectionIcon = (section: FilterSection) => {
+    switch (section) {
+      case 'meal':
+        return AppIcons.DINNER
+      case 'budget':
+        return AppIcons.DOLLAR
+      case 'cuisine':
+        return AppIcons.DINNER // Using DINNER icon since UTENSILS isn't available
+      case 'dietary':
+        return AppIcons.VEGETARIAN
+      case 'features':
+        return AppIcons.SETTINGS
+      default:
+        return AppIcons.CHECK
+    }
   }
 
   const getSectionTitle = (section: FilterSection): string => {
-    const titles = {
-      meal: 'Meal Type',
-      budget: 'Budget',
-      cuisine: 'Cuisine',
-      dietary: 'Dietary',
-      features: 'Features',
+    switch (section) {
+      case 'meal':
+        return 'Meal'
+      case 'budget':
+        return 'Budget'
+      case 'cuisine':
+        return 'Cuisine'
+      case 'dietary':
+        return 'Dietary'
+      case 'features':
+        return 'Features'
+      default:
+        return ''
     }
-    return titles[section]
-  }
-
-  const getSectionIcon = (section: FilterSection): string => {
-    const icons = {
-      meal: 'utensils',
-      budget: 'dollar-sign',
-      cuisine: 'globe',
-      dietary: 'leaf',
-      features: 'star',
-    }
-    return icons[section]
   }
 
   const getSectionCount = (section: FilterSection): number => {
     switch (section) {
       case 'meal':
-        return tempFilters.mealTypes.length
+        return tempFilters.mealTypes?.length || 0
       case 'budget':
-        return tempFilters.budget.length < 4 ? tempFilters.budget.length : 0 // Don't show count if all selected
+        return tempFilters.budget?.length === 4 ? 0 : (tempFilters.budget?.length || 0)
       case 'cuisine':
-        return tempFilters.cuisineTypes.length
+        return tempFilters.cuisineTypes?.length || 0
       case 'dietary':
-        return tempFilters.dietary.length
+        return tempFilters.dietary?.length || 0
       case 'features':
-        return tempFilters.features.length
+        return tempFilters.features?.length || 0
       default:
         return 0
     }
@@ -137,7 +148,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
   const renderSectionButton = (section: FilterSection) => {
     const isActive = activeSection === section
     const count = getSectionCount(section)
-
+    
     return (
       <TouchableOpacity
         key={section}
@@ -148,9 +159,8 @@ const FilterModal: React.FC<FilterModalProps> = ({
         onPress={() => setActiveSection(section)}
       >
         <View style={styles.sectionButtonContent}>
-          <Icon
-            name={getSectionIcon(section)}
-            type="feather"
+          <FontAwesomeIcon
+            icon={getSectionIcon(section)}
             size={16}
             color={isActive ? theme.colors.textOnPrimary : theme.colors.textPrimary}
             style={styles.sectionIcon}
@@ -274,10 +284,10 @@ const FilterModal: React.FC<FilterModalProps> = ({
     },
     countBadge: {
       position: 'absolute',
-      top: -4,
-      right: -4,
+      top: -8,
+      right: -8,
       backgroundColor: theme.colors.error,
-      borderRadius: 8,
+      borderRadius: 10,
       minWidth: 16,
       height: 16,
       justifyContent: 'center',
@@ -285,15 +295,15 @@ const FilterModal: React.FC<FilterModalProps> = ({
       paddingHorizontal: 4,
     },
     activeCountBadge: {
-      backgroundColor: theme.colors.background,
+      backgroundColor: theme.colors.surface,
     },
     countText: {
       fontSize: 10,
-      fontWeight: '700',
+      fontWeight: '600',
       color: theme.colors.textOnPrimary,
     },
     activeCountText: {
-      color: theme.colors.primary,
+      color: theme.colors.textPrimary,
     },
     content: {
       flex: 1,
@@ -303,11 +313,10 @@ const FilterModal: React.FC<FilterModalProps> = ({
       flexDirection: 'row',
       paddingHorizontal: theme.spacing.lg,
       paddingVertical: theme.spacing.md,
-      paddingBottom: theme.spacing.xl,
       borderTopWidth: 1,
       borderTopColor: theme.colors.divider,
-      gap: theme.spacing.md,
       backgroundColor: theme.colors.background,
+      gap: theme.spacing.md,
     },
     resetButton: {
       flex: 1,
@@ -315,10 +324,6 @@ const FilterModal: React.FC<FilterModalProps> = ({
       borderWidth: 1,
       borderColor: theme.colors.border,
       borderRadius: theme.borderRadius.md,
-      paddingVertical: theme.spacing.md,
-      minHeight: 48,
-      maxHeight: 48,
-      marginBottom: 22, // Adjusted for safe area
     },
     resetButtonTitle: {
       fontSize: theme.typography.fontSize.body,
@@ -329,9 +334,6 @@ const FilterModal: React.FC<FilterModalProps> = ({
       flex: 2,
       backgroundColor: theme.colors.primary,
       borderRadius: theme.borderRadius.md,
-      paddingVertical: theme.spacing.md,
-      minHeight: 48,
-      maxHeight: 48,
     },
     applyButtonTitle: {
       fontSize: theme.typography.fontSize.body,
@@ -352,9 +354,8 @@ const FilterModal: React.FC<FilterModalProps> = ({
           <View style={styles.header}>
             <Text style={styles.headerTitle}>Filter Restaurants</Text>
             <TouchableOpacity style={styles.closeButton} onPress={handleClose}>
-              <Icon
-                name="x"
-                type="feather"
+              <FontAwesomeIcon
+                icon={AppIcons.CLOSE}
                 size={24}
                 color={theme.colors.textPrimary}
               />

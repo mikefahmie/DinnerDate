@@ -171,7 +171,7 @@ const FilterChips: React.FC<FilterChipsProps> = ({
             onPress={onEditFilters}
           >
             <Icon
-              name="sliders"
+              name="gear"
               type="font-awesome-5"
               size={12}
               color={theme.colors.textPrimary}
