@@ -1,4 +1,4 @@
-// components/filters/ModalStepComponents.tsx - Complete file with FontAwesome Pro icons
+// components/filters/ModalStepComponents.tsx - Updated to match discovery wizard icons exactly
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
@@ -22,23 +22,30 @@ interface FeatureOption {
   minPriceLevel?: number
 }
 
-// Modal Meal Type Step
+interface CuisineOption {
+  id: string
+  label: string
+  icon: [IconPrefix, IconName] | { emoji: string }
+  description: string
+  availableFor: string[]
+  minPriceLevel: number
+}
+
+// Modal Meal Type Step - Matching discovery wizard exactly
 export const ModalMealTypeStep: React.FC<ModalStepProps> = ({ wizardState, updateWizardState }) => {
   const { theme } = useTheme()
 
   const mealOptions = [
-    { id: 'breakfast', label: 'Breakfast', description: 'Morning meals and brunch', icon: AppIcons.BREAKFAST },
-    { id: 'lunch', label: 'Lunch', description: 'Midday dining', icon: AppIcons.LUNCH },
-    { id: 'dinner', label: 'Dinner', description: 'Evening meals', icon: AppIcons.DINNER },
+    { id: 'breakfast', label: 'Breakfast', description: 'Morning meal', icon: AppIcons.BREAKFAST },
+    { id: 'lunch', label: 'Lunch', description: 'Midday meal', icon: AppIcons.LUNCH },
+    { id: 'dinner', label: 'Dinner', description: 'Evening meal', icon: AppIcons.DINNER },
     { id: 'coffee', label: 'Coffee', description: 'Coffee shops and cafes', icon: AppIcons.COFFEE },
-    { id: 'dessert', label: 'Dessert', description: 'Sweets and desserts', icon: AppIcons.DESSERT },
+    { id: 'dessert', label: 'Dessert', description: 'Sweet treats', icon: AppIcons.DESSERT },
   ]
 
   const handleMealTypeToggle = (mealTypeId: string) => {
     const currentMealTypes = wizardState.mealTypes || []
-    const newMealTypes = currentMealTypes.includes(mealTypeId)
-      ? currentMealTypes.filter(id => id !== mealTypeId)
-      : [...currentMealTypes, mealTypeId]
+    const newMealTypes = currentMealTypes.includes(mealTypeId) ? currentMealTypes.filter(id => id !== mealTypeId) : [...currentMealTypes, mealTypeId]
     updateWizardState({ mealTypes: newMealTypes })
   }
 
@@ -92,15 +99,15 @@ export const ModalMealTypeStep: React.FC<ModalStepProps> = ({ wizardState, updat
   )
 }
 
-// Modal Budget Step
+// Modal Budget Step - Matching discovery wizard exactly ($=DOLLAR, $$=MONEY)
 export const ModalBudgetStep: React.FC<ModalStepProps> = ({ wizardState, updateWizardState }) => {
   const { theme } = useTheme()
 
   const budgetOptions = [
-    { level: 1, label: '$', range: 'Under $15', description: 'Fast food, coffee shops', icon: AppIcons.DOLLAR },
-    { level: 2, label: '$$', range: '$15-30', description: 'Casual dining, cafes', icon: AppIcons.DOLLAR },
-    { level: 3, label: '$$$', range: '$30-50', description: 'Fine dining, steakhouses', icon: AppIcons.DOLLAR },
-    { level: 4, label: '$$$$', range: '$50+', description: 'Premium restaurants', icon: AppIcons.DOLLAR },
+    { level: 1, label: '$', range: 'Under $15', description: 'Budget-friendly', icon: AppIcons.DOLLAR },
+    { level: 2, label: '$$', range: '$15-30', description: 'Moderate', icon: AppIcons.MONEY },
+    { level: 3, label: '$$$', range: '$30-50', description: 'Higher-end', icon: AppIcons.MONEY },
+    { level: 4, label: '$$$$', range: '$50+', description: 'Premium', icon: AppIcons.MONEY },
   ]
 
   const handleBudgetToggle = (level: number) => {
@@ -164,44 +171,49 @@ export const ModalBudgetStep: React.FC<ModalStepProps> = ({ wizardState, updateW
   )
 }
 
-// Modal Cuisine Step
+// Modal Cuisine Step - Matching discovery wizard with emojis for country cuisines
 export const ModalCuisineStep: React.FC<ModalStepProps> = ({ wizardState, updateWizardState }) => {
   const { theme } = useTheme()
 
-  const cuisineOptions = [
-    { id: 'italian_restaurant', label: 'Italian', icon: AppIcons.ITALIAN },
-    { id: 'chinese_restaurant', label: 'Chinese', icon: AppIcons.CHINESE },
-    { id: 'mexican_restaurant', label: 'Mexican', icon: AppIcons.MEXICAN },
-    { id: 'japanese_restaurant', label: 'Japanese', icon: AppIcons.JAPANESE },
-    { id: 'french_restaurant', label: 'French', icon: AppIcons.FRENCH },
-    { id: 'thai_restaurant', label: 'Thai', icon: AppIcons.THAI },
-    { id: 'indian_restaurant', label: 'Indian', icon: AppIcons.INDIAN },
-    { id: 'american_restaurant', label: 'American', icon: AppIcons.AMERICAN },
-    { id: 'mediterranean_restaurant', label: 'Mediterranean', icon: AppIcons.MEDITERRANEAN },
-    { id: 'korean_restaurant', label: 'Korean', icon: AppIcons.KOREAN },
-    { id: 'vietnamese_restaurant', label: 'Vietnamese', icon: AppIcons.VIETNAMESE },
-    { id: 'greek_restaurant', label: 'Greek', icon: AppIcons.GREEK },
-    { id: 'spanish_restaurant', label: 'Spanish', icon: AppIcons.SPANISH },
-    { id: 'lebanese_restaurant', label: 'Lebanese', icon: AppIcons.LEBANESE },
-    { id: 'turkish_restaurant', label: 'Turkish', icon: AppIcons.TURKISH },
-    { id: 'german_restaurant', label: 'German', icon: AppIcons.GERMAN },
-    { id: 'british_restaurant', label: 'British', icon: AppIcons.BRITISH },
-    { id: 'brazilian_restaurant', label: 'Brazilian', icon: AppIcons.BRAZILIAN },
-    { id: 'ethiopian_restaurant', label: 'Ethiopian', icon: AppIcons.ETHIOPIAN },
-    { id: 'barbecue_restaurant', label: 'BBQ', icon: AppIcons.BBQ },
-    { id: 'seafood_restaurant', label: 'Seafood', icon: AppIcons.SEAFOOD },
-    { id: 'steakhouse', label: 'Steakhouse', icon: AppIcons.STEAKHOUSE },
-    { id: 'pizza_restaurant', label: 'Pizza', icon: AppIcons.PIZZA },
-    { id: 'sushi_restaurant', label: 'Sushi', icon: AppIcons.SUSHI },
-    { id: 'fast_food_restaurant', label: 'Fast Food', icon: AppIcons.FAST_FOOD },
-    { id: 'sandwich_shop', label: 'Sandwiches', icon: AppIcons.SANDWICH },
-    { id: 'bakery', label: 'Bakery', icon: AppIcons.BAKERY },
+  const cuisineOptions: CuisineOption[] = [
+    // Food types with FontAwesome icons
+    { id: 'african_restaurant', label: 'African', icon: AppIcons.AFRICAN, description: 'Traditional African dishes', availableFor: ['lunch', 'dinner'], minPriceLevel: 2 },
+    { id: 'bagel_shop', label: 'Bagels', icon: AppIcons.BAGEL, description: 'Fresh bagels and spreads', availableFor: ['breakfast', 'lunch'], minPriceLevel: 1 },
+    { id: 'bakery', label: 'Bakery', icon: AppIcons.BAKERY, description: 'Fresh baked goods', availableFor: ['breakfast', 'lunch', 'dessert'], minPriceLevel: 1 },
+    { id: 'bar_and_grill', label: 'Bar & Grill', icon: AppIcons.BAR_GRILL, description: 'Casual dining with drinks', availableFor: ['lunch', 'dinner'], minPriceLevel: 2 },
+    { id: 'barbecue_restaurant', label: 'BBQ', icon: AppIcons.BBQ, description: 'Smoked meats and sides', availableFor: ['lunch', 'dinner'], minPriceLevel: 2 },
+    { id: 'breakfast_restaurant', label: 'Breakfast', icon: AppIcons.BREAKFAST_FOOD, description: 'All-day breakfast', availableFor: ['breakfast', 'lunch'], minPriceLevel: 1 },
+    { id: 'brunch_restaurant', label: 'Brunch', icon: AppIcons.BRUNCH, description: 'Weekend brunch specials', availableFor: ['breakfast', 'lunch'], minPriceLevel: 2 },
+    { id: 'chinese_restaurant', label: 'Chinese', icon: AppIcons.CHINESE, description: 'Traditional Chinese cuisine', availableFor: ['lunch', 'dinner'], minPriceLevel: 2 },
+    { id: 'fast_food_restaurant', label: 'Fast Food', icon: AppIcons.FAST_FOOD, description: 'Quick service dining', availableFor: ['lunch', 'dinner'], minPriceLevel: 1 },
+    { id: 'hamburger_restaurant', label: 'Burgers', icon: AppIcons.BURGER, description: 'Gourmet burgers', availableFor: ['lunch', 'dinner'], minPriceLevel: 1 },
+    { id: 'mediterranean_restaurant', label: 'Mediterranean', icon: AppIcons.MEDITERRANEAN, description: 'Mediterranean flavors', availableFor: ['lunch', 'dinner'], minPriceLevel: 2 },
+    { id: 'middle_eastern_restaurant', label: 'Middle Eastern', icon: AppIcons.MIDDLE_EASTERN, description: 'Middle Eastern cuisine', availableFor: ['lunch', 'dinner'], minPriceLevel: 2 },
+    { id: 'pizza_restaurant', label: 'Pizza', icon: AppIcons.PIZZA, description: 'Fresh pizza', availableFor: ['lunch', 'dinner'], minPriceLevel: 1 },
+    { id: 'sandwich_shop', label: 'Sandwiches', icon: AppIcons.SANDWICH, description: 'Fresh sandwiches', availableFor: ['lunch', 'dinner'], minPriceLevel: 1 },
+    { id: 'seafood_restaurant', label: 'Seafood', icon: AppIcons.SEAFOOD, description: 'Fresh seafood dishes', availableFor: ['lunch', 'dinner'], minPriceLevel: 2 },
+    { id: 'steak_house', label: 'Steakhouse', icon: AppIcons.STEAK, description: 'Premium steaks and chops', availableFor: ['dinner'], minPriceLevel: 4 },
+    // Country cuisines with emoji flags (matching discovery wizard)
+    { id: 'french_restaurant', label: 'French', icon: { emoji: '🇫🇷' }, description: 'French favorites', availableFor: ['lunch', 'dinner'], minPriceLevel: 2 },
+    { id: 'indian_restaurant', label: 'Indian', icon: { emoji: '🇮🇳' }, description: 'Authentic Indian cuisine', availableFor: ['lunch', 'dinner'], minPriceLevel: 2 },
+    { id: 'thai_restaurant', label: 'Thai', icon: { emoji: '🇹🇭' }, description: 'Authentic Thai dishes', availableFor: ['lunch', 'dinner'], minPriceLevel: 2 },
+    { id: 'vietnamese_restaurant', label: 'Vietnamese', icon: { emoji: '🇻🇳' }, description: 'Vietnamese specialties', availableFor: ['lunch', 'dinner'], minPriceLevel: 2 },
+    { id: 'mexican_restaurant', label: 'Mexican', icon: { emoji: '🇲🇽' }, description: 'Mexican cuisine and tacos', availableFor: ['lunch', 'dinner'], minPriceLevel: 2 },
   ]
 
   const handleCuisineToggle = (cuisineId: string) => {
     const currentCuisines = wizardState.cuisineTypes || []
     const newCuisines = currentCuisines.includes(cuisineId) ? currentCuisines.filter(id => id !== cuisineId) : [...currentCuisines, cuisineId]
     updateWizardState({ cuisineTypes: newCuisines })
+  }
+
+  // Render the appropriate icon based on type
+  const renderCuisineIcon = (cuisine: CuisineOption, isSelected: boolean) => {
+    if ('emoji' in cuisine.icon) {
+      return <Text style={styles.flagEmoji}>{cuisine.icon.emoji}</Text>
+    } else {
+      return <FontAwesomeIcon icon={cuisine.icon} size={24} color={isSelected ? theme.colors.primary : theme.colors.textSecondary} />
+    }
   }
 
   const styles = StyleSheet.create({
@@ -215,6 +227,7 @@ export const ModalCuisineStep: React.FC<ModalStepProps> = ({ wizardState, update
     cuisineIconContainer: { marginBottom: theme.spacing.xs },
     cuisineLabel: { fontSize: theme.typography.fontSize.secondary, fontWeight: '600', color: theme.colors.textPrimary, textAlign: 'center' },
     selectedCuisineLabel: { color: theme.colors.primary },
+    flagEmoji: { fontSize: 24 },
     checkIconContainer: { position: 'absolute', top: theme.spacing.xs, right: theme.spacing.xs },
   })
 
@@ -230,7 +243,7 @@ export const ModalCuisineStep: React.FC<ModalStepProps> = ({ wizardState, update
             return (
               <TouchableOpacity key={cuisine.id} style={[styles.cuisineCard, isSelected && styles.selectedCuisineCard]} onPress={() => handleCuisineToggle(cuisine.id)} activeOpacity={0.7}>
                 <View style={styles.cuisineIconContainer}>
-                  <FontAwesomeIcon icon={cuisine.icon} size={24} color={isSelected ? theme.colors.primary : theme.colors.textSecondary} />
+                  {renderCuisineIcon(cuisine, isSelected)}
                 </View>
                 <Text style={[styles.cuisineLabel, isSelected && styles.selectedCuisineLabel]}>{cuisine.label}</Text>
                 {isSelected && (
@@ -247,27 +260,25 @@ export const ModalCuisineStep: React.FC<ModalStepProps> = ({ wizardState, update
   )
 }
 
-// Modal Dietary Step
+// Modal Dietary Step - Matching discovery wizard exactly
 export const ModalDietaryStep: React.FC<ModalStepProps> = ({ wizardState, updateWizardState }) => {
   const { theme } = useTheme()
 
   const dietaryOptions = [
-    { id: 'vegetarian_friendly', label: 'Vegetarian Options', description: 'Plant-based meal options available', icon: AppIcons.VEGETARIAN },
-    { id: 'vegan_options', label: 'Vegan Options', description: 'No animal products', icon: AppIcons.VEGAN },
-    { id: 'gluten_free_options', label: 'Gluten-Free Options', description: 'Gluten-free meals available', icon: AppIcons.GLUTEN_FREE },
-    { id: 'halal', label: 'Halal Options', description: 'Halal certified meals', icon: AppIcons.HALAL },
-    { id: 'kosher', label: 'Kosher Options', description: 'Kosher certified meals', icon: AppIcons.KOSHER },
-    { id: 'no_dietary_restrictions', label: 'No Dietary Restrictions', description: 'Open to all options', icon: AppIcons.CHECK },
+    { id: 'none', label: 'No Dietary Restrictions', description: 'I eat everything', icon: AppIcons.NO_RESTRICTIONS },
+    { id: 'vegetarian', label: 'Vegetarian Options', description: 'Restaurants with vegetarian dishes', icon: AppIcons.VEGETARIAN },
+    { id: 'vegan', label: 'Vegan Options', description: 'Restaurants with plant-based options', icon: AppIcons.VEGAN },
+    { id: 'gluten_free', label: 'Gluten-Free Options', description: 'Restaurants with gluten-free dishes', icon: AppIcons.GLUTEN_FREE },
   ]
 
   const handleDietaryToggle = (dietaryId: string) => {
     const currentDietary = wizardState.dietary || []
-    if (dietaryId === 'no_dietary_restrictions') {
-      const hasNoRestrictions = currentDietary.includes('no_dietary_restrictions')
-      updateWizardState({ dietary: hasNoRestrictions ? [] : ['no_dietary_restrictions'] })
+    if (dietaryId === 'none') {
+      const hasNoRestrictions = currentDietary.includes('none')
+      updateWizardState({ dietary: hasNoRestrictions ? [] : ['none'] })
       return
     }
-    const filteredDietary = currentDietary.filter(id => id !== 'no_dietary_restrictions')
+    const filteredDietary = currentDietary.filter(id => id !== 'none')
     const newDietary = filteredDietary.includes(dietaryId) ? filteredDietary.filter(id => id !== dietaryId) : [...filteredDietary, dietaryId]
     updateWizardState({ dietary: newDietary })
   }
@@ -322,29 +333,30 @@ export const ModalDietaryStep: React.FC<ModalStepProps> = ({ wizardState, update
   )
 }
 
-// Modal Features Step
+// Modal Features Step - Matching discovery wizard exactly  
 export const ModalFeaturesStep: React.FC<ModalStepProps> = ({ wizardState, updateWizardState }) => {
   const { theme } = useTheme()
 
   const ALL_FEATURE_OPTIONS: FeatureOption[] = [
-    // Beverages
+    // Beverages - matching discovery wizard
     { id: 'serves_wine', label: 'Serves Wine', icon: AppIcons.WINE, description: 'Wine selection available', category: 'beverages', availableFor: ['lunch', 'dinner'], minPriceLevel: 2 },
     { id: 'serves_cocktails', label: 'Serves Cocktails', icon: AppIcons.COCKTAILS, description: 'Cocktail menu available', category: 'beverages', availableFor: ['lunch', 'dinner'], minPriceLevel: 2 },
     { id: 'serves_beer', label: 'Serves Beer', icon: AppIcons.BEER, description: 'Beer selection available', category: 'beverages', availableFor: ['lunch', 'dinner'], minPriceLevel: 1 },
     { id: 'serves_coffee', label: 'Serves Coffee', icon: AppIcons.COFFEE_SERVICE, description: 'Coffee and espresso drinks', category: 'beverages', minPriceLevel: 1 },
-    // Amenities
+    // Amenities - matching discovery wizard
     { id: 'outdoor_seating', label: 'Outdoor Seating', icon: AppIcons.OUTDOOR_SEATING, description: 'Patio or outdoor dining', category: 'amenities', minPriceLevel: 1 },
     { id: 'reservable', label: 'Takes Reservations', icon: AppIcons.RESERVATIONS, description: 'Accepts reservations', category: 'amenities', minPriceLevel: 2 },
     { id: 'live_music', label: 'Live Music', icon: AppIcons.LIVE_MUSIC, description: 'Live performances', category: 'amenities', availableFor: ['dinner'], minPriceLevel: 2 },
-    { id: 'good_for_groups', label: 'Good for Groups', icon: AppIcons.GROUPS, description: 'Large parties welcome', category: 'amenities', minPriceLevel: 1 },
-    { id: 'good_for_children', label: 'Family-Friendly', icon: AppIcons.FAMILY, description: 'Kids menu and welcoming', category: 'amenities', minPriceLevel: 1 },
-    { id: 'allows_dogs', label: 'Dog-Friendly', icon: AppIcons.PET_FRIENDLY, description: 'Pets welcome', category: 'amenities', minPriceLevel: 1 },
+    { id: 'good_for_groups', label: 'Good for Groups', icon: AppIcons.GROUP_DINING, description: 'Large parties welcome', category: 'amenities', minPriceLevel: 1 },
+    { id: 'good_for_children', label: 'Family-Friendly', icon: AppIcons.FAMILY_FRIENDLY, description: 'Kids menu and welcoming', category: 'amenities', minPriceLevel: 1 },
+    { id: 'allows_dogs', label: 'Dog-Friendly', icon: AppIcons.DOG_FRIENDLY, description: 'Pets welcome', category: 'amenities', minPriceLevel: 1 },
     { id: 'takeout', label: 'Takeout Available', icon: AppIcons.TAKEOUT, description: 'Food available for pickup', category: 'amenities', minPriceLevel: 1 },
     { id: 'delivery', label: 'Delivery Available', icon: AppIcons.DELIVERY, description: 'Food delivery service', category: 'amenities', minPriceLevel: 1 },
-    { id: 'wifi', label: 'WiFi Available', icon: AppIcons.WIFI, description: 'Good for working or studying', category: 'amenities', availableFor: ['coffee', 'lunch'], minPriceLevel: 1 },
-    { id: 'parking', label: 'Parking Available', icon: AppIcons.PARKING, description: 'On-site or nearby parking', category: 'amenities', minPriceLevel: 1 },
-    // Accessibility
-    { id: 'wheelchair_accessible', label: 'Wheelchair Accessible', icon: AppIcons.ACCESSIBILITY, description: 'ADA compliant entrance', category: 'accessibility', minPriceLevel: 1 },
+    { id: 'good_for_watching_sports', label: 'Good for Sports', icon: AppIcons.SPORTS, description: 'TVs and sports atmosphere', category: 'amenities', availableFor: ['lunch', 'dinner'], minPriceLevel: 1 },
+    // Accessibility - matching discovery wizard
+    { id: 'wheelchair_accessible', label: 'Wheelchair Accessible', icon: AppIcons.WHEELCHAIR, description: 'ADA compliant entrance', category: 'accessibility', minPriceLevel: 1 },
+    { id: 'parking', label: 'Parking Available', icon: AppIcons.PARKING, description: 'On-site or nearby parking', category: 'accessibility', minPriceLevel: 1 },
+    { id: 'wifi', label: 'WiFi Available', icon: AppIcons.WIFI, description: 'Good for working or studying', category: 'accessibility', availableFor: ['coffee', 'lunch'], minPriceLevel: 1 },
   ]
 
   const getFilteredFeatures = (): FeatureOption[] => {

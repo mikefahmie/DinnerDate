@@ -287,7 +287,7 @@ export const AppIcons = {
   OUTDOOR_SEATING: createIcon(IconStyles.SOLID, 'table-picnic'),
   RESERVATIONS: createIcon(IconStyles.SOLID, 'calendar'),
   LIVE_MUSIC: createIcon(IconStyles.SOLID, 'music'),
-  GROUP_DINING: createIcon(IconStyles.SOLID, 'user-group'),
+  GROUP_DINING: createIcon(IconStyles.SOLID, 'people-group'),
   FAMILY_FRIENDLY: createIcon(IconStyles.SOLID, 'family-pants'),
   DOG_FRIENDLY: createIcon(IconStyles.SOLID, 'dog-leashed'),
   SPORTS: createIcon(IconStyles.SOLID, 'tv'),
