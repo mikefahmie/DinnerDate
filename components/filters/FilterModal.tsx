@@ -224,6 +224,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
       maxHeight: '85%',
       minHeight: '70%',
       flex: 1,
+      
     },
     header: {
       flexDirection: 'row',
@@ -312,7 +313,8 @@ const FilterModal: React.FC<FilterModalProps> = ({
     footer: {
       flexDirection: 'row',
       paddingHorizontal: theme.spacing.lg,
-      paddingVertical: theme.spacing.md,
+      paddingVertical: theme.spacing.lg,
+      minHeight: 80, 
       borderTopWidth: 1,
       borderTopColor: theme.colors.divider,
       backgroundColor: theme.colors.background,
