@@ -391,6 +391,16 @@ const RestaurantDetailScreen: React.FC = () => {
           </View>
           
           <Text style={styles.address}>{restaurant.formatted_address}</Text>
+          {restaurant.website_uri && (
+            <TouchableOpacity 
+              style={styles.websiteRow}
+              onPress={() => handleWebsite()}
+              activeOpacity={0.7}
+            >
+              <Icon name="globe" type="font-awesome" size={16} color="#666" />
+              <Text style={styles.websiteLink}>{restaurant.website_uri}</Text>
+            </TouchableOpacity>
+          )}
         </View>
 
         {renderDescription()}
@@ -615,6 +625,17 @@ const styles = StyleSheet.create({
   },
   directionsButtonTitle: {
     color: '#2196F3',
+  },
+  websiteRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 8,
+  },
+  websiteLink: {
+    fontSize: 16,
+    color: '#666',
+    marginLeft: 6,
+    textDecorationLine: 'underline',
   },
 })
 
