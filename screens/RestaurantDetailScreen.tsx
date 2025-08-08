@@ -108,9 +108,26 @@ const RestaurantDetailScreen: React.FC = () => {
   }
 
   const handleDirections = () => {
-    if (restaurant?.location_lat && restaurant?.location_lng) {
+    if (restaurant.location_lat && restaurant.location_lng) {
+      // Primary: Try to open native maps app
       const url = `maps:0,0?q=${restaurant.location_lat},${restaurant.location_lng}`
-      Linking.openURL(url)
+      Linking.openURL(url).catch(() => {
+        // Fallback: Open Google Maps in browser
+        const address = encodeURIComponent(restaurant.formatted_address || restaurant.display_name)
+        const webUrl = `https://www.google.com/maps/search/?api=1&query=${address}`
+        Linking.openURL(webUrl).catch(() => {
+          Alert.alert('Error', 'Unable to open maps application')
+        })
+      })
+    } else if (restaurant.formatted_address) {
+      // If no coordinates, use address
+      const address = encodeURIComponent(restaurant.formatted_address)
+      const webUrl = `https://www.google.com/maps/search/?api=1&query=${address}`
+      Linking.openURL(webUrl).catch(() => {
+        Alert.alert('Error', 'Unable to open maps application')
+      })
+    } else {
+      Alert.alert('Error', 'No address available for directions')
     }
   }
 
