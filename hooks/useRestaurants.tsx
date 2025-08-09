@@ -1,4 +1,4 @@
-// hooks/useRestaurants.tsx - FIXED VERSION with sorting
+// hooks/useRestaurants.tsx - Updated to handle search results filtering
 import { useState, useEffect, useCallback } from 'react'
 import { supabase } from '../lib/supabase'
 import { WizardState } from '../screens/DiscoveryWizard'
@@ -14,6 +14,7 @@ interface Restaurant {
   location_lat: number
   location_lng: number
   location_city: string
+  market: string
   business_status: string
   primary_type: string
   types: string[]
@@ -78,7 +79,7 @@ interface UseRestaurantsResult {
 const RESTAURANTS_PER_PAGE = 20
 
 export const useRestaurants = (
-  filters: WizardState,
+  filters: WizardState & { searchResults?: string[]; searchResultsData?: any[] },
   sortBy: SortOption,
   userLocation?: { lat: number; lng: number }
 ): UseRestaurantsResult => {
@@ -98,10 +99,26 @@ export const useRestaurants = (
       .select('*', { count: 'exact' })
       .eq('is_active', true)
 
+    // Check if this is a search results query
+    if (filters.searchResults && filters.searchResults.length > 0) {
+      console.log('🔎 Using search results filter:', filters.searchResults.length, 'restaurants')
+      query = query.in('id', filters.searchResults)
+      
+      // For search results, we can skip other filters and just apply sorting
+      return applySorting(query, sortBy)
+    }
+
+    // If we have searchResultsData, don't run any database queries
+    // The component will handle the data directly
+    if (filters.searchResultsData && filters.searchResultsData.length > 0) {
+      console.log('🔎 Using search results data directly, skipping database query')
+      return null // Signal that no query should be run
+    }
+
     // Market filter instead of location_city
     if (filters.location) {
       console.log('🏙️ Filtering for market:', filters.location)
-      query = query.eq('market', filters.location)  // ✅ Use market field
+      query = query.eq('market', filters.location)
     }
 
     // Meal type filters
@@ -201,58 +218,61 @@ export const useRestaurants = (
       })
     }
 
-    // 🚀 ADD SORTING LOGIC HERE - This was missing!
-    console.log('🔧 Applying sorting:', sortBy)
+    return applySorting(query, sortBy)
+  }, [filters, sortBy])
+
+  const applySorting = (query: any, sortBy: SortOption) => {
     switch (sortBy) {
       case 'rating':
-        query = query.order('rating', { ascending: false }) // Highest rated first
-        break
+        return query.order('rating', { ascending: false })
       case 'price':
-        query = query.order('price_level', { ascending: true }) // Lowest price first
-        break
+        return query.order('price_level', { ascending: true })
       case 'distance':
-        // For distance sorting, you'd need user location calculation
-        // For now, fall back to rating
-        console.log('📍 Distance sorting not yet implemented, falling back to rating')
-        query = query.order('rating', { ascending: false })
-        break
+        // For now, just sort by name since we don't have distance calculation
+        // In the future, this would use user location to calculate distance
+        return query.order('name', { ascending: true })
       case 'openNow':
-        // Sort by open restaurants first, then by rating
-        // You can implement this with a computed field or separate logic
-        console.log('🕐 Open Now sorting - implementing basic logic')
-        query = query.order('rating', { ascending: false }) // Fallback for now
-        break
+        // This would require checking current opening hours
+        // For now, fall back to rating
+        return query.order('rating', { ascending: false })
       default:
-        // Default to rating
-        query = query.order('rating', { ascending: false })
-        break
+        return query.order('rating', { ascending: false })
     }
-    
-    // Secondary sort by name for consistency
-    query = query.order('name', { ascending: true })
+  }
 
-    return query
-  }, [filters, sortBy, userLocation])
-
-  // Load restaurants with pagination
-  const loadRestaurants = useCallback(async (page: number = 0, append: boolean = false) => {
-    try {
+  const fetchRestaurants = useCallback(async (page: number = 0, append: boolean = false) => {
+    if (!append) {
       setLoading(true)
-      setError(null)
+    }
+    setError(null)
+
+    try {
+      // If we're using searchResultsData, don't fetch from database
+      if (filters.searchResultsData && filters.searchResultsData.length > 0) {
+        console.log('🔎 Using search results data, skipping database fetch')
+        setLoading(false)
+        return
+      }
 
       const query = buildQuery()
-      const startIndex = page * RESTAURANTS_PER_PAGE
-      const endIndex = startIndex + RESTAURANTS_PER_PAGE - 1
-
-      console.log(`📄 Loading page ${page}, range: ${startIndex}-${endIndex}`)
+      
+      // If buildQuery returns null (for searchResultsData), skip the fetch
+      if (!query) {
+        setLoading(false)
+        return
+      }
 
       const { data, error: queryError, count } = await query
-        .range(startIndex, endIndex)
+        .range(page * RESTAURANTS_PER_PAGE, (page + 1) * RESTAURANTS_PER_PAGE - 1)
 
-      if (queryError) throw queryError
+      if (queryError) {
+        throw queryError
+      }
+
+      console.log(`📊 Fetched ${data?.length || 0} restaurants (page ${page})`)
+      console.log(`📈 Total count: ${count}`)
 
       const newRestaurants = data || []
-      console.log(`✅ Loaded ${newRestaurants.length} restaurants, total: ${count}`)
       
       if (append) {
         setRestaurants(prev => [...prev, ...newRestaurants])
@@ -261,30 +281,34 @@ export const useRestaurants = (
       }
 
       setTotalCount(count || 0)
-      setHasMore(newRestaurants.length === RESTAURANTS_PER_PAGE)
+      setHasMore(newRestaurants.length === RESTAURANTS_PER_PAGE && (page + 1) * RESTAURANTS_PER_PAGE < (count || 0))
       setCurrentPage(page)
 
-    } catch (error) {
-      console.error('Error loading restaurants:', error)
-      setError('Failed to load restaurants')
+    } catch (err: any) {
+      console.error('❌ Error fetching restaurants:', err)
+      setError(err.message || 'Failed to load restaurants')
+      if (!append) {
+        setRestaurants([])
+      }
     } finally {
       setLoading(false)
     }
-  }, [buildQuery])
+  }, [buildQuery, filters.searchResultsData])
 
-  // Load more restaurants (pagination)
   const loadMore = useCallback(async () => {
     if (!hasMore || loading) return
-    await loadRestaurants(currentPage + 1, true)
-  }, [hasMore, loading, currentPage, loadRestaurants])
+    
+    console.log('📄 Loading more restaurants...')
+    await fetchRestaurants(currentPage + 1, true)
+  }, [hasMore, loading, currentPage, fetchRestaurants])
 
-  // Refresh restaurants (reload from beginning)
   const refresh = useCallback(async () => {
+    console.log('🔄 Refreshing restaurants...')
     setCurrentPage(0)
-    await loadRestaurants(0, false)
-  }, [loadRestaurants])
+    setHasMore(true)
+    await fetchRestaurants(0, false)
+  }, [fetchRestaurants])
 
-  // Reset results
   const resetResults = useCallback(() => {
     setRestaurants([])
     setCurrentPage(0)
@@ -293,11 +317,11 @@ export const useRestaurants = (
     setError(null)
   }, [])
 
-  // Load restaurants when filters or sort change
+  // Load initial data when filters change
   useEffect(() => {
     resetResults()
-    loadRestaurants(0, false)
-  }, [filters, sortBy, loadRestaurants])
+    fetchRestaurants(0, false)
+  }, [filters, sortBy])
 
   return {
     restaurants,
@@ -307,8 +331,8 @@ export const useRestaurants = (
     totalCount,
     loadMore,
     refresh,
-    resetResults,
+    resetResults
   }
 }
 
-export type { Restaurant }
+export { Restaurant }

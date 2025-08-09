@@ -1,4 +1,4 @@
-// screens/RestaurantDiscoveryScreen.tsx - Updated for new WizardState interface
+// screens/RestaurantDiscoveryScreen.tsx - Updated to handle search results
 import React, { useState, useEffect } from 'react'
 import { View, FlatList, StyleSheet, RefreshControl } from 'react-native'
 import { Header } from '@rneui/themed'
@@ -19,7 +19,10 @@ type RestaurantDiscoveryNavigationProp = NativeStackNavigationProp<RootStackPara
 
 type RouteParams = {
   RestaurantDiscovery: {
-    filters?: WizardState
+    filters?: WizardState & {
+      searchResults?: string[]  // Array of restaurant IDs from search
+      searchResultsData?: any[]  // Full restaurant objects from search
+    }
   }
 }
 
@@ -32,8 +35,12 @@ const RestaurantDiscoveryScreen: React.FC = () => {
   const navigation = useNavigation<RestaurantDiscoveryNavigationProp>()
   const route = useRoute<RestaurantDiscoveryRouteProp>()
   
+  // Check if this is a search results view
+  const isSearchResults = (route.params?.filters?.searchResults && route.params.filters.searchResults.length > 0) ||
+                         (route.params?.filters?.searchResultsData && route.params.filters.searchResultsData.length > 0)
+  
   // Updated default filters to match new WizardState interface
-  const [filters, setFilters] = useState<WizardState>(
+  const [filters, setFilters] = useState<WizardState & { searchResults?: string[]; searchResultsData?: any[] }>(
     route.params?.filters || {
       location: 'Ann Arbor/Ypsilanti',
       mealTypes: [],
@@ -47,15 +54,52 @@ const RestaurantDiscoveryScreen: React.FC = () => {
   const [sortBy, setSortBy] = useState<SortOption>('rating')
   const [filterModalVisible, setFilterModalVisible] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
+  const [searchResultsRestaurants, setSearchResultsRestaurants] = useState<any[]>([])
+
+  // Use search results data directly if available, otherwise use useRestaurants hook
+  const shouldUseSearchResults = filters.searchResultsData && filters.searchResultsData.length > 0
 
   const {
-    restaurants,
+    restaurants: hookRestaurants,
     loading,
     error,
     hasMore,
     loadMore,
     refresh
   } = useRestaurants(filters, sortBy)
+
+  // Use search results data if available, otherwise use hook results
+  const restaurants = shouldUseSearchResults ? searchResultsRestaurants : hookRestaurants
+
+  // Handle search results data
+  useEffect(() => {
+    if (filters.searchResultsData && filters.searchResultsData.length > 0) {
+      setSearchResultsRestaurants(filters.searchResultsData)
+    }
+  }, [filters.searchResultsData])
+
+  // Sort search results when sortBy changes
+  useEffect(() => {
+    if (shouldUseSearchResults && filters.searchResultsData) {
+      const sortedResults = [...filters.searchResultsData].sort((a, b) => {
+        switch (sortBy) {
+          case 'rating':
+            return (b.rating || 0) - (a.rating || 0)
+          case 'price':
+            return (a.price_level || 0) - (b.price_level || 0)
+          case 'distance':
+            // For now, sort by name since we don't have distance calculation
+            return (a.name || '').localeCompare(b.name || '')
+          case 'openNow':
+            // Fall back to rating for now
+            return (b.rating || 0) - (a.rating || 0)
+          default:
+            return (b.rating || 0) - (a.rating || 0)
+        }
+      })
+      setSearchResultsRestaurants(sortedResults)
+    }
+  }, [sortBy, shouldUseSearchResults, filters.searchResultsData])
 
   const handleRefresh = async () => {
     setRefreshing(true)
@@ -100,7 +144,7 @@ const RestaurantDiscoveryScreen: React.FC = () => {
   )
 
   const renderFooter = () => {
-    if (!hasMore) return null
+    if (!hasMore || shouldUseSearchResults) return null
     return <LoadingSpinner style={styles.footerLoader} />
   }
 
@@ -112,6 +156,13 @@ const RestaurantDiscoveryScreen: React.FC = () => {
     if (filters.dietary.length > 0) count++
     if (filters.features.length > 0) count++
     return count
+  }
+
+  const getHeaderTitle = () => {
+    if (isSearchResults) {
+      return 'Search Results'
+    }
+    return restaurants.length > 0 ? `${restaurants.length} Restaurants` : 'Restaurants'
   }
 
   const styles = StyleSheet.create({
@@ -158,12 +209,12 @@ const RestaurantDiscoveryScreen: React.FC = () => {
     },
   })
 
-  if (loading && restaurants.length === 0) {
+  if (loading && restaurants.length === 0 && !shouldUseSearchResults) {
     return (
       <View style={styles.container}>
         <Header
           centerComponent={{
-            text: 'Restaurants',
+            text: getHeaderTitle(),
             style: { color: theme.colors.textPrimary, fontSize: 18, fontWeight: 'bold' }
           }}
           backgroundColor={theme.colors.surface}
@@ -175,12 +226,12 @@ const RestaurantDiscoveryScreen: React.FC = () => {
     )
   }
 
-  if (error) {
+  if (error && !shouldUseSearchResults) {
     return (
       <View style={styles.container}>
         <Header
           centerComponent={{
-            text: 'Restaurants',
+            text: getHeaderTitle(),
             style: { color: theme.colors.textPrimary, fontSize: 18, fontWeight: 'bold' }
           }}
           backgroundColor={theme.colors.surface}
@@ -201,21 +252,23 @@ const RestaurantDiscoveryScreen: React.FC = () => {
     <View style={styles.container}>
       <Header
         centerComponent={{
-          text: `${restaurants.length} Restaurants`,
+          text: getHeaderTitle(),
           style: { color: theme.colors.textPrimary, fontSize: 18, fontWeight: 'bold' }
         }}
         backgroundColor={theme.colors.surface}
       />
       
-      {/* Filter Chips Section */}
-      <View style={styles.filterSection}>
-        <FilterChips
-          filters={filters}
-          onEditFilters={handleEditFilters}
-          onClearFilters={handleClearFilters}
-          showEditButton={true}
-        />
-      </View>
+      {/* Filter Chips Section - Hide for search results */}
+      {!isSearchResults && (
+        <View style={styles.filterSection}>
+          <FilterChips
+            filters={filters}
+            onEditFilters={handleEditFilters}
+            onClearFilters={handleClearFilters}
+            showEditButton={true}
+          />
+        </View>
+      )}
 
       {/* Sort Options Section */}
       <View style={styles.sortSection}>
@@ -230,10 +283,14 @@ const RestaurantDiscoveryScreen: React.FC = () => {
         {restaurants.length === 0 ? (
           <View style={styles.emptyContainer}>
             <EmptyState
-              title="No restaurants found"
-              message="Try adjusting your filters to see more options"
-              actionText="Edit Filters"
-              onAction={handleEditFilters}
+              title={isSearchResults ? "No search results" : "No restaurants found"}
+              message={
+                isSearchResults 
+                  ? "Try adjusting your search terms or browse all restaurants."
+                  : "Try adjusting your filters to see more options"
+              }
+              actionText={isSearchResults ? "New Search" : "Edit Filters"}
+              onAction={isSearchResults ? () => navigation.goBack() : handleEditFilters}
             />
           </View>
         ) : (
@@ -242,7 +299,7 @@ const RestaurantDiscoveryScreen: React.FC = () => {
             renderItem={renderRestaurant}
             keyExtractor={(item) => item.id}
             style={styles.restaurantList}
-            onEndReached={loadMore}
+            onEndReached={shouldUseSearchResults ? undefined : (hasMore ? loadMore : undefined)}
             onEndReachedThreshold={0.1}
             ListFooterComponent={renderFooter}
             refreshControl={
@@ -250,20 +307,24 @@ const RestaurantDiscoveryScreen: React.FC = () => {
                 refreshing={refreshing}
                 onRefresh={handleRefresh}
                 tintColor={theme.colors.primary}
+                colors={[theme.colors.primary]}
               />
             }
             showsVerticalScrollIndicator={false}
+            contentContainerStyle={{ paddingBottom: 100 }}
           />
         )}
       </View>
 
-      {/* Filter Modal */}
-      <FilterModal
-        visible={filterModalVisible}
-        filters={filters}
-        onFiltersUpdate={handleFiltersUpdate}
-        onClose={() => setFilterModalVisible(false)}
-      />
+      {/* Filter Modal - Hide for search results */}
+      {!isSearchResults && (
+        <FilterModal
+          visible={filterModalVisible}
+          filters={filters}
+          onFiltersUpdate={handleFiltersUpdate}
+          onClose={() => setFilterModalVisible(false)}
+        />
+      )}
     </View>
   )
 }

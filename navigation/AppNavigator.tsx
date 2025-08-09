@@ -1,4 +1,4 @@
-// navigation/AppNavigator.tsx - Fixed navigation types
+// navigation/AppNavigator.tsx - Updated to include Search screen route
 import React, { useState, useEffect } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -12,6 +12,7 @@ import { RootStackParamList } from '../types/navigation'
 // Screens
 import SplashScreen from '../screens/SplashScreen'
 import AuthScreen from '../screens/AuthScreen'
+import SearchScreen from '../screens/SearchScreen'  // New search screen
 import DiscoveryWizardScreen from '../screens/DiscoveryWizard'
 import RestaurantDiscoveryScreen from '../screens/RestaurantDiscoveryScreen'
 import RestaurantDetailScreen from '../screens/RestaurantDetailScreen'
@@ -120,6 +121,10 @@ const AppNavigator: React.FC = () => {
               )}
             </RootStack.Screen>
             <RootStack.Screen 
+              name="Search"
+              component={SearchScreen}
+            />
+            <RootStack.Screen 
               name="DiscoveryWizard" 
               component={DiscoveryWizardScreen}
               options={{
@@ -144,6 +149,10 @@ const AppNavigator: React.FC = () => {
             <RootStack.Screen 
               name="MainTabs" 
               component={TabNavigator}
+            />
+            <RootStack.Screen 
+              name="Search"
+              component={SearchScreen}
             />
             <RootStack.Screen 
               name="DiscoveryWizard" 

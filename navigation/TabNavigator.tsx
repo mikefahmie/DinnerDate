@@ -1,4 +1,4 @@
-// navigation/TabNavigator.tsx - Fixed to sit directly over safe area
+// navigation/TabNavigator.tsx - Updated to use SearchScreen for Discovery tab
 import React from 'react'
 import { Platform } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
@@ -7,7 +7,7 @@ import { useTheme } from '../hooks/useTheme'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 // Import screens
-import RestaurantDiscoveryScreen from '../screens/RestaurantDiscoveryScreen'
+import SearchScreen from '../screens/SearchScreen'  // New search screen
 import FavoritesScreen from '../screens/FavoritesScreen'
 import ProfileScreen from '../screens/ProfileScreen'
 import DiscoveryWizardScreen from '../screens/DiscoveryWizard'
@@ -66,7 +66,7 @@ const TabNavigator: React.FC = () => {
     >
       <Tab.Screen
         name="Discovery"
-        component={RestaurantDiscoveryScreen}
+        component={SearchScreen}  // Changed from RestaurantDiscoveryScreen to SearchScreen
         options={{
           tabBarIcon: ({ color, size }) => (
             <Icon
