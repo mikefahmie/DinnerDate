@@ -29,6 +29,7 @@ interface Restaurant {
   rating?: number
   price_level?: number
   photos: string[]
+  primary_photo_url?: string  // Add this field for processed photos
   primary_type?: string
   serves_dinner?: boolean
   serves_lunch?: boolean
@@ -72,6 +73,7 @@ const SearchScreen: React.FC = () => {
           rating,
           price_level,
           photos,
+          primary_photo_url,
           primary_type,
           serves_dinner,
           serves_lunch,
