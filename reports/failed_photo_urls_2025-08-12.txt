@@ -1,0 +1,2648 @@
+=====================================
+        FAILED PHOTO URLS REPORT
+=====================================
+
+Generated: 2025-08-12T19:36:37.002Z
+Total restaurants checked: 796
+Failed URLs: 374
+Success rate: 53%
+
+ERROR BREAKDOWN:
+----------------
+Forbidden: 374 URLs
+
+=====================================
+          FAILED RESTAURANTS
+=====================================
+
+1. 734 Brewing Company
+   Address: 15 E Cross St, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cywA3cwUtAuu0r9Ahs10T_nnS8Ul8xB2pzLOKnnkECmiIer2OBoLoafZyjZuM9eHbJuwRx5WGoz5_rCns1NDkzyV4-kF18UZ-UJPJ2S8RAUXROqThlvMqtDzJT_EvqdbXxPz7F4WYde0VBM0w=s4800-w600-h400
+   Restaurant ID: 6380bb94-70dd-4489-a07d-f973ccefe19f
+
+2. Achilles Restaurant
+   Address: 3075 Packard St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwAD6PM_5syxEOIB29LoAmf6sVd4qceWGbuNeyejmRxoWrj0Nf369-jX3o5jijvlBuB8MdyXwDWtQytJ8DEpUMch9gM0npU4kVnrBAL0m3DS0MEQXOjJYEd0-iaDWB3IfftJYidu1K6bE8iBRnwkOMLOw=s4800-w600-h400
+   Restaurant ID: 02d7520d-4253-4fc3-8a74-eb51fc7d63f1
+
+3. Afternoon Delight
+   Address: 251 E Liberty St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czOp-8lpALGGM5sJWS6madHWk-4ocyjj0nW-tQZD2ey3Xo0D6uhNMbnAXLRpyYKGwRsqZFhfMIN42e7qDzMnKe7TJzA7s8_2aXhEwnxbuJAoJB6EcRHMhBYziFSvifhNTA25XrF-cxwDfnUAw=s4800-w600-h400
+   Restaurant ID: 8e8f4f05-00bb-4cf5-8112-d3fc5a17d5bc
+
+4. Ahmo's Gyros & Deli
+   Address: 4001 Stone School Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cw8qs3s5HtpahqLpKMlA8bxhbF3xWNEELGRIjdhPKuSTmgv8xYBAp0uJFBWKGcUO-XPQfjgJuGFQgHnxKPzj3tscEEVE_IQje-gB9MjR-6HmpnCeCmvxlstXLESBI63bvzZcrYXKm5C5UXFDg=s4800-w600-h400
+   Restaurant ID: 9c718832-3fd5-4588-b562-5a2ef78b93c2
+
+5. Ajishin
+   Address: 42270 Grand River Ave, Novi
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwiIBlkCORD9SRM22R8mPCUZMS1feQlBdELkucPBMkNqb9uIorUTQOqAknhgyTgMtYC1A5XkK2nmADNS3fO1zLiZjYiVMfxQNTl2iXnZriItTT3PHIAvk9BcJfsde5LXMFT6h5OyF0OFdamKw=s4800-w600-h400
+   Restaurant ID: 946cd985-9d3d-47df-96f6-efa5a1fe3670
+
+6. Aji Ten Japanese Restaurant
+   Address: 42087 Ford Rd, Canton Township
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cycNGM487wvUJCIaz91SohAzZ-BArXcfnTPUPOZci_TRHSNfgoPL-G3Vztt6vLyl41uAa6y9R0t2g3x51iPGgBICCt_G732OBb4YZg8fMtgux0qjSMap5WbD871idplIQsAlIILBcwx1m6n=s4800-w600-h400
+   Restaurant ID: 34dab2c7-4784-41f6-bbb0-0101d6485694
+
+7. Aki sushi and Thai
+   Address: 250 N Canton Center Rd, Canton Township
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czemGsYDo5X03hHi7eLGaeCmMP9QANx14oM_UAHFfnHYipCf6TtonE7btiEgIsmssFPypNv1nEURMEzeXOrjLdcPlg4MXfdNzYxGXWqDoLh1PJLRI0wpHLFT9ZnDqFAelUyrQhE3ZR8ws_4=s4800-w600-h400
+   Restaurant ID: 970aa13d-b216-47a9-a2aa-24ca3a88e9b3
+
+8. Aladdin's Market
+   Address: 3188 Packard St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxZgWAAnnKiLchLQptwfPN9WNM4JqUou3NQjEcHQfZxfmIAVGIgHKDgHgvCZ5bejtIHrGomVaGDKnLmsY94bTXzw4uOlI5n7dDIAAKMJsuo1TH-ljHS9dEx3lFnHN-KNASjd6kwut7U18clEfg=s4800-w600-h400
+   Restaurant ID: 49d0fb0f-8d5c-4ab1-9f7f-c594a1c21588
+
+9. ALEZ MARKET
+   Address: 2243 Ellsworth Rd, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwAkYPUU49aBO2Yqm5rRo3ckA_z1h4RST0liLtG7JUzrURzlu_XOx6YAd3eD8akwgCEmXZkp8stLL0V4tWGEgoLLoGE5CLNYyJkIF2DPcz_W4ohvcxLa1ZIppKfx4OLVIJulPJcK1euCQJg8g=s4800-w600-h400
+   Restaurant ID: 2e90c1ee-3da5-4731-a3db-774b9ddb162c
+
+10. Alley Bar
+   Address: 112 W Liberty St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyLWpB5Gukhb152Hpj45zHK9Q8A0yIav3KUOGKg-kUfAEc4VpcQGB3WjgmQnBETR-KmeNpQH0Bg_sge0GEX3PslICNiEwFFrcCHo2jA8W-saFdninyZ61j1n6dACJdeF6RRNlzHn9arVy-g1b37IBiHcA=s4800-w600-h400
+   Restaurant ID: 7d2fcf95-4ce4-4685-a434-b9fcd7cb88fe
+
+11. Aloha Hawaiian BBQ
+   Address: 882 W Eisenhower Pkwy, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxxwt9ZfzNoG4YcF3xKH1vv628V8xIYi0ERZEHzTO2JBdPV_CjH6nd6P9Li5nU7_CRSLH-DPxtzJhp05_Dkn_N96r4pltueUUkwdMKRHwGHGblEFGcuL0zyyQIz2hviL4YybLsGPYrK5nYg5g=s4800-w600-h400
+   Restaurant ID: 7f89168e-bac5-405c-8328-754601a29476
+
+12. Alpha Koney Island
+   Address: 4389 Jackson Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwQ3GZOhs04L4LVQWA-Iy1sgr6fHtEUbiyeaUoRzfM9TcGzT_IZUcdb5iclUlilnF6RDZEUmo1QcWt2oOSLkR1zj9RfH4y2HfMbibKNanhqujAnDr74-KOB9GyVhdqoy2F6wQBAWPX_la6rD5A=s4800-w600-h400
+   Restaurant ID: 62ba7473-9614-4e3e-8c71-f35f9323b1b3
+
+13. Amadeus Restaurant
+   Address: 122 E Washington St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxLRFcs4gKmsiGtkj484zOOHVLmyp_uxG7Se8a5x_l4R_lN972XGfAtUhQ5OewnG5WdiNNo-r46T1K5zOjHiwLdFWqoXDdrrbKKDROKQpTf4CobeYtM70xqv4OtyREYmduyC17MGEtquylxrA=s4800-w600-h400
+   Restaurant ID: 86b205ce-7da4-4bf5-867f-e131ef7e1897
+
+14. American Grille
+   Address: 1450 Holmes Rd, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cy6_sVunPH8YcEWTMKg_F57GxRELKTLmEM3HMhK8dRfg82rPvog2VPCb4mOHTJtheCu16HJ67RcP2IzUbRJtKYEofceKPJgenDRJ9IyB3kzN4QpOv08ynQ0m-XMf7eI2TpljZJCSIQpt3xG4jg=s4800-w600-h400
+   Restaurant ID: 9420401f-0258-4bbf-9be2-4b3680eceac6
+
+15. Amer's Delicatessen
+   Address: 314 S State St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czirnePP8MesM7AdFOD4x7SnllIGHVqXNEh2uoWz2QVRk14ZgmbmgDrytYiSmm88DXKh_nYVs-sEAtXLxGPbnGgLOA2JINBru8ktbTemKgdtwBUiPNdodn7kmHosc56zU7IrxPXWjB6PTBvUw=s4800-w600-h400
+   Restaurant ID: e685de3a-db66-44d3-a481-9d688cabc908
+
+16. Ann Arbor Coffee Roasting Company
+   Address: 324 S State St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwpYO_W7MBRU2RXLfFVTbJar1GRknufpyEhK6cKxAOON_HZES_1TGWGsayqtvWNEZ_lWTVzpOgfE1AIxw8bSVgVTa4MHGdAXlbHLNmNQ77NTcfxV67nP8amlPTEeSe6UcLIUaTTcGkY1XXSeg=s4800-w600-h400
+   Restaurant ID: 94f1145a-e5e3-48a2-a80d-554410592d18
+
+17. Ann Arbor Distilling Company
+   Address: 220 Felch St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxokaWFJh2day_N-XgG-Z_iw7zgLyAmAySx85Cpro1nwwMEODU1zwpx0Bu1TiuAX9YeKk4IwMJPWPnYb4Q2sfAySu8m11HnLfSXpPD2Si4GcZbhEVSDzwh2j7oXpZGRMU1sLNdS6B1S9vxojy4=s4800-w600-h400
+   Restaurant ID: 293e0e13-593a-4446-a3b0-eb2ca537d137
+
+18. Ann Arbor Mediterranean Market
+   Address: 4019 Stone School Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cx0G6AQyaEgk3HCqSM21hnxGasowmamt5u_QcX5jdh5Y2beewRFDCaeun2wqFGunU_Fju3ZEPQnoC7Iekbuqcu9oZ5HzrUTBfI5nSaNr_YsstyJYnai-PmdyyVgDEUzyg0ZQuU8s_D1QdJyJA=s4800-w600-h400
+   Restaurant ID: 77dfb583-550a-4479-9189-ff26748cdcd6
+
+19. Anthony's Gourmet Pizza
+   Address: 1508 N Maple Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxvkCfu3LDA46nn8sfgve1TJSjUTx4OwuDGnLa5VmVJ5Gpjd435S9ws6HxW8fOOGkwvMZ0DUd0N1aZKRhadxdu-hghY4mhQKKX5s2xmz17N_CvmFwyYL4NmxQcXOkXXaAsDxqowVofhr464YYw=s4800-w600-h400
+   Restaurant ID: f08d1442-bfb3-4a25-9477-158b7994cb02
+
+20. Applebee's Grill + Bar
+   Address: 3819 Carpenter Rd, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxn79edhCGthBe3oMhRVDJhym3uQaGW26h4DhICv3wxTikd4JOC5syNlkMoP7b_x9ARXgUm9nuPvVM8KYvQTgOfsl8wgkoGEKsYQEWNGneiKhoRLK3XjrHqWLczvYSgmZB8O2b9H7LsX7EB_uI=s4800-w600-h400
+   Restaurant ID: 7da28604-be47-446d-8ed8-27bf0124d968
+
+21. Arbor Brewing Company Session Room
+   Address: 3685 Jackson Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cx1DqywFL0VAu4Xfh6KhBmdbD5OdLRV8Kw0rMSxg9j9VCbIPfEQYDHuLNJonHaQ5IwQ0jL-xiQ0aOisQ87iNq4hJZbZ8q931JRlOG9xlTck4T-nfwcymS6u4K9_P-TmYWiTNCEKxCxibcKXlsk=s4800-w600-h400
+   Restaurant ID: 932a2b4d-1ba9-4f44-a52a-ff2efb6e32f7
+
+22. Arby's
+   Address: 5660 Jackson Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxtNaIa2Q57Ykf3NpwuXL_8Jm_tmEJiEaoeSkGBKfHM6Eqn2TAdtCylGF-lUnjE582cLX04BFT5sjhb-f8znWE0NO1bSgapWVC3oSYrlqoQoEuwGiSXcDwIjqE6yWt1b7z50vb6qafusud_MA=s4800-w600-h400
+   Restaurant ID: 2f35a7e9-601a-4bf1-a121-c076f51d37e8
+
+23. Arby's
+   Address: 3015 Washtenaw Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwviaTC7ei8tV-3P9YVLrvn_n1ytYZR8hMmtrJEFo-2JPABw5Lz3OdaOQbrzaCa_K6NMomyTay-NwOnIas6aCY4T9Kos7Z5zL1lHmmfk6Ss9PhoKEoktYF7bLa1Y1X6NXpUVj5V3Pc5rAIf0Q=s4800-w600-h400
+   Restaurant ID: d3c2439a-9f9e-43d6-b0d9-8ea84baf3af5
+
+24. Asian Legend
+   Address: 516 E William St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwXTwYkZzVz_0mnwRZlPdIlCpkXuzHrz7QDnt6uQ2H3vn0m70wHokXVOj96Eb94656N1MYgwEpSu_ig3qpRtRw_4CqgagnbI1hHPVE_UJhdw0IgEO3WRZTshG4ZkljmcjRJ3dBJbwbJyIhThO0=s4800-w600-h400
+   Restaurant ID: 639a8afb-bab2-40cf-bf1e-5724edc984e2
+
+25. A Taste Of Soul By Biggie
+   Address: 1004 W Michigan Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyuLZPD6R1x5NBgv0N7s3hEHuHieP_S-qoUJbZg21K0zFAsJTOoMOWJl_nbbEWs9POkM3dZI8RxcVHsDXu1JDwfZa9aEkzCyIZ2LuzD3bodqjR0MG8bHIXmWTuR-yU55OsmcqaLfh9hKf0pzXc=s4800-w600-h400
+   Restaurant ID: 20a63110-d34b-432b-80c3-5efbfd0994f3
+
+26. Aubree's Pizzeria & Grill
+   Address: 2122 Whittaker Rd, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czdz4xboqps8LEMdBuekSKuvm8ikZsEGJPo9B4H-Mx9mgBJI-4jXx_bZjbRds8eKVh6uYs9h1B3wcG_ds1jO-BIsT6nWMeX-pG-FsJSswuWXdToUvmImJXhvy7BoVJboMRnL93Agovj2YKJ5oU=s4800-w600-h400
+   Restaurant ID: 3e5ccf93-a3ba-4b71-af9c-04cf7b6b3e0b
+
+27. Aubree's Pizzeria & Grill
+   Address: 39 E Cross St #1972, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxe2qVgXBTVYPt9zCENbzOxn40auFiO7BEqHW6bdOdvfxkxvibG9YysxZMicNxM3ke_e18wX6LckYMYtkzMhpdjYr_xVzQbVkPb16YvkUmKMWJ8HMGh5dGTS48Q9UcmSHg18zIHACNJpq_EkQ=s4800-w600-h400
+   Restaurant ID: 7388877a-31b3-4bc2-8130-4bbd78ff231f
+
+28. Ayse's | Turkish Cafe
+   Address: 1703 Plymouth Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxmYiOS934al8uRXjuPljrMx0lVbBHv3mxyTRAkAPsTxnWiQ3rgXBNUl-Gr87cZDU73jVCqN_kxioMBnDrUcAkqgNwAWe8O_HkqACvVFmnzTlkP0sy7TaLZ7N2MHxuRyFF0i06ZsLsfeQU0=s4800-w600-h400
+   Restaurant ID: 41f57d1c-390e-487a-8b48-5ea4bee3bb40
+
+29. Bake Shoppe
+   Address: 17416 Savage Rd, Belleville
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cw5bWVl4DcAVMiK-dV9BSObi4uBFqgHMjj2NSHKOuqFKz8PEsGrRK9DnNCkQVwq4dCHzCcwrGFhVhj5SBKxshRQ1LCSGaKsYsv-HTAEFq0eSJn9ZZJZzFzxkv2mHVWftWZpxtOjxtUvYZEzuIY=s4800-w600-h400
+   Restaurant ID: d12f84b5-91b4-4935-bd53-0af77cdcd3f2
+
+30. Bao Boys
+   Address: 1928 Packard St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cx7RRANYwTCdbvaAhErXd5N1HSkzxEWqzm3WQIS52oLkJzeoHKgQnfxZ3rLJ3waGPinYg3RXsJiBr4RND2wFwO1ZSClws6CTI2NiBZXDKrvDEr9LVbZrjrY-pffibje4I2qUZ7XuIfL8BFujQ=s4800-w600-h400
+   Restaurant ID: bc00538c-c34b-4b1b-bd74-b7c60fc970dd
+
+31. Baskin-Robbins
+   Address: 1952 W Stadium Blvd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwCbvJ_Nwy3RFTGBCCW78z6bbVx-nVacRwtpzFn4Fu148BMLTkN-fL8H__syvCV-otGsTIaP_LXWUbz_67BX7Fl3feIjD-B0jo2uv-DVz42xbSR53bFHSdouv2Pe-0gbui8b1FhFQ-NNt_LQP4=s4800-w600-h400
+   Restaurant ID: 27b94eb6-b0c6-4b05-ad25-65d703350907
+
+32. Bayt Almocha ( Mocha House Cafe)
+   Address: 109 Catherine St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwFLrOFkulU6m6DMcU388K4cfBKKCYXOdOsI0m5oasz3S1Po8f_yHyR1xRBM-v0qMABoHyQUcfJf3gyqFpnDVe5ipDlYwkRQ1ATQleZ3UswCtd2WgUHBhnk2-SdVjxLvI_ug3u9SIkaapOk=s4800-w600-h400
+   Restaurant ID: 2ef83cea-5a35-42ec-bbff-2d3216089140
+
+33. B-Cubed Bakery
+   Address: 741 Emerick St, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cx8fmPQWLeju_gpqJROemrWjTwnujMPfnUqpXoXrQUDi6OBlZsaSjqeQ-1MLZqSLOZ0R98q0WtLQPqJxwWDCY9YZSqMbWcIr0tYybyE1J3J0ojhVGxf-x-1RpARJ2nwhFCF7Ec3816cfA7M_w=s4800-w600-h400
+   Restaurant ID: 047a05c6-ee0d-4a9d-8091-7ab96e939add
+
+34. Beara Bakes
+   Address: 10 N Washington St, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cx3KYEroC7gyjuAF-yLWDLyUiqSYutuJf9LDXocggyN5H4EsJkDQ3DHQ84iPQMeME2qteH8UyEybwAem0bxgGWFI_TMrZlF24eGvInns6t5XdbVQX34_mQxqgILhXIpDDCQFtV9PC_b-Uq4OcY=s4800-w600-h400
+   Restaurant ID: c7adf4e3-1db7-402a-8340-b28288281afd
+
+35. Bell's Diner
+   Address: 2167 W Stadium Blvd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cztT9eqGLTsVoNTTdqOQy0GWNxW-_t-dv1F29WakCP8GpP6wUsB-rL7ZdkydtSPyud6gtxLqQer4166Rvu25Cb8m56j_G3D2dIi6Chs8eBgCDHK1EwxD3zcGuh6ckSEWnC4mOAQiqcmPBka=s4800-w600-h400
+   Restaurant ID: 781c102c-17a4-4307-9a90-4c304229302f
+
+36. Benito's Pizza
+   Address: 51255 Willis Rd, Belleville
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwXV7ndLjE6QM_rkc1P6d7kicXO_7w-ZEJiT8NXz7oKPisV2lLWC3bwaFXOiOfyflrnNgWRGv5zgT3SZXQkx8VH-vRWTTVgkpJA6LcJjfQZh-Szt80RXnMeKKkTMtsrRqJMIHi-wryZbVhZ=s4800-w600-h400
+   Restaurant ID: ae7484dd-7cb4-4a0a-b9cd-b8bae810d668
+
+37. Ben & Jerry’s
+   Address: 304 S State St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyC1AQIvt538RjKmDXVpnz9XMuOJhUR0ruS4ME6Mr7O8TQR2G--IdExard9j1oO2ljPjBQHboedorgB16igk9g0XeehnieDrHrd3LJTHdFvhghiAFk7OcUD1ymBKJjGSsNYrg6HDrI0vXU0SZg=s4800-w600-h400
+   Restaurant ID: 7fee124f-7082-4703-9924-41cf78670c3e
+
+38. Benny's Family Dining
+   Address: 1952 S Industrial Hwy, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyyVl1fcDUfRyNdhwpvgBJ1PxP1JzEF-S6dhkq5iZ29RdNVB4p3YLepzTOpQJMr4LQbf5-_AbOWsObmiuJEAupSHYZbH9_69QHtmERX-btMJlNcmAn0mT-zYI5MAb5DwC2fdBXjdOwGOk4C_jE=s4800-w600-h400
+   Restaurant ID: f21a9d9e-fa90-4fd8-b821-bb3b22252feb
+
+39. Benzina's Bistro W/ Duke's Fried Chicken
+   Address: 49230 Michigan Ave, Belleville
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxzGJuoltuU-KAwuyx3CLxEjUTMG-FuFVrgcr5vghOK7PyIc7FhaqJq2wTUFS0a_sACYwTkJqYPn0NN1pu4b0fAvXSk0gG-IzwFuajzZWP1hGYSH2Amz1x2R4R1YIidh0b6raAM1u7C6gEr6g=s4800-w600-h400
+   Restaurant ID: aa710fde-c980-44f2-895b-b487a1b4fd05
+
+40. Bigalora Wood Fired Cucina
+   Address: 3050 Washtenaw Ave #112, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czg_0R8eiBVMlZeHFOEgTtfsMlVuDg_42jPY4bUrf3Svda-mZxjN78U4yvoFsycjk_BgiX-hJT1uk2Y0ho0JdrbU1gYH_kgVoEijivSDCbRQhmWQdq7NumGboX9mF_acfdZFCZP1mpmzF_-KNg=s4800-w600-h400
+   Restaurant ID: 6bc24e83-c348-4470-8e63-69253a9447d5
+
+41. Big Bo's Grill Restaurant & Food Truck
+   Address: 27872 John R Rd, Madison Heights
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxAhToGJpUNT8dH6o7eVYeEvu8R_a2t3sQZgARX6ziwPCC8PicMCBVz8ZHzXh4belD90GU1Z6ZWwCowfrRNMBblcOpVawjYunS3EC9K-C19JxhG0fGMdJZ2bkVQxPCbnCsL1KmolOFmaGDrqg=s4800-w600-h400
+   Restaurant ID: 259a3ff8-3403-4acb-bf90-b8c5b6cded4b
+
+42. Big City Small World Bakery
+   Address: 500 Miller Ave #1, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyZSiTSryqNNT6T9OrZcksDdydXmIl2hOwwHheGwNUUS4DM5N9dj2RIFIBXwpDx_MRCcD-9JaiTx2MpTeeBQN4er4Kr_WinbeXOR--_UGz_F9e4rTSY9lNs61yEbtx4tkBQT8lBvvDTklUuhc4=s4800-w600-h400
+   Restaurant ID: ec232921-6fc2-4248-89fe-ae43e680d920
+
+43. Big Sky Diner
+   Address: 1340 Ecorse Rd, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cz7vp6MgU4_6e85L_TObmmpGw7o8s9uZBprq0vqRWV9TZF18Nw2vLjN-SxYsnyS7xZtjdQ69hHSJ7kSCW7sS9tKK5_cMDl0dgfWU6C1KICO0n0n47NIACT2_OumYWraa41vZN9LCSPSlA4CpYg=s4800-w600-h400
+   Restaurant ID: ac6ce70c-78a5-47f1-afa6-2d85da372e11
+
+44. Bitter Truth BBQ
+   Address: 207 W Michigan Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxorsuSI_A2WUfKgQQzwYOUeLxna0xTaXqfPKDhud2_SMrm1o72xgQzTjkPWV_0kLdhKxopxK1T8qrJmDcbzGkcV54ULcJ6usqLc8X1rdOp-akZCO-H9A3iP7eXUvfzADfuxPDNNVxnF2tJyA=s4800-w600-h400
+   Restaurant ID: a795ee8d-9efb-442b-b1e0-7d38a4425ade
+
+45. Biwako Sushi
+   Address: 1355 E Michigan Ave, Saline
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxDaT90bdEIrxdNlBVAT04dOrfT9zTVg2J_i_GjwiJDSVVdH_RzxSs2_x2oYUZd0wzvDeD9B2zCYTnygW4G75YuMKRkyZftj4bOZZhUKVQaa6XDcYdSGMhyCxTWVD0GEEl4kVzJBpqW6WQC2Q=s4800-w600-h400
+   Restaurant ID: 748fa2dd-5d82-40cf-a4b3-393ed3a40776
+
+46. Black Rock Bar & Grill
+   Address: 3776 S State St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxVsWjHGbk2ShQzDGyfQHNFQU6XArxeEJfzHD3D3jOC2FzatLVpd-xinQx7fxXcikWBKjUHaN65EeFeiHzvNWzDoHaPEZVaIQLFZkl2kDhAM1qv4VZ1YNnOCPu5l91S5Jvytyv5DRTxCUhdUV0=s4800-w600-h400
+   Restaurant ID: 22bdaffd-df24-4721-b291-5df5b9a9ae94
+
+47. Blue Nile Ethiopian Restaurant
+   Address: 221 E Washington St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxiEQ5YgcYZBQIb2POe8wnhk7Fko4-vNSn3NsqyVufPhLR634Exf8KXlsx_vUzrHe-8BmzelrVQ9iaauyjXIAi3wavIFJlkjcXx6k3lK65vfGBLmo6mKl98jhaoQZt2IuRqsOPt2OZJ8uZ2IA=s4800-w600-h400
+   Restaurant ID: e0b96b20-b4d4-415d-98de-0dbf267c6e82
+
+48. Bob Evans
+   Address: 2411 Carpenter Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cx46rK8v0mb_tcOxioOo9oYeiNttDFNTHZW9TpdVR98XbtCDWOARC_kgSZubdnm0-KIa_YbgIW3IRSect6IoK2R8WDyiA7qEQ-bFZdgGmhH40XGs9Jn9alUwbsGbo5LtdrK-9kOBjeob8-buA=s4800-w600-h400
+   Restaurant ID: 20a93d34-fb00-4014-b7d8-ef668ea38300
+
+49. Bonchon Ann Arbor - S. Main St.
+   Address: 2272 S Main St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwl9mhv5JgLe99hg1GV4B0u593dDovoQrZq36eP0LyZJ0QDr5KezAwckzd0vp0SOZAJ5L5zcYuTvLk9Zx3uVKVjwAqrMsvn7GV0kZwc2rhwqpEQHfYY_2yGx5K5Qc7s9MyGebIJOiKjheaMdcs=s4800-w600-h400
+   Restaurant ID: 81709543-b7c8-45da-ae32-e91a2c3dbbde
+
+50. Bone Heads Bar B Que
+   Address: 10256 Willis Rd, Willis
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czeNj1mHRzhz70MPatVRye2nezJkmkta2cWLT40KzuXyITmv_4y-zrhbrdVWZ2P8NQhb4439QrcM2CsWp86RmxwPRoSEfmCF5K9M32Ub3oDeKuf1RC6BiHMWdSa8MV3kDdjZy-NaHWBWtzm=s4800-w600-h400
+   Restaurant ID: f4f6780e-474a-4247-9461-639706ae28b7
+
+51. BORIMEX RESTAURANT LLC
+   Address: 5561 Carpenter Rd, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyAah0apFELjj0zRFasSovEQTYZg0FGBXezADzvdILgdXf85CZ_KqvKTxenH-b122IYLGomwBuAitHrlKDS2RGKkd2UAVGGp_R9kdRFmIyFmMcCQPtElSxP8p-qxMp1E1_c0y9MU0kKc6oDDg=s4800-w600-h400
+   Restaurant ID: 6c4cc2a9-9915-4c01-b5fa-9f1dcfa07dec
+
+52. Bruegger's Bagels
+   Address: 709 N University Ave, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwJk3oETUmwYUHKemaGnQYfIU6V540NzdvZrHg_z7YklJ1tt-PaapGfZvLjdwCT1bxgRKBuuX2Utj8SB4y8lQYw12afBE0YX2jSBFw5G9-Y-GkqV8muHPejP5-tI0YrrjDArDp5dBSsM5fW=s4800-w600-h400
+   Restaurant ID: d09487b8-890f-4f76-9b52-815ef22de3b9
+
+53. BTB Burrito
+   Address: 1140 S University Ave, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cywlYnXCkj88KeIzVrsFBz6BGZiXnozXqWjhkZmIFdKIh_tuznmYtRPsUB0SGPWeu5uz5VoLi_KvmS26AAXY-ONbW12Z1EmBEql3rU2Qb9jiJb7BFHlKo31tfnwPliA4YgiT_hemawKBy94YPs=s4800-w600-h400
+   Restaurant ID: cb7d41bf-e977-41e8-aea1-289d6f898cea
+
+54. Buddy's Pizza
+   Address: 3153 Ann Arbor-Saline Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cw7XU0BY3H2HWvkp4mni4G-YLTEVf-0JcqdM4ApEhykIcSsK5e_eSSLK0Qm_MPQs4NV80sVhPxiPsWu8FpGsz4LxU7JdXC_D_zS_lUNhQYRidTfX7DTDc04SAgOA_iXnx10HtHjx7cqNn655g=s4800-w600-h400
+   Restaurant ID: 719c38ca-bbb1-4db8-af3d-4399190acdbe
+
+55. Buffalo Wild Wings
+   Address: 205 S State St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxwkJ8IL012ZJaQmN5j5liJsSfUcWE-U8tL994bRq8ge3M9Ysiu_d9H3wtWomF9Npc00Q4-hd0PhQDseLcHv5hlzpM0KHnn52U8Xpt9p7jAZwklBBxil3Ubx20bKHoS12HgW4DlalFDBLoCRA=s4800-w600-h400
+   Restaurant ID: 071bb279-3cc2-4d26-8a37-6c43d62f7147
+
+56. Buffalo Wild Wings
+   Address: 216 James L Hart Pkwy Unit 1, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwlUSLBLAgBDyxUsKWIqJypvEnXZD_79oM6_iORdNpgi6RbENwkhf5VPfovDHzFmB5sTtmDvqoLA8M8tyYo-l_nWR7Ct3HwjA6QPrBKGBM5M3DGSavemD_rDLp0GtoclonYT0HM5uOBBm8gqQ=s4800-w600-h400
+   Restaurant ID: 7c724cba-94cb-424c-9831-a7cf9cbfc0a3
+
+57. Burger King
+   Address: 151 S Zeeb Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cw0OFAWPZ9X2EenlJ6omAzIyONlMdao-Wfn48nRPKQxq_C5hdTupxd8K5fFwHDmm-X8C4DrrBFBZ4bEWmJ0e4GdcyPRBrha4Yck1v9YY_L-sWlk1BwP8oua8R0LlM2-xdqfEFcDByntpkYJUw=s4800-w600-h400
+   Restaurant ID: f0a45b4a-f912-40e3-b741-52833504e8a7
+
+58. Burger King
+   Address: 4885 Washtenaw Ave, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czirMxWY8kloEyA9eRY7D23VOlcmhnVW0WCEuxMbhh2FOev8G8i0ZiC57LM720oJ-LB3yx0PxPup1xgBzYeV3c0OU_mSpmk1vONggMWM4antZ8zvLb00tw2T8r7Vym4fq4QHjE5IJNXn0vgKg=s4800-w600-h400
+   Restaurant ID: f8d51083-c4d7-4e5d-b1d4-78c80ae30c36
+
+59. Buscemi's of Ann Arbor
+   Address: 695 S Maple Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czRG-BTUMfsVvVvaAJrWXvdZx3cT0DKgQzAQCsYMNow0yRFjFDrWt8FHO3DWoDsxBlUGwWw5eGndvyMID2Q9aVS0BfJYW1ctTBxSol4RVxlT-sECTMHkJud1SWTEF21EWYoGpjl9gDsH5fHYf4=s4800-w600-h400
+   Restaurant ID: 4b8a3d80-492a-4d1a-a858-36acb302cb2d
+
+60. By the Pound
+   Address: 1952 S Industrial Hwy, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwjijLhy37qmlq1tTc0SMQg-XDujPGaHAt18czo7xcH-3gZyhbxL12XLg6mge9SZV9iNfwTkuqeJ1ryPYew4NWNyE-P5OQtKStfgFaHg67ByOLNX8sSI1OsFXbc68z2IBpTodIO5QMOOeUEkBY=s4800-w600-h400
+   Restaurant ID: 3a21cc8b-827e-4c8b-8e5a-13300ab1c9cd
+
+61. Café Zola
+   Address: 112 W Washington St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cx70hKJMY-TcHc_t0uIX26VOeKFj-pWXBVtfHTLIytx_N1rfE7NRNyc-_MlZurTWDPc5QW5MXJSEVYzXPyKtF59H6K9JcUvb8m8SVnY8nWmLapQF0riCAf9vQKDrL7UxpXEIsIskkGrrNcP02g=s4800-w600-h400
+   Restaurant ID: 2c0e0e21-7c76-44e4-9c1e-393c29d226b9
+
+62. Cakes By Rubina
+   Address: 1689 Plymouth Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czNDvcI5p-cMZWTHoLHtnGo9weFe9jbZ2umGiRv605AsRt3XVyJfsOSUTHPzjbrv787OAF9Rxmk1__hbhLlvoNx-aX_zvkoZr9FiYnYgDK4fMDc90nbpEjbcvN9e-2AZ0ldqYnjBslM-MfKWw=s4800-w600-h400
+   Restaurant ID: 255cf1a1-6007-4417-96f4-af3267fe6f84
+
+63. California Pizza Kitchen at Briarwood
+   Address: 870 Briarwood Cir, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwTbUyr7JmpE_KrkEbDwSkeqSijui0eOZwldOwAWN2v_FTOb1i2Mkke1SIydQgprOnu3eXWkLtTlczVcCFMV_g3Ev28rWe8jzpxK0Zhdz3nR4sSYk2C2I1g3HTlmWUAkXJKSdIsJTjKBoE_KYo=s4800-w600-h400
+   Restaurant ID: b267ba7f-ed73-4e6c-b9d8-01d096417aeb
+
+64. Cannelle Ann Arbor
+   Address: First National Building, 110 E Washington St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxjmPAPZ9pmNmoIL_dcPpR-o0J5hBWjZs7DQB9vzOl7jVZ5FWEf-26Tupla2fh9cEIh_z0wXcAbupmuGcymC8nYOW8h1NHpSn8PfEU0RBogSDwFEsFxW8YTz1T81yhfSYVIU5B7V72DtPHXMw=s4800-w600-h400
+   Restaurant ID: 65321a9a-c7f5-4359-98ad-40910f902104
+
+65. Cardamom Restaurant
+   Address: 1739 Plymouth Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxESxPyON_fFlpmZWbnKsDt1T2gsmaZuMudwnIdfCXdybfl1iKAc1hRt0ukfV_YhlkQob397Ki9rAn5vhwpBQ9-V2J150AWwi6eyECWqCrRHJHLfep4Y5PA4A-p2d_mCnfOHK71K-St5yCfqA=s4800-w600-h400
+   Restaurant ID: 5df9ee0c-de59-42b4-9f61-ca826d3e3e96
+
+66. Casablanca
+   Address: 2333 Washtenaw Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwy5rPqHdFOHXEpG5O8thstK0uteCW2hXvU-OEXaOBYCqbDA9KaBScciR_DZT0STAfQ1Tdt43ldh6zK_gBEMeiCUtvLjLXGfOB_0KBwsSn4d91h_q7srGgsIrQRd3VcVoKNqFHfACIg0Bj5J9U=s4800-w600-h400
+   Restaurant ID: 4a2ae86a-5b6e-412f-b4e1-6d3e6152c2b0
+
+67. Chans Garden
+   Address: 2265 W Liberty St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyJ_PzGPygQp_cnpWRbsaTA5aK8iYtUo4iam2XPluD6xp5JfwFQPlSDazYA4SAXeg_EX0yKo_4TZjl-XTFGIapMJipqg3ZZrL4vokdkTPiUKYQb8fMTLDT_FUk2Lhjx5-m7AuGAv93Vfvcu9Q=s4800-w600-h400
+   Restaurant ID: e2d8fe1c-7bb7-4ba0-8389-ddf2c0b06957
+
+68. Chatitas Rolling Kitchen (Food truck)
+   Address: 67300 Van Dyke Ave, Washington
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czLLtts4KAPQR1D4D7iLVTgS3_rrDpLJcFxdZrvz9m-cKeZRFvsUtlFDNL5Y_4v543TVCQTgUmR4dv89TjLIr9j-DcRRNcyU9VDlysuv3krkb4X_zfX9RJHidQt-gKiESDaCSDFKUzHpQqpQg=s4800-w600-h400
+   Restaurant ID: 768dd863-8bf8-455c-bcba-d275932d48df
+
+69. Cheat Treats
+   Address: 5838 Schaefer Rd, Dearborn
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cytt1eJL6UvgXUIa955hjhp45T2NW865cQLAAdpySXMTBPw5uozc7LfyTU6O1upoYBmGVwYESqqR3Pzv-5OmjSJKw2yoSznhvGWHbz-7A2WaF-0HOTvgZhkI6i03u9uQuq6ERF11yRfkZDLuSM=s4800-w600-h400
+   Restaurant ID: e7806db1-9298-4750-b7f1-9ccb80e29328
+
+70. Chef Restaurant Mediterranean Grill
+   Address: 1098 N Huron River Dr, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czk4VsqdU386Q4-rRRTXCGbgIt3jvavCABsWPdKxqBKVENeZGLlAcbI5-9CwO4unxhxLQsaT30nYvDO4wSFSDS5CXfVvWPt5LD41m9rVQpyYRmt2dNDmPaKY2LrqH_Mq_Tcq4OgPkTmDziBVb0=s4800-w600-h400
+   Restaurant ID: 118fea3c-ab6f-49d9-a0f1-1d941e8964ea
+
+71. Chicago Reds Windy City Hot Dogs
+   Address: 312 S State St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cz9cinDgn4Q-K9cIe8xSy8wrnO8c5oP-UlFeOBtKiFz00Zw_f_gPh_OJH25q2K3HK9j2rFQGC27-gOFI5LhQZ6gtqM19E--ynH4e_L17kZ5Sdv2LF6KLRUZ6ehQ_S15U3djVZ_BA_e7qdzbcg=s4800-w600-h400
+   Restaurant ID: a209b4b4-5825-498e-9c90-cbe8f8690110
+
+72. Chick-fil-A Express @ EMU
+   Address: 878 W Cross St McKenny Hall, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cy0mbT2pqMBTfjZDW0Ubf5Z5uAFor5bIJNMQ3MC9tXGEkrTLtsDhjCZif-Zgm-EODO1uKCgnDILDQNn0uf5hyyplt9o0wm8aKkvn1nwTW2DFaCU2Z053Rln2SuBAEXziVcbT44JijHZpo5tCw=s4800-w600-h400
+   Restaurant ID: 662e25ac-5ed9-47e1-9da7-fbc76a4f7d99
+
+73. Chick Inn Drive in
+   Address: 501 Holmes Rd, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czCOR3ltH8EMdde5afOSNGi1fgUgebEYEfW9puRogTgo32luD1VPSFFtxU4PW4g3kqrKDVHHzmMJWAawjw9cTXrjQ3C19LkJf4FGPseuwvYeGO6pyu6M6KLPsgEfpPcb8z0WOltZ6J_xglLhQ=s4800-w348-h348
+   Restaurant ID: 1e5eb26c-ff68-4789-bea2-d87d205c59cc
+
+74. China Chef
+   Address: 2870 Washtenaw Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwJ2n7h-XiV0u71tiRQ2vcsqNzP6RUN8BImzkDta_S1BwNKEL-LNZyIeAHFg0hNBHK2H2hXxkYTqMSxeqjR5p7oJ5QtN4vwGarfXyYS3JfGmehuEjDmnZW8FuLoSmkg88S9MVP59KG9ETpG_qg=s4800-w600-h400
+   Restaurant ID: 98d32f40-1601-48a5-80ca-850174ce77da
+
+75. China King Express
+   Address: 45915 S Interstate 94 Service Dr, Van Buren Township
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwbLwH7JKNZoUNhvs1FTziiAHurQvu4Y5046aN4owLrs3yL71jOWu303gqPYIDhHNPxhEqZ8pRgLe5igXUvAK_Q1pt_qDgvhp72mo8eWwFd93jhozE3FgvBEwYOEVdqYvRAaKdTksU10ziPbQ=s4800-w600-h400
+   Restaurant ID: 58684b6d-daff-484d-8398-7a4e0b25f8a4
+
+76. China Palace Restaurant
+   Address: 2905 Washtenaw Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cx_gUtyyyUilSMy-V-wEh2IeTLLvRU4ZSbHqhJIKxOqHlYKFWpugqSD3q4VzakpNxLBaev-bpvYQdGxcVnfov1lSeyGWabe-_bPRd_Qj4iMuMa8OfJpPsrDck5rBxW_w7sJViadAI3dp5nHWA=s4800-w600-h400
+   Restaurant ID: 1f51ac92-a77b-41dd-b433-63df67799f7b
+
+77. Chipotle Mexican Grill
+   Address: 235 S State St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cznZu2oNZhBSoUuRqfzVEHQU30Dj5UPK7RZLY8ozvDBI5TT5H34rCLuoZn0jFwST69FE0tvINKtUSOWraX0eNfQ2gxpFfoSrJUrxm1Cdjh0j-t76hRPjQhjpy89Yz40iWgUZ5nEM7SoH8PCut3Gc3WXjA=s4800-w600-h400
+   Restaurant ID: 578fb46a-e0ee-444c-8d15-1b95eed7f0eb
+
+78. Chipotle Mexican Grill
+   Address: 3354 Washtenaw Ave A, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cz0IcvPnxYe6hU5QNHdr73ue6ReEjsbxtjFaB-Kd1xvaOj-B5ahsB4vHA2MMZW3xAe3lKtHTn_Vr5kjbGNFQJqpe99vHGJPT7axkbkDkVcfhaKdHEX-_n3jP9ukxsDyeoacRJNSBvRCJ0tRUw=s4800-w600-h400
+   Restaurant ID: c5e80463-ca9c-4a28-9c36-135328b45b60
+
+79. Cinnaholic
+   Address: 121 E Liberty St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cx9mhrnr8m6ewl3l52oVsgipR-T97izN4KmZWLWlr0RcqkPZ9uElVdwPLXKcbCVTh5AOQd1yx6LyqqsI3DVd5Hxd-vvmZoH4KidL8Bd_wp5yLg2LD3z-E7LwQnpvXfxMpoPCgnfWDqXdzdw2sc=s4800-w600-h400
+   Restaurant ID: cd984d99-9962-4d1c-baa0-705bf6fe6568
+
+80. Cold Comfort Ice Cream
+   Address: 10 N Washington St, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyg5FY7kLFTNqu9438XJJs0UrnFBD-AfIGLwQg7ZjpgUPfIXhLQo6cTeZSccDalCkwgRnFADyjzm62bxMn0_M_ZcufjYPXFh4bZWFceRJuQYlg6IAqJ85pZAMA2lPM4tzdttUgkKTYPHR9KZV1Xd0yBvw=s4800-w600-h400
+   Restaurant ID: 8710c579-ae8d-466a-a810-535b97538488
+
+81. Cold Stone Creamery
+   Address: 3597B Washtenaw Ave, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czEamdpFMO6gN3wfYHiHzDBE7bHsvoFagGt9fWPFFkPyGeUpOkUJhRZqUU6HhHbj5Je2UUV4XN2viQrvc239m1w41oU77RCNFuCQE54l5E-rJMz8T2Tkq7A-z9jYRcpqCFsYiKod7665o8u=s4800-w600-h400
+   Restaurant ID: 93b076d2-bcbc-4dbc-8d0e-7718cf2dc183
+
+82. Common Grill
+   Address: 112 S Main St, Chelsea
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cw9Vs0em9RPPWAQTYOjjsG2MeLqtEOmOow0V6SxQoJ8-IVzyosWlO3hYNHTuS5V_j01XuncfUh0pEqD5TAOQy6Sfz9nqC7U5wEDPH9a_6dbpLNEjeilugwCodJBq88psBNrExDPRrlKNYDRUA=s4800-w600-h400
+   Restaurant ID: 95943231-047f-43e8-b867-b8d2d55082fe
+
+83. Condado Tacos
+   Address: 401 E Liberty St #200, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxUECOT7YL4gJG5DHi3TU7-7WNp2hHAo3mUu448A6LV2GwPX82EzFgAfOsWpxd5ga2HF744pQfmwVIyE1TCgfjvSMme0OvguKtV509ZxNm9IKYeiVU662Oua05sAbDmG_Fp-R4qOh1ll4JF=s4800-w600-h400
+   Restaurant ID: 2d229ad3-fc45-4a0b-a63b-e5f9835c3be3
+
+84. Crow's Nest Bar & Grill
+   Address: Crows Nest Bar & Grill, 6166 N Canton Center Rd, Canton Township
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cydIgPjVI4N2yXyktTQQCD_fXVSQbte1gxdDtFtEylTIJGRrD9xSObYlyGJis-RucV26EPmrF3O7PhgWAdpqrWvTCfg0lR-V4cF_7MRifCZw2y-TLVSzD5ZtNZi9T-0N5-8yN9tEziHCMyj=s4800-w600-h400
+   Restaurant ID: b79caf91-52d3-4168-a15e-124213ab25df
+
+85. Crumbl - Ann Arbor
+   Address: 215 N Maple Rd Suite A-2, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czgum01i0LJg6zGFcrYamfF58gNzSIvj7Jtebehlq2Zyz7Fl10XmMFgS1zy3Cqr4p2J9Y4_fHIFt1CRTpaUK0JhVWgZyzHIQQXr9qZrLMP0Zlx6Ii7uZIj7_j37s3OpRtwuZAASNk2HPxtH=s4800-w600-h400
+   Restaurant ID: 186f788f-2bfe-4b0d-ad79-0253dbee8aa3
+
+86. Culver’s
+   Address: 5910 Jackson Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czB011XxDh88XsnFz-DE-3fXg2XMwyx6vQuoMabE00KODMwRWJVDrytRggRI4Opkec6MgvUH-ltslwVHPbeSvZWZCMZVhX3pmYsuCo0qJSWqwooYjQjXCJsBgV9nCLhymMvp1vlKDiHsPr8JA=s4800-w600-h400
+   Restaurant ID: 639bb409-8451-4c4e-bb37-5892a92b6983
+
+87. Culver’s
+   Address: 3015 Lohr Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxfY1mpAUWALDbXb7xBIF47okCmGDhe5iThJ_x6Z4FKoev4UZOU9pBVhZG2D793xCot5TL7yFlYqUdChvcuXy4dVpE0Y_O4gvNSA-0mqOnODRI9oOfG3UNIDbtPadpb-HX7SW8H_b5vo9PakQQ=s4800-w600-h400
+   Restaurant ID: ac2d35a2-eaa8-45bd-98b7-a24c2848c4c3
+
+88. Curry On
+   Address: 2711 Plymouth Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwYnZY1pzzHfwqEz8W9kGHqRmHP3mExE7slqYF2QONm5wXJBepDLkP0asLWD42vh8TSoOv95uX2xgieN_WlKqKUWvRqNoiHXCgXWBcRkT6ZGxZckhrLi5I8_HMPJFjDMyHiUnmgn4eVuNsALQ=s4800-w600-h400
+   Restaurant ID: 42a1743c-ae91-4a72-9e85-36fe57ef4e56
+
+89. Dairy-Go-Round
+   Address: 1226 S Main St, Plymouth
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cz297I5txh0amISzfLSc-VqqeDAOCzCCPOAI9guw_Omh5R0tH2wa05pknMoiIi1LRcuno6ZY4S_AU43FxxE3jG4BPY6yNtdl0nsD8rUzp_EyXuWFAsFmR8PVCjs5oWe77l8YlRHBiVA4e9n=s4800-w600-h400
+   Restaurant ID: 010cb659-8047-4eb7-b5e6-095565faca2c
+
+90. Dairy Queen
+   Address: 2430 W Stadium Blvd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyNMnOqa6HFR-8wzhpZ-AnK12dDXk5ZufbVFpU2LDDISuryw6rWDyv5SjDtdAV5MAHZCVsjbTZQmQyZytQvzl73y5QRat-Rg_JTEvMNmXY7gb-gfYfFy3GbdJP-DOXsY9qiw4RzO_RsbOg7ru0=s4800-w600-h400
+   Restaurant ID: fe63a5bd-ad33-4631-81f1-f9c281332208
+
+91. Dairy Queen Grill & Chill
+   Address: 1801 Washtenaw Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyjO4r7BHMHZ2bUvpUTiMOwCe-YO7hVXNN_J0TUnCBwajh6GUk11WaNDT97ah-9WF8fwDOcpMhk4YkVC4f8JIkr49fdP5CHPuNWW7LcC-srTixkFlyXdB0njgmsNB0It-YQjzkcRlJr6IlZcw=s4800-w600-h400
+   Restaurant ID: b9dd1d6c-1bdf-40c1-a098-ba57a5ffa2cb
+
+92. Dairy Queen Store
+   Address: 400 E Michigan Ave, Saline
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxsEAYv4JHgOGj06RpBbQSEs23v6KBmvltdYDxjikzsH1z_D2MXkJyOktauIlGFpjjXzWqHSXpkY8Dy2bZrkuRxs8mCXZOHNHTdcDK750lF3T9qnELg37zybP7mNvnZhTh9WU5P5Wgr5wHukA=s4800-w600-h400
+   Restaurant ID: dc49e572-4d87-417d-9f6a-c5788afd24d3
+
+93. Dairy Queen (Treat)
+   Address: 1805 Packard St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czCqBfGnrNRUJSzqKdKrPkTAwr_jCajl4F4bVZQY8TrQFS32_UE7dMlBy0UnhRgYvh1eBJ9ZOzwN30wDt78HtkyVCs9egeBZeYFD8URCpZvcfN3jReBt30Qw2QEFM6aNFYRtbjHT4iAEhY2-g=s4800-w600-h400
+   Restaurant ID: 972e0280-c411-4e68-8f88-b58cd5548d84
+
+94. Dairy Queen (Treat)
+   Address: 101 E Michigan Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cx1qSwChVBbI7YZ9tavxWCm9wW9PnR3yE0NsZAnR1UhLpF_jNmD_YoUbpBL9hMNf3fSfzE5sLu9gkiacLIJJ7oMwJmi9jICBq6JmakmQli6aUH-xk_tCH1hRZf6NYCc5zUuhgq79rABZP0Nfg=s4800-w600-h400
+   Restaurant ID: 742b354d-a23a-436d-9a28-29e90e0ee742
+
+95. Dexter Brunch House
+   Address: 8124 Main St, Dexter
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwVaTQJaZnC64W1AghGeBdXxkiAGKjhbhzYN8uHTr-VrOEndqjJi_eB2ZtI8OVjjR2_JzF9kCzUQgLmiYFPT-4UNc8mTCyPt5wE3x3ODRV23gHfwLtB2royoiXJGveQilmmBMF-A2C2xFbd=s4800-w600-h400
+   Restaurant ID: 6804fb4b-3126-4b8c-89d0-844a39d565bd
+
+96. DJ’s Bakery
+   Address: 3031 Packard St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyAzzJwiqieV6eB-e7CshdViaVNIoqs4EELRRqCvtXgPXFsNvk73kdfyTV80wwK89Wt50AaUZv_MkvTv0K2Y9_a_Zd_84lRKYvUhWj25EUyFMOUP5lCla2Xd7KIwiTbIYca4Ol2UPT6RVkZnQ=s4800-w600-h400
+   Restaurant ID: 013a662c-302f-4520-bb42-bacb6e558318
+
+97. Domino's Pizza
+   Address: 953 Washtenaw Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czUx_QBHvsr2dRIQLCd5fZTq-YFNmv27Wd7xJnoYgJy_pVuxEU3Qq5gCraHTVkbRFdIe3pPaLF7CSvvT8hM-ZLcYuE_TXm_hN-bl2Cssv4JSS0lqlanwhA54nOwBXK--O3afigQxXwsGocXVA=s4800-w600-h400
+   Restaurant ID: b7e21140-77d0-4324-aeb0-5e153a214159
+
+98. Domino's Pizza
+   Address: 716 Packard St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyrFtS605Fd3xE6dIfWuEWcxQKs8PTJTQrD0K-DqLm8etzUay31cPuLYM6MLY5Nz1Qq1IpReA7cxnZ6uyH-j5FJZYgTWG7Shv__KUatSR1Mmnbh4kQPOq94NNsb1n8xFFRQcFQt85Z-xMwZQz4=s4800-w600-h400
+   Restaurant ID: 71435a37-5d49-45cc-9e68-28f65bb4e204
+
+99. Dos Fuentes
+   Address: 1960 Whittaker Rd, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxmKZvMU2HHKyxi25v3a6HP-6J7k4PtuB_Ot86QlE6e9RMwh3t8KZD_JT8i6YfW_0bu9d4Nut2VxyEKy4BRJJOjZJxugY7M6XVGlh91dah4g32ykTHciy1sPzuJVawExiZFGoaa8yX2I3F9Eko=s4800-w600-h400
+   Restaurant ID: 15f1b19f-5e19-46de-8085-73ccb049a02f
+
+100. D.P.Dough
+   Address: 729 W Cross St, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxto8SPuOmf6FDCFIXACYjNVXFva0Ob38_rndPgzdW-IxHi45HLl61EaTLFBi4PODVc_wRvCChcW0lvVU2KzS6ySa-EZS-URuijK-eQpejglJ18CiUHKZ2rkIa7GAA1r_H-y3K9QmuCLBEkxg=s4800-w600-h400
+   Restaurant ID: d5ed618d-c136-42b1-b9b2-8645848a81a4
+
+101. Dunkin'
+   Address: 201 E Liberty St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxHG4WtQ599hiEOKwl7xldX7bD7BAtv549S1I52yisiysPn-704KTWfYxIV6LX0qmZso-N_f5l_9Uw_67GfmnlS6ZvIrtIGRsHvvbk0H_5X2Us4OuKbPafUl1IFN1BEYqbKUVrRCIJVEio9_Q=s4800-w600-h400
+   Restaurant ID: bdc4fde6-86bf-4ef9-8bc6-f5eade5f60f5
+
+102. Dunkin'
+   Address: 608 S Hewitt Rd, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxKs7Av555zUm73KFhOIRujT1F2wjuqPn16CbNYIHEEQ0YYckJycX_lD5hzT1aj8HcSHl7OiyJ13ySyqi3koid_MRv5mRBz9r-vUl2e1Ulz5oDi_652sNiikoIR_33KntcwVC8XHczjXnofXaI=s4800-w600-h400
+   Restaurant ID: 26384cb8-10ac-4877-a5a0-fbebdf4a3f59
+
+103. Earthen Jar
+   Address: 311 S 5th Ave, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyDnJhpffnUevAy9JJjKLRFe6ea-BENMTkhpv7IhwmVad3p5WOuAHmnPzOrG3JsLnDk7pgGorK_76k3Re_TUqFRS5ruvTS0l7vT95DR-L2T_PnlFIP8NBZWMVmfvxjOGk14Mkt92RnMwxHZSA=s4800-w600-h400
+   Restaurant ID: d01aeb2d-8364-4a19-95c8-2720d2b1f2fb
+
+104. Egan's Pub
+   Address: 396 Main St, Belleville
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cy0suX0XTdTnoI7WP8lcoAMrCItKbEgOaghsrylNOOG_SjQPAEKxf6fLo-m1BR7ii0wOcaVlCJR5JnthoHPp1yfpinlHg42c4A5FX_FF8NwtOzGSsa05wfP7HrkxoA7QKplZlMiDt-Oy8Pa=s4800-w600-h400
+   Restaurant ID: d3c03ba5-4b47-4c86-99a8-58ee6e4c99f2
+
+105. El Limón
+   Address: 2709 Plymouth Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxCg91tEtERMITcXhZcTtFVOXmoF8tMg4unp3QAdbwjblXtgnTV-PoFfg8O9TYJbhMNzsidA-Bd3IXrb3uOeoXe5uDGS-CM8Ib_IsT5PYsPQHbE6TW1ISaEZf_Ug-BJcFtIAtrQGgrmjDOUTg=s4800-w600-h400
+   Restaurant ID: a7f64855-2c83-4c2c-bdc3-b85362cd279c
+
+106. El Sabor De Mi Tierra Pupuseria Y Mas
+   Address: 505 S Huron St, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyqMFPfQxOfma42uegrjx9uYwMaVyupO3T97KAZ4pdK5gJawL2JVF2Aspp0uv6uTEhJGjSr3COf7l6L7PYo6qAcobQzQJ06Uk-ESGZtejVnUd48fcIEeJksZ5ITPXvfeNtXJvls8n9XGg2PtkTqLaE9JQ=s4800-w600-h400
+   Restaurant ID: 6197b3eb-e953-4ffd-ac94-8eb2ed746b7f
+
+107. El Trompo Mexican Grill formerly Los Amigos Mexican Restaurant
+   Address: 2851 E Michigan Ave, Ypsilanti Township
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyA90whCGlJZNCcA7wf7bfLOzOYLSEiYMjS7sAwnCwMbrrW9s6kldOsAJf7vp3xK4wtuBza-snsg3QI6WcAgVHMC-gVklSduvoW3CIFS5Y8awuPln34ybatrsznva7bZKVVEAzOwpKFFRJNmQ=s4800-w600-h400
+   Restaurant ID: 9cf3d3e3-f372-4435-8b1c-45d18f3656e1
+
+108. Enchanted Oven
+   Address: 5241 N Territorial Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxQkIeGMD-oTWmikGI_B59gdqjHjQUZNuDBiHSf5E8wdLWQ37eNP3wnX8KDKB36m5QqYrt-9y5vSygbKGRzCBxS7UCO81EkycpMgl_PzwL_Q_0Sba_-5-kE2W_W2tNKesHzezEXL632eS2EIeY=s4800-w600-h400
+   Restaurant ID: bbd9ffdc-4489-45cd-9de7-668518948237
+
+109. Everest Sherpa Restaurant
+   Address: 2803 Oak Valley Dr, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwk9-7y09NhNEf8BWC3bx3TBAMwpKB4-rk3clFO8YR7Yh4-2tnJkmoiFkn65JOsIsfsO3l79KiP2O54AyUQ7tidKSfzivmQ13NDfPuxxRxiQgo4tVT1t6YKJiuOE1KBB34d8vlceZrG72pTwfs=s4800-w600-h400
+   Restaurant ID: 59df5db1-3953-4e4c-8570-bc99099d8500
+
+110. Express Fish & Chicken
+   Address: 3015 E Michigan Ave, Ypsilanti Township
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cy-WnyI3RQQiiFM73Yf0q_WaaPcmofpCf6uJQawJFoiRT0KyajYX9Is_rat9wJ76n-fDOskTrC6ss47XioQ2Qk-o7HSQxPRpCR_ZAcHZXQlDbznq3U_JsNiKEZBdTth6XCWFGcsUHFbX84yvpk=s4800-w600-h400
+   Restaurant ID: f1c98ce1-1252-4343-b688-34b54db3cee4
+
+111. Family's Fried Chicken
+   Address: 510 W Michigan Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cydgEJr2VRyYAyfrtZNtku-JVWchn2WCbpuq6q86kimEbS9gTmlHI5D1SfX2GiFMoQJWsjRKsZFtzI8k6OLUdneONKNvmO8pqUgDuth_oqMTYKI2ro6mtziO0F15YQ4sZnylddLejW8pTMS6Q=s4800-w600-h400
+   Restaurant ID: 4bf93b73-4e27-4975-871a-bc00178882a9
+
+112. Fat Daddy's HOT Chicken & Waffles
+   Address: 411 E Washington St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwmp_Y2LeCf8sDueXZkdRWp3MiGCC8AeptAtLDuyOEeYg5fDvqPLLzEUKBAActL6zKPXplQlFWt--TjuZUZLhSbl7mvgyBks4cTC66eenKnK6ji6GZjTCPTrsU6GQ0vJL9sFT6T-PsWJ9MkyYw=s4800-w600-h400
+   Restaurant ID: 7eaaee6a-62f4-4130-acdf-adf498c3ca3a
+
+113. FIVE Steakhouse
+   Address: 44045 Five Mile Rd, Plymouth
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cz3zhP0ISywGjXveOsfeCebXiCBJXg6YC_vx2uQlrAXEiM2zuL-UHqWutUIGn2JyoT5v5sOO4fNEPigHE_nijaCRvX1rGNjCvz5MC8JXXr2sD_RwjZ7mr1SzEb4LCH13O75dYkI8gzhWC4=s4800-w600-h400
+   Restaurant ID: 9bba4ed9-b673-4e4f-9440-a4661d30b64e
+
+114. Fleetwood Diner
+   Address: 300 S Ashley St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxe06KjYJIIi6lnjfepmX1B5a0pfOp35qnddIRX3SkOu15Mu3NhXX-Fo0G6Ixeg6lfjHHne9C686ePMFo0jEwZNAEqBUDNn7lK5AQeNb4W_n71AAVJ1hoGM1LT0zqiPXBZrfGyU9pnOX1-M6-4=s4800-w600-h400
+   Restaurant ID: 285f0419-5076-48a1-8d00-6ca387ed567e
+
+115. Fleming’s Prime Steakhouse & Wine Bar
+   Address: 17400 Haggerty Rd, Livonia
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwuXH4USa4-HM9v-iHoVMfPCEgD3W58ZuHeRabYMTKpC9QR0awxMo2dG_ssv2i5WK38Ahbix97ZGvfJQpTl64bDMWiyyjxO-yY4fXihh6P5CB7DRRd3qjTpbSprMo-vO8PWCe7_PtXv6nRySw=s4800-w600-h400
+   Restaurant ID: 508de37d-80e4-4999-be91-227962d31a09
+
+116. Fonda Reyes Truck
+   Address: Parking, Lot 1070 N Huron River Dr, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxg3M-F6OJ2dwYoou9WR0u1gEWtXUn8gOmqQWeX3I6UmXMX_Hb2hzeW5rjszWLda13BgafVtVyqsNVpP3OIFh2MlqWmYr-8Nhq3akGN2wtArTNQtsxl_uAhmuUMMWoRmKL_dZhRRUBag93v=s4800-w600-h400
+   Restaurant ID: 59f37d52-8a98-406c-aa3d-9013524442b8
+
+117. Frank's Restaurant
+   Address: 334 Maynard St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxfJrHWI5O8uIeQEn49CzHZDcHIvJV0zgO8--GFv75idBkAKiPMb_baq3oFQo-uB-9bwCTDUSgFpaf0nEzC03e6X70XwcdK9Ifk0IJJowtLfEaEnVCikRrlRAcR3tTFJhCo5EMz-oSRmoij0Ao=s4800-w600-h400
+   Restaurant ID: 400337d9-0ee5-4e2a-a124-1fea42fe81db
+
+118. Fraser's Pub
+   Address: 2045 Packard St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwgPCINz_YgHS_Ylc971sS66a962pXAt3C6LE23I7QHUOgVvRbrUu64zBnmRTd5OebRW7AgJpW6b2KRuOl4RLNJs97dtt1pGXsozvzQf-q2XspFk0ihwiRioUKbh4duSUL8mCxuI4RcQXljag=s4800-w600-h400
+   Restaurant ID: 14d61562-99a1-447f-b052-be08bee2a14f
+
+119. French Quarter
+   Address: 1494 Ecorse Rd, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cy6f-Q8HN7dGP0JVuezkpDNrX6cgiICEFuYMpgwJNPHLkoo4qdurqCTbswxbALBE7AxX_2KLBRaECTGLUrNFAaqWNfg44WToAEC7T239x2Vz8EVQNvA_tjTY2XORQ4mFRCpTXloYuzlXo3vm7I=s4800-w600-h400
+   Restaurant ID: ddc370dd-fca7-4cb8-b58a-24204cd20042
+
+120. Fresh Thyme Market
+   Address: 2985 Washtenaw Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czBA6dcDfoHpjyfdqlPD-j_GhMy9_16f77te7XGVpdQyRVOvSgKnYba-McPqXV0_URygHr94w6E7UgNPGQyOiUaHPdriQ4PUQKSK6n7q0YmWtrEcwCopc0L4Gqc5OtmdWARe9UUugsW-kCRFw4=s4800-w600-h400
+   Restaurant ID: 4e94040e-e890-4c05-af82-33b3dc8ee91a
+
+121. Full House Restaurant
+   Address: 57 Ecorse Rd, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czuZwlGaxD0oO1GpTASfPzkz51qIgpE7zn5_Tyh2JFtjUT9wzsr7xtWd4HYqjD2EMcTWpPhXSHEpbVHVSeckf6aw3bFBGlbpAx5WpLNb7RrYYJU56TRU2UfawV8Y_n9kZv-uUeQ0ihh-YSw=s4800-w600-h400
+   Restaurant ID: 19f6180d-937b-41c1-9eb3-e5605a90fda3
+
+122. Gandy Dancer
+   Address: 401 Depot St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxJF2RXkHHmWcxUSOrLRMGw-sipK5i2dEzyg8gK7JgrsDcdiiGnarxQ5WKLgefXL0lZM5lt-MGpvENoDxfFr5Up0kKb7M3bZoJzHOJjiWfi0oOMk71VhtGTT3rUVVFVNV_JtZjSV-EFmIbxtj4=s4800-w550-h367
+   Restaurant ID: c572e183-6e0c-426f-8c23-848c68f2fdcf
+
+123. Gilbert Chocolates
+   Address: 100 Briarwood Cir, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyaXwrG5uY9u1-554LVzmD_JXcGlnXM0bftT5g05l1tyFJcWcSe28sj9Jde-13r19SOl5BCs-C80hRGW1qRoaWzG8O_bPsgXvhRRAcahz0_2snOu2dRhXDLNpeC2KrHewfY36c1uEm1yQ63=s4800-w600-h400
+   Restaurant ID: 2b95f2e8-975b-4c29-bf6b-96c10b0410f2
+
+124. Godaiko
+   Address: 3105 Oak Valley Dr, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyDTGrc4vv9djBHAESW9MAhZAoiTIDZYXddHbX21OHgPw5xJEZ4Z4tVu14jfp7UczcztQW2aYHKW3xrGOZ1qHwvWyaPmuZ03Yfo362iU-a4fBbA7fI5sWNNqbModp6J0-ii5xrpzNcIWIVy4A=s4800-w600-h400
+   Restaurant ID: 2a901cbc-029c-4a48-a385-690ffe3c4fa7
+
+125. Got Burger!
+   Address: 301 W Cross St, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwwyVvD2HDcnYkFiFLH-2TgoUUw_omwmJmV4MxCBAaHQDxSqGIRR-XAJYPeB3uchYE9bgn8RFvYOeychyfeJMJVCf_7oCiYXKStCMsZI0qP7B_0xNU9IrGLJQATgsq6k8FCbHoaVWcOsAzvla8=s4800-w600-h400
+   Restaurant ID: a3b98af2-1271-4a51-b958-5afa1706c82e
+
+126. Grand Traverse Pie Company
+   Address: 291 N Zeeb Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxgLBtvAld4ZD-I0mhEhC5ouZZvB0Y3JeXDWWbqovcmoVwqcVeasFLfu0CBWw-DLNSxWEsc0Wj_XwxSujVH3YzTFR9W0kW8VENhd-uvQkEGipwDaOCUb5kRfcZgNN38xjRuna0VQuz64Xo=s4800-w600-h400
+   Restaurant ID: 8b9af690-ab15-488c-b6a8-438da234ac1d
+
+127. Great Wall Chinese Restaurant
+   Address: 2128 Whittaker Rd, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyqmHh7rmdABc_MmSReLy_gglHm5BN-ohngOznwFYyQ566znGlVAVPAQu6mDmdvsedGtHvrFLi4hRp71JpSjI14xRm5lIVsIj0CAEBwM-kn4AuhZ48e11ldNem9HvMflPcpfxcKY6f_hirlag=s4800-w600-h400
+   Restaurant ID: d45ca5e2-17c5-4b40-a23b-53cdcc333e34
+
+128. GRUB BBQ
+   Address: 3500 S State St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyaVkfuoz17MEguvpwdFqIXiFpbrUsbxlU72DM1zsk3UYXPzsQfAeZd1TFLw3GN8ZCVog6RKUv_fXiA2XUmj_CK46RIpBz_pJpCND5KeyeKqY_DxLeA6WHMDtvAIMFYsmPl9T1l1q_Txl42-g0=s4800-w600-h400
+   Restaurant ID: 72c8c53b-5446-4399-aae0-f0de5fa26b4e
+
+129. Haab's Barrel House
+   Address: 18 W Michigan Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyEMB_iSEZMa8Z36O2NjJg258Wf8Cb8l4J2ZL_9ndots5oab_eQx2HmACiIok9bkpTxvNNM0DT5qR-G1Hl6my2mSaWRNVpbxAVzdW3ZKT5MzE7mWar2xwD2Db6K-fmHWwNeg__6GgIPttLAYA=s4800-w600-h400
+   Restaurant ID: df039994-abec-4728-903a-eb83dd1d9e98
+
+130. Haab's Restaurant Inc
+   Address: 18 W Michigan Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxoEk5rOtxzDZ2Q4B26jA4SQyezJPKBUlOpzLNioutSLq09xwus4Nat2xYlfoUg7kPRTMhXnDM32xWfC5EviuKhQzqJorkvc1m8zHW-ElN-3zTJ3BrphPGG9iwCuKTfC9Nr4Eus1zhysmc31A=s4800-w600-h400
+   Restaurant ID: da2fcd89-5cd4-4971-b703-1344db7875b9
+
+131. Happy's Pizza
+   Address: 612 E Michigan Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czlHdsRioFCxkU63h27o9Cwhf9kFQxZ7Fz4nSJGCuV6Is0xUHEBF3Ar6_s7McUFizdXK7ChUyAcUhTTCHsQ3WMVc_OmFy76dx2FqPB4bF1RNZGPkVh4dukZ8izy3iJTgxZEyug-Sc1F55oZYdo=s4800-w600-h400
+   Restaurant ID: c65d015d-d8a9-4633-ba65-818f5ede5da2
+
+132. Havana Underground Speakeasy & Cigar Lounge
+   Address: 207 N Main St #100, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czj2RgUgiVAESuVt01CfQ9cFwosgmzcGaZR-Haw4ryFxrJ9RKVXomEL8w7w-uIeTlNKTxl0uMO_WQalb4kHCgE-ZIl4wKgS8FXBifE9b3_npV_7_4GTb1oyCkETA4I9D7RkI0SV2D3AGh9W5IuC3t1Z=s4800-w600-h400
+   Restaurant ID: 9ab9204c-bab5-4b66-b26a-0a9dceefbe0b
+
+133. Hello Faz Pizza
+   Address: 2259 W Liberty St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cydGneJUJB_dDoZRbT7w7Clk7PG5Hv1upF-EfZ-hJtLpLTc_3P4oZTjy1P9DKMJngjxPD1XXt9nU6iRbhINwJYfELJSikGIUt7vKNm52CJtMrg5OBEmArsmB4sq9upDSIKu5qD_BktT7RSLw_o=s4800-w600-h400
+   Restaurant ID: e455fcfe-a781-4ff0-bbc0-1d4f88b0e153
+
+134. Helvaci Ali-Turkish Dessert Cafe
+   Address: 22727 Michigan Ave, Dearborn
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwouVG8JoZBisR125mU-dRwVgPm3jqvq8bo_QeQZVbKUG3Dv6-msZm1nsOfhEil9oaWcucIn83Ua00VD9gX9bJh2oAvPG_KbETcrkb4_Tmesg7fuVhDfU6t6XcfEBbsrHfw_YvD29HpuwJk0g=s4800-w600-h400
+   Restaurant ID: 66bdeab5-1aae-4818-97d1-fa3593cec945
+
+135. Hibachi-San
+   Address: 2101 Bonisteel Blvd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyBGSQNGjcvZ7j_TsmVQt1qiXpmDF5PPz_uh5exLpHL2A7cEbIRVROTFqt7jny-qrRb3D4TXXZmwqn2SPTyUpL5lyYzBme2yCl4oB7nIqsCp-chMcSL9MWtcnU0CxkkjK_WqEQbNsbHLB76=s4800-w600-h400
+   Restaurant ID: e37ffad4-6c6d-4644-be61-17cffd73901f
+
+136. Hola Seoul
+   Address: 715 N University Ave, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyNxlZFkrEuL8lC0XNOKAB1MaE2XbtufqiP_UCiOeizp3h8VtHhDHrCObTyT0GYI3r1DHizwWJI457Zco2_bQTk_zk9UyW1AEeCgyDKFsHpGRLFuB5583xK4Y9UZq1N3KeOp6ooBza5U7M0lnk=s4800-w600-h400
+   Restaurant ID: 0a5b1edf-8c74-4b32-886d-b82a587c5609
+
+137. Holiday Market
+   Address: 520 S Lilley Rd, Canton Township
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cynfqKfAJsZPau_T7Wr0Z_QuufU0MaccfSw6v42LzDj-bWU6mYteG819IjbIaxAFYxy7DIqRm2CLpXTIK49FcqdBc2apKNYd4lRAqeOGlH3niyiCQ9gsLxxjAYR92Ea8LTguQfOq2nDlO5AcrY=s4800-w600-h400
+   Restaurant ID: db646827-a86b-43a4-be85-4e6227f20d7e
+
+138. Holiday's Restaurant
+   Address: 2080 W Stadium Blvd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxTxX589qwldSoj4GzY2ZqocnDKWTRttxZZMpqerwSY-4fW54ksOElOwrO18zXlEBUI5SDC30fI3LwyrAlbdbRfJARcC4s3hW3vecE7uO9mYuOZbf6q8Lzi3s44XJqjz8MR-0d4yNnjIgpLJQ=s4800-w600-h400
+   Restaurant ID: f1e5b6a3-1bde-4eaf-8e1d-5e77b296b40e
+
+139. HOMES Campus - Beer Garden
+   Address: 112 Jackson Plaza, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cykx6QrN3Bmyevaxh9Bzt3Q2x1Edi4g9B6guSKinlng7pwT-Rve4qkTHAswjsmUg7yDsm_0Q-7K3neUhZlKH0Yn6qEQgXpVv-Abiu7bffhNehSWYRFwKHIgMGTgYW1EnADATC6SQVGI-tLEPXA=s4800-w600-h400
+   Restaurant ID: 1e4fd86d-8f4a-4746-b5ed-5cb20c886c03
+
+140. Hong Kong Chinese Food
+   Address: 2339 Ellsworth Rd, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxsD_dHVneaY6jE_hVDSUdhmXnosfs3sC0n7v9uAIIRMEv__10J31IjyNgTUFirCzeFGTlzMA0M64NCLC0QlAIHWlejGAppKfUO2IKWRFcXfbjsqIpba7EpTZj-_HB_3y9YgZpzQhaXpJw1bKM=s4800-w600-h400
+   Restaurant ID: b837acab-8264-4181-b3d3-49e4593c3f0c
+
+141. Hot Chicks Food Truck
+   Address: 25315 Kean St, Dearborn
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czXnghFWFB4AOBPK9zswuMxv6Sw0leBH3f-bFZ0uGguODiJKwxu34l0umGGwVSqzfwc8YSVLd1jB4kJsaQm6bOtqXrHqAmzML6t9Y643thqDya7YCZLmN2abbwyP-yqXIEKx9z19XxYFbTJtdA=s4800-w600-h400
+   Restaurant ID: ace91b78-8df3-44c9-bed5-9070dc721d2d
+
+142. Hot Pot Chen
+   Address: 2255 W Stadium Blvd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwSiFK6CnJLiFZ69EmjhAPxcHCYp5V8psIf1jel3WkFioJ-Z6NWYBaema628imabju1xnUB-JUOiJ_Yure7XBRkLwHAI6YFa6MFHzQoC5MyQtmAReSMMSYzpnPTNDXGXMPugyIJhn5C2fyoug=s4800-w600-h400
+   Restaurant ID: 1ae09f7d-9419-4c06-810e-b94a247d44b0
+
+143. Howard's Hoagies Restaurant
+   Address: 2011 McCartney Ave, Ypsilanti Township
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyL-Aqxtk3M9bx0vmj8uumXYYBIgBypp4mgI3_LKeDO1lPNIXOPyTKLXCOWR0v7ZN9Q8LS59YF4l0EXTcDN0Zx85OQfvR19WSTSuattT5q_sgjy22gxxxwcBc-T0GjgwSznMAKdkL_e_KjuPA=s4800-w600-h400
+   Restaurant ID: 4b67c468-a5ae-4ac7-939f-77f85e3c66c5
+
+144. Hyperion Coffee Co - Ann Arbor
+   Address: 111 W Liberty St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwxS4cTwAp_LBxleSeNARPqDgPcSKTX5pLEcnaXLdd01sVE7IdgjiqKLbADrB_ry4cwZK11wyFrqbuIQRk1RQGEiNS1GPb1yMtnXWyTmgWxumGai7zR0fzf9aE25JFG-1v1V8vW_zFoBVCGOg=s4800-w600-h400
+   Restaurant ID: 29283d6d-9d00-4e9d-ab09-c9d6677bf7e2
+
+145. Ichiban Hibachi Steakhouse & Sushi Bar
+   Address: 43750 Ford Rd, Canton Township
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cx8cen02d8NDXm5AYCi0B2aKwhlbwLkA0LNyJ0UA1Ae_1bWTZU1S7Gtr5_qkf5R7-au_ejJDBKc-mO2Q33rnl56MOhUJu-y4AGky9p-VWf3RTs2DFIPGK62ELs0RXgWQcrAxZ59PRAA312zh58=s4800-w600-h400
+   Restaurant ID: f1c318bc-e29c-4484-8fdf-54a084035822
+
+146. Ichiban Japanese Steakhouse
+   Address: Taylor Retail Center, 23299 Eureka Rd, Taylor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czWiEz5cwI6G-eV2xjNgGP0o1cZLGXKjGFxO27gWyIveWWLgv1y3S9tVZWUMof46RZKHSL1bBfnctTeFathZMNTUulsK78s9IUlAO_cP8CaJ_1T5jaAq_xxk3ncF7TlSMBoJkyA3Ta05bVARg=s4800-w600-h400
+   Restaurant ID: 016ffa52-66cd-4e22-9ed9-93317b5d4212
+
+147. Iggy's Eggies
+   Address: 611 E Liberty St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cy4mAcC9VGLzuS8oinYeGvpfZLdQwkbJ7lUu5Q5LLayYvTiGREEbdROBP86cfAdinflFLTH1VdWb0887CIhHETJPBXbAFff2E-yamZTQARGUjgeS8rdJse6hpTSpT8jx9RvTLDMsDJQZExy2g=s4800-w600-h400
+   Restaurant ID: 6a3fded4-3074-4d51-84a6-4584cc28c672
+
+148. IHOP
+   Address: 4221 Ellsworth Rd, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyAIS_MoLHr6jd64fzIL7qXxsYWkZba_30XYqys7tJqVnUxLzkd2vORA6Qld8aLVe-dLqmEjdkPkr_DkDimNmqWpfHkEZ1f90nFOUw0UWlNZSWUqcNVSaL98udy0fLYdQPUF5J_Yeyg-R75dQ=s4800-w600-h400
+   Restaurant ID: ea5ca833-2055-4118-9be6-8a65bf90e6fe
+
+149. India Cafe
+   Address: 1797 Washtenaw Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwmjrlczbQhEOMART2nWLchTcmMJigB1dhGCNYWGb3jZPHuQzZHIx_khMPw93tm3GIpq9sJx5SSD3GEQyNUeY1QqHCkb82tPyI32scR1SAz_EE2K-MLPdhSVutfraML9iKcAXbC5jIMsnYSw9I=s4800-w600-h400
+   Restaurant ID: 6eedf3a4-d325-4fb8-8046-fa67e1b04def
+
+150. Insomnia Cookies
+   Address: 733 W Cross St, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxQWSLFX5QzXyODD60fJZboCn41FkArW6BgeJFSTSJqslACe0uWsAg8p2Db7Gs2qGjapCS1EOdkML4DcdRYbpabQopadDcG7jfEYMkpitJAWJc2PfAKEtiitVJHVMbV80raxpCBKTOXK7dv6A=s4800-w600-h400
+   Restaurant ID: 091e5f3a-8346-471b-994a-a698d5d99a78
+
+151. Isla Detroit
+   Address: 2496 Metro Pkwy, Sterling Heights
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czpdpXiX4I8eC3woVdDlR5kE7p9EIndwwcxIYZWgE50QZlojP1dREdk8Teme6DFiof0Eb4QWCYhNmnhNTVpbrxzOqBbR9DdbTeru_lKUvGbEMlLav8G-O8ih7bZ5F1w6IWS3_b2y7WLLZYZ-w=s4800-w600-h400
+   Restaurant ID: ae43068a-3761-4d0c-8229-09aa7977d99e
+
+152. Jagged Fork
+   Address: 414 S Main St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxsghgEB4Dc7UxvXAFqwFNWKIYF9esjKx5Q11ay87FO9jcDwXoanVI4BfGs7goyIF8bIaQYAGCV_JuDYax0ohzpszonWwpwD2VHcoNbH0o4G1X7T5S8fJT_TeZTkpOIyGfjiUV4O2p_5uVcnQ=s4800-w600-h400
+   Restaurant ID: 38814411-5154-4092-9b84-cbe3cbf8b8b8
+
+153. Japanese & American Bistro LLC
+   Address: 130 Maple St, Wyandotte
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwPdqcAqpjbFy7sGTjuMFfZSjwvO10Ka8DRy6MYAsy7_IQoGf9kAgN_6qzx9b2Wi0Dw9l4wMamolq7xNCEsr49Caw3X-stKC2k2UJrkuroVTgxXHLoMDZuMFeFLmq4b1iXPii0AaCLR8lqNWw=s4800-w600-h400
+   Restaurant ID: 9b884841-8005-4a41-a3b4-184ebf183d61
+
+154. Jimmy John's
+   Address: 537 W Cross St, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxN9xTpW1weF4ocn32jSUDd3fBVfHYMPOpA5sIZ_HXjTMfg6M5Czcd8b2pwQC_wNHO8ONDsOGA_VDxDLuxmdt_cG74NeAALRKyMOzsV6QK5Iw2-fW0Odm7RKFXZamcNAfSv01PF8BEeVbdt=s4800-w600-h400
+   Restaurant ID: 6b4484f4-46f5-43f4-88c1-5007782d7778
+
+155. Jimmy John's
+   Address: 600 Packard St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwFDHJCwaigrUciC4efBckZ7_F4f9EbnjgaerAwtFiuQJhBduHKm0jIRvfxKvCzY_-F6hUCUnZc6ssjiGPkmIEpJlotx63Egg5PCgMihrSHhsJIaQShUJIrWH8asZpi7utMUXYUupOQFkcc3Yk=s4800-w600-h400
+   Restaurant ID: aaa4fecc-bc7d-46f5-b875-5e45b0195467
+
+156. Jimmy John's
+   Address: 929 E Ann St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cydEyb0v_Eg5AoikKOkI54G1TeV1cZgsTCG3fJgbV7e-WEQagyia3_tpAytYzaq6qoFY2ghXzatRrOy7kr3OM9amSIvhZJhioo3i217ZW9kQAnMtetw8ICRhwaogOcM4gBXEsanrU99WRWqBQ=s4800-w600-h400
+   Restaurant ID: 12aab97d-79e1-4884-b6fe-0e0f0a665023
+
+157. Joes Java
+   Address: 5301 E Huron River Dr, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cz9XREHMyiGwfeA-kJHPzqF8oLN9rn0LNbfymWSD0jGPm8osf1ltW9b9qUbb1ZTXHkx8dTcXC5CqNk5ojeM7IYCpXPDc5Ud2yMWuU9yJ0IYPwlqjMo_Oo-JR6yZA_2WZP8S-v5VywzDr9L0cw=s4800-w600-h400
+   Restaurant ID: 8017401e-e562-4f9e-a3ea-a957becdea8d
+
+158. Joes Java
+   Address: 5333 McAuley Dr Rm 3001, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cx1T8amSmIf9cdhmRB2Sa1eYLg79zjU5T7bCKTwW_IHIJyHuFRci4ma85y1NDENZX7-ffAiKEHp60J5BLtV5UeCJ-s4VsbEkRJ04xfr9w-d9gJAbN5bqPeTCht5154to8uonu_DiXciN6PUfA=s4800-w600-h400
+   Restaurant ID: cff37bf9-771f-44ed-b587-2c5120b3a511
+
+159. Johnny's On The Lake Bar & Grill
+   Address: 146 High St, Belleville
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cy2RaFuEn975BXgsCv_NWboC1khgSzG-IJdwU4IxdOJX-nCOD5hPcpYQVjHZ7eBukTiJXlSWvfjIHqK1lbQBRj9FBK8TVdXLxguLyS3HePsubslbP6iznwIotpVVYWSezW5BK319AYQfS3xV_c=s4800-w600-h400
+   Restaurant ID: 3e50e0d0-f2f0-4b73-a4cc-6f9d5ecf50cb
+
+160. Jolly Pumpkin Cafe & Brewery
+   Address: 311 S Main St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czGWQ8u6c2tTUHOS9X3uSQLIOJA68nrPGbHiRFW0WACHktjUV3C1qZ8E76Y3fwJG8tLSOvfQ6IjFEtZ8r90diCEYQzPb2iyB4JvL-MBfmZbRGIAm5wvepam3A8hg6XCuXmIsk8YB5ANCMc1Eyo=s4800-w600-h400
+   Restaurant ID: 188ebc3e-e917-4ebc-b3a7-b815f16b6696
+
+161. Jonny Cakes Cafe
+   Address: 5846 Sheldon Rd, Canton Township
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwJ5vocf8qoRWMgilFDfllPHZCZuSP50C4Ef53UV5G84Jist25RiD2D31WOX2O5chHCRd5SwJTv8CURzefKUr33y5MdFlsKlpvnrVkDzEp0bpP0hVrGbGQaGXwIXNwIoxzp8yw07dPM4pHASA=s4800-w600-h400
+   Restaurant ID: dc55eefc-77a1-4316-b082-4841319ab0bf
+
+162. Juicy Oistre
+   Address: 414 E Eighth St, Traverse City
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cz1vpG16jsL7G2gYIE1psF84l6Tyguo537upDOElGL7PLbOWrm4pJbtKJ2TqEUZ9nKVGUGEevYU4Z-ebH7SfSGp3NYGmcnMrqAFnsRKIHPUUpgKKtMVJinjF1sMfpwqzfe_q-pCkzpH9xTH=s4800-w600-h400
+   Restaurant ID: 3c6a6be4-f4d7-410c-9980-5969e552afa4
+
+163. Kabuki Sushi Canton
+   Address: 41808 Ford Rd, Canton Township
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyHIEN5i1wjWovud0Mkf6bmES3jrwwkqAzKojbPJ99xYJAgd8AjmUWO5ROwP8uFS6zUJxYk-pTbd7zsz1ouK4CRzI4xgsWe0-bMsNQn-dksrKu-19WbTmLb9zfpZQmfHSfthiraGcG6E11Sp7U=s4800-w600-h400
+   Restaurant ID: 44ebfd6c-4eb3-4623-a1a2-86371e887dbb
+
+164. KANBU Sushi Downtown
+   Address: 241 E Liberty St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwRgBhOJ6Xm1rnWMslGjcIICMinFtY5JidYKIZfHEXZ6BWynoJj31xxCpQ1XIyqlg3ovN9Oh-9sWFw4dPK15lHqV5BVS7URhTsmFE_nmnhhlVDFQf1ytuwL7Fhhi7HPnZDE61FG-bz-9Dxeo0E=s4800-w600-h400
+   Restaurant ID: 29a81617-90a7-44a2-a767-d28ca9647358
+
+165. Kang's Korean Restaurant
+   Address: 1327 S University Ave, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cw2Fp6tIG7Oulj83WOn1F0haCrVQfginbhZPPIGMm6SUpoM0R7aOgb_uXkvSkAhIQSUSeE9bYwDrPNVi7kN6A4Sf3xQ0gvEo3iShPp6fAYsUXiBU9irEyZLIMhX1TGYGKlyPrF0pduBTfiG=s4800-w600-h400
+   Restaurant ID: 5b277504-5d2b-4f93-97d7-805df14eaa3e
+
+166. K-Cups Coffee
+   Address: 2294 Touchdown Ct, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwYEBKmnw1lRiZSgXmS54PtSrYkVxBuh5Y0l8iiolsn3sfeiIs4SSXSaL6JYcQZT5FHFXlpwsxdHs-3NrpwLmdjoS0VvtMUYrEmNMOPSn4JNAB9lGHX6q-rmm9LKhNZp8yosNfTzUDcwcZZ=s4800-w600-h400
+   Restaurant ID: 94400ea6-d99b-4a16-b76d-71ae5b85e1f4
+
+167. Kilwins Ice Cream - Chocolate - Fudge
+   Address: 107 E Liberty St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czLkLt8bUl6fdjGW7rSsrcrpgSnDjO_Idz4U1_ugjVtN34HTY8-ypJODfDDfIuy15ZdkD72XCPM7PwvvBtJjrBw_lj180kk008lFVF_bJNQcykW372qYoZcok6QlaT_jTuBJBcYW-uXYXtNwQ=s4800-w600-h400
+   Restaurant ID: 2c07a702-8f70-40d2-8387-d3781fcd43e7
+
+168. Kimchi Box
+   Address: 1771 Plymouth Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cysfc8oF-08OJIKMMnWbhQ38kYXoUl90mqFB_Am7hHkUIzb4KPOLxlQAjDYWtF8O_Nxv8rIjB96RBdwwcACN9zfmM_vukNbyTuyGzuZ-A9tWz64wcKez2T5LgRvB_O052JAu_Or7MxMRcjLuw=s4800-w600-h400
+   Restaurant ID: 331c53b0-9ce7-4e61-802f-1fd9b50fe197
+
+169. King Shing
+   Address: 2865 Carpenter Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwzJLu5Un5uHahx0om-7xpPf6wF5LtYNAv-5CpA1t85WzFBCYdcWsaZM1dfwdd9ekVO64al3SDHDnla0RDBpyqHfRMR2U2RphHE0EdtWcIZhMTvKWgDYR29D2KKn-YhRkCvxMdIsO5o7jFevg=s4800-w600-h400
+   Restaurant ID: c8312037-dc60-4f14-9d21-38c9fb21efcc
+
+170. Knight's Steakhouse
+   Address: 2324 Dexter Ave, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwo4iYU1mxvh0pQa0gjIgFYwE21kh5gpRoB6yj3qn6IQZJEAAE8wzL4w0kwa1b5YOmJhnIuUuQw3_NjjjcI6pwwBjJI6hwd11aVFn2LBBaf8R-bKsOrT6fa2zK_bFwU9HhgRPALtV9X0lvD2A=s4800-w600-h400
+   Restaurant ID: 67fa305f-c6b2-4ef7-bb86-2c0565e4c732
+
+171. Korner Kitchen
+   Address: Packard St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxU0ijP9dnkantlGw1t3ijPVrtjryQo7mw99l08g-EP2VOeyFZ1_oofq485UoVp33BQfrJiEJZJXjzlGFIFI6puDCecimg-QqRnxFu7X2YfT3MlWtCOeLzdUB8LXfGXN976qDwp7yfSvewbPg=s4800-w600-h400
+   Restaurant ID: 306fc0f8-6495-494c-ba71-44890fbb23de
+
+172. KPOT Korean BBQ & Hot Pot
+   Address: 44375 W 12 Mile Rd Unit G147, Novi
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czQXMxJeWlwTW2SpUBLabUJBLcJ3IYH5_fq3std4aPfGGqsL3cB26bW2cGM2Cr_rD6iCwlnaa1b-LmIJeViNmWYqNtQoWXas-Zk2wxDFkEpRoauKlZScjUjyAYaZ-WFaxzKWHXweXDOwsqiKy4=s4800-w600-h400
+   Restaurant ID: e9e94ed3-b29f-4a37-99a8-7771058c39a2
+
+173. lab cafe
+   Address: 505 E Liberty St # 300, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czY6z4UArqlQKnQO2ZPaDgRpJaSsYD6kVUYlQ4WICVjPgi92Y1lDLVaCSMFKljn-1vu1R1B0A89hMDp61_I0wjteWDPhAaH4J-xSSM5_6FL_uOcM0Jg1LTs8CG13zwNpVzXYuNUCxchHdSK4Q=s4800-w600-h400
+   Restaurant ID: d823ab0b-8468-4187-b58c-7ad998d9db7d
+
+174. L.A. Bistro Canton
+   Address: 44314 Cherry Hill Rd, Canton Township
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwgwiZ17xmTI-ayhjuw-24RuaH6rybBg0WvtIpxv11cyqSC4sYPDcVBNyaK3mt32Zc9k0sbWbZAq7oYqkaPvJlJPczr-knCREP2r5I94n136P9BknY4bHLbeDphPEQYkqop7oeeNhBsP41-cw=s4800-w600-h400
+   Restaurant ID: 567ac5d0-1a76-48ac-a727-31b9ae1f6433
+
+175. La Casa Latina
+   Address: 308 E Michigan Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cy-Jr535unXsFa8316p2sCiKeR_jMPdqIDOAMj0OLMRX2xDFAz_YlznYpPMmhQwd4kshxuPleIB6BE5j4xV82aTzpwrcA5KOAX9NW1zwgzLzdunocRGzHNHV4Qw6sSb2w7JOCE9pxN196Enlo0=s4800-w600-h400
+   Restaurant ID: e2aed5bf-155b-4f34-85c5-4477ae98bc8a
+
+176. La Espiga Dorada Market
+   Address: 1449 Ecorse Rd, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyMVOB2uA9O8ong8R3wgBIykjUKE98OZe3v_UU5U1Y7UeZ1MLJRZYknvcwkBQ1lp3uk1o7GJ093KBQHpG5NcxwbIa6zR5BpLjzhKyAcQRSDLMTkj_JS7D55BznsTcLBgV4MXd4frR4TWfNViYQ=s4800-w600-h400
+   Restaurant ID: a2db6fdb-38ed-4329-aeb7-1a8771e6757f
+
+177. La Marqueza Taqueria
+   Address: 1396 E Michigan Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwq16Pih1lvnqEnxtVdtN3U0-sdBQ5cPeGDD-xC12TXn6aWXLNiODmk86ANKsQksXtrKuG6_dYSZOa2z4RaKYK-7VyqDE5FKa4RXPYu5r3yOgJ9WxC7vO45_ftHATPTrXJUYo4ag6coxPZcVA=s4800-w600-h400
+   Restaurant ID: 9d86e983-4fba-4416-ab62-5081d100b2ba
+
+178. Lan City Hand Pulled Noodle
+   Address: 2612 Washtenaw Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwfAZ3XQe0Wpo1Pi1RXg-7uHozFFGJ1b-g1fHp5ICOVkLo9SZl2g_mKt7hzmxeWqK26TsinPDZ1pStTjbBxBME7RziJB3wh1nz-D8H8NfhJlNYdwPVSF0OR1nY1FKUqR_WedGMrIc_zF5CtFdo=s4800-w600-h400
+   Restaurant ID: 18b629dc-d5bc-4681-9c6f-623c0e1298fd
+
+179. la piña loca
+   Address: 3980 Platt Rd ste c, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxEXLgm5EO4pSnB0uMVeClyy3ABIuxR01D-SfkVKzCTfOGO8cra3n6DL2tSOVbyfeDovF4Lsy7zkSaw43ZELuKw-ltv9uk5F8zGrBVAIZ4sE8lWMIp83XoCEpIWZV3y_awIXBXHH9qpOPuY=s4800-w600-h400
+   Restaurant ID: 1a5fca29-115e-4ac4-b298-0a6f0894b025
+
+180. Latin American Cuban cuisine
+   Address: 2269 Ellsworth Rd, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyXCgluJCTGLmVNH-O0MLvPneNSKfTbkI-N_sYnaQHNFgQljeh_-hamiZb6IEbfp8ssIm622atn4ftsnklrUOZdl738LhoMJllGXIhGo9zo4jEQ8EQ02MNln7cM6yhZVRVo_LR9UMsJzFL0ag=s4800-w600-h400
+   Restaurant ID: 110f263d-f93e-4fa5-90ad-da396741ec4a
+
+181. La Torre Taqueria
+   Address: 1525 Washtenaw Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxP_r2Z6OGVgxdy55Veknt6Md411dtllqE4e64c9ofBg8hdJ2AQT--tejox5duf7JxQrs9POH7u0Da6uCpXuz74c_ahCojN7P96qTL54zZPWQbfkpMaanVN1zZQPSpkLtT7lK_xBuA85tpuvQ=s4800-w600-h400
+   Restaurant ID: 24eecf05-d03a-447d-9744-79bfc3700501
+
+182. Leo's Coney Island
+   Address: 3644 Carpenter Rd, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cw2nCk2lc8amXBhO1RQtYw1ewd20hW5D14lNqVECyTO-bJV4DlMD9fBr-JwpvtgTnF2zb_ZYsw2TyhXy4p12kG4nCp2RhT36iyOfRJ5fUICO0eNKzMji_lXhI005bkbfS_Sj0prYr2JS9Lz=s4800-w600-h400
+   Restaurant ID: 63a7a5b5-c03c-47f9-ac41-0f1a100d043b
+
+183. Leo's Coney Island
+   Address: 1342 Anna J. Stepp Dr, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czIQqhq2pm2zfxtj0WYORGPxKJpQK8bNs86fsUiIY1ppQ2El798ajC6IBT-IVUNohOY8hqfzj1xNeRUzjbtW-cK1vdiJ402jt0zomholkKMVHUhPyeVNcEGyePv6CAbWMnd1adaaZrc6tRVzg=s4800-w600-h400
+   Restaurant ID: 5c24152a-50b7-4b2f-a898-0e63c764c72f
+
+184. Levant Kitchen
+   Address: 45164 Ford Rd, Canton Township
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cx9XH1XPJjeZlmvdlRNnEmv7szSVxhUz22LMsAUTZo6DoUbCI-tt2yAc8SJXrzMBuRJmOjg_nRDtQJM639Dz4JlFMOFmpyynfa40cXn2i8DEVF6Xor3eY5q5WHufv7jkUCmpLuK200lUyEtkw=s4800-w600-h400
+   Restaurant ID: 93e0c469-ba00-4f85-8ab7-2170638ebc0c
+
+185. Little Caesars Pizza
+   Address: 1783 Washtenaw Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cx5gM8GYqo9CILVfgT3MLJiOqtwO73frIs9AOJe_ymWSXnRvnx63iQIsieIk7gHlzQ3-DJnCRgcntXb7DJT5nmXcF41iVVUHeyopcILbm96n8JPOpfxdftfl4KFRHelmx5Uv7_POK5oK2MfGw=s4800-w600-h400
+   Restaurant ID: 1364d2bc-f32b-4dd8-9862-793fa5fbc8a4
+
+186. Little Caesars Pizza
+   Address: 3000 Packard St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwYqTQRHFm_nTeNrf8_c-hQ78NrQFqFzProa_YXJ4ZKIkzFqrptV2xTBUT-gdNXU7IFXaGfF986nw5IdwMgD9NCOflurtIKBRVcpHqIGA1qbSXz8ULqSI1YFQR1glRqIZez0mkRGSxcovmvcQ=s4800-w600-h400
+   Restaurant ID: 49020027-f7e3-4e8a-a010-920e394fefb6
+
+187. Little Caesars Pizza
+   Address: 1595 Holmes Rd, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czTUEk7Y4L_pABkxRzHMKSc4XZ2mc5ZAxBJ6qEUllICvkvAhDKXqgYpEgL-emneQd0GGG0D6CT6XpQl7zBZa8ktTEz6a8EFHQTb9aXw2jxRUZTPXILT3sl5HZEHJLXRUzFi1gQBL1T7ftmH=s4800-w600-h400
+   Restaurant ID: 4b1637a9-a01d-4ea3-8f2e-453e2597788c
+
+188. Little Caesars Pizza
+   Address: 1944 W Stadium Blvd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwrx4Swn9Y2ApUw6pNZ9yt_EpLcySw0gbpoyXTXFtixfi3A6BGpe8MfCcB3Hx5gysqb2AfYrIGCmuxOg0xVJm_J2din1d7sfKtdbgW5ou2te9ORgvTFn2AXa0wqXwujr4LecKNr9-27UT2fOy4=s4800-w600-h400
+   Restaurant ID: e11c9c5a-2abe-4d47-b953-fa5ad1e4410e
+
+189. LongHorn Steakhouse
+   Address: 35400 Warren Rd, Westland
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwVnK_S2ly5GccoA9u2DV57ys6Y7fY6xWWbqA2ESPK_zC7RhZ4Vaswq5Qa0dbYyVnd9poK_vqrZYhs1Pvh5_L5T_cZ7n5sgsIlYcSgL4PaQ_1zI9IjD_Bsx8UnPrWshA_mt6P1jdLLzJOMxf2w=s4800-w600-h400
+   Restaurant ID: faba628c-ed0c-49e0-80b5-bd5371d8f76c
+
+190. Los Mejores
+   Address: 4970 Washtenaw Ave, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czKYcIDfg15fM8uIMco_7Fb_B6BrPzvRjFoKfMhPZgyCxR91BHpHa45pYjtRBzyxxLnMEpH7bokIdP_sAt_wWG8nAJ57ngRlntPnQwckp4HMpPfpQM5ZubIjmQluNrl8o9JGIYtrM5079Qb7nE=s4800-w600-h400
+   Restaurant ID: 1f1a6213-b73e-4bc4-becc-26f2b87761dd
+
+191. Luca Pastry
+   Address: 3354 Washtenaw Ave C, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxR3yG_7Mn8sGmwkug-qYot1MU3P-iv5l5MVWqJkgo_0b8iXXTISi7K44y5l7UII8am33unxhq9eugV0c13BplsZVfxzAipHDBzAjEPehcdX0caWlrEyb0xGQaHsLFMjvq2yB6gw-6ZXfbNqruyvBSr=s4800-w600-h400
+   Restaurant ID: 9fe37dec-7ca4-443b-97af-a0d65747fba1
+
+192. Luca Pastry
+   Address: 42927 Ford Rd, Canton Township
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxsdZP9z8n4AbAbofDabUh6A9TPrLVzMWF3u0ohSkK-hNSSgb15Ypy4TruDiJhuuXH1lSYB7fJan4uw7UBLcTSmCfv9myNvSRf5FbBX2e9nSVaBauqZAAI81bnMv9Sb6d1-HSBiId3kC6wulQ0=s4800-w600-h400
+   Restaurant ID: ea780414-7fd4-44c6-8212-c9204a74bb85
+
+193. Luca's Coney Island
+   Address: 309 E Michigan Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxZtaJ9O6Vv437PE_0deK8Ad-qKB2A2I5KphzgT_Xhaf5h-x0FGh7Kflm-OSqMZy04zWPxkdG9lmu3gQiBTCH2oQaWHSbIA8sFO9P3foLYGArUYqO8CGXtKvqH6kW0udqGTwvXOWQvO65tviwc=s4800-w600-h400
+   Restaurant ID: 097f4cd3-3b37-4aef-96bd-7ce875ab8774
+
+194. Luck Star Buffet
+   Address: 8234 Telegraph Rd #2229, Taylor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyh--dZj2_BeSFNsLPfJOiBYjizi15w4MCLDpvrIs0FS7uOWcWpHtpeoz2Kv8b0wYySbRZ67x8hiKsuytrchLNAwmU2wTP5txwi7tzegPy5M_wdKxmdJCTvMepAsJUBpXPHyObsXSatkJ5vkg=s4800-w600-h400
+   Restaurant ID: 7f845ce1-03b9-46ce-bc1c-c5c195443f34
+
+195. Lucky Garden
+   Address: 1072 N Huron River Dr, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwhQSuivnO4Zr8kftu9qMk6LF6B_1Xvo5eII5gxaLVvntXagmRulpRvWAuKK8qFbIamfKtVazqGnORxfwwnnFnGBhz7o-fEGA52LDTOp8cFoH4Ot3p7EjwGP7oUIotamcgquob18xLFAsLr=s4800-w600-h400
+   Restaurant ID: b896ef95-6fca-4149-915f-6cd118b2a056
+
+196. Lucky Kitchen
+   Address: 1753 Plymouth Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwjPpsJxslbH8cqa8u70DN82dmKnHi4jzfW94jF6IP8MsjyeOT5LLX5MuXADkQ6l24lqpZ8krmNDaBpa8qz6I9inqVLPDOqpdkskArIg8M7bAqzRF_w8mSiQmhbomcKAIAxZfz8_SAHM7OeMhM=s4800-w600-h400
+   Restaurant ID: 0fb20ec7-a7bf-46c3-8394-1c5a1b472272
+
+197. Luna Bar & Bistro
+   Address: 2910 Van Alstyne St, Wyandotte
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxtLBXmKhleonMZyIleq2cRUpFVxuav0TOk8mEQ6oFpObvDXDVbyS1QPZzr4eVUdUNRsbuM9tNtNWK1azpQ9FRGkGZAEaqda0QJhiub0yIRkE-0tZwQ2J6cuaZTw8ifY71auIeGmdK7H6cBWA=s4800-w600-h400
+   Restaurant ID: 64f1f2a5-9ecf-4b4c-bdc7-8a51dd5a20d2
+
+198. Macheko
+   Address: 2283 Ellsworth Rd, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czIlquqQqfu7MN5IG3A2YAlJzSE3SG9g8cXu-OiApjK6vOgZbR0moXXwGR1TmvxuYj5A23vH2ovcVwT9zGoszPAZCNvtwtjGfmrAENCqPzHBnReuIaErwZ6Y0dqsUmNADAw5LQD49hJewfu8nU=s4800-w600-h400
+   Restaurant ID: c536dc52-2270-4e61-b2ab-d16596b82c60
+
+199. Madras Masala Express
+   Address: 1143 Broadway St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cztAymIAp7uPZy3-Ih-bPXaEy2ySlIZzaeY_RDdSEXAixsnpOQNq_yoZewDlS1wbihCtu81ks4BKuaSgzCoqMhVVMIZ8Mz__HojXrji-AKnoawnEzmWea4D0U2AwyWuNX3esnjMaf0imVMEcRo=s4800-w600-h400
+   Restaurant ID: c00ab93f-a880-4745-afc5-ab1e746510a6
+
+200. MAÍZ Mexican Cantina
+   Address: 36 E Cross St, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czJSYTCmr5PX_qOp-NVtNXjfHv7vox5yp1VEq97q5g-lIgwOOSUswS5Hu-_Y1fwFvjMr5k53Hvk8VSpcpLwhUIdW47J7bWSUw0nCWWIcxdpfzvzHkdYdTkDMqHQ-BIKaVIEh27_yf5mQtq4Lw=s4800-w600-h400
+   Restaurant ID: a5fdf61a-a36b-4599-a776-2cc469653749
+
+201. Mancino's Pizza & Grinders
+   Address: 2883 Carpenter Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwmiMa3_TeKQOxsPbtvzKfJaZv4UhQlXQ1dXO5FuXNt0J4vn0L7XNc5OTpInESSDeGBD12RNFrcis-nEgoQ80bHG7dbUVz-6NHTEuO08abbB2uQE0MzTc5X5uR0Jv-qFbWCaumGaWlZ8duYjhY=s4800-w600-h400
+   Restaurant ID: 25ba3d41-6a3e-4a38-bb0c-d02afd285325
+
+202. Mani Osteria and Bar
+   Address: Handicraft Building, 341 E Liberty St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cx9R6eDhMQREwN3a5NaVQKT5Rgo5kdBmQ7d1Q5i1mRokDgJRLmCIqOCLY7TzRKmKUj2oWmC0V-0klQ8K3khyHBJax6fhpqckhbQ-GUmtV9ni0aijBNRKIm6PBTDM5CGU9G0OCvbnl8lLaB6Vw=s4800-w600-h400
+   Restaurant ID: 1f677268-140c-47d4-be59-a10b844afc67
+
+203. Mark's Midtown Coney Island
+   Address: 3586 Plymouth Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxKGWk0CQ8xajcBvXhXCjRQjw-1aAtDQXb7PcQOBJy6uCksRC1a5JC4XQ-d5Bn0RnDLRwfE0KGxG9-c0C-2wP67CWHW11Q9Cux3p_DHx6-rhgQ-3KSOqAtRVQvPDIQ6FQybs_yf0NL7ynDu=s4800-w600-h400
+   Restaurant ID: 13fb2f53-5797-4550-95f9-7f75d3a82fbf
+
+204. Mark's Mid-Town Coney Island
+   Address: 3672 S State St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cywew8yAsUyIunKUMOXh1kJLEjg3nIpo0wvBEJxQfX9D-V6kMzS01RA26R8Q1GF2O7X5I4Apc_IqBWN78fDLxKbUnK8Xoc7ye42PBAHdzPA9QvKP-Hgruvcswxi1jutG3a20lGEMc6ZUz6E=s4800-w600-h400
+   Restaurant ID: 5b2b2564-f32c-4775-a4ea-d19d4beaa3af
+
+205. Mash Bar
+   Address: 400 N River St, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cziJ1a30dFpVb7OlLg3ektQ2zWSQea9kazFjG1diFYTQ9VOzQoyJhZUuUgzciDhO_MdpHReZH4wrTCD8r7I241cDzytow4ApJ7Gsa_I5tCqZAyACqaXIm0UrXfvLgoNwdJxdNOoln5oZlLIow=s4800-w600-h400
+   Restaurant ID: 877a86d0-e8eb-44d8-b46a-0afb1d75b5c7
+
+206. Matsu Chan Ramen and Sushi
+   Address: 5990 Sheldon Rd, Canton Township
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cylABwOdMxqCxTP87Uj6sXB0du0XOP6I3y0FmX2ijJ-rHiADoejtuqiGL4-i0lkykhAtCqiv89m-mOC9Nv0NpC2zyesW-bFArsKioK3vYGYh_raMH9u57pLd_NkaoliuNRr-u8LZ2_rNw10=s4800-w600-h400
+   Restaurant ID: 287f48c2-c588-48ea-9ebf-4c3279b75c5a
+
+207. McDonald's
+   Address: 373 N Zeeb Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cx3EhPSvuRZtmApORqBeWK06vlMppi6MOT7Y2g6apQpfJxT_PNBi_892OdKsDcYj9DnIm1n62gN9eriBh7EnDA0OTn6uDlk5EPU5OZd1mEY7GI5Is2OVxY3OcfGo_pXyaBIWnd6UrkVwbeOTw=s4800-w600-h400
+   Restaurant ID: 9abb8bee-4eb0-4750-8233-ee6783995bc1
+
+208. McDonald's
+   Address: 3811 Carpenter Rd, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwk0oHq24KM2Q_45pAfRkADO5CdG5UYyg3k7-oqgw9a-xIBcP3HVqZ0i3vJgTioEQfJ7J3-tXJLfCHEvAXLrf7gUA_1OGK2rZ0BXMjQUsWgJZpPz8GaIxnI-VIdeOFRtMMxi-078aYLZsSL9g=s4800-w600-h400
+   Restaurant ID: ab0cb6c7-be1e-41cf-b0fd-9371d0ac5b83
+
+209. McDonald's
+   Address: 2310 W Stadium Blvd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czrzjkXcwMdon7jae5jB3lUKKcuhNthFCiav3zDeEKZXVnasyjeDOMvy-0vAyvuIaCLm_LXakZxsVXdpqU1YOoVBZzXARdART6jVmHVm7J8vSiFhIJtdlq5skC6M8TqG-DgbuK5hWX_3aUX=s4800-w600-h400
+   Restaurant ID: 134b273e-462d-4957-9c4d-fabbf29eccf9
+
+210. McDonald's
+   Address: 166 James L Hart Pkwy, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czkrZ29CMa_jg-134m7D8hpyXBD-CTJ4skvDLlJhMAdyxcxX-3QSj4XqkiKhQmqvUUUlBul_oiD32bpI89za78sKd9iygwKVlAEosUfkFJ_aOIFjSXvlnO1jWo0mTYVGCUK-OAHUj-SWrtvOaU=s4800-w600-h400
+   Restaurant ID: b765b06e-be3e-40e6-a782-650c1587bc8e
+
+211. McDonald's
+   Address: 2675 Plymouth Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cx4PxIjN8HGITm2Kbv7PkgUFXJFQDzJORYf0B357wYo2Oy76FOPAvs2p094JqyIrPxyMAmHQJlnBoOEsGekLflcsDDVcCRaHCTTANoIFDkgOf6cBqAzMFp7s0_jjUFPBBgyMYytkc0B9z3Hng=s4800-w600-h400
+   Restaurant ID: b96568f9-7318-420a-9575-c62900511045
+
+212. McDonald's
+   Address: 16 Ecorse Rd, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyl6xZJhk-78pz3duAFXj1cHtlnlEQP38nxcga72je6Xz4h1J36SQWw0MYENCqKW7fC5OXDIqqGg6VrsSSvk1NIpMGf4twoLOJHqY4vQyrJW832eOQSdXMnIu0dMA46lZhQdeJW_Q3mdJUblA=s4800-w600-h400
+   Restaurant ID: e9be273f-9c22-455f-ba4f-7a814adf8aba
+
+213. McDonald's
+   Address: 4775 Washtenaw Ave, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cy6sDEfk7_qhj-C5xgKUQ_mPKPzneE0zDPnsTYKAqxnkApp8HTdbfMyuXJtAgFcDwj5o17YFeK8LlN2ChNUBappgZIwn8SdXCN15YCEfmdySBJhFOFZzTl2qHxbX2TvxBHQbzJt5B9N6IcPBg=s4800-w600-h400
+   Restaurant ID: 7e2b79c5-38a8-4050-bb87-5c901e7b599a
+
+214. McDonald's
+   Address: 5550 W Michigan Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cztB9MNUneiGVH-RJLnVzi2auqs7NbxL4fJGgw8ddaAAfOUUT_-lDLCP-KqvIDuwqp8TM_gz5xAOWFFCIQhOeElJkZ85osWHS3LeBxlUB94bdcMCdaXfraTmUocfKvQUBraaVUb6oYhYi6n9w=s4800-w600-h400
+   Restaurant ID: df59b334-c6c6-4cc7-bf48-d3563891e7a5
+
+215. McDonald's
+   Address: 3001 Lohr Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxPEqxrhddTiB1d9EdyYs-ZIwUlgsv-sjBUP7xtzvmhGN6vwTYPSV86ooOvOVe59uEaRu2CanoUqsMtJERCmfC_oQrnLjPiTlUlTS9Kt0NCNdosBLq_Y519BJ_FxIA8zP2o-z0kZiSUABFP7A=s4800-w600-h400
+   Restaurant ID: 6d864564-0886-45d5-9454-685d017713ea
+
+216. Menchie's Frozen Yogurt
+   Address: 6427 N Canton Center Rd, Canton Township
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyD-Xu4i0vzU-G15k45uXouzxmd9rsU8lPmyYyZuNg_ti8fM61zvlDUMv-q9miS-gtd6vk04wGlfUHSgzaSMiWsw41BuOW02x2Ejz5VFjpoJ5S2qcigS-tWa65PThjnrhAwTyprc0-Sb4Iea8g=s4800-w600-h400
+   Restaurant ID: c6f84896-bd9c-4207-bb6d-d0162bde358d
+
+217. Menchie's Pittsfield place Ann Arbor
+   Address: 3155 Ann Arbor-Saline Rd Ste B, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxTKI7bbeF0OO0Mfbs5ywDpeKDux2xsSClvPWSS6pKA9bTUAVZYOPhHaasQhiX7c851piW6fEbG-dMwwkqwukrw9mYVrXqxfmP5aDNdEAymLdAOJ4KteBiJZZUX5dJAgqdkisy1vCtsMvEW3O4=s4800-w600-h400
+   Restaurant ID: 827eb9f1-e21c-4d4c-bb5f-ad1ef73dc493
+
+218. Milk & Froth Ice Cream
+   Address: 328 S Main St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyvogA6-xl3e6KRupUIAVydFvAFq97q3vl8b55HwNVpFH-gfq-t_nWER_0wx-bwyfK1yU5cJ3_YifQkkFZbMResfGVx345M3ue-_ItXgjnN-T9-tgBtcKiQVqBOcmJLo2xsziJjI4-coKo56w=s4800-w600-h400
+   Restaurant ID: b6271382-2251-4011-9de0-56e74d2e8c4c
+
+219. Mindo Chocolate Makers Shop
+   Address: 206 N 4th Ave, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyDxLKQFfIVIubvxDb0Z3UNzyfviI7przOUwPAWnY9K68jWOTompY_RtHEvIOs3Ms9UAN8hNdqWuSGgg2N_k0CM565Lh9gwzAJQmtLIlnbvmWBMim0aPHWZIiOaq3hbSEDjvMQvLBdY905jrg=s4800-w600-h400
+   Restaurant ID: 8d57b62f-2f6c-4975-b272-a815ef45592f
+
+220. Mister Spots Ann Arbor
+   Address: 808 S State St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyIIfZQxyvlGLj16cnrGg7Sy7VCs8CMZ4301WtLiWSO0rwJvmHnPi2-gekhlqfz8VfLj3S11fziPMYDkT1UphohF9CFm-uTotUR25Xr6iOBltDtwKYALK0pwKmA4XCoZlVVng-plL9FyMh4nQ=s4800-w600-h400
+   Restaurant ID: 5cc26703-5a91-481f-99af-031e2d8fe98a
+
+221. Misty's Plant Based Foods
+   Address: 101 W 1st St, Monroe
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwZ7QevZ9Ha8TTAsfGU02wB2fgq_S9aN8XqunVn91rVyNLnvIc8iJacrHqlZP8pt4gMBD_F2bq7yRUStkXCWflWMCjzAHqj5HHkM4X9rVnh6vKXwtLLB-srUjvqMkwdEDG0iEMfjer1eKxv=s4800-w600-h400
+   Restaurant ID: beba57e1-7410-4bb7-9809-a68bd22ce4d2
+
+222. M & M Cafe
+   Address: 44284 Cherry Hill Rd, Canton Township
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czY5hqFlMJmPjI84VcyEfxlm-g-ajwNsEaxHpZ_kpo7XuBXq8YVZSMTTQBQ1zs4Jo7xmxuEZa60lo9qZ2lvYireJYDzXD0xGl9-nqUy27SdKnG7G1u9fQMC6sl9Z02G8KROmEhdpU_xZWMWew=s4800-w600-h400
+   Restaurant ID: 8b3d317e-6f0e-421d-b62f-544fe016aa41
+
+223. Momma’s Dessert Bar
+   Address: 56752 Van Dyke Ave, Shelby Township
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cy4aQeIBIrm2X55ORiaEVq9QqLh5UpRYKUZ3ZJnOoD8cg-8UNrAPgbiVVM4M7ACTSwP5AVdsvLpCOOTfHf12_5TCwQ8vL-QXrGaJ26MGl295p_NTKUOzSKWHnjNUEzQx6zckbn3zeRFRot8MhU=s4800-w600-h400
+   Restaurant ID: 20042f17-ce72-4dc2-8dd4-2ee0422eed79
+
+224. Momo Sushi - Ann Arbor
+   Address: Colonnade Shopping Center, 895 W Eisenhower Pkwy, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cw3KAW80dwCBnVLXrvBHLFIHzcZiUSsO5Sq1rYn7a_hy9hqOUnC2ZzLf_Tg7LYqh_ysBgELBSsk7IJfh0QewoDgsEI3dAtMwq-e9KIYnCTVQDc7dT4-oFbGe9umKlSkNAw8WK9tGtj0C4zs9A=s4800-w600-h400
+   Restaurant ID: ab0523b7-8f07-4771-a1c4-bb421d9bdc7d
+
+225. Monty's Public House
+   Address: 3140 Packard St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cys_dL67-esC7jTyYtP53Wk7HjvJuhjGjxsKIRrFewOcoYn8WrXdEY4fM12TO1xQQS2XNerRH05F-2pMAR1MXrHPfjwdAFuPtDXqeXAaqwT3aze37vtTKteoGxr6l7Q3BdLCnHh8B05dkHA=s4800-w600-h400
+   Restaurant ID: 38193354-5351-45b7-94fc-ce558ed390d2
+
+226. MoonWinks Café and Tavern
+   Address: 5151 Plymouth Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czc9tlJK_Se2y8kw9HtjOic-RI4zAElTOVukONouOywmMzvEPZgmxX7v0ktnttDItiog_Yb3oo1FUxeOAxzQWDOQOaVWSdz_88FqE7tRvmZ4QGs1NQ7-XQC9f8-YO7HUSHrWwxJ3MygloxUdw=s4800-w600-h400
+   Restaurant ID: 2856ce69-380a-4beb-a9bf-b628ebc3011e
+
+227. Mosher-Jordan Dining Hall
+   Address: Mosher-Jordan Hall, 200 Observatory St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cz76vrW_iWyzceTVEXkJnRrdD2zOzZEgHDQZForyE5zf2PeW1UvqhezOwCrwnuOomwS52Kk-tU0BOzSZWe2FbI25HfKlMdogH--pwTD1ANIcI3bEnpoS-tJ0SD5faFNbNjfZ1zqd3-6xyXdhw=s4800-w600-h400
+   Restaurant ID: e3e3128f-30da-4fe7-97f2-459d7ba818a9
+
+228. Mothfire Brewing Company
+   Address: 713 W Ellsworth Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyAsjQHn0vwuOkcAFUh69E7KdVxUxaZHxi9AA7F6GJm9H0m7gysqJYAEm5xGborxKw_bnkk1YXmp6isPXg3NB0pvjpYRttv7FkQ4-ne_FTQeNGaD09pR1C1SnYR80uh5QdN4CuCzhpBF-_V3c4=s4800-w600-h400
+   Restaurant ID: 12fdbdcb-f2b1-4bd8-b194-0dd61e1bd2da
+
+229. Mr Pizza
+   Address: 9860 Haggerty Rd, Belleville
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cz2AhXpvDBwXx3wkXxzxmK8DMiBThVgt-uNfR86X2GESoW3rxDCpUSGqIXg0HtvWp1L4yt_O1VBf3H0kv_nuGdeOwzeUklph_5rj4g3tcv6dosRAusjlpFxJ_OgF5O3sjuQ9mRYFhXA-yRUmw=s4800-w600-h400
+   Restaurant ID: 2a54b9a6-c761-4be4-b3c9-1cc067e09fa5
+
+230. Mr Pizza
+   Address: 800 Ecorse Rd, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czfgydIqO9nHJlvjgO-z8oR9crpt-L-ot0IIjfMOFFp7R8WvArYHwdNXdetR9Gss-qNWoUvI1VyfNi8EjitocyqzrZw8dUnToRtgNfdJTvEQrQteRq0urbIhjoVzGOplF_dx7hIWpH1_g7eFQ=s4800-w600-h400
+   Restaurant ID: becde230-1720-436a-9b29-4ea935b2e457
+
+231. Mr Pizza
+   Address: 6054 Rawsonville Rd, Belleville
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czCHLKLYJFHi2abaCb1SIf-K_xanItroEZcadUH-EFlCzWDmURw5nryjkcmO0dDrB5ciUWKYZvgEjWCbqOIkSHEJViidejyaz_jm5c9dNfLFOxpSUkCcPEkBVF4vp1Od_-RVh9BFCiq-fTy6g=s4800-w600-h400
+   Restaurant ID: 6fe79c6b-646c-4ec5-aa88-1510e825c717
+
+232. Mr. Pizza
+   Address: 1484 Washtenaw Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxAqsaDFRfqwc4m7ynOvFYy0UMPGDpIYcenUL4foegBapNgsoXnT881GDWKlRN5WdYeb85Ye1cZr-yX9rXVhyYGPcVL54QDaJ0x1ovXYP9jReXzNBfueN-n_uIAbERIpFGveZBiBOPbJ3FwcQ=s4800-w600-h400
+   Restaurant ID: d770db79-7d47-4d6a-bc61-0ebf61172b7a
+
+233. Mr. Yun's Tower Deli
+   Address: 2200 Fuller Ct, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwz1cPP_DrIExcKp5k13-bgd-31T48YjTnoKReD85baVG51Dutd83yoW46qSE3Uj_3Qy2yP6AOLXAbyUNxqe4OOdmr0LXZPQPTFUd9298RfVpve82JJfX-ul3ftw4YUD4fEeekSn_4zXGcwug=s4800-w600-h400
+   Restaurant ID: ee6bd7b8-ac49-41c3-800b-bf336b28d51c
+
+234. Nagomi Sushi and Korean BBQ
+   Address: 1754 Plymouth Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cy9uguq6hhdQlgY62Log6pyY42LuhTAKdd5h_bvKcz20P1LDDZ5le_133OGRuHN5FE_qtyf4GNl1KutsgISHaIS7DuhhuifbPfaCVtjJulty7C8OfHpstJZ7aIHs8gBIL55l6Ks_U5Q-pKBPb0=s4800-w600-h400
+   Restaurant ID: 940c2027-0675-4de6-bf25-66a9160978dc
+
+235. Namaste Flavours Arbor
+   Address: 400 S Division St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czzaG85Eb0M1Ai7mv6aGSbHRg-GOsRNWaUgalwLIZp0NGUBCtdIvTfaIJKwKi4OrCDjlRdbDc2LrZ2ZJRSa0eW2iMMFERlGYxIxf6VyNa6mlXu_4FxWB_4LDT-qPAvS7sABR8nenw9ArRf_cg=s4800-w600-h400
+   Restaurant ID: c28dbf5a-1cba-4ac9-8981-f0c6b84c2649
+
+236. Neehee's Canton, Michigan
+   Address: 45656 Ford Rd, Canton Township
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyeoG0bxwA8D53V3xaGTQbzdLGrIppo6j4dYuBQGHX6BqdW1rpER5wszEgUBkbKubY01B6yeoB5wa9sRB6nirr51t0A97JzJPcaJEHWVHR7NDxOcbhe01Hywy4EaeBfRm99Rnm3eBDmRDQoJ2o=s4800-w600-h400
+   Restaurant ID: 224db4c8-0c92-4079-ad51-d4fa88e942b6
+
+237. New York Pizza Depot
+   Address: 605 E William St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cx21_NxTX22IU7mENGjREfzZBcZWUNdn0cUVdKLt5PWo76ThvQHTqChHEcOyTJS7EwUZfIL_vTUGlLqmgFoSCN_uXMuN6aeEEKEGYqvKId797bWI9Md7sWEFgQrvMu2Rvcm2qx--JjrWNwNMg=s4800-w600-h400
+   Restaurant ID: 15725127-f59a-49f5-b5b8-d555ecd1e67d
+
+238. Nightcap
+   Address: 220 S Main St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czVYLvptEATLuzyHHdfPtDe8XHCshLrf5rZ3BFU_C55uUZX8Z4vKEwAxfzma2pJA7zUkugw9H2wTerE6bjndwffpSJ9WcEcb2cRkoYV6CAKKZkFm6nEz0LpyM4VykLwup8OP8n6JK_DvQycaw=s4800-w600-h400
+   Restaurant ID: 45e62b08-49a0-415a-bde4-19342b706e9a
+
+239. Nirit's Gluten Free Bakery
+   Address: 4603 Central Blvd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czlIFJf4AyV_TnJLb6mrq3wGmlbRiSRZC4chzM9S1MDdNkyKyNFNo8-wM85zpuc-8hdfEO7iFMrNywBuZ0JdHpy7pldJu5CmTHdb1uu7VbhmCpZ0hTGHpb-h1oxmclyT2SEi5Gmg_6s7O4kcw=s4800-w600-h400
+   Restaurant ID: 70d8a7a1-eb67-478d-b88b-20206f8f167b
+
+240. Noodles and Company
+   Address: 3601 Washtenaw Ave, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxfINf0_XKgf-JBD65FEE7TUPpdof6QdgQ_UsiX1o5N9gdUjNp1A_SyEoO2DFe1tBbu2abvp6_IChZfrgsPZHFe8uEHzICjCE5-x4-NW1fMlhgpWNf76EcuhUOF8VP6XPTT2P5QaiYKn8KFfd4=s4800-w600-h400
+   Restaurant ID: 90f15d8e-14b7-4b45-ad05-2284ce547671
+
+241. Noodles and Company
+   Address: 2245 W Stadium Blvd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyK8JvkgTvUq_zJNSndEja_FIqRcvEfoq6ATkUJOEXxqHCG2LPdPWsQ6WAkPUXwA9xaC8XlRneCHOMEm2mF4E96q2DGAcgVirriCYtPZe0q6Po0kzGSxlzulhMLV5lzLTAY0N7_brGiCc8LHg=s4800-w600-h400
+   Restaurant ID: a8ef0655-a2ed-4169-9e30-f413723aca5a
+
+242. Noodles and Company
+   Address: 320 S State St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwjlt4str1uUFufOBWERx3PAvnspX-nSPUrXNPmTg7tuRt3xX81cHZKpY7p5UTZeT0RsIxo_WPVhRmIJnG38M2fl-TI8RdQybu2zmVWNIS70cbi-HjjYnbKtA4cWF7j6ld_a1awhLGAETnZpw=s4800-w600-h400
+   Restaurant ID: fda35c66-b8e7-426d-aaf1-6c38680986d1
+
+243. Northern Grind Coffee
+   Address: 317 W Cross St, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cx3e5_RTaxZdA6ho2ojCjdWJn_fr4Ovt6FioBiluXM-K4WfdXz_wQUaUSbZ2CSTgrwahqQbI1wiQFh6c3HAtCwVLh9hRwJRGvRft96yC-SdGnrknMbG3_SctHJr5orxaE4nHtAI8fIXGvXU6zU=s4800-w600-h400
+   Restaurant ID: fc92ce26-a873-4e2a-8da4-b3a11f268068
+
+244. No Thai! Kerrytown
+   Address: Kerrytown location, 226 N 4th Ave, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyrVXpOqQj8H_1hDTgoBVkNCVREGSYDYsLqbqxLGx9KS6BvNey77Z1yDUb-patoX2rYf8YCN38R_tbzEbh_WOkHPh1H3HnwS8CpQyQTegtuXrLdDeXVOa8Huh3f5nghj74eH725RmO2Vi7v_w=s4800-w600-h400
+   Restaurant ID: 373844f5-259c-4ae9-8873-ce1452a93606
+
+245. Nu Wave Fish and Chicken
+   Address: 244 Joe Hall Dr, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwcZBrI2KkoBew8XEikoysV-PbA0s94PC8tImPL2KIDAfrQOfGR8_LDKy0UT1jVVtWixec8JjyYgbRboN6RY6x7DfD6arEoVUNPfQCu0lqZDRNFdBIHCHFvFwY2v_3c5wN8SZ1-Rfqgz3lP=s4800-w600-h400
+   Restaurant ID: 6ba5d2c3-5a7e-4a50-bd76-21a1ab74acde
+
+246. Nu Wave Fish and Chicken
+   Address: 2169 Washtenaw Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwUr-dD0ybyAZQpiQhgLNPA8r9j6Xp35oZ6lEtdocUAZ8OFcJu9zRSS2vxFt_njbTE5LGEIsLDLRIqzXkJSXWIQxqf0Kv97OQ6PTWsZ-AagzwmVkgERjKnZaurSMr6tDi-bUqeTCZ_P4MRzaw=s4800-w600-h400
+   Restaurant ID: 125aff1d-a126-44c5-aa26-271ec3e825a7
+
+247. Old Town Tavern
+   Address: 122 W Liberty St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cz70XnkUwKOVMUhZuIJruVBjG217OKLFmXSXubU787-5SD5AIu9GMY6HjmhMBj-MIkqWMaghYXp9ldb3pYRUYktoEyQdV0_-pP8i6YX3TzHsGg6cZOyWQhudsMvdNCNlFMTIfChySX98wq2z-M=s4800-w600-h400
+   Restaurant ID: d6e7155c-10b9-47c4-901b-7f724853716c
+
+248. Olga's Kitchen
+   Address: 3500 Washtenaw Ave Spc. B-1, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxHqDVp4V6pa_l5HxpZjQk3LD2Uz90rEqQL7QeOw6Pt1ztxlMYRC-zzmNsGjNe_IuNbIPdb3cYUktrms9dHv0hIVEygrRdYmc_eRgCyXGXcTQPMk2jx--inWpbTyP9kF9HToOr-pc6I9ffR2CQ=s4800-w600-h400
+   Restaurant ID: 4abb92bc-bb8c-4022-80e9-09c5ec447a1e
+
+249. Olive Garden Italian Restaurant
+   Address: 445 E Eisenhower Pkwy, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyoWqRJkYGslpdNmpVWj8ek7c007gdAaN75uhQmmIDqPqmuFOanYj99s23FyQO9CdaxtkSfi6BSt3I2kE-HW-Nziq-k0fHgRDWZXMRMuULDfB-AplyrAUB6jqSyriNXw_MU4ajeM7wXa91B=s4800-w600-h400
+   Restaurant ID: f13f26f0-8347-4ab5-8639-3ef6b8c5cd2a
+
+250. One Bowl Asian Cuisine
+   Address: Ann Arbor Plaza, 1220 S University Ave, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwVIi888T2b-HvPwG3JUuPaPvvNmoAMRWkW5Czl18uS-_mpQxhY5RRo8UEbp7Dcsh7M9C8HB3uAmbdDKly5WzP0tlSV3Gk8haA4ZHT5GY_fTwQfqXHCgC4zqPPSNX6K82AQ2BUZVmuqkqfAL4A=s4800-w600-h400
+   Restaurant ID: d982c267-6233-4330-a04e-2db9930110c6
+
+251. Outback Steakhouse
+   Address: 3173 Oak Valley Dr, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cx3C0Om9tkOFOxrf5d8yMmvEfU0rChtwE_SFeSqCEqADaPgOMEZa9BGiVOB1Z1wj0l8TG0FyMegZPRNgtateiGYqtxdfvwFHVQvB-brXk1CeWv30M_tFWiGc0yFU6r20eTUuYu28ZPYPB7Q=s4800-w600-h400
+   Restaurant ID: df2a231a-1314-4fb4-9e5f-16bd12957341
+
+252. Outback Steakhouse
+   Address: 42871 Ford Rd, Canton Township
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxZfHKo6kjVsszeov9HBmwuBbejIJ6n3lIaZTsdTrlB6YKWTSelduhGp7m1R1_0JIfSh_qcq_7-q-dVSRary_XYRdW-lzWQsuIj2L8g5OqzbHDJAb1sXYlJYSzTOx86mDY7hOJYpS3dXIK33g=s4800-w600-h400
+   Restaurant ID: 00f79cc8-0a2a-463c-bda6-49dafd08480a
+
+253. Pacific Rim By Kana
+   Address: 114 W Liberty St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwAessEcBvnoBL1D0N2yGVD1bpiPATIOoaQEo2G5M4ddT4qOj7AuJ4DoWqofhJpPjUoO_GWxk9zhNXp1EpP38eUEcYamwI_z6xCmRTRDTIT6TegnDVzn1oGqKLbfvoHQNW7fBEzRbL8P5tSwg=s4800-w600-h400
+   Restaurant ID: 19d9e4b3-2caa-488f-a99d-a944c06e7b65
+
+254. Panda Express
+   Address: 620 Briarwood Cir D113, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxOTD4yFOPkEyA_axF7aMr8q73NKc1MvCD79V_v6u-0FCLjgDN2TUSEfGwDQm7ku9oUVJi_3RF_HpCE_iFT7DLc7CsH_dBQkWHN8hPi8zSvNxI9QDy00waTcgUu1Z3bMyA0PnoQHr37u0OI9g=s4800-w600-h400
+   Restaurant ID: 1d303075-b203-481a-8856-31347384e246
+
+255. Panda House
+   Address: 229 N Maple Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyikBPnl9NV7H25MKB2qzbUB6cZOrR0eUqDvFcx9og5zM0nO9r-0yIMDQOzy5dsig46mTSELhCtMTinvch7JFKcA46Rgeh_AUOzRTGaf62AWnQlSNLXgse9IHrvqjQoFiGultV1KipIGKjJnA=s4800-w600-h400
+   Restaurant ID: 8c9efe16-ab96-4d18-94fe-672e7e61f760
+
+256. Panera Bread
+   Address: 777 N University Ave, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czogyz2ChAFZPywTu46IiJH6fclINqxuMN8fMUR_xF9MrkYL9Gy6AjUX4d15oMiu6qh6b0_ZrLXEh8oWabnq8KMtuxWVuUS8sO_-rl58xz-ea3_0mHybDhV4aD751d1gcYXIiYaLzioQw3Fw5c=s4800-w600-h400
+   Restaurant ID: 4cfd458e-58aa-4ad9-b9fe-3863bd45d722
+
+257. Paris Banh Mi
+   Address: 607 E William St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cy_3HSbeQTodBU_4oc_wZ1ijUn48Kn-gtA5sJ0c_iiLcUmYEI0qx5IyUzZ6KCc7YcdBj4Rt4q4OO3DLtFMQ27nvn3d8xB6JQxz8N7JB584UFF8DekX1yqV3UeOtL0UsWBEz3rWgJkMfuCcs0mZA_MrPMg=s4800-w600-h400
+   Restaurant ID: 805c569a-e479-4b84-8edb-64472f708cc5
+
+258. Pat's Tavern by the Green
+   Address: 3113 Carpenter Rd, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czwejJKm2ElhaqD09TRKibV308iJuUv6zcmeHqLEx-lQcK3bQNCxI_6-tOBMY8AGu6kxXbi4z6Cm-ScPWHVnlxIhtu7v2_evA8MjPgrpy0ihc5_4yT69IFmo1UGSUxBLQeCLzaMXf1A_JyqPEw=s4800-w600-h400
+   Restaurant ID: 68d6e4c0-8a0f-4ad4-98c9-cee262e55d24
+
+259. PB&J's BBQ
+   Address: 109 S Main St, Brooklyn
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwLjX5dusMD6MyHnWeCnDiPIomB6tWMKx1ZI10uwSz_Mh2JjMgYmi-awQEb5WwM4c3-1lHtG0JhjnbCG4NL1QbW58qtA6gX0BivriUapwSCa3PZhBCDvfExpF9PD148ljy4CIsnReRdp06djQ=s4800-w600-h400
+   Restaurant ID: 0f78403c-fadc-4931-abdc-04f607d881dc
+
+260. Peaches Brunch House
+   Address: 130 S Main St, Romeo
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwFLnTBnD9dTKbNsPImHBDk_Huta3akhXUeS1rPeRbyK1pGk7OYL8sssrUPn2B8rE6opVb-GvleqpEKhxcLCqTqX2A-vazQ9yALnjB6ncnbYzJkqLw5u0VxPvRCPmNwcx9Iq4eTvDBAkOSr-g=s4800-w600-h400
+   Restaurant ID: 6c5a9940-701e-4cbf-b1ec-37eac4cfddd6
+
+261. Pho House
+   Address: 2224 Washtenaw Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwhO6pyCwewYxSIjvMPlybhxUgZeJ7_rHSO5vy5qaGduOJYfw-haOUz9Tb6-br5myMN7xY4CHvq9GSUB4ee1aMJmTKXaQ4caXeohS_od4lT-asu2Z-buhl402KNz_CE6zppKCl6l5fxvxlJRLk=s4800-w600-h400
+   Restaurant ID: 3831c8a5-5445-416c-a709-e5863c1e0abe
+
+262. Pinkberry
+   Address: 100 Briarwood Circle Kiosk, No. K134, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyBSn-glR5edHMbcciMb5rCA6pafIvjXGiK8YTDBaDAyoQBeQ79-g_fy_u4hjx19OlAE95A4vLGzD8WYG8bfGL6-5WE5_YSbsOINtpJbv_o8a3MzqVnqHWjwAHgiW2vQrA_3m-oOJXQpdiR=s4800-w600-h400
+   Restaurant ID: 8f4ce855-f501-4d00-b2ed-110a11de6280
+
+263. Pita Pita
+   Address: 2649 Washtenaw Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cy1ugv2YDWwGdPK4BkeoyHpihHoq_iaLen9Aoik7iDFF9E3t00Llprq2sSL8qAa6imwBmkEaPlO4QgwWGodJTYd0I-lCK9ksj1Zd4PGTDEaNwOIkoMFQyX1hcEsGsnejqKtqN8DoFWjvJpOXw=s4800-w600-h400
+   Restaurant ID: 3361566d-4663-47a1-9533-5dc599c06674
+
+264. Pita Way - Ann Arbor (Jackson rd)
+   Address: 5609 Jackson Rd ste 101, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwhWN_BbI0CaMpJaSxEaFahLaLh12ipZ9yUpP76RVEH7sn2ZY5Ws96tMN6Bq_XwUuv4BF_1STl6WfYhDrvD5fdDUFRr7mi9koOFxN5D7J7Lz5ufqwMIz8g7tDGFmYZzLbyns48x_A6U2xnoYg=s4800-w600-h400
+   Restaurant ID: b6a3f9c2-04c1-4843-a4bb-4567674854ab
+
+265. Pizza House
+   Address: 618 Church St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxwFuGP9ccB0TuRf4vYRopp4lKK5Tuq4oyCA_Ahh5LdQL5ypBMAc3eE8cQLbwJPbtDCsAKEeL6QNC4n7bASorkF8zs-E4G8Stf970vdO9Li2BhWRwQydbefF7THqwq4p7UQdHzN10Mt0AXgZQ=s4800-w600-h400
+   Restaurant ID: 17d67820-1c60-43cb-9ad9-bb5e4100a881
+
+266. Pizza Perfect Ypsilanti
+   Address: 332 S Ford Blvd, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwKsq-rbzZZnYuAijlEgSB541CtD8OXlQGvqEpM7CHxWGPvheFNDjWoTHZtIku096XeNwGthevOS4RaJ93gc-Ae1vA_SsufcESYs3GuSZeh8hItL5TjdTR1k-pyLm9-v9PPW2oTE-VyicQYmQ=s4800-w600-h400
+   Restaurant ID: feb67b0a-eaa1-4bd6-a009-c615426b1f62
+
+267. Poindexter Coffee
+   Address: 615 E Huron St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyYhUwdbtVEXJO0PWPkppszpC662FqcLauYLb0UX6bAHFsn5tvcb8KstcIydyZE-6FuKvxbB_wpgw3fjbVwDWwMV1PGJhD1r0QVHyEAt828xY9YTFRVBxxBXFuaaITdlZM9U0iFS0U5jvgqXCU=s4800-w600-h400
+   Restaurant ID: 7353ebb2-83d2-4557-89ca-81c1a97354b6
+
+268. Potbelly
+   Address: 3785 Washtenaw Ave, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwaxa6_d19MDLzW22stYVd_Eu8btwKRrskpmCZtnx7cEcm00ffake4Xe3Li0RNzby63fqWXMrlBvNkpjURhoC4aPvGKZGp6hJiMk9K10dyS69xoYBmdzC0fq5Wp5YCMKAz2IrgwZGl1IdwSDjA=s4800-w600-h400
+   Restaurant ID: 7565a93e-4d5e-40cc-8f62-c4d66865f7b5
+
+269. Potbelly
+   Address: 300 S State St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cy1oWi4ymx0fTTyIl_IzK5jbjRoy0cTujlPQh-O-1q1UJcDStEWLQAMDmvNu3V0x4RGJdi5uvGngJi7aghO-63Vb5Rn4mwOTVJ10VxGhDS010qtrTMxbV6tNMFuDI-bWZkQHyo9B6KYCZeyIA=s4800-w600-h400
+   Restaurant ID: 9fe939a8-3c4e-486a-b3a7-4ae1c828eb81
+
+270. Powell's Pub
+   Address: 625 N Huron St, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cy5skX4igxKBz-nO8pHXY9LsE1wpEqiiLkVMqPuTNUGEZ24GDfyS5Z5p3takbgywRtwVIhHBOlfiD3rnZ8e8RwG8IkwTa3nabmT0ch0u7IbOm1xTREguPdxtZrEibDm40r56nswFAS01duDBA=s4800-w600-h400
+   Restaurant ID: db6a07dd-13eb-4f80-896a-f8a174726aec
+
+271. Pretzel Bell
+   Address: 226 S Main St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cw7s7oPlvzF7YBHiG1u9aKb2ca87we_6DG-K1qFwD2jnzNXNYdTF2-RzEPwTAe-XGLyaaf62P4Yt3D8V9jHoDHmmdbVdyNRyu4PA45ojiJIy_vPHDv-WIOgajU7WXfgYNmdCqPIJPBNC5pGaw=s4800-w600-h400
+   Restaurant ID: b642b5f6-5ea9-4e91-811d-289c640fa390
+
+272. Qahwah House - Ann Arbor
+   Address: 211 N Maple Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxXZ3Osmwa9XYl3RvaZdpF46fqg6ZnNAnRpxlDaLYVjjfAIw607AHmlIA_GLZBohDsuGJ7elsL_CdfuWNefdb2ttGj0T4pzjJHOZUtgKf_GGNybiQ1kkz5dz8QwYrV3PEVMMGXJhXEIMWT37Q=s4800-w600-h400
+   Restaurant ID: c3e152ad-0e6e-4382-a905-560b7d11f397
+
+273. QDOBA Mexican Eats
+   Address: 3279 Washtenaw Ave Ste 103, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cw8B_s_UsiRoq3GY4FtT13zAWEaCNBTjIkj27CAbcBOEbG0aLTPZ99WcIoUdVQBR40MKnyfehl9NwftX8Nb8X21-PN_Pf72rfauKf-kj8Vs4BsMFF2KIB4uk80vBoDuxOHmOST5QvxlluCe=s4800-w600-h400
+   Restaurant ID: d66c10ea-7327-4b8d-9219-3508fa14218d
+
+274. QDOBA Mexican Eats
+   Address: 2252 S Main St Ste 100, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxP8zYkrhfKFibMVdAWbT0P9dXO84J0x-yJYPfPaDsvfKtjk6jA_n48svd4WnQHf-Sj3LQvgbUEo3qSLieDHU4e1OmNJoHmjhwBffZVVoBkmerV5z07zVtoqr5pgFJZjVlBMA0J-6Hf0wwrpH0=s4800-w600-h400
+   Restaurant ID: d18cb12c-67e2-499b-a001-7a3d8e97ee2c
+
+275. Red Lotus & Taste Kitchen
+   Address: 529 E Liberty St #206, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cybfUEwK9rHGo95X8O1mfDGkJTUDqUVYGxFf9EpzUONfJGag5tZOJ7tpObqgaXgGT6nqOQlSBscNKQkiqr6T6Ipw79vIk-aiR7o06QrD8PTOiGZosvuV3czgfCWk1vfSvdXS2x7foPTAl90=s4800-w600-h400
+   Restaurant ID: 190eccfa-5640-49c3-bcec-90d6123ee2f5
+
+276. Regal Beagle Lounge
+   Address: 817 E Michigan Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwh9nRN6ymyhhKc7ba1Z9GWJ0NsGT2cubEMS5jSxvI1VIXYGyKwWm3Si0pIirvsiXTE5QtFduRBbnNalCH_5Yac-3rkTBeXpI3Sb_vMmUBB1tDyQjS3SVObVKd8oM9N2os3hc_7XLCGV-3KJQ=s4800-w600-h400
+   Restaurant ID: 349a8f7f-6a17-4105-9440-1ac015720881
+
+277. Revive & Replenish
+   Address: 619 E University Ave, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyQpPAvQKQX9PMhsQpBUL_bVRrggdEdVI_GoaMxnbiB59XOnZcOL0H6BLh7mNZbbkauh6JwUlyEpN-CmNfnye_xDRy1popcb3we3tKdeVh6vdS9_oXirmleS0PcXMaIc3Nbtrs69DHco__RVA=s4800-w600-h400
+   Restaurant ID: 21615f80-f0ae-45fe-b810-aa8d43450aa2
+
+278. Rich J.C. | Korean Restaurant
+   Address: 1313 S University Ave, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxbUEZ5qVNMvgZ7By5BWtIPudZRMx3o876IAU1wnZ-Q1YYW0Fe1aTB5RTmDaunFpHc9ppm0LYGIInLNeZplQL5GzMD_xeMTLe7G-rpo8YJEJT3bc2Ps-DT5TjaawcVBECBUCMhH9RgBFjow=s4800-w600-h400
+   Restaurant ID: 5a5f4714-5c34-4efe-8428-c98a2e80dc36
+
+279. Rose's Restaurant & Lounge
+   Address: 201 N Canton Center Rd, Canton Township
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cy_mwXdxfXMJbwpblJI6ViCoSGjm2iUfykO2SE6s9URCdynnVdNCUkovZKX8Lcillwf1ItsG-CTiJBPg3DSkKpwRW_C3IszNnxYP4eWLaT9oeUMbiimLqO7qxBO7x7akc84Ab_jnqHxSd6dbw=s4800-w600-h400
+   Restaurant ID: 0a75f823-fd26-4580-bd92-9f1a169b9479
+
+280. Roy's Squeeze Inn
+   Address: 1315 E Michigan Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxNjtUjRAAg9PRAKJqX8EH6q_4qvwuWq6-RBDQKPrgHxaday-xzvMcN_LWED6mWnl-L_NcmVDxQ-TNm0VY7_av7FTVY8eboo0qNsZ1W98jYcXZTuRHULAH6eSZB8ecp_Xnq_V3cABhIUVZE1A=s4800-w600-h400
+   Restaurant ID: a75d65a5-5414-43ca-bd7a-ad47b272ff6f
+
+281. Rusted Crow on the Lake
+   Address: 569 Main St, Belleville
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czooEM4kcO4MzgYRgBvVbAAmmkinuE0SOKTqlJegMcqDQSoq4O-ZjMu1yUp1btljTcfxoxNgD4YdqzMKy4oTKUI7DRV8ke9KefrzgG3Iwf9lx4bOEyUoqDcE0Lcu0fa_TJNIUHa3D62Nr_oLQ=s4800-w600-h400
+   Restaurant ID: 2c8d3347-d503-4c7e-8394-9db93eedf4c5
+
+282. Sadako Japanese Restaurant
+   Address: 1321 S University Ave, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czEeFxuEDYtMBL4A8ZPJ-Ukc-88i7HVG3M5PC1FKpRekf0pB44WKYv-hCitLkYoXeo_MPPxaLRKpTeT6ovQLC6uQoBVf9yDAWt7XPyOhR99TJyHv-ff06zLs9eFHaHnI4HGk0MALCMPNa1Q3nI=s4800-w600-h400
+   Restaurant ID: 2bdc366e-cf35-4611-9893-6f75b4737730
+
+283. Sahara International Market
+   Address: 2447 Ellsworth Rd, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxhiytmHXBV4kcOBnIlabPc-lMbw-PXNHWlR8MOecJw_0EuyannnVeCHAYKiEmvWnchlPCU5hghnYh-JhuaCk7-pePw6sJjEskgMJTXtseu6Aq0zVnWTAFkvESDqK_9z48gsbUUU7vHnVS2PA=s4800-w600-h400
+   Restaurant ID: fc182922-d9db-4c85-9cba-07029d482f63
+
+284. Saica Restaurant
+   Address: 1733 Plymouth Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cz72eKJ7fEXy-Ms80vdQJexGwvg9lZCLsvC0TgaGV-gM__bdIg_lPSPQUYZrUxFJ2LRD9NBokPqjTIkim5DTOzX3Mh43lsg6xtEY_fz353e1FTvD6bn5k5mXNpfg5--nr5PXQT20a_o0m1maQ=s4800-w600-h400
+   Restaurant ID: 342965be-cada-4a1d-bb89-62799ce85825
+
+285. Sakura Sushi
+   Address: 21895 Pontiac Trail, South Lyon
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxq89isbjT9oiK7LaVH_1adj-9hWbh7RF8X0DLcngDOYCSAzQBL-GBbFjNkwFsfO4u8nt24dgN9Yoi2LfasulebZs0-YNCI2OgozcELEdwp5pI-MP3cXFXYEgXkNzaM5jQ92_JLZ75MsFgp=s4800-w600-h400
+   Restaurant ID: 269d5a80-7a0e-4e4b-b666-0f2df1ff7c66
+
+286. Samba Bowls Ann Arbor
+   Address: 113 W Washington St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxK3QKd4uyNCDsmbJiNR8OcXM8BlpWtcfA1NJTl1LyoHW9ubrESGWh_NHH_u6Yk5AbU41F4QSnBCIr3xDpPI_QYK0i5BEZMMSeaUhIJC-qqbk4NSUlIeZawlkWP02K0CGFMyFeHxbFRyhpuwA=s4800-w600-h400
+   Restaurant ID: 1270e8fa-2acd-4aa6-aaa0-d0f01f1f0cf9
+
+287. Sam's Bar and Grill (Formerly Play it Again Sam's)
+   Address: 40675 Bemis Rd, Township of Sumpter
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cySHXfvnXz0WuK9pVdAR9RNSZbbqxCf8DsyOWqn1Bb3KagpKR-9TwoQ0304JCadbY8Xn-EtVp5w3WrAyYPeOaH8e37LZxdUUAQ1sehXTjdi2X2FL-XKIxgmVB5ecVR5cyf02t9Zm0yHbw5663Q=s4800-w600-h400
+   Restaurant ID: 9d32a60b-e7a3-4fb3-8e98-97be3fc3905e
+
+288. Savvy Sliders
+   Address: 2997 Washtenaw Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxyL4Oy-K7m80NMqZmoNQ4ceAOhrCATM1g-qmyD11oQy_aMn19X7NyFTOvx9Zr4ucbdWufp7gDYjNvt_SD928OIfF49STkEWBblmn_4ykNKKJfib5bHQ22V6xeh1B_0Vj5u9l8k-iaqxSka9aQ=s4800-w600-h400
+   Restaurant ID: ce8e79c3-281d-43d8-ac8f-5c0d25518045
+
+289. Shake Shack Ann Arbor
+   Address: 3030 Washtenaw Ave #107, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwwsIUiTh6-tuWRjPKByjJgR8u3NQzKx10eMtqsSViOvwFptQsw3oinp9Vz-85nQI4WucXa2YjfrbBIGi30Ux0WTQujhRNd7Yt2fyM0sm7iaK7d-xwSDtZ7Jp31TJnR43DtlKpqiKrZ-DI-=s4800-w600-h400
+   Restaurant ID: 01b7078a-957f-4ad2-a964-f60a78f29089
+
+290. Shiro Restaurant
+   Address: 43180 W 9 Mile Rd, Novi
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxbvm6WbGB6DdkeFXr7KWUosNKxhi4mMcGSVlzXOkoRaKaGCE3ssi8eI4wreXXXvj6dKbgg4J3TAkp3ZT-BUvn-vETKCUh-SDy8tk_Oszk44GFgtBCSo_vG7gF6cppw8SZUSAYGwx5FsTHG_g=s4800-w600-h400
+   Restaurant ID: 528ccec4-997e-40ad-a275-3551e6941f9f
+
+291. Shisho Palace
+   Address: 1699 N Canton Center Rd, Canton Township
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyDaIpaLx05rK9Hvh4HWx49LIcetgVNZIThVw-9mg7HPd1zCDuUDfkUlXUNfAG3nIFgEzoDBgT49IfQ2AotkjzU084dlfgWfQsK3OnD4K32iOUkuH3LDhTo2Zk3Dlc1QSluBb-G_EtuwPj2PQ=s4800-w600-h400
+   Restaurant ID: ba9490f4-acdb-4ff0-ab9d-2ce9031d4cf1
+
+292. Siam Square
+   Address: Colonnade Shopping Center, 883 W Eisenhower Pkwy, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxXVnYwJtKSsOeWrZjq8RxAY3plDeVJ_Rx-bSfRgFJA-LvuvGDpNy6PZr3P8oQlXdo0QRtQlkBhtGFfgQt9rbiDOk_QsiM4ytbzLRwuDe6P8tHKbtir-QCyfq_gv4S7lDLtjh1HZ0gwo3u9=s4800-w600-h400
+   Restaurant ID: 69114e74-93cb-45d8-b57b-41ef2e7b61f4
+
+293. Side Biscuit
+   Address: 1232 Packard St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwf0ZUujPwj_PJeW_bXC_NNn5uOIU55tX66u06QzY6_9RZYi0twXFa8Z5waQRFdU4ZpT9-T92T87p8H3Qds49-1hH0wYQWHGNIGpPM4fIhnO7u7psf9zax5FNiGZRFfzH-ivlZ4OKXrKilzyA=s4800-w600-h400
+   Restaurant ID: e50eec6f-ff14-4467-89a3-4f9d27f6e29b
+
+294. Sidetrack Bar and Grill
+   Address: 56 E Cross St, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxvjWJKWcffB7ngdRQKQWRoP6LWcpviZR6_k7ARs0fXoUpaanH-kpW7pysCo1CcWr92VSpzUaV4X5aXEKj8OxwBNND9UZ_GwhxfllRCB36SMOOIuV-rYuYc998ks4chNuQeWELIEHUNXDGEv7M=s4800-w600-h400
+   Restaurant ID: 97b6485a-bc02-460d-b000-56915717566b
+
+295. Silvio's Trattoria e Pizzeria
+   Address: 225 Canton Ctr Rd, Canton Township
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwKOebzKMcQRZhVvDUbR_N2WY5V9YUNhIRNZpXXDUa9RTZ0wE2x7HZkywBhrotQ9QlwgITFdciy2gJt37VgsWXHODVVSZSJjjoAxVgr1dsSuCyMA4joLw1xR5npvHfhv8Qw232Y1SWyCD4dK0k=s4800-w600-h400
+   Restaurant ID: e4300d6b-b632-4716-b219-938033aa1231
+
+296. Sinbad's Coney Island
+   Address: 2563 Ellsworth Rd, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyFD22M7fy14oswoAo3B_2z_bKAw_-uN0zwT792tdnxpyQRzhS4m7jI1M2BFRliVYSMv0mGnYBn8ZRATZvGMfMGo2zwYaRoOxeHvnFmenUQ4e2dL2zFXrC3Uyz6puijfFXZbB0EkX7zP1LrSg=s4800-w600-h400
+   Restaurant ID: a5d4c8a5-c3c2-45ce-8d48-ce619c03ab3d
+
+297. Sottini's Sub Shop
+   Address: 205 S 4th Ave, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwC8-ti07WIhVEU67PfT4ygj0ON5XCFL0WYy-1VZahLupz4tKhoqG5NIy0O-iTA5PigRnNIe2vt_LfD8UfBuJqO9zUnKA0gW2ACQv8V4GvVx2zsVimdlz3gPrE__NE2C5F_YLKUy4Mz_hcJg4o=s4800-w600-h400
+   Restaurant ID: bab9a532-66f2-4f75-a7d0-7fbde433aa84
+
+298. South Quad Dining Hall
+   Address: South Quadrangle, 600 E Madison St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxvJ1L5jQvZfYO88Boz2Dy9DW0ig3V_BkevKvs7UpVZOBz_u2q5BNpARmDmXXsvq3L72XRJtrojoKBKX0VyPch9GwnF-XoKXNlm-SppIKSbqCpvowWPixQ9ZRnILpIYY4KBrug7-uruTfkHemI=s4800-w600-h400
+   Restaurant ID: c01939cc-7d65-4e73-9e1b-a446b8a598a6
+
+299. Spencer
+   Address: 113 E Liberty St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyrNVLij2uAqkmKpbDQyryw_pNeTYlJ7rpD7E8jLPteSl4MjZMGkM_AB0ucsaRCffjPrXVOUv7PGlY2lPOXzkxU7kYWG6NHpE23S4XcsM4vKImW6d0k8z6I7Opynalc8HYR0ru8_qui5BR11_c=s4800-w600-h400
+   Restaurant ID: dc898ec6-2887-4a2d-aad4-99f7737698e4
+
+300. Spiedo
+   Address: 307 S 5th Ave, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cx1oyJZDxI39SkMIscv7DEhziaUAKXETlfEOHzFc9ZI6lR3xC_ZDti3-eCNjbhB4ryINcRTImxHhmX7GWn8AgodBZ6nOmf2RUmcmT8_KARckdHUP1kZNSZk7i_YJiZwvolg7RUVJFpwVhuueVc=s4800-w600-h400
+   Restaurant ID: 5518a8b3-94b2-472c-8831-c0569914e55c
+
+301. Stadium Deli & Liquor
+   Address: 1956 S Industrial Hwy, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyYIBGG8xY9jTpgU4Fg7Dhg62K2jX65iS_nIMkOFcDL-37Nj74KfdzkfYFwH9usSYGeiVLc5VH7ALmfkFGOEorE7x4t0I62HjAbSB-fX5IyS6voB9tJ9pv0sQukhlHGAZDgvTM0zDJ2S08QnQ=s4800-w600-h400
+   Restaurant ID: ac630055-cf2d-4bcf-ab8a-f2ea08718263
+
+302. Steak 'n Shake
+   Address: 4120 Ellsworth Rd, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czY0rE-_CUpbehb5zvqIvpAL_P6kQDoF4AV8Qkm_04WRrq2RUbHoUhiVZv5VJracysMyUjwwXp7sgb_AzReePkwLmHkBbBoSf9l-v3XHW7Rn2KX-CuJqepGXT8bG2dtPli4lmDh98TWT07Kf0Y=s4800-w600-h400
+   Restaurant ID: 40635d6b-f732-4da4-8eee-627651d60820
+
+303. Strider Coffee Stop
+   Address: 1608 Jackson Ave, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cw7z67PRBFWsfxoHle7w0lHNdOrD4CY6AfzQARMDSVbHIMpV_TuZK9i6-kZpN9vGDiB1c3Rn8s1MnkahG7wE79tus9Zr2BcYCieOrLRNApl4uT7igM_lSsDEkwU1zBXpAyrcgBqcjTt50zFzg=s4800-w600-h400
+   Restaurant ID: 1a5f4d55-998f-4a93-9cb9-35dc6d7e48ea
+
+304. Subway
+   Address: 902 S State St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czNWjb1hxz6_OU7wfiKGBOE3yBJwHVOHwVn_OXJQHk8YppXBvVXazDZDHK9Sj_AUIrpzVDsDAnmRUlx8YUfZdzrqQZ8mqZEJV-T9EibLTF4Fj5h1lAnKCdj4GV8x9WLxfnGAKLfV26sM5uvSS8=s4800-w600-h400
+   Restaurant ID: b3d42914-5196-40aa-aef9-6aff424ea0e5
+
+305. Sumo Japanese Grill
+   Address: 44275 Ford Rd, Canton Township
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwWCmGNAWvQ1D2HbHaPhdHNxpkHdX7oNO-TQllYt5_oXLfHoY3gQxiWz3qbbpiNAxBwTu3fG-fI1dVWFIODYwHSuGLM53rFpabJaCWClauKodW7CC3TbJa0t9ysbGaxbfMiWJaYJk40KSCsNw=s4800-w600-h400
+   Restaurant ID: 98fd3b29-7960-440a-be9c-7101f01b6561
+
+306. Sushi Time
+   Address: 7050 Dexter Ann Arbor Rd # 100, Dexter
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyJpeU2BJ9XS2Qttkx4VRVX_jQyyzgKEh2GBgsh1MQ1Kta6fggeVI-0Z8W7fGnVivoGdSY3aJcDfenj0gc74l_ifD0Biv47thT11vSKjKMLs_j6OiXYkCyAUBQ-opyGOwa1818-OQJRIvwQc_A=s4800-w600-h400
+   Restaurant ID: 11408d8a-77e1-409d-9f16-216f682d05c1
+
+307. sweetgreen
+   Address: 3070 Washtenaw Ave Suite D107, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwFiJtHvcfX20BvMYc2JDChTJO8EodahxpuSmVxSYeZN4_pnodylqvGnMppmRHml1C4qyqZGgQ5e62VxDfgpzldvmA81gkiLFuCvIRD7oJqFKA9LnEqVG3ct8t2izdBLQFxUTaDX4_x12RI05I=s4800-w600-h400
+   Restaurant ID: a823602d-436a-41f7-b832-fe374171d2e4
+
+308. sweetgreen
+   Address: 311 S State St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cx8cnrXV_zCm_mB0z77v72qaJvQyAiNOroaCMgWllm1yMmIHe3ml8nHL0bAN_9Qpfnrsmmh8nTjn_bAtqf2e8ewciLfA11GOz8bEqee_V_PZdrW7qyUlumZWHwAePz22ljiKosmOSp09ktw=s4800-w600-h400
+   Restaurant ID: c99d91e1-32be-4365-9562-1c803d93e4a5
+
+309. Sweeting
+   Address: 854 Briarwood Cir, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwf9f-IRSq3uY7Ej_z2EGYS6cr5PlPIIrSekIFEN_IcJ4ShIkX3yqerzz5igud2LSo4kErLNabSPUyYg4sQpqZun2gH41iSSQpQRdTibWf6e2B9zqQhJhu2HGKHP03I6k5ND2CBJFqH-r-fDJ4=s4800-w600-h400
+   Restaurant ID: 61c3e1ba-918b-46a5-aea8-4fd132b00833
+
+310. Taco Bell
+   Address: 2280 W Stadium Blvd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czBDrMlgXEqJJBDXT5Sal2mGUwvEA4eAbHXhvM4EnS_YJAa1rMHUJCoCVXIXBUhk5DB7Ogm7Ghf9tFNQaCIiIzBpEI6WAE3cfnpc7tsbeffs6fFlVGTAYCtAdt32y4b25wo9yZMnMIpm6oXFA=s4800-w600-h400
+   Restaurant ID: da7aca58-81c3-40a1-a73e-af1d6da808b8
+
+311. Taco Bell
+   Address: 3860 S State Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxGNg4JDyKBng7UThgZAxpJ-Sdp-bCKfyQSn5A1hlGlHMMjltLthFYaR1nh06a7Lfx563hbPMyVZZdzRIZplheu-LmKdegMNcFeNWbSfNEsGPAowGaWFK09dxLb1NUPhWbMRxvt7ywqsqHCtAw=s4800-w600-h400
+   Restaurant ID: ef057191-07a5-4e4b-9a88-338eb88b60de
+
+312. Taco Bell
+   Address: 1655 Plymouth Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwwyC4OcK3nMkjiBHjPn3AT4tU3NdUu0akj-Nas6K0YOnMB1UHV6uU7Vvys0-96FDGjboxnvVxMtIwwmEqu9GmxgfCbvHd5zSh432PMkWRhTETah891g8xCHGAlJFBmb47Y65m1fL1G_LgH=s4800-w600-h400
+   Restaurant ID: c70a3053-38ac-49db-b535-5f67d0c175e3
+
+313. Taco Bell
+   Address: 5650 Jackson Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyvBjZbxDkUQqUbSp1qPYekfbDIJ_uKAuMOfwH1ht5VVRYSgXnYQrk_5YL9HsD2koan3P22b5t3QZ1s7YdPhP7Mc8MTUjHGmDk1gJlAHvMUz7ff6vlR3_Ssgct9IDnV92cOOSzBaYmdJpVVV3c=s4800-w600-h400
+   Restaurant ID: 78b2743d-2bf8-4667-828b-cefcb199bc5c
+
+314. Taco Bell
+   Address: 2655 Washtenaw Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cw8X5XgU86PxYCklRPePkuAkvC1GnXrRvSu3BJbQvTrr9Z0dJQTE1xHiSngvU94lRWfBKvtxQ3FRABxdWXhm28n9zb7uvahUwtoDL3hGMrhiyHnu00exIR-baG5Ko4ltoo216i2emUK4kAjsA=s4800-w600-h400
+   Restaurant ID: 8e0c3c01-4152-42ea-b250-6e78facbdf6d
+
+315. Taco Bell
+   Address: 2351 Ellsworth Rd, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwxeGyCPFpU4PukllAfHlvTd4q6BOROiaIUvV1XAOCm3hbGEhwqJ1uR6DIUyHCCQR0Qu99hgxX7iQEUG5GGqppgnvZhs1PZM1cuXHXJ235nSo8MNzG7TJXai8Z_PhRtX8tqRKIUQl1HYYVdCR8=s4800-w600-h400
+   Restaurant ID: 1663f2c8-2fcf-40bb-bd01-46aa596a1c64
+
+316. Taco Bell
+   Address: 1085 E Michigan Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxLvPFfZIsjB0X_aHO5prActKxBaqOorEogJEE_zMPFUrIRlm4-_nNzruJ0Cv3AnM7Zr5P5Sir_glKi_TbWyofSwAjBH9z-8BhtgKMzMnWz_DuBSFlEOaw-X_0Z6XuuYtZ3Gw7G4AfNBEAzIQ=s4800-w600-h400
+   Restaurant ID: be36c1e6-2bc9-44f7-adc8-eee58dd4c2d6
+
+317. Tacos el Caballo
+   Address: 1445 Springwells St, Detroit
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cz4PAjbSdsM791_n-gq5VlMDHc0EHUd1HlfeMxi3_TNJkG1ISxPSViKtiymInRDFfKgZeldlEmil83jdGdvshat2kpG3PLXdxFFfW_leMBBDDBcsqLg0z3C-F2BRprxnm_IFjIplCQPi_zRlfk=s4800-w600-h400
+   Restaurant ID: c719a1df-1ea5-437a-bbc5-ec41eaab1436
+
+318. Tacos El Chaparrito
+   Address: 2165 Washtenaw Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxUnibxFTjzpFougMXaqBxPRTjOG40awLZditF7fignKcW7_KHUgekagXQCWAji4o3lMWx9PMv1HbhPFqzW3scIorxti8tQP811mQRKUaorj2TPMI8HJtse_I7cZLL-si3MCoy8AfMCiXCuJg=s4800-w600-h400
+   Restaurant ID: 6207c6b7-4124-49fc-8947-0b3b5ebf4249
+
+319. Tacos El Mariachi Loco
+   Address: 2140 Oak Valley Dr, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyIJYS4HV0liHP-hYk8-LdkkcNYbuckmhCDdMSuP4Ad2xIct9iV7fLI5Cfpz2cwXfnWRivuzFPiQ__b7Yx66yztxSDqHk_meXsRWY8OmhmZjkLkkLzgzFeB-bXkKWvRW5W__7SKCYLeTf2_yK0=s4800-w600-h400
+   Restaurant ID: f0248d00-0f50-4f32-8240-e49e263bb9fd
+
+320. Tacos El Mariachi Loco Food Truck
+   Address: 11 E Cross St, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxZd95R5Ce6D2367d1UP_o-oSQ-LHA4bjI5gNS0f80-j_jyq0TcNLs8NYZCBuosunLwL38CEoBUiqXzj2FLzp-BgGV9CWUr39zx3UjEXgMw07IFN5BTSkAIdf4Lf6-pC9qqqldcUUDdgK5sxUk=s4800-w600-h400
+   Restaurant ID: ef023455-7519-4e73-98a7-e3e5712bf4d7
+
+321. Taco's Mexico Truck
+   Address: 552 4th Ave, Pontiac
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cw3P_22kKPn3sJneEtLzuXknRg8zxk5FXepPiG4AVRk98pmQkc1ZwowvC-b4Ym5faGaB6cLKHlbiCz5xyEZoX5RuxWF3x9fpZKgpk96Vb98ApG0GIdnxAzISyMT-ciy_ucVo37pj4i2szrzpII=s4800-w600-h400
+   Restaurant ID: a5befd83-92bf-40fa-b17c-248a705def01
+
+322. Tap Room
+   Address: 201 W Michigan Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxFYohehoinUl3c0vKRMh95Et_Rnz6DeIYBQYD9Npq4Qq_VAf5TBN39CrvupujO354mcAg6wRHDtHcHZvB4GkQqKsenA2-vBeG5YhvmBwXpyeqorF5sgM8cg9dvtM5lyb1i5txWZ5mB1H80Kw=s4800-w600-h400
+   Restaurant ID: 7b407422-b2e1-46bc-acbe-7e39479870cf
+
+323. TAQ | Taqueria Restaurant & Bar
+   Address: 106 E Liberty St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czhesNWddDXcO2TGwqmGryxhDDzqy-1fBTxHAdNV5vDVtWMMxZLajMW-q3U-lSR0ozRmVt7L3J3wz5ity31eMXYdVikeQP7gdcPO_yP3cnIfFs4gtmKz54aq1-WCMupxTjSp7SFpaNzcBxkzw=s4800-w600-h400
+   Restaurant ID: 3f803b75-01cf-43c9-8371-d3ebbcf46d72
+
+324. Taquizas Mexicana's Food truck
+   Address: 1232 Perry St, Pontiac
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwM4-ZD6gcfgpZtUSryvu3-T4zWxuS_fRv9a6Mx35qHcfL0G0y72GV1GFFAg2weBJFMp_u25IIQJaqU-N8MjisoRvshQ1aE9dQTP2tliGBbUMLUFjbAfsYOb8tQNa8zuxAOZLts3NfbhWR0y1E=s4800-w600-h400
+   Restaurant ID: 5f6786f3-6657-4eaa-9ee7-31be6e100ab0
+
+325. TeaHaus
+   Address: 204 N 4th Ave, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyRSU0jopYvrYKFZUR06h1mfVmlfiVaPCiLWg8h4SJMfT32A24jZLlSmh8eiUa-b-yR0WsUbuAL6kNY99MGJ9WKU0R1svcMc_5E949TQ4BTFQj0jv2097wvbcaY5_FzB87Kzcng4dSaPybg3g=s4800-w600-h400
+   Restaurant ID: ff404a4b-e52d-4f3f-b30d-4b1ed9099f8a
+
+326. Terry Bakery
+   Address: Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwzlJ4BA2iYtpxgZ18ItyTr-KTZU4y5tAcJbdZT6qoS_sKlKQ3mXRr8nPHPXoIl4bp9l9NYWlXouXRbvyk9l2UH2O2RPayNSL_WCaxdcYMwUpVbUCtkaXY6UBGM0CP3tmM3g7eHhQIsQfrHFhc=s4800-w600-h400
+   Restaurant ID: 70bf82a6-3649-4a9d-a04b-c31b08116a8b
+
+327. Texas de Brazil - Ann Arbor
+   Address: 760 Briarwood Cir, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwH452JuUKpBam9M94Hy1qfNFvp3i_5PthLDf-DYjHqyDD_GixstjhTyc05tgT4soFU16HJmZLZsnZJYaImhfy-hcPBYeKw23ToW01-2FL5oNotEgtjUfseJd5q5NK5exjO_x9Q2XNJe5Lq=s4800-w600-h400
+   Restaurant ID: 056b861f-d855-484e-a035-e5f9d9e3e0cc
+
+328. Texas Roadhouse
+   Address: 3133 Ann Arbor-Saline Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwjrcIwWIeGEpUtCtCqaLrAWBB2KSE39_fmJOxuIfIcr4CO23WbpeTAm-6ALcFk7mYjkfH4QdIO4uitRJCUEtXxYB1ZSd33UZn3J0qZSxM6HVQeWBkrAcFw5gFEKozUu9LrZbIKD8CIqMNNfQ=s4800-w600-h400
+   Restaurant ID: 333a69cf-9a46-4fac-b6c9-5005dc1d1cca
+
+329. The Back Room
+   Address: 605 Church St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyhyIlZgK6P_-IrgDMrLSeFB-ggZrbcTcYZ7NKEk2Zmhmas-7MF_V6bpSYB44KmGcC_n5258somnkXI_7Zb61xMN8yLOhyeSWot-_vbGdkXrZUo3rhkewgs1lN_YUQyXFqE4f8NyhU2SLNe=s4800-w600-h400
+   Restaurant ID: 427af777-de1f-4554-9d07-5606fb136beb
+
+330. The Bistro - Eat. Drink. Connect.®
+   Address: 3205 Boardwalk Dr, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwOQC6TMR5upCXpv-gEHgCJWNcVHJH35qRiKL3NIbsWsYryCDW9vn8osUF0zieDQcqXTxeNDpSiSGQA9bl5OjQMiLGVYGwI4AYS_xRdI-jFWUxFqnF5ez_E1lm6VnTcGDdZ-zZo9h_SH6Rjr_Q=s4800-w600-h400
+   Restaurant ID: f9c61198-d115-4881-89fd-bdbb165fbce3
+
+331. The Blind Pig
+   Address: Parking lot, 208 S 1st St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyuWNhd44Bf4ZVTN7Nx6scJyweH0q-TUrX7kOZfwjFoP8KkXt3_7TRKQMumb_0XlXg3sybdykUQI7Dd1dzADsIJzI0Wt3vpXe0xT6grxM9ECpjltzrjRP6VIQvL-CrzQNVoVDTcSplHXSdlGA=s4800-w600-h400
+   Restaurant ID: a430809b-08f8-4181-aa91-f20c8bccff26
+
+332. The Blue Leprechaun
+   Address: Ann Arbor Plaza, 1220 S University Ave #109, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxJXPn5G9zvCVU4rmGbvZdHH11MU13jVBkYlldxWfTjCCYI9iV-RHw6RL5Y8Rbym8ItIzb_Z8g78yFXU-3jU9lTCE6u6jubz02JHLbaZMRW7ydqPygjuyXnGhd7WrdMDgdIcWaMsPI_EzbtfXw=s4800-w600-h400
+   Restaurant ID: 64a48d5d-bdfb-44c3-90ce-4b62673e1ae1
+
+333. The Boro Cafe & Bakery
+   Address: 5400 Plymouth Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cy7coK_tCcZmBAFnyHX9nD_r35_fB-BGOP57m4rtc9VsP3nntyXuGBjtmvxJwi2saVyKjgJIzueZQy_r0fkHxKcL-_kYiS8LxgyT9Pnhns4kZ44OD1YuBuUH7f2PuH_eKvOt4-cNVgWd-TiiNo=s4800-w600-h400
+   Restaurant ID: 551c6c1d-92a7-415a-9dd3-83f1c6e278da
+
+334. The Eastern Eateries
+   Address: 7 Ann Street, Eastern Eateries, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxjPQyPgwnP3YMik2ituR0CceeNxjxF0q5GU2Tx9zHOlUERt7fl3JRcU0x1WU78_ZDYvdHyL0kJdbjCdsUXmC1b08NpoYUUf-fc5z4IycAHnFlR-s_7U5Uo-lBJgwf4v4qGLJsXy7lKmdXOKw=s4800-w600-h400
+   Restaurant ID: 0979eb62-4f1a-445f-b5e4-690a8611d5df
+
+335. The Golden Egg
+   Address: 2660 Washtenaw Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czC3sQErp2qG3dfMfAQV4gb71uM9SiWgaVL0dF4sYTt21sybWpv80dXF4jrKd83RABj9_73FiOJ0oWqmM-qdO2N44MQTz-KKZq-80QdYV8I3EnKs5na5Mi8ttKnwrJm3iE6EEnH39v29OcDQWw=s4800-w600-h400
+   Restaurant ID: d772c334-977c-4f60-a347-1c0843b4c661
+
+336. The Hidden King Cafe & Bar
+   Address: 210 S Main St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxzfLIj7gby_ZFuUvzO7a3tOmKrQjNQ98SpKtE7LxNbEaFmpYNAZGNyNmSC07rBR_KYULF-H1domxYCDbiqpLGT_KxIw55kqvI1mo_EHXtAueZcOj7nlYNpyzi8Omoedj5tn1Ar8kaHvl_uTNg=s4800-w600-h400
+   Restaurant ID: 6e8d6f6d-4e37-40d1-b860-7064aa56516c
+
+337. The Java Spot
+   Address: Student Center, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czfqqcVfhwZ3_BrjaJfDgbhf5IqiJMk771oH2M-bFtcYs6fp_zifYIb77HM9AMtJ-EAd8js1T713kbrZ9LSHAoxOX9TaPs60AYSF-_sJjDQomRTMh3B72MFt-Nx_T3WnSd5w8rshAuR-PS3Yfk=s4800-w600-h400
+   Restaurant ID: b15e5178-2381-4860-a4a1-aabf77658ce2
+
+338. The Last Word
+   Address: 301 W Huron St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyTH2Noi8IadmUBrZNUcyfjRSEh_WmIwG0jPdESoroRrtJqQ_aZYoGQcpj2pi9Ii4j_WMl-kzJoLYFQEoW_tMc4Xh4zCaYq3h90_WeuF1xd0Yy3K3VHt6O27yi35qqZWrIwRoHZDAOwnXXrwA=s4800-w600-h400
+   Restaurant ID: 24d77e3b-5bc5-4048-bcfa-cdb7325342bc
+
+339. The Produce Station
+   Address: 1629 S State St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxw-dTP6_DyRAL0V1gGS_ZQXaOZKp75tQdZx-CHzmSu__EZ4ktr1a3Xej99Wbqr-dxr8h3mfTsrrnH4WftJQ8Max7xr7nwbnNQtlrs0PV_jx9XXeqqD4MgyW74bCEmCGDHR5Bkzo2JLTOMgCIQ=s4800-w600-h400
+   Restaurant ID: 718b19cb-7553-48c1-8130-f2c58defcf30
+
+340. The Ravens Club
+   Address: 207 S Main St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cw9xqQ_tNrEBeW21JkOzicoOk5xibUexIzc64-nFbStE2VdMAQCFBDaSes6QbpRXBXsxQ0Lmun_cp1XUu6Lrw_mbwSqQLLPBug8WPkbXBcA7BW-YBCKBHfUHMp3pfL6KYjxHMykXlNQCQ1A7g=s4800-w600-h400
+   Restaurant ID: d2fb0b42-f5dc-4a95-baf2-f6ed1f520781
+
+341. The Seoul
+   Address: 620 E Liberty St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czdRwz2-ccNn9buc1S6S8xxLynJS_tmsvI_ws3j-WybvUT5yzzqqaIY-ADfecdw_5UBjdRt0wyyrWhF4a3oUaerlvimMaYt8EXdhB5dQNWIhI2I6mIhrMaHqiru_nXH5nruld66dTzTUly5tw=s4800-w600-h400
+   Restaurant ID: c34b0e4a-e71a-4a78-a005-22d8467a42c3
+
+342. The Sheikh Restaurant
+   Address: 44934 Ford Rd, Canton Township
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cysFYdqKU5l1XhT5RdjoZrFCWOTYNyxi8bqt-0Tf7t159JBi5zf-yKUg2z8EDhVCtSbKDXAc9xfDQldvYLd0_tquwE7zaYhy6vUPzHIB8KMtXAM0Yho8X_wIwu3r2_yXpf4HbJmbbnu6oH66g=s4800-w600-h400
+   Restaurant ID: 2dc793e5-e112-4891-99c0-65a2d058187a
+
+343. The Songbird Cafe
+   Address: 2707 Plymouth Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czdeS-cucb-VxtEeEXK7Ez1XHv1CT--YhY1TypKoV1cgCGzS2qLAJaAIbdBLxwxgJuexR_-dO5v7m5qYxOwktQA1qGyPz_ejfdLfGgjgmwHZm6mfBK68vxEJgM6fMjFRwpvp1E6cEucY0IIiw=s4800-w600-h400
+   Restaurant ID: 98985082-e373-4225-9521-920443a25595
+
+344. The Whisk and Bloom
+   Address: 8845 Spinnaker Way, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxh5Rk2eHSes95m_wja3mNHUJtmjCUP965RaTuNXgYau4w0eSQawPEVLPjWnjqgFd3xN-p54BOa_bnZzJYBe3AxQQdFRbheXP57H4o70rIPRB2tX94rpe4S2TXSBRlc0skF42T-ZXkOrM5fcQ=s4800-w600-h400
+   Restaurant ID: e8843459-0e6b-4dc1-804c-3c14010d7ff6
+
+345. Tian Chu Restaurant
+   Address: 613 E William St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxqye-GWrBA5A6oglpc9HUDVAkQ6fxIB57fGqKsGf1Cc81t8SqMOzcN_uwQAFoACNqYOpqzuiQ34_FoJTwYYf-_8MwXbva9fdCm1rEoxkWL_IS31RnpGI1HaG2Yd26oKq6OzfMn43aFLcuB=s4800-w600-h400
+   Restaurant ID: 1f6f1b2a-1be6-4c24-99f5-f21e196f284b
+
+346. Tikalito
+   Address: 1346 E Michigan Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czlaJjrIAxpf3fhfkVONIMX-g7eY5YZJvauqtYdnYvNvUCCQmslOwNzHJDWxY5ilIkTDhsxwsv-OGE7v96KgJ7lHqIPkJwjEaUoWCg-1uPJ9EAjrWCyGQcpvS6L2dJ-ClEBtchdSBNsYMKLIF0=s4800-w600-h400
+   Restaurant ID: db021407-dc57-4888-938c-d77744aed24a
+
+347. Times Square Kitchen
+   Address: 1026 Broadway St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwlbarBAeO6nImBBPOwWbALrnn0TaUlAcQCDfyh9O-FkjFUSMR-DnBcUPum-U2qzo7UQ-0D7cZ4QTbiPzoyMWXeQh6lNSpRGsuSoFHnjtjwLiOmt4bqZgGPSxKHzoSPXrT1OCoX0wMEd_yhENY=s4800-w600-h400
+   Restaurant ID: 8a8d5300-da56-4e91-8590-af6870aa4f20
+
+348. Tim Hortons
+   Address: 2220 Washtenaw Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czdNwhLGb-ocTleDNkQ-bjn0AXYQQSFKRplaOqdAj53s0xjmKN0wCBAWseZo89t9VYExrCcgi0cWAtgI4dFmdn-0e5I1KzCBIiCNeofnIPYNqJ3N4P6R1m0sAOxicLUee8WdycIrg9QffIdPg=s4800-w600-h400
+   Restaurant ID: 82947b64-04bf-4df2-929b-7981520ece47
+
+349. Tim Hortons
+   Address: 1311 Anna J. Stepp Dr, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxAAXMSgD4KAXTD96RP303T3VcYrhHMz0T1T_nOYHAzOM1WcnPjNHM1405nxHfay7uotacr2o_lLalgz39U0Mo-25nZCJCO3ehybOpIS0FHChrIc2LdzTeYMe4-KaJZwF_Nd5MDXp2pYvMI=s4800-w600-h400
+   Restaurant ID: 40d9c024-c521-4a52-b559-4bfc39f9710d
+
+350. Tios Mexican Cafe and Tequila Bar
+   Address: 401 E Liberty St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwyyvDIT6B5CTIWVxKZWDvM1eW1FmHIkyJvVz1TENb1dFflvQr-H4F5G5UyJauhRVNd8wFcMR-chrMk5YbxCBc4lTb1ZuQieoeT-MHHzykZrPRY1ZeagtC6N2ax3Cyk83FYKUZGX_2Tc2t6c-8=s4800-w600-h400
+   Restaurant ID: 36de52f7-a1aa-4d76-afaa-2d589318dac7
+
+351. Toarmina's Pizza & Burrito Joint
+   Address: 1200 Packard St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czlMBBmBMWzrn1G_ONajWCdVc1LL_fbT8kNfvp_rItdd-koJwwtZ5i19Q9NGpuO3HdHfyh8oZpNRVXus1W5rFKm0uBNKRl6CdEG33bDnldy9OMYkWSaoB5uHx99-U_zr1z2YVN3sABrVA-n2A=s4800-w600-h400
+   Restaurant ID: 090bf6e0-797a-44df-b154-a09784d80f23
+
+352. Tomukun Korean BBQ
+   Address: 505 E Liberty St Suite 100, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyZKHqmDLFR4_DbosDooShXaRoxyYY3HDBOaodI2jTe8JF6-teYXDp3SQpU05sr5btfz1H-GzynuQMnD7reeT1_Q1kGEdru1Vu_TF1-vHXlk931IqP4EDU8k0saIIGilpnZFnzS3MZB9dJ06wk=s4800-w600-h400
+   Restaurant ID: a61bc96e-341b-40db-aedf-b9d9ccd4c3b2
+
+353. Tomukun Noodle Bar
+   Address: McKinley Towne Center, 505 E Liberty St Suite #200, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxt2LVkddoYqlbZZSgxgPWWsWYJpc9jhHTtbfhlT7WIsGnsyCh6JFg2bqcFEOwEf94IFMMNPHdyQ-vxnAJ6GQ1G1OLTVmTJW5pYjxyKr2TPTv-wjq0FyOs5Pn0OiCiEVkpCmZ2z8_QBFz4Y_g=s4800-w600-h400
+   Restaurant ID: 9cc57e94-5b80-4ba0-92bd-d20484b761d3
+
+354. Totoro
+   Address: 215 S State St #2031, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cx6Aw2Uc09vB8QL87fVfwkq8fEQmj94QJfeFaRx1LQ0EFFAf9u2-hcy9H_aEv_a3cO2B_qIuTAEQzHvbBu0C_9j_GtbIKZUjk3ivuwCcEQ2OKc__4FRMORSR3B2z_8bXefjR3ANDdG-3UAEMw=s4800-w600-h400
+   Restaurant ID: cccbd511-6c23-458f-879a-838e91fcea33
+
+355. Tuptim Thai Cuisine
+   Address: 4896 Washtenaw Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cx4yd6UwcwwX-botpCyA1OKm7cMCOAnmya2fdq_zTQrdOxurEgpFxwwb-Y0lEHCNUsjoVNXXFBv8zvP00WjyYqIH74Jk2KR5Ph9w6r8EO713FncupXkMYNeR8d57Pi8D8flWfWYI88DVcQNhI0p61qSWw=s4800-w600-h400
+   Restaurant ID: 48f4400d-2486-485f-9191-5b7def217ae7
+
+356. UMI SUSHI
+   Address: 3393 Plymouth Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cweOeZtMUSX7_MiDCgAfisC22d0YMuClGeQhh4HhM2q0aSxCntIxK4PRTeHGFNrWrgRlTLwuqLU30EcLjrCYQuLlK2mTgTe2mNw3A_d9v8U651ldPvuk93E-c4Gdv77Sjvc8CtTazlyKBG3cfY=s4800-w600-h400
+   Restaurant ID: b2bdd61b-0c1a-4a8f-a124-e072593167ec
+
+357. Union Rec
+   Address: 545 S Main St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czW1Rk7AdbScJhC9B-y27GTn0QSyAl8bFGtLOPGoNHdZlVY4s3rVXxj27mXquYB-ZjjdlGARayqJ5bxAm0tUy26_dmn4WBvcHznCiNlYszcwnvYvk6IcROsRINUh6vccFpVmmiIJQWXNy-cZg=s4800-w600-h400
+   Restaurant ID: 5ea0ec29-d2e1-47de-96e8-a36dddd42b7f
+
+358. unitea café
+   Address: 522 E William St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyTOxo4pa9U_8OsAoviJm2LmWp2LWkHg-ia2pyDaM_esZuMI42k3LCe0qyVagS3ZqcvLzR9Y27p4W5Gld3SszR9sJqgsgYqIkD_Ck1zCykKadx4Bax0bjqq1dFBKd_dVa7dIpYw7drTRnR2Eec=s4800-w600-h400
+   Restaurant ID: 0d85b784-ed67-4b4e-b4d2-402ba2111f21
+
+359. Uplift Ann Arbor
+   Address: Parking lot, 210 S 1st St #100n, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwfE1qXQYigDuzzcHpF9VcTBXckMGQk8l_jNTjNX9JI0pB2erhNI1XWBtc0qzzPNse1w6sB1vI_jGq9RizvEBnzKakHGNPIx4VtHHcoJ33lKVH7DajhcZPktWW3j3TQoxuiLw18bgb-DH67Ctk=s4800-w600-h400
+   Restaurant ID: 5f9410db-00b7-4ea8-837a-cf37c7ed92e3
+
+360. Uptown Coney Island Restaurant Ann Arbor
+   Address: 3917 Jackson Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxpeH67qgAqcta4_EWnj8RUwmegztyo9Lc5LmhMXTRUSZXeVaWuHCbzUisO2IfJqNSO719gRSA2rDd_ciZuV2wFWoX6myLUBn0EroiZBlf30M3MEGiyX0pOvR04v3MNYd_WiuYN0a7Vj35DPS4=s4800-w600-h400
+   Restaurant ID: de1998f2-727d-4a5f-8192-a0823fb97bd5
+
+361. Village Kitchen of Ann Arbor
+   Address: 241 N Maple Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cx6uAk3YQK2m7J73lMiTZBvuq5RUmazSMeyNXF6sNOFviUHu93zj8jeO0slL80c_lODmDJ7_4DJ06fQNN0_8tEn4soCWVzZQVCDLpCA_L_GY5xaO2sbKR-XKtRbTt30Nm7dXIUQnvaRtLk94g=s4800-w600-h400
+   Restaurant ID: 6223beb3-a4d7-47f3-bc74-6b889ecb0f20
+
+362. Washtenaw Dairy
+   Address: 602 S Ashley St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czU3_eUfiOHW_4lyXKJx2kHzNxnlRpUv36k3VNQukgkO1D2aKU37sTYorvCV4pWEUUDLGWkFPaCJPGCl0PZNAyZLk2Ab6nXS9zDWjkjo2i2OZv8CqD8Hs_2_iBWCBxVwvacOH8zjaIDBdWOUA=s4800-w600-h400
+   Restaurant ID: 0b3d41d9-618f-4422-a3e0-728c746bf67d
+
+363. WaxBar
+   Address: 44 E Cross St, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cwpvRQnL5x_0nB1E1Jc2BCo6ZYlAS2kFZp1KzBKBaNzVF0GmhcME_HqyYwMFaMPkTwp0lAzAQ0rwgdw663cJOcaz8syK4Y01ucWYkKHRGyXzajjV_QEZrl3Svcc5-dt7V-os-Na_tEmv421Ug=s4800-w600-h400
+   Restaurant ID: 97a10895-d97a-4751-b20a-e47798746c81
+
+364. Wendy's
+   Address: 73 S Zeeb Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyYygWq2YsnVgRKl-1KlcdjOn-rDtFzAcMUJRBb8FAkYhR9vgxettUNtbFM80eR-NmVVvYCUFqk04izAS2JEl3fZ17Gap0JfYau-e3JsqWRb9yk8Z0Itq0p-whsPYa0dcN_BMbiiJtggpDh=s4800-w600-h400
+   Restaurant ID: bff2ac5d-8fdf-4f64-95a4-907d65d3c99f
+
+365. Wendy's
+   Address: 3100 Boardwalk Dr, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyO5onQufr8GSIjltcwJr4i32vLZ0qNXlqbjOrHkP2v28WN0nsmVbHKDDDf-KzpGvZhEh092oZjOnqQxugfBxKmCYm-_sDcnxVGyVVY-f8V8OJ9jqEMSy-_TLbRHcgA_Iu36Es369RX0CHQyg=s4800-w600-h400
+   Restaurant ID: 490c7d44-d23d-4ba2-a1cf-c2867178e327
+
+366. Wendy's
+   Address: 750 S Hewitt Rd, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cyueICsf0EICKV5nFNyH-eF-Dbu402GGI2fAY4M9OKBc3YWyRdKfZKFMn28EmdIrPjPsEoG39FP9IqZAdu3CSJ9YJ14Aviwb2bfwTyIUdzrWDgFMiNBapSlXaXe4YJPhpi1EkpReWldgqv_Lw=s4800-w600-h400
+   Restaurant ID: 8ce3bc8d-a4a8-41f7-9a3e-f66484305a9a
+
+367. Wendy's
+   Address: 4020 Carpenter Rd, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cw6XGi-Y0pemcDGLhXIngemmekstTJNTuHmHF2Z48PnCpjPZ61s4S7ZLkebacCPsJD1tNSoN984s3_G3Gl7HonuiSC7Sc22CD1Aki2SIFcDOeNqAYoT9LRNjA-ui0Rg5rj-gzwmmVN3bFUpS2o=s4800-w600-h400
+   Restaurant ID: cff56c2d-f9f1-4e98-bfd4-c4ae07f466d1
+
+368. White Castle
+   Address: 3953 Packard St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxFEFRyNN3DRyZDD_Xsan7pglqGY0AWNgfy5UMeJ0oQbOfDhynUb7vwsjZq4Lb_6A0jECEA7IM4rxn26mdRCd9wocbWBsb44cnu11l1bnOpsddvrMhpUAOvDCoWnYjiWRGNjXWaZeo9TkybMJg=s4800-w600-h400
+   Restaurant ID: 9d029953-5033-4ae1-841d-ea663f45b0e8
+
+369. Yoon's Bakery
+   Address: 2775 Plymouth Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cy81KgNW4iZY8Eas7eoesJD0SxR6XUeHuW80E1655UAgH2TbofEESRe94EFKviJrOblNdAt9V33pMSq7k7wEyxjtkpLr2WKY92lTunTc2gP0zrAmFuQdT6rcgmAKrEqbN1W6dydzKTcSMLmpiA=s4800-w600-h400
+   Restaurant ID: 7ef8055a-1c11-4ca5-87fc-50cbe729dbce
+
+370. YPBOR F.M 颐宝筵川菜坊
+   Address: 2800 Washtenaw Ave, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2czGInytP7GshCtMXh8mAYBAQx4Ecv-mJBTYKjO_KwDGp3rslAahO0rZm_XW_ewNzsR_VMQ_Z-hvTwUxZy9CyKjOSd_ZO-UTAU3gagzx0yEQT95sSVO0dJe3JUj8PXft9gQ_OG4tkHwro7wbVPQ=s4800-w600-h400
+   Restaurant ID: 74005edf-571c-40a1-aeb9-52903a6b9bed
+
+371. Ypsilanti Food Co-op
+   Address: 312 N River St, Ypsilanti
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxKLfJQ8AKZeBXmEOdWr9PAwqf7c_b326n5PLhacd8N_YBl2pmLY7ZZasugCuLxOf_c7ySZEAmwsjAAzNHcgcYknG7EHrJpp91PernE7tpwuCSGEb0QPKLXIjoxfpySEsDSN-kMuEMVg0OLlw=s4800-w600-h400
+   Restaurant ID: b4b93433-702e-419a-ade5-82c9d42a0895
+
+372. Zamaan Cafe
+   Address: 3580 Plymouth Rd, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cxIxQ06agaMNAJJ9C8ZGhQb6918CuwUWmYMJ3Uhj2GBLIFfNC7c7heJuGWm9gnV1Q8jJNJGUda2AlpsbJ-G4Gk7pfYfGNX2jvUbZvcxHOYSy_RWVndqTivC-5EKr60I6Drxd8486O9lmvCVKQ=s4800-w600-h400
+   Restaurant ID: 4989b6ab-f403-4ef5-8b48-b652f3e3e22b
+
+373. Zingerman's Bakehouse
+   Address: 3711 Plaza Dr, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cy32fwz3tzVN7g8PAn4pGRaOPBee6Lk8eZ6Zwi5fSrBMRsdSHri5xcAJm6ONlnNxm7kiKbM5dKBLvuHVKGW_bVHT29FEwvzA2SgPq6slYhUpOCDAqQiY87S0ta6VYxSgjmBokx-cZD1THWBoQ=s4800-w600-h400
+   Restaurant ID: 91314a63-da76-4f6a-b07a-0b5a5815b04f
+
+374. Zingerman's Next Door Café
+   Address: 418 Detroit St, Ann Arbor
+   Photo URL: https://lh3.googleusercontent.com/place-photos/AJnk2cw9QW-Uie5kn_M_dBCqBYJhFV2YPijTmIAFWxgFDQqDxCMPhGU0A8AgMQJz8ymRXN-C2A39so3f1M9sS7rULEE-XlToTtrFyF1tHALi4a6gZMbQ4gfhItLHejs_bB0AkgsphYG_rmqOoYDz7Q=s4800-w600-h400
+   Restaurant ID: c423b9e5-8878-497d-a5a2-e10be0baf2fa
+
+
+=====================================
+      BULK PROCESSING COMMANDS
+=====================================
+
+SQL to clear failed photo URLs from database:
+UPDATE restaurants SET primary_photo_url = NULL, photo_processed_at = NULL
+WHERE id IN (
+  '6380bb94-70dd-4489-a07d-f973ccefe19f',
+  '02d7520d-4253-4fc3-8a74-eb51fc7d63f1',
+  '8e8f4f05-00bb-4cf5-8112-d3fc5a17d5bc',
+  '9c718832-3fd5-4588-b562-5a2ef78b93c2',
+  '946cd985-9d3d-47df-96f6-efa5a1fe3670',
+  '34dab2c7-4784-41f6-bbb0-0101d6485694',
+  '970aa13d-b216-47a9-a2aa-24ca3a88e9b3',
+  '49d0fb0f-8d5c-4ab1-9f7f-c594a1c21588',
+  '2e90c1ee-3da5-4731-a3db-774b9ddb162c',
+  '7d2fcf95-4ce4-4685-a434-b9fcd7cb88fe',
+  '7f89168e-bac5-405c-8328-754601a29476',
+  '62ba7473-9614-4e3e-8c71-f35f9323b1b3',
+  '86b205ce-7da4-4bf5-867f-e131ef7e1897',
+  '9420401f-0258-4bbf-9be2-4b3680eceac6',
+  'e685de3a-db66-44d3-a481-9d688cabc908',
+  '94f1145a-e5e3-48a2-a80d-554410592d18',
+  '293e0e13-593a-4446-a3b0-eb2ca537d137',
+  '77dfb583-550a-4479-9189-ff26748cdcd6',
+  'f08d1442-bfb3-4a25-9477-158b7994cb02',
+  '7da28604-be47-446d-8ed8-27bf0124d968',
+  '932a2b4d-1ba9-4f44-a52a-ff2efb6e32f7',
+  '2f35a7e9-601a-4bf1-a121-c076f51d37e8',
+  'd3c2439a-9f9e-43d6-b0d9-8ea84baf3af5',
+  '639a8afb-bab2-40cf-bf1e-5724edc984e2',
+  '20a63110-d34b-432b-80c3-5efbfd0994f3',
+  '3e5ccf93-a3ba-4b71-af9c-04cf7b6b3e0b',
+  '7388877a-31b3-4bc2-8130-4bbd78ff231f',
+  '41f57d1c-390e-487a-8b48-5ea4bee3bb40',
+  'd12f84b5-91b4-4935-bd53-0af77cdcd3f2',
+  'bc00538c-c34b-4b1b-bd74-b7c60fc970dd',
+  '27b94eb6-b0c6-4b05-ad25-65d703350907',
+  '2ef83cea-5a35-42ec-bbff-2d3216089140',
+  '047a05c6-ee0d-4a9d-8091-7ab96e939add',
+  'c7adf4e3-1db7-402a-8340-b28288281afd',
+  '781c102c-17a4-4307-9a90-4c304229302f',
+  'ae7484dd-7cb4-4a0a-b9cd-b8bae810d668',
+  '7fee124f-7082-4703-9924-41cf78670c3e',
+  'f21a9d9e-fa90-4fd8-b821-bb3b22252feb',
+  'aa710fde-c980-44f2-895b-b487a1b4fd05',
+  '6bc24e83-c348-4470-8e63-69253a9447d5',
+  '259a3ff8-3403-4acb-bf90-b8c5b6cded4b',
+  'ec232921-6fc2-4248-89fe-ae43e680d920',
+  'ac6ce70c-78a5-47f1-afa6-2d85da372e11',
+  'a795ee8d-9efb-442b-b1e0-7d38a4425ade',
+  '748fa2dd-5d82-40cf-a4b3-393ed3a40776',
+  '22bdaffd-df24-4721-b291-5df5b9a9ae94',
+  'e0b96b20-b4d4-415d-98de-0dbf267c6e82',
+  '20a93d34-fb00-4014-b7d8-ef668ea38300',
+  '81709543-b7c8-45da-ae32-e91a2c3dbbde',
+  'f4f6780e-474a-4247-9461-639706ae28b7',
+  '6c4cc2a9-9915-4c01-b5fa-9f1dcfa07dec',
+  'd09487b8-890f-4f76-9b52-815ef22de3b9',
+  'cb7d41bf-e977-41e8-aea1-289d6f898cea',
+  '719c38ca-bbb1-4db8-af3d-4399190acdbe',
+  '071bb279-3cc2-4d26-8a37-6c43d62f7147',
+  '7c724cba-94cb-424c-9831-a7cf9cbfc0a3',
+  'f0a45b4a-f912-40e3-b741-52833504e8a7',
+  'f8d51083-c4d7-4e5d-b1d4-78c80ae30c36',
+  '4b8a3d80-492a-4d1a-a858-36acb302cb2d',
+  '3a21cc8b-827e-4c8b-8e5a-13300ab1c9cd',
+  '2c0e0e21-7c76-44e4-9c1e-393c29d226b9',
+  '255cf1a1-6007-4417-96f4-af3267fe6f84',
+  'b267ba7f-ed73-4e6c-b9d8-01d096417aeb',
+  '65321a9a-c7f5-4359-98ad-40910f902104',
+  '5df9ee0c-de59-42b4-9f61-ca826d3e3e96',
+  '4a2ae86a-5b6e-412f-b4e1-6d3e6152c2b0',
+  'e2d8fe1c-7bb7-4ba0-8389-ddf2c0b06957',
+  '768dd863-8bf8-455c-bcba-d275932d48df',
+  'e7806db1-9298-4750-b7f1-9ccb80e29328',
+  '118fea3c-ab6f-49d9-a0f1-1d941e8964ea',
+  'a209b4b4-5825-498e-9c90-cbe8f8690110',
+  '662e25ac-5ed9-47e1-9da7-fbc76a4f7d99',
+  '1e5eb26c-ff68-4789-bea2-d87d205c59cc',
+  '98d32f40-1601-48a5-80ca-850174ce77da',
+  '58684b6d-daff-484d-8398-7a4e0b25f8a4',
+  '1f51ac92-a77b-41dd-b433-63df67799f7b',
+  '578fb46a-e0ee-444c-8d15-1b95eed7f0eb',
+  'c5e80463-ca9c-4a28-9c36-135328b45b60',
+  'cd984d99-9962-4d1c-baa0-705bf6fe6568',
+  '8710c579-ae8d-466a-a810-535b97538488',
+  '93b076d2-bcbc-4dbc-8d0e-7718cf2dc183',
+  '95943231-047f-43e8-b867-b8d2d55082fe',
+  '2d229ad3-fc45-4a0b-a63b-e5f9835c3be3',
+  'b79caf91-52d3-4168-a15e-124213ab25df',
+  '186f788f-2bfe-4b0d-ad79-0253dbee8aa3',
+  '639bb409-8451-4c4e-bb37-5892a92b6983',
+  'ac2d35a2-eaa8-45bd-98b7-a24c2848c4c3',
+  '42a1743c-ae91-4a72-9e85-36fe57ef4e56',
+  '010cb659-8047-4eb7-b5e6-095565faca2c',
+  'fe63a5bd-ad33-4631-81f1-f9c281332208',
+  'b9dd1d6c-1bdf-40c1-a098-ba57a5ffa2cb',
+  'dc49e572-4d87-417d-9f6a-c5788afd24d3',
+  '972e0280-c411-4e68-8f88-b58cd5548d84',
+  '742b354d-a23a-436d-9a28-29e90e0ee742',
+  '6804fb4b-3126-4b8c-89d0-844a39d565bd',
+  '013a662c-302f-4520-bb42-bacb6e558318',
+  'b7e21140-77d0-4324-aeb0-5e153a214159',
+  '71435a37-5d49-45cc-9e68-28f65bb4e204',
+  '15f1b19f-5e19-46de-8085-73ccb049a02f',
+  'd5ed618d-c136-42b1-b9b2-8645848a81a4',
+  'bdc4fde6-86bf-4ef9-8bc6-f5eade5f60f5',
+  '26384cb8-10ac-4877-a5a0-fbebdf4a3f59',
+  'd01aeb2d-8364-4a19-95c8-2720d2b1f2fb',
+  'd3c03ba5-4b47-4c86-99a8-58ee6e4c99f2',
+  'a7f64855-2c83-4c2c-bdc3-b85362cd279c',
+  '6197b3eb-e953-4ffd-ac94-8eb2ed746b7f',
+  '9cf3d3e3-f372-4435-8b1c-45d18f3656e1',
+  'bbd9ffdc-4489-45cd-9de7-668518948237',
+  '59df5db1-3953-4e4c-8570-bc99099d8500',
+  'f1c98ce1-1252-4343-b688-34b54db3cee4',
+  '4bf93b73-4e27-4975-871a-bc00178882a9',
+  '7eaaee6a-62f4-4130-acdf-adf498c3ca3a',
+  '9bba4ed9-b673-4e4f-9440-a4661d30b64e',
+  '285f0419-5076-48a1-8d00-6ca387ed567e',
+  '508de37d-80e4-4999-be91-227962d31a09',
+  '59f37d52-8a98-406c-aa3d-9013524442b8',
+  '400337d9-0ee5-4e2a-a124-1fea42fe81db',
+  '14d61562-99a1-447f-b052-be08bee2a14f',
+  'ddc370dd-fca7-4cb8-b58a-24204cd20042',
+  '4e94040e-e890-4c05-af82-33b3dc8ee91a',
+  '19f6180d-937b-41c1-9eb3-e5605a90fda3',
+  'c572e183-6e0c-426f-8c23-848c68f2fdcf',
+  '2b95f2e8-975b-4c29-bf6b-96c10b0410f2',
+  '2a901cbc-029c-4a48-a385-690ffe3c4fa7',
+  'a3b98af2-1271-4a51-b958-5afa1706c82e',
+  '8b9af690-ab15-488c-b6a8-438da234ac1d',
+  'd45ca5e2-17c5-4b40-a23b-53cdcc333e34',
+  '72c8c53b-5446-4399-aae0-f0de5fa26b4e',
+  'df039994-abec-4728-903a-eb83dd1d9e98',
+  'da2fcd89-5cd4-4971-b703-1344db7875b9',
+  'c65d015d-d8a9-4633-ba65-818f5ede5da2',
+  '9ab9204c-bab5-4b66-b26a-0a9dceefbe0b',
+  'e455fcfe-a781-4ff0-bbc0-1d4f88b0e153',
+  '66bdeab5-1aae-4818-97d1-fa3593cec945',
+  'e37ffad4-6c6d-4644-be61-17cffd73901f',
+  '0a5b1edf-8c74-4b32-886d-b82a587c5609',
+  'db646827-a86b-43a4-be85-4e6227f20d7e',
+  'f1e5b6a3-1bde-4eaf-8e1d-5e77b296b40e',
+  '1e4fd86d-8f4a-4746-b5ed-5cb20c886c03',
+  'b837acab-8264-4181-b3d3-49e4593c3f0c',
+  'ace91b78-8df3-44c9-bed5-9070dc721d2d',
+  '1ae09f7d-9419-4c06-810e-b94a247d44b0',
+  '4b67c468-a5ae-4ac7-939f-77f85e3c66c5',
+  '29283d6d-9d00-4e9d-ab09-c9d6677bf7e2',
+  'f1c318bc-e29c-4484-8fdf-54a084035822',
+  '016ffa52-66cd-4e22-9ed9-93317b5d4212',
+  '6a3fded4-3074-4d51-84a6-4584cc28c672',
+  'ea5ca833-2055-4118-9be6-8a65bf90e6fe',
+  '6eedf3a4-d325-4fb8-8046-fa67e1b04def',
+  '091e5f3a-8346-471b-994a-a698d5d99a78',
+  'ae43068a-3761-4d0c-8229-09aa7977d99e',
+  '38814411-5154-4092-9b84-cbe3cbf8b8b8',
+  '9b884841-8005-4a41-a3b4-184ebf183d61',
+  '6b4484f4-46f5-43f4-88c1-5007782d7778',
+  'aaa4fecc-bc7d-46f5-b875-5e45b0195467',
+  '12aab97d-79e1-4884-b6fe-0e0f0a665023',
+  '8017401e-e562-4f9e-a3ea-a957becdea8d',
+  'cff37bf9-771f-44ed-b587-2c5120b3a511',
+  '3e50e0d0-f2f0-4b73-a4cc-6f9d5ecf50cb',
+  '188ebc3e-e917-4ebc-b3a7-b815f16b6696',
+  'dc55eefc-77a1-4316-b082-4841319ab0bf',
+  '3c6a6be4-f4d7-410c-9980-5969e552afa4',
+  '44ebfd6c-4eb3-4623-a1a2-86371e887dbb',
+  '29a81617-90a7-44a2-a767-d28ca9647358',
+  '5b277504-5d2b-4f93-97d7-805df14eaa3e',
+  '94400ea6-d99b-4a16-b76d-71ae5b85e1f4',
+  '2c07a702-8f70-40d2-8387-d3781fcd43e7',
+  '331c53b0-9ce7-4e61-802f-1fd9b50fe197',
+  'c8312037-dc60-4f14-9d21-38c9fb21efcc',
+  '67fa305f-c6b2-4ef7-bb86-2c0565e4c732',
+  '306fc0f8-6495-494c-ba71-44890fbb23de',
+  'e9e94ed3-b29f-4a37-99a8-7771058c39a2',
+  'd823ab0b-8468-4187-b58c-7ad998d9db7d',
+  '567ac5d0-1a76-48ac-a727-31b9ae1f6433',
+  'e2aed5bf-155b-4f34-85c5-4477ae98bc8a',
+  'a2db6fdb-38ed-4329-aeb7-1a8771e6757f',
+  '9d86e983-4fba-4416-ab62-5081d100b2ba',
+  '18b629dc-d5bc-4681-9c6f-623c0e1298fd',
+  '1a5fca29-115e-4ac4-b298-0a6f0894b025',
+  '110f263d-f93e-4fa5-90ad-da396741ec4a',
+  '24eecf05-d03a-447d-9744-79bfc3700501',
+  '63a7a5b5-c03c-47f9-ac41-0f1a100d043b',
+  '5c24152a-50b7-4b2f-a898-0e63c764c72f',
+  '93e0c469-ba00-4f85-8ab7-2170638ebc0c',
+  '1364d2bc-f32b-4dd8-9862-793fa5fbc8a4',
+  '49020027-f7e3-4e8a-a010-920e394fefb6',
+  '4b1637a9-a01d-4ea3-8f2e-453e2597788c',
+  'e11c9c5a-2abe-4d47-b953-fa5ad1e4410e',
+  'faba628c-ed0c-49e0-80b5-bd5371d8f76c',
+  '1f1a6213-b73e-4bc4-becc-26f2b87761dd',
+  '9fe37dec-7ca4-443b-97af-a0d65747fba1',
+  'ea780414-7fd4-44c6-8212-c9204a74bb85',
+  '097f4cd3-3b37-4aef-96bd-7ce875ab8774',
+  '7f845ce1-03b9-46ce-bc1c-c5c195443f34',
+  'b896ef95-6fca-4149-915f-6cd118b2a056',
+  '0fb20ec7-a7bf-46c3-8394-1c5a1b472272',
+  '64f1f2a5-9ecf-4b4c-bdc7-8a51dd5a20d2',
+  'c536dc52-2270-4e61-b2ab-d16596b82c60',
+  'c00ab93f-a880-4745-afc5-ab1e746510a6',
+  'a5fdf61a-a36b-4599-a776-2cc469653749',
+  '25ba3d41-6a3e-4a38-bb0c-d02afd285325',
+  '1f677268-140c-47d4-be59-a10b844afc67',
+  '13fb2f53-5797-4550-95f9-7f75d3a82fbf',
+  '5b2b2564-f32c-4775-a4ea-d19d4beaa3af',
+  '877a86d0-e8eb-44d8-b46a-0afb1d75b5c7',
+  '287f48c2-c588-48ea-9ebf-4c3279b75c5a',
+  '9abb8bee-4eb0-4750-8233-ee6783995bc1',
+  'ab0cb6c7-be1e-41cf-b0fd-9371d0ac5b83',
+  '134b273e-462d-4957-9c4d-fabbf29eccf9',
+  'b765b06e-be3e-40e6-a782-650c1587bc8e',
+  'b96568f9-7318-420a-9575-c62900511045',
+  'e9be273f-9c22-455f-ba4f-7a814adf8aba',
+  '7e2b79c5-38a8-4050-bb87-5c901e7b599a',
+  'df59b334-c6c6-4cc7-bf48-d3563891e7a5',
+  '6d864564-0886-45d5-9454-685d017713ea',
+  'c6f84896-bd9c-4207-bb6d-d0162bde358d',
+  '827eb9f1-e21c-4d4c-bb5f-ad1ef73dc493',
+  'b6271382-2251-4011-9de0-56e74d2e8c4c',
+  '8d57b62f-2f6c-4975-b272-a815ef45592f',
+  '5cc26703-5a91-481f-99af-031e2d8fe98a',
+  'beba57e1-7410-4bb7-9809-a68bd22ce4d2',
+  '8b3d317e-6f0e-421d-b62f-544fe016aa41',
+  '20042f17-ce72-4dc2-8dd4-2ee0422eed79',
+  'ab0523b7-8f07-4771-a1c4-bb421d9bdc7d',
+  '38193354-5351-45b7-94fc-ce558ed390d2',
+  '2856ce69-380a-4beb-a9bf-b628ebc3011e',
+  'e3e3128f-30da-4fe7-97f2-459d7ba818a9',
+  '12fdbdcb-f2b1-4bd8-b194-0dd61e1bd2da',
+  '2a54b9a6-c761-4be4-b3c9-1cc067e09fa5',
+  'becde230-1720-436a-9b29-4ea935b2e457',
+  '6fe79c6b-646c-4ec5-aa88-1510e825c717',
+  'd770db79-7d47-4d6a-bc61-0ebf61172b7a',
+  'ee6bd7b8-ac49-41c3-800b-bf336b28d51c',
+  '940c2027-0675-4de6-bf25-66a9160978dc',
+  'c28dbf5a-1cba-4ac9-8981-f0c6b84c2649',
+  '224db4c8-0c92-4079-ad51-d4fa88e942b6',
+  '15725127-f59a-49f5-b5b8-d555ecd1e67d',
+  '45e62b08-49a0-415a-bde4-19342b706e9a',
+  '70d8a7a1-eb67-478d-b88b-20206f8f167b',
+  '90f15d8e-14b7-4b45-ad05-2284ce547671',
+  'a8ef0655-a2ed-4169-9e30-f413723aca5a',
+  'fda35c66-b8e7-426d-aaf1-6c38680986d1',
+  'fc92ce26-a873-4e2a-8da4-b3a11f268068',
+  '373844f5-259c-4ae9-8873-ce1452a93606',
+  '6ba5d2c3-5a7e-4a50-bd76-21a1ab74acde',
+  '125aff1d-a126-44c5-aa26-271ec3e825a7',
+  'd6e7155c-10b9-47c4-901b-7f724853716c',
+  '4abb92bc-bb8c-4022-80e9-09c5ec447a1e',
+  'f13f26f0-8347-4ab5-8639-3ef6b8c5cd2a',
+  'd982c267-6233-4330-a04e-2db9930110c6',
+  'df2a231a-1314-4fb4-9e5f-16bd12957341',
+  '00f79cc8-0a2a-463c-bda6-49dafd08480a',
+  '19d9e4b3-2caa-488f-a99d-a944c06e7b65',
+  '1d303075-b203-481a-8856-31347384e246',
+  '8c9efe16-ab96-4d18-94fe-672e7e61f760',
+  '4cfd458e-58aa-4ad9-b9fe-3863bd45d722',
+  '805c569a-e479-4b84-8edb-64472f708cc5',
+  '68d6e4c0-8a0f-4ad4-98c9-cee262e55d24',
+  '0f78403c-fadc-4931-abdc-04f607d881dc',
+  '6c5a9940-701e-4cbf-b1ec-37eac4cfddd6',
+  '3831c8a5-5445-416c-a709-e5863c1e0abe',
+  '8f4ce855-f501-4d00-b2ed-110a11de6280',
+  '3361566d-4663-47a1-9533-5dc599c06674',
+  'b6a3f9c2-04c1-4843-a4bb-4567674854ab',
+  '17d67820-1c60-43cb-9ad9-bb5e4100a881',
+  'feb67b0a-eaa1-4bd6-a009-c615426b1f62',
+  '7353ebb2-83d2-4557-89ca-81c1a97354b6',
+  '7565a93e-4d5e-40cc-8f62-c4d66865f7b5',
+  '9fe939a8-3c4e-486a-b3a7-4ae1c828eb81',
+  'db6a07dd-13eb-4f80-896a-f8a174726aec',
+  'b642b5f6-5ea9-4e91-811d-289c640fa390',
+  'c3e152ad-0e6e-4382-a905-560b7d11f397',
+  'd66c10ea-7327-4b8d-9219-3508fa14218d',
+  'd18cb12c-67e2-499b-a001-7a3d8e97ee2c',
+  '190eccfa-5640-49c3-bcec-90d6123ee2f5',
+  '349a8f7f-6a17-4105-9440-1ac015720881',
+  '21615f80-f0ae-45fe-b810-aa8d43450aa2',
+  '5a5f4714-5c34-4efe-8428-c98a2e80dc36',
+  '0a75f823-fd26-4580-bd92-9f1a169b9479',
+  'a75d65a5-5414-43ca-bd7a-ad47b272ff6f',
+  '2c8d3347-d503-4c7e-8394-9db93eedf4c5',
+  '2bdc366e-cf35-4611-9893-6f75b4737730',
+  'fc182922-d9db-4c85-9cba-07029d482f63',
+  '342965be-cada-4a1d-bb89-62799ce85825',
+  '269d5a80-7a0e-4e4b-b666-0f2df1ff7c66',
+  '1270e8fa-2acd-4aa6-aaa0-d0f01f1f0cf9',
+  '9d32a60b-e7a3-4fb3-8e98-97be3fc3905e',
+  'ce8e79c3-281d-43d8-ac8f-5c0d25518045',
+  '01b7078a-957f-4ad2-a964-f60a78f29089',
+  '528ccec4-997e-40ad-a275-3551e6941f9f',
+  'ba9490f4-acdb-4ff0-ab9d-2ce9031d4cf1',
+  '69114e74-93cb-45d8-b57b-41ef2e7b61f4',
+  'e50eec6f-ff14-4467-89a3-4f9d27f6e29b',
+  '97b6485a-bc02-460d-b000-56915717566b',
+  'e4300d6b-b632-4716-b219-938033aa1231',
+  'a5d4c8a5-c3c2-45ce-8d48-ce619c03ab3d',
+  'bab9a532-66f2-4f75-a7d0-7fbde433aa84',
+  'c01939cc-7d65-4e73-9e1b-a446b8a598a6',
+  'dc898ec6-2887-4a2d-aad4-99f7737698e4',
+  '5518a8b3-94b2-472c-8831-c0569914e55c',
+  'ac630055-cf2d-4bcf-ab8a-f2ea08718263',
+  '40635d6b-f732-4da4-8eee-627651d60820',
+  '1a5f4d55-998f-4a93-9cb9-35dc6d7e48ea',
+  'b3d42914-5196-40aa-aef9-6aff424ea0e5',
+  '98fd3b29-7960-440a-be9c-7101f01b6561',
+  '11408d8a-77e1-409d-9f16-216f682d05c1',
+  'a823602d-436a-41f7-b832-fe374171d2e4',
+  'c99d91e1-32be-4365-9562-1c803d93e4a5',
+  '61c3e1ba-918b-46a5-aea8-4fd132b00833',
+  'da7aca58-81c3-40a1-a73e-af1d6da808b8',
+  'ef057191-07a5-4e4b-9a88-338eb88b60de',
+  'c70a3053-38ac-49db-b535-5f67d0c175e3',
+  '78b2743d-2bf8-4667-828b-cefcb199bc5c',
+  '8e0c3c01-4152-42ea-b250-6e78facbdf6d',
+  '1663f2c8-2fcf-40bb-bd01-46aa596a1c64',
+  'be36c1e6-2bc9-44f7-adc8-eee58dd4c2d6',
+  'c719a1df-1ea5-437a-bbc5-ec41eaab1436',
+  '6207c6b7-4124-49fc-8947-0b3b5ebf4249',
+  'f0248d00-0f50-4f32-8240-e49e263bb9fd',
+  'ef023455-7519-4e73-98a7-e3e5712bf4d7',
+  'a5befd83-92bf-40fa-b17c-248a705def01',
+  '7b407422-b2e1-46bc-acbe-7e39479870cf',
+  '3f803b75-01cf-43c9-8371-d3ebbcf46d72',
+  '5f6786f3-6657-4eaa-9ee7-31be6e100ab0',
+  'ff404a4b-e52d-4f3f-b30d-4b1ed9099f8a',
+  '70bf82a6-3649-4a9d-a04b-c31b08116a8b',
+  '056b861f-d855-484e-a035-e5f9d9e3e0cc',
+  '333a69cf-9a46-4fac-b6c9-5005dc1d1cca',
+  '427af777-de1f-4554-9d07-5606fb136beb',
+  'f9c61198-d115-4881-89fd-bdbb165fbce3',
+  'a430809b-08f8-4181-aa91-f20c8bccff26',
+  '64a48d5d-bdfb-44c3-90ce-4b62673e1ae1',
+  '551c6c1d-92a7-415a-9dd3-83f1c6e278da',
+  '0979eb62-4f1a-445f-b5e4-690a8611d5df',
+  'd772c334-977c-4f60-a347-1c0843b4c661',
+  '6e8d6f6d-4e37-40d1-b860-7064aa56516c',
+  'b15e5178-2381-4860-a4a1-aabf77658ce2',
+  '24d77e3b-5bc5-4048-bcfa-cdb7325342bc',
+  '718b19cb-7553-48c1-8130-f2c58defcf30',
+  'd2fb0b42-f5dc-4a95-baf2-f6ed1f520781',
+  'c34b0e4a-e71a-4a78-a005-22d8467a42c3',
+  '2dc793e5-e112-4891-99c0-65a2d058187a',
+  '98985082-e373-4225-9521-920443a25595',
+  'e8843459-0e6b-4dc1-804c-3c14010d7ff6',
+  '1f6f1b2a-1be6-4c24-99f5-f21e196f284b',
+  'db021407-dc57-4888-938c-d77744aed24a',
+  '8a8d5300-da56-4e91-8590-af6870aa4f20',
+  '82947b64-04bf-4df2-929b-7981520ece47',
+  '40d9c024-c521-4a52-b559-4bfc39f9710d',
+  '36de52f7-a1aa-4d76-afaa-2d589318dac7',
+  '090bf6e0-797a-44df-b154-a09784d80f23',
+  'a61bc96e-341b-40db-aedf-b9d9ccd4c3b2',
+  '9cc57e94-5b80-4ba0-92bd-d20484b761d3',
+  'cccbd511-6c23-458f-879a-838e91fcea33',
+  '48f4400d-2486-485f-9191-5b7def217ae7',
+  'b2bdd61b-0c1a-4a8f-a124-e072593167ec',
+  '5ea0ec29-d2e1-47de-96e8-a36dddd42b7f',
+  '0d85b784-ed67-4b4e-b4d2-402ba2111f21',
+  '5f9410db-00b7-4ea8-837a-cf37c7ed92e3',
+  'de1998f2-727d-4a5f-8192-a0823fb97bd5',
+  '6223beb3-a4d7-47f3-bc74-6b889ecb0f20',
+  '0b3d41d9-618f-4422-a3e0-728c746bf67d',
+  '97a10895-d97a-4751-b20a-e47798746c81',
+  'bff2ac5d-8fdf-4f64-95a4-907d65d3c99f',
+  '490c7d44-d23d-4ba2-a1cf-c2867178e327',
+  '8ce3bc8d-a4a8-41f7-9a3e-f66484305a9a',
+  'cff56c2d-f9f1-4e98-bfd4-c4ae07f466d1',
+  '9d029953-5033-4ae1-841d-ea663f45b0e8',
+  '7ef8055a-1c11-4ca5-87fc-50cbe729dbce',
+  '74005edf-571c-40a1-aeb9-52903a6b9bed',
+  'b4b93433-702e-419a-ade5-82c9d42a0895',
+  '4989b6ab-f403-4ef5-8b48-b652f3e3e22b',
+  '91314a63-da76-4f6a-b07a-0b5a5815b04f',
+  'c423b9e5-8878-497d-a5a2-e10be0baf2fa'
+);
+
+JavaScript array for reprocessing:
+const failedRestaurantIds = [
+  '6380bb94-70dd-4489-a07d-f973ccefe19f',
+  '02d7520d-4253-4fc3-8a74-eb51fc7d63f1',
+  '8e8f4f05-00bb-4cf5-8112-d3fc5a17d5bc',
+  '9c718832-3fd5-4588-b562-5a2ef78b93c2',
+  '946cd985-9d3d-47df-96f6-efa5a1fe3670',
+  '34dab2c7-4784-41f6-bbb0-0101d6485694',
+  '970aa13d-b216-47a9-a2aa-24ca3a88e9b3',
+  '49d0fb0f-8d5c-4ab1-9f7f-c594a1c21588',
+  '2e90c1ee-3da5-4731-a3db-774b9ddb162c',
+  '7d2fcf95-4ce4-4685-a434-b9fcd7cb88fe',
+  '7f89168e-bac5-405c-8328-754601a29476',
+  '62ba7473-9614-4e3e-8c71-f35f9323b1b3',
+  '86b205ce-7da4-4bf5-867f-e131ef7e1897',
+  '9420401f-0258-4bbf-9be2-4b3680eceac6',
+  'e685de3a-db66-44d3-a481-9d688cabc908',
+  '94f1145a-e5e3-48a2-a80d-554410592d18',
+  '293e0e13-593a-4446-a3b0-eb2ca537d137',
+  '77dfb583-550a-4479-9189-ff26748cdcd6',
+  'f08d1442-bfb3-4a25-9477-158b7994cb02',
+  '7da28604-be47-446d-8ed8-27bf0124d968',
+  '932a2b4d-1ba9-4f44-a52a-ff2efb6e32f7',
+  '2f35a7e9-601a-4bf1-a121-c076f51d37e8',
+  'd3c2439a-9f9e-43d6-b0d9-8ea84baf3af5',
+  '639a8afb-bab2-40cf-bf1e-5724edc984e2',
+  '20a63110-d34b-432b-80c3-5efbfd0994f3',
+  '3e5ccf93-a3ba-4b71-af9c-04cf7b6b3e0b',
+  '7388877a-31b3-4bc2-8130-4bbd78ff231f',
+  '41f57d1c-390e-487a-8b48-5ea4bee3bb40',
+  'd12f84b5-91b4-4935-bd53-0af77cdcd3f2',
+  'bc00538c-c34b-4b1b-bd74-b7c60fc970dd',
+  '27b94eb6-b0c6-4b05-ad25-65d703350907',
+  '2ef83cea-5a35-42ec-bbff-2d3216089140',
+  '047a05c6-ee0d-4a9d-8091-7ab96e939add',
+  'c7adf4e3-1db7-402a-8340-b28288281afd',
+  '781c102c-17a4-4307-9a90-4c304229302f',
+  'ae7484dd-7cb4-4a0a-b9cd-b8bae810d668',
+  '7fee124f-7082-4703-9924-41cf78670c3e',
+  'f21a9d9e-fa90-4fd8-b821-bb3b22252feb',
+  'aa710fde-c980-44f2-895b-b487a1b4fd05',
+  '6bc24e83-c348-4470-8e63-69253a9447d5',
+  '259a3ff8-3403-4acb-bf90-b8c5b6cded4b',
+  'ec232921-6fc2-4248-89fe-ae43e680d920',
+  'ac6ce70c-78a5-47f1-afa6-2d85da372e11',
+  'a795ee8d-9efb-442b-b1e0-7d38a4425ade',
+  '748fa2dd-5d82-40cf-a4b3-393ed3a40776',
+  '22bdaffd-df24-4721-b291-5df5b9a9ae94',
+  'e0b96b20-b4d4-415d-98de-0dbf267c6e82',
+  '20a93d34-fb00-4014-b7d8-ef668ea38300',
+  '81709543-b7c8-45da-ae32-e91a2c3dbbde',
+  'f4f6780e-474a-4247-9461-639706ae28b7',
+  '6c4cc2a9-9915-4c01-b5fa-9f1dcfa07dec',
+  'd09487b8-890f-4f76-9b52-815ef22de3b9',
+  'cb7d41bf-e977-41e8-aea1-289d6f898cea',
+  '719c38ca-bbb1-4db8-af3d-4399190acdbe',
+  '071bb279-3cc2-4d26-8a37-6c43d62f7147',
+  '7c724cba-94cb-424c-9831-a7cf9cbfc0a3',
+  'f0a45b4a-f912-40e3-b741-52833504e8a7',
+  'f8d51083-c4d7-4e5d-b1d4-78c80ae30c36',
+  '4b8a3d80-492a-4d1a-a858-36acb302cb2d',
+  '3a21cc8b-827e-4c8b-8e5a-13300ab1c9cd',
+  '2c0e0e21-7c76-44e4-9c1e-393c29d226b9',
+  '255cf1a1-6007-4417-96f4-af3267fe6f84',
+  'b267ba7f-ed73-4e6c-b9d8-01d096417aeb',
+  '65321a9a-c7f5-4359-98ad-40910f902104',
+  '5df9ee0c-de59-42b4-9f61-ca826d3e3e96',
+  '4a2ae86a-5b6e-412f-b4e1-6d3e6152c2b0',
+  'e2d8fe1c-7bb7-4ba0-8389-ddf2c0b06957',
+  '768dd863-8bf8-455c-bcba-d275932d48df',
+  'e7806db1-9298-4750-b7f1-9ccb80e29328',
+  '118fea3c-ab6f-49d9-a0f1-1d941e8964ea',
+  'a209b4b4-5825-498e-9c90-cbe8f8690110',
+  '662e25ac-5ed9-47e1-9da7-fbc76a4f7d99',
+  '1e5eb26c-ff68-4789-bea2-d87d205c59cc',
+  '98d32f40-1601-48a5-80ca-850174ce77da',
+  '58684b6d-daff-484d-8398-7a4e0b25f8a4',
+  '1f51ac92-a77b-41dd-b433-63df67799f7b',
+  '578fb46a-e0ee-444c-8d15-1b95eed7f0eb',
+  'c5e80463-ca9c-4a28-9c36-135328b45b60',
+  'cd984d99-9962-4d1c-baa0-705bf6fe6568',
+  '8710c579-ae8d-466a-a810-535b97538488',
+  '93b076d2-bcbc-4dbc-8d0e-7718cf2dc183',
+  '95943231-047f-43e8-b867-b8d2d55082fe',
+  '2d229ad3-fc45-4a0b-a63b-e5f9835c3be3',
+  'b79caf91-52d3-4168-a15e-124213ab25df',
+  '186f788f-2bfe-4b0d-ad79-0253dbee8aa3',
+  '639bb409-8451-4c4e-bb37-5892a92b6983',
+  'ac2d35a2-eaa8-45bd-98b7-a24c2848c4c3',
+  '42a1743c-ae91-4a72-9e85-36fe57ef4e56',
+  '010cb659-8047-4eb7-b5e6-095565faca2c',
+  'fe63a5bd-ad33-4631-81f1-f9c281332208',
+  'b9dd1d6c-1bdf-40c1-a098-ba57a5ffa2cb',
+  'dc49e572-4d87-417d-9f6a-c5788afd24d3',
+  '972e0280-c411-4e68-8f88-b58cd5548d84',
+  '742b354d-a23a-436d-9a28-29e90e0ee742',
+  '6804fb4b-3126-4b8c-89d0-844a39d565bd',
+  '013a662c-302f-4520-bb42-bacb6e558318',
+  'b7e21140-77d0-4324-aeb0-5e153a214159',
+  '71435a37-5d49-45cc-9e68-28f65bb4e204',
+  '15f1b19f-5e19-46de-8085-73ccb049a02f',
+  'd5ed618d-c136-42b1-b9b2-8645848a81a4',
+  'bdc4fde6-86bf-4ef9-8bc6-f5eade5f60f5',
+  '26384cb8-10ac-4877-a5a0-fbebdf4a3f59',
+  'd01aeb2d-8364-4a19-95c8-2720d2b1f2fb',
+  'd3c03ba5-4b47-4c86-99a8-58ee6e4c99f2',
+  'a7f64855-2c83-4c2c-bdc3-b85362cd279c',
+  '6197b3eb-e953-4ffd-ac94-8eb2ed746b7f',
+  '9cf3d3e3-f372-4435-8b1c-45d18f3656e1',
+  'bbd9ffdc-4489-45cd-9de7-668518948237',
+  '59df5db1-3953-4e4c-8570-bc99099d8500',
+  'f1c98ce1-1252-4343-b688-34b54db3cee4',
+  '4bf93b73-4e27-4975-871a-bc00178882a9',
+  '7eaaee6a-62f4-4130-acdf-adf498c3ca3a',
+  '9bba4ed9-b673-4e4f-9440-a4661d30b64e',
+  '285f0419-5076-48a1-8d00-6ca387ed567e',
+  '508de37d-80e4-4999-be91-227962d31a09',
+  '59f37d52-8a98-406c-aa3d-9013524442b8',
+  '400337d9-0ee5-4e2a-a124-1fea42fe81db',
+  '14d61562-99a1-447f-b052-be08bee2a14f',
+  'ddc370dd-fca7-4cb8-b58a-24204cd20042',
+  '4e94040e-e890-4c05-af82-33b3dc8ee91a',
+  '19f6180d-937b-41c1-9eb3-e5605a90fda3',
+  'c572e183-6e0c-426f-8c23-848c68f2fdcf',
+  '2b95f2e8-975b-4c29-bf6b-96c10b0410f2',
+  '2a901cbc-029c-4a48-a385-690ffe3c4fa7',
+  'a3b98af2-1271-4a51-b958-5afa1706c82e',
+  '8b9af690-ab15-488c-b6a8-438da234ac1d',
+  'd45ca5e2-17c5-4b40-a23b-53cdcc333e34',
+  '72c8c53b-5446-4399-aae0-f0de5fa26b4e',
+  'df039994-abec-4728-903a-eb83dd1d9e98',
+  'da2fcd89-5cd4-4971-b703-1344db7875b9',
+  'c65d015d-d8a9-4633-ba65-818f5ede5da2',
+  '9ab9204c-bab5-4b66-b26a-0a9dceefbe0b',
+  'e455fcfe-a781-4ff0-bbc0-1d4f88b0e153',
+  '66bdeab5-1aae-4818-97d1-fa3593cec945',
+  'e37ffad4-6c6d-4644-be61-17cffd73901f',
+  '0a5b1edf-8c74-4b32-886d-b82a587c5609',
+  'db646827-a86b-43a4-be85-4e6227f20d7e',
+  'f1e5b6a3-1bde-4eaf-8e1d-5e77b296b40e',
+  '1e4fd86d-8f4a-4746-b5ed-5cb20c886c03',
+  'b837acab-8264-4181-b3d3-49e4593c3f0c',
+  'ace91b78-8df3-44c9-bed5-9070dc721d2d',
+  '1ae09f7d-9419-4c06-810e-b94a247d44b0',
+  '4b67c468-a5ae-4ac7-939f-77f85e3c66c5',
+  '29283d6d-9d00-4e9d-ab09-c9d6677bf7e2',
+  'f1c318bc-e29c-4484-8fdf-54a084035822',
+  '016ffa52-66cd-4e22-9ed9-93317b5d4212',
+  '6a3fded4-3074-4d51-84a6-4584cc28c672',
+  'ea5ca833-2055-4118-9be6-8a65bf90e6fe',
+  '6eedf3a4-d325-4fb8-8046-fa67e1b04def',
+  '091e5f3a-8346-471b-994a-a698d5d99a78',
+  'ae43068a-3761-4d0c-8229-09aa7977d99e',
+  '38814411-5154-4092-9b84-cbe3cbf8b8b8',
+  '9b884841-8005-4a41-a3b4-184ebf183d61',
+  '6b4484f4-46f5-43f4-88c1-5007782d7778',
+  'aaa4fecc-bc7d-46f5-b875-5e45b0195467',
+  '12aab97d-79e1-4884-b6fe-0e0f0a665023',
+  '8017401e-e562-4f9e-a3ea-a957becdea8d',
+  'cff37bf9-771f-44ed-b587-2c5120b3a511',
+  '3e50e0d0-f2f0-4b73-a4cc-6f9d5ecf50cb',
+  '188ebc3e-e917-4ebc-b3a7-b815f16b6696',
+  'dc55eefc-77a1-4316-b082-4841319ab0bf',
+  '3c6a6be4-f4d7-410c-9980-5969e552afa4',
+  '44ebfd6c-4eb3-4623-a1a2-86371e887dbb',
+  '29a81617-90a7-44a2-a767-d28ca9647358',
+  '5b277504-5d2b-4f93-97d7-805df14eaa3e',
+  '94400ea6-d99b-4a16-b76d-71ae5b85e1f4',
+  '2c07a702-8f70-40d2-8387-d3781fcd43e7',
+  '331c53b0-9ce7-4e61-802f-1fd9b50fe197',
+  'c8312037-dc60-4f14-9d21-38c9fb21efcc',
+  '67fa305f-c6b2-4ef7-bb86-2c0565e4c732',
+  '306fc0f8-6495-494c-ba71-44890fbb23de',
+  'e9e94ed3-b29f-4a37-99a8-7771058c39a2',
+  'd823ab0b-8468-4187-b58c-7ad998d9db7d',
+  '567ac5d0-1a76-48ac-a727-31b9ae1f6433',
+  'e2aed5bf-155b-4f34-85c5-4477ae98bc8a',
+  'a2db6fdb-38ed-4329-aeb7-1a8771e6757f',
+  '9d86e983-4fba-4416-ab62-5081d100b2ba',
+  '18b629dc-d5bc-4681-9c6f-623c0e1298fd',
+  '1a5fca29-115e-4ac4-b298-0a6f0894b025',
+  '110f263d-f93e-4fa5-90ad-da396741ec4a',
+  '24eecf05-d03a-447d-9744-79bfc3700501',
+  '63a7a5b5-c03c-47f9-ac41-0f1a100d043b',
+  '5c24152a-50b7-4b2f-a898-0e63c764c72f',
+  '93e0c469-ba00-4f85-8ab7-2170638ebc0c',
+  '1364d2bc-f32b-4dd8-9862-793fa5fbc8a4',
+  '49020027-f7e3-4e8a-a010-920e394fefb6',
+  '4b1637a9-a01d-4ea3-8f2e-453e2597788c',
+  'e11c9c5a-2abe-4d47-b953-fa5ad1e4410e',
+  'faba628c-ed0c-49e0-80b5-bd5371d8f76c',
+  '1f1a6213-b73e-4bc4-becc-26f2b87761dd',
+  '9fe37dec-7ca4-443b-97af-a0d65747fba1',
+  'ea780414-7fd4-44c6-8212-c9204a74bb85',
+  '097f4cd3-3b37-4aef-96bd-7ce875ab8774',
+  '7f845ce1-03b9-46ce-bc1c-c5c195443f34',
+  'b896ef95-6fca-4149-915f-6cd118b2a056',
+  '0fb20ec7-a7bf-46c3-8394-1c5a1b472272',
+  '64f1f2a5-9ecf-4b4c-bdc7-8a51dd5a20d2',
+  'c536dc52-2270-4e61-b2ab-d16596b82c60',
+  'c00ab93f-a880-4745-afc5-ab1e746510a6',
+  'a5fdf61a-a36b-4599-a776-2cc469653749',
+  '25ba3d41-6a3e-4a38-bb0c-d02afd285325',
+  '1f677268-140c-47d4-be59-a10b844afc67',
+  '13fb2f53-5797-4550-95f9-7f75d3a82fbf',
+  '5b2b2564-f32c-4775-a4ea-d19d4beaa3af',
+  '877a86d0-e8eb-44d8-b46a-0afb1d75b5c7',
+  '287f48c2-c588-48ea-9ebf-4c3279b75c5a',
+  '9abb8bee-4eb0-4750-8233-ee6783995bc1',
+  'ab0cb6c7-be1e-41cf-b0fd-9371d0ac5b83',
+  '134b273e-462d-4957-9c4d-fabbf29eccf9',
+  'b765b06e-be3e-40e6-a782-650c1587bc8e',
+  'b96568f9-7318-420a-9575-c62900511045',
+  'e9be273f-9c22-455f-ba4f-7a814adf8aba',
+  '7e2b79c5-38a8-4050-bb87-5c901e7b599a',
+  'df59b334-c6c6-4cc7-bf48-d3563891e7a5',
+  '6d864564-0886-45d5-9454-685d017713ea',
+  'c6f84896-bd9c-4207-bb6d-d0162bde358d',
+  '827eb9f1-e21c-4d4c-bb5f-ad1ef73dc493',
+  'b6271382-2251-4011-9de0-56e74d2e8c4c',
+  '8d57b62f-2f6c-4975-b272-a815ef45592f',
+  '5cc26703-5a91-481f-99af-031e2d8fe98a',
+  'beba57e1-7410-4bb7-9809-a68bd22ce4d2',
+  '8b3d317e-6f0e-421d-b62f-544fe016aa41',
+  '20042f17-ce72-4dc2-8dd4-2ee0422eed79',
+  'ab0523b7-8f07-4771-a1c4-bb421d9bdc7d',
+  '38193354-5351-45b7-94fc-ce558ed390d2',
+  '2856ce69-380a-4beb-a9bf-b628ebc3011e',
+  'e3e3128f-30da-4fe7-97f2-459d7ba818a9',
+  '12fdbdcb-f2b1-4bd8-b194-0dd61e1bd2da',
+  '2a54b9a6-c761-4be4-b3c9-1cc067e09fa5',
+  'becde230-1720-436a-9b29-4ea935b2e457',
+  '6fe79c6b-646c-4ec5-aa88-1510e825c717',
+  'd770db79-7d47-4d6a-bc61-0ebf61172b7a',
+  'ee6bd7b8-ac49-41c3-800b-bf336b28d51c',
+  '940c2027-0675-4de6-bf25-66a9160978dc',
+  'c28dbf5a-1cba-4ac9-8981-f0c6b84c2649',
+  '224db4c8-0c92-4079-ad51-d4fa88e942b6',
+  '15725127-f59a-49f5-b5b8-d555ecd1e67d',
+  '45e62b08-49a0-415a-bde4-19342b706e9a',
+  '70d8a7a1-eb67-478d-b88b-20206f8f167b',
+  '90f15d8e-14b7-4b45-ad05-2284ce547671',
+  'a8ef0655-a2ed-4169-9e30-f413723aca5a',
+  'fda35c66-b8e7-426d-aaf1-6c38680986d1',
+  'fc92ce26-a873-4e2a-8da4-b3a11f268068',
+  '373844f5-259c-4ae9-8873-ce1452a93606',
+  '6ba5d2c3-5a7e-4a50-bd76-21a1ab74acde',
+  '125aff1d-a126-44c5-aa26-271ec3e825a7',
+  'd6e7155c-10b9-47c4-901b-7f724853716c',
+  '4abb92bc-bb8c-4022-80e9-09c5ec447a1e',
+  'f13f26f0-8347-4ab5-8639-3ef6b8c5cd2a',
+  'd982c267-6233-4330-a04e-2db9930110c6',
+  'df2a231a-1314-4fb4-9e5f-16bd12957341',
+  '00f79cc8-0a2a-463c-bda6-49dafd08480a',
+  '19d9e4b3-2caa-488f-a99d-a944c06e7b65',
+  '1d303075-b203-481a-8856-31347384e246',
+  '8c9efe16-ab96-4d18-94fe-672e7e61f760',
+  '4cfd458e-58aa-4ad9-b9fe-3863bd45d722',
+  '805c569a-e479-4b84-8edb-64472f708cc5',
+  '68d6e4c0-8a0f-4ad4-98c9-cee262e55d24',
+  '0f78403c-fadc-4931-abdc-04f607d881dc',
+  '6c5a9940-701e-4cbf-b1ec-37eac4cfddd6',
+  '3831c8a5-5445-416c-a709-e5863c1e0abe',
+  '8f4ce855-f501-4d00-b2ed-110a11de6280',
+  '3361566d-4663-47a1-9533-5dc599c06674',
+  'b6a3f9c2-04c1-4843-a4bb-4567674854ab',
+  '17d67820-1c60-43cb-9ad9-bb5e4100a881',
+  'feb67b0a-eaa1-4bd6-a009-c615426b1f62',
+  '7353ebb2-83d2-4557-89ca-81c1a97354b6',
+  '7565a93e-4d5e-40cc-8f62-c4d66865f7b5',
+  '9fe939a8-3c4e-486a-b3a7-4ae1c828eb81',
+  'db6a07dd-13eb-4f80-896a-f8a174726aec',
+  'b642b5f6-5ea9-4e91-811d-289c640fa390',
+  'c3e152ad-0e6e-4382-a905-560b7d11f397',
+  'd66c10ea-7327-4b8d-9219-3508fa14218d',
+  'd18cb12c-67e2-499b-a001-7a3d8e97ee2c',
+  '190eccfa-5640-49c3-bcec-90d6123ee2f5',
+  '349a8f7f-6a17-4105-9440-1ac015720881',
+  '21615f80-f0ae-45fe-b810-aa8d43450aa2',
+  '5a5f4714-5c34-4efe-8428-c98a2e80dc36',
+  '0a75f823-fd26-4580-bd92-9f1a169b9479',
+  'a75d65a5-5414-43ca-bd7a-ad47b272ff6f',
+  '2c8d3347-d503-4c7e-8394-9db93eedf4c5',
+  '2bdc366e-cf35-4611-9893-6f75b4737730',
+  'fc182922-d9db-4c85-9cba-07029d482f63',
+  '342965be-cada-4a1d-bb89-62799ce85825',
+  '269d5a80-7a0e-4e4b-b666-0f2df1ff7c66',
+  '1270e8fa-2acd-4aa6-aaa0-d0f01f1f0cf9',
+  '9d32a60b-e7a3-4fb3-8e98-97be3fc3905e',
+  'ce8e79c3-281d-43d8-ac8f-5c0d25518045',
+  '01b7078a-957f-4ad2-a964-f60a78f29089',
+  '528ccec4-997e-40ad-a275-3551e6941f9f',
+  'ba9490f4-acdb-4ff0-ab9d-2ce9031d4cf1',
+  '69114e74-93cb-45d8-b57b-41ef2e7b61f4',
+  'e50eec6f-ff14-4467-89a3-4f9d27f6e29b',
+  '97b6485a-bc02-460d-b000-56915717566b',
+  'e4300d6b-b632-4716-b219-938033aa1231',
+  'a5d4c8a5-c3c2-45ce-8d48-ce619c03ab3d',
+  'bab9a532-66f2-4f75-a7d0-7fbde433aa84',
+  'c01939cc-7d65-4e73-9e1b-a446b8a598a6',
+  'dc898ec6-2887-4a2d-aad4-99f7737698e4',
+  '5518a8b3-94b2-472c-8831-c0569914e55c',
+  'ac630055-cf2d-4bcf-ab8a-f2ea08718263',
+  '40635d6b-f732-4da4-8eee-627651d60820',
+  '1a5f4d55-998f-4a93-9cb9-35dc6d7e48ea',
+  'b3d42914-5196-40aa-aef9-6aff424ea0e5',
+  '98fd3b29-7960-440a-be9c-7101f01b6561',
+  '11408d8a-77e1-409d-9f16-216f682d05c1',
+  'a823602d-436a-41f7-b832-fe374171d2e4',
+  'c99d91e1-32be-4365-9562-1c803d93e4a5',
+  '61c3e1ba-918b-46a5-aea8-4fd132b00833',
+  'da7aca58-81c3-40a1-a73e-af1d6da808b8',
+  'ef057191-07a5-4e4b-9a88-338eb88b60de',
+  'c70a3053-38ac-49db-b535-5f67d0c175e3',
+  '78b2743d-2bf8-4667-828b-cefcb199bc5c',
+  '8e0c3c01-4152-42ea-b250-6e78facbdf6d',
+  '1663f2c8-2fcf-40bb-bd01-46aa596a1c64',
+  'be36c1e6-2bc9-44f7-adc8-eee58dd4c2d6',
+  'c719a1df-1ea5-437a-bbc5-ec41eaab1436',
+  '6207c6b7-4124-49fc-8947-0b3b5ebf4249',
+  'f0248d00-0f50-4f32-8240-e49e263bb9fd',
+  'ef023455-7519-4e73-98a7-e3e5712bf4d7',
+  'a5befd83-92bf-40fa-b17c-248a705def01',
+  '7b407422-b2e1-46bc-acbe-7e39479870cf',
+  '3f803b75-01cf-43c9-8371-d3ebbcf46d72',
+  '5f6786f3-6657-4eaa-9ee7-31be6e100ab0',
+  'ff404a4b-e52d-4f3f-b30d-4b1ed9099f8a',
+  '70bf82a6-3649-4a9d-a04b-c31b08116a8b',
+  '056b861f-d855-484e-a035-e5f9d9e3e0cc',
+  '333a69cf-9a46-4fac-b6c9-5005dc1d1cca',
+  '427af777-de1f-4554-9d07-5606fb136beb',
+  'f9c61198-d115-4881-89fd-bdbb165fbce3',
+  'a430809b-08f8-4181-aa91-f20c8bccff26',
+  '64a48d5d-bdfb-44c3-90ce-4b62673e1ae1',
+  '551c6c1d-92a7-415a-9dd3-83f1c6e278da',
+  '0979eb62-4f1a-445f-b5e4-690a8611d5df',
+  'd772c334-977c-4f60-a347-1c0843b4c661',
+  '6e8d6f6d-4e37-40d1-b860-7064aa56516c',
+  'b15e5178-2381-4860-a4a1-aabf77658ce2',
+  '24d77e3b-5bc5-4048-bcfa-cdb7325342bc',
+  '718b19cb-7553-48c1-8130-f2c58defcf30',
+  'd2fb0b42-f5dc-4a95-baf2-f6ed1f520781',
+  'c34b0e4a-e71a-4a78-a005-22d8467a42c3',
+  '2dc793e5-e112-4891-99c0-65a2d058187a',
+  '98985082-e373-4225-9521-920443a25595',
+  'e8843459-0e6b-4dc1-804c-3c14010d7ff6',
+  '1f6f1b2a-1be6-4c24-99f5-f21e196f284b',
+  'db021407-dc57-4888-938c-d77744aed24a',
+  '8a8d5300-da56-4e91-8590-af6870aa4f20',
+  '82947b64-04bf-4df2-929b-7981520ece47',
+  '40d9c024-c521-4a52-b559-4bfc39f9710d',
+  '36de52f7-a1aa-4d76-afaa-2d589318dac7',
+  '090bf6e0-797a-44df-b154-a09784d80f23',
+  'a61bc96e-341b-40db-aedf-b9d9ccd4c3b2',
+  '9cc57e94-5b80-4ba0-92bd-d20484b761d3',
+  'cccbd511-6c23-458f-879a-838e91fcea33',
+  '48f4400d-2486-485f-9191-5b7def217ae7',
+  'b2bdd61b-0c1a-4a8f-a124-e072593167ec',
+  '5ea0ec29-d2e1-47de-96e8-a36dddd42b7f',
+  '0d85b784-ed67-4b4e-b4d2-402ba2111f21',
+  '5f9410db-00b7-4ea8-837a-cf37c7ed92e3',
+  'de1998f2-727d-4a5f-8192-a0823fb97bd5',
+  '6223beb3-a4d7-47f3-bc74-6b889ecb0f20',
+  '0b3d41d9-618f-4422-a3e0-728c746bf67d',
+  '97a10895-d97a-4751-b20a-e47798746c81',
+  'bff2ac5d-8fdf-4f64-95a4-907d65d3c99f',
+  '490c7d44-d23d-4ba2-a1cf-c2867178e327',
+  '8ce3bc8d-a4a8-41f7-9a3e-f66484305a9a',
+  'cff56c2d-f9f1-4e98-bfd4-c4ae07f466d1',
+  '9d029953-5033-4ae1-841d-ea663f45b0e8',
+  '7ef8055a-1c11-4ca5-87fc-50cbe729dbce',
+  '74005edf-571c-40a1-aeb9-52903a6b9bed',
+  'b4b93433-702e-419a-ade5-82c9d42a0895',
+  '4989b6ab-f403-4ef5-8b48-b652f3e3e22b',
+  '91314a63-da76-4f6a-b07a-0b5a5815b04f',
+  'c423b9e5-8878-497d-a5a2-e10be0baf2fa'
+];

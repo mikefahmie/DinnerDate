@@ -1,126 +1,49 @@
-// Updated RestaurantDetailScreen.tsx with single photo support and FIXED hours parsing
-// File: screens/RestaurantDetailScreen.tsx
-// ONLY CHANGE: Added ButtonContainer for safe area handling
+// screens/RestaurantDetailScreen.tsx
+// CLEAN VERSION: Uses correct theme structure and no duplications
 
-import React, { useState, useEffect } from 'react'
-import { 
-  View, 
-  Text, 
-  ScrollView, 
-  StyleSheet, 
-  Dimensions, 
-  Linking, 
-  Alert,
-  TouchableOpacity,
-  Share
-} from 'react-native'
-import { Image, Button, Header, Icon } from '@rneui/themed'
+import React, { useState } from 'react'
+import { View, Text, StyleSheet, Image, Linking, Alert, Pressable } from 'react-native'
+import { Icon } from '@rneui/themed'
 import { useTheme } from '../hooks/useTheme'
-import { useNavigation, useRoute, RouteProp } from '@react-navigation/native'
-import { useFavorites } from '../hooks/useFavorites'
-import { restaurantService } from '../services/restaurantService'
-import RatingDisplay from '../components/restaurant/RatingDisplay'
-import HoursStatus from '../components/restaurant/HoursStatus'
-import ActionIcons from '../components/restaurant/ActionIcons'
+import { Restaurant } from '../types/database'
+import { getOptimizedPhotoUrl, getPlaceholderPhotoUrl } from '../utils/photoUtils'
 import LoadingSpinner from '../components/ui/LoadingSpinner'
-import ButtonContainer from '../components/layout/ButtonContainer'
 
-type RouteParams = {
-  RestaurantDetail: {
-    restaurantId: string
-  }
+interface RestaurantDetailScreenProps {
+  restaurant: Restaurant
+  toggleFavorite: (restaurantId: string) => void
 }
 
-type RestaurantDetailRouteProp = RouteProp<RouteParams, 'RestaurantDetail'>
-
-const formatPrimaryType = (primaryType: string): string => {
-  if (!primaryType) return ''
-  
-  // Split by underscores and capitalize each word
-  return primaryType
-    .split('_')
-    .map(word => {
-      // Keep "and" lowercase, capitalize everything else
-      if (word.toLowerCase() === 'and') {
-        return 'and'
-      }
-      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-    })
-    .join(' ')
-}
-
-const { width: screenWidth } = Dimensions.get('window')
-const HERO_HEIGHT = 250
-
-const RestaurantDetailScreen: React.FC = () => {
+const RestaurantDetailScreen: React.FC<RestaurantDetailScreenProps> = ({
+  restaurant,
+  toggleFavorite,
+}) => {
   const { theme } = useTheme()
-  const navigation = useNavigation()
-  const route = useRoute<RestaurantDetailRouteProp>()
-  const { restaurantId } = route.params
-  
-  const [restaurant, setRestaurant] = useState<any>(null)
-  const [loading, setLoading] = useState(true)
   const [imageLoading, setImageLoading] = useState(true)
   const [imageError, setImageError] = useState(false)
-  
-  const { isFavorite, toggleFavorite } = useFavorites()
-
-  useEffect(() => {
-    loadRestaurantDetails()
-  }, [restaurantId])
-
-  const loadRestaurantDetails = async () => {
-    try {
-      setLoading(true)
-      const details = await restaurantService.getRestaurantById(restaurantId)
-      setRestaurant(details)
-    } catch (error) {
-      Alert.alert('Error', 'Failed to load restaurant details')
-      navigation.goBack()
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const handleShare = async () => {
-    if (!restaurant) return
-    
-    try {
-      await Share.share({
-        message: `Check out ${restaurant.display_name} - ${restaurant.formatted_address}`,
-        title: restaurant.display_name,
-      })
-    } catch (error) {
-      // Share was cancelled or failed
-    }
-  }
-
-  const handleCall = () => {
-    if (restaurant?.phone_number) {
-      Linking.openURL(`tel:${restaurant.phone_number}`)
-    }
-  }
-
-  const handleWebsite = () => {
-    if (restaurant?.website_uri) {
-      Linking.openURL(restaurant.website_uri)
-    }
-  }
 
   const handleDirections = () => {
     if (restaurant.location_lat && restaurant.location_lng) {
-      // Primary: Try to open native maps app
-      const url = `maps:0,0?q=${restaurant.location_lat},${restaurant.location_lng}`
-      Linking.openURL(url).catch(() => {
-        // Fallback: Open Google Maps in browser
-        const address = encodeURIComponent(restaurant.formatted_address || restaurant.display_name)
-        const webUrl = `https://www.google.com/maps/search/?api=1&query=${address}`
-        Linking.openURL(webUrl).catch(() => {
-          Alert.alert('Error', 'Unable to open maps application')
-        })
-      })
+      const lat = restaurant.location_lat
+      const lng = restaurant.location_lng
+      
+      Alert.alert(
+        'Open Directions',
+        'Choose how to open directions:',
+        [
+          { text: 'Cancel', style: 'cancel' },
+          { 
+            text: 'Google Maps', 
+            onPress: () => {
+              const webUrl = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`
+              Linking.openURL(webUrl).catch(() => {
+                Alert.alert('Error', 'Unable to open maps application')
+              })
+            }
+          }
+        ]
+      )
     } else if (restaurant.formatted_address) {
-      // If no coordinates, use address
       const address = encodeURIComponent(restaurant.formatted_address)
       const webUrl = `https://www.google.com/maps/search/?api=1&query=${address}`
       Linking.openURL(webUrl).catch(() => {
@@ -146,10 +69,11 @@ const RestaurantDetailScreen: React.FC = () => {
     setImageLoading(false)
   }
 
-  // Updated renderPhotos function for single photo
+  // Get optimized photo URL using new utility
+  const heroPhotoUrl = getOptimizedPhotoUrl(restaurant, 'hero')
+
   const renderPhotos = () => {
-    // Check if we have a primary photo URL
-    if (!restaurant?.primary_photo_url || imageError) {
+    if (!heroPhotoUrl || imageError) {
       return (
         <View style={[styles.heroImage, styles.noPhotoContainer]}>
           <Icon 
@@ -163,7 +87,6 @@ const RestaurantDetailScreen: React.FC = () => {
       )
     }
 
-    // Single photo display (no gallery)
     return (
       <View style={styles.photoContainer}>
         {imageLoading && (
@@ -174,469 +97,295 @@ const RestaurantDetailScreen: React.FC = () => {
         )}
         
         <Image
-          source={{ uri: restaurant.primary_photo_url }}
+          source={{ 
+            uri: heroPhotoUrl,
+            headers: { 'Cache-Control': 'max-age=3600' }
+          }}
           style={[styles.heroImage, imageLoading && { position: 'absolute' }]}
           resizeMode="cover"
           onLoad={handleImageLoad}
           onError={handleImageError}
+          defaultSource={{ uri: getPlaceholderPhotoUrl(restaurant.name, 'hero') }}
         />
+
+        {/* Storage indicator badge - helpful during migration */}
+        {restaurant.photo_storage_path && (
+          <View style={styles.storageBadge}>
+            <Icon 
+              name="check-circle" 
+              type="font-awesome-5" 
+              size={12} 
+              color="#4CAF50" 
+            />
+            <Text style={styles.storageBadgeText}>Stored</Text>
+          </View>
+        )}
       </View>
     )
   }
 
-  const renderDescription = () => {
-    if (!restaurant?.editorial_summary && !restaurant?.generative_summary) return null
-
-    return (
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>About</Text>
-        <Text style={styles.description}>
-          {restaurant.editorial_summary || restaurant.generative_summary}
-        </Text>
-      </View>
-    )
-  }
-
-  const renderFeatures = () => {
-    const features = []
-    
-    // Service offerings
-    if (restaurant?.serves_breakfast) features.push('Breakfast')
-    if (restaurant?.serves_brunch) features.push('Brunch')  
-    if (restaurant?.serves_lunch) features.push('Lunch')
-    if (restaurant?.serves_dinner) features.push('Dinner')
-    if (restaurant?.serves_coffee) features.push('Coffee')
-    if (restaurant?.serves_beer) features.push('Beer')
-    if (restaurant?.serves_wine) features.push('Wine')
-    if (restaurant?.serves_cocktails) features.push('Cocktails')
-    
-    // Service types
-    if (restaurant?.dine_in) features.push('Dine-in')
-    if (restaurant?.takeout) features.push('Takeout')
-    if (restaurant?.delivery) features.push('Delivery')
-    if (restaurant?.curbside_pickup) features.push('Curbside Pickup')
-    
-    // Amenities
-    if (restaurant?.reservable) features.push('Reservations')
-    if (restaurant?.outdoor_seating) features.push('Outdoor Seating')
-    if (restaurant?.good_for_children) features.push('Kid-Friendly')
-    if (restaurant?.good_for_groups) features.push('Good for Groups')
-    if (restaurant?.allows_dogs) features.push('Dog-Friendly')
-    if (restaurant?.live_music) features.push('Live Music')
-
-    if (features.length === 0) return null
-
-    return (
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Features & Services</Text>
-        <View style={styles.featuresGrid}>
-          {features.map((feature, index) => (
-            <View key={index} style={styles.featureChip}>
-              <Text style={styles.featureText}>{feature}</Text>
-            </View>
-          ))}
-        </View>
-      </View>
-    )
-  }
-
-  // FIXED: Updated renderFullHours function to parse hours correctly
-  const renderFullHours = () => {
-    // First try to use weekday_descriptions (most reliable and pre-formatted)
-    if (restaurant?.regular_opening_hours?.weekday_descriptions) {
-      return (
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Hours</Text>
-          {restaurant.regular_opening_hours.weekday_descriptions.map((dayHours: string, index: number) => {
-            // Split the day and hours
-            const [dayName, hours] = dayHours.split(': ');
-            return (
-              <View key={index} style={styles.hoursRow}>
-                <Text style={styles.dayName}>{dayName}</Text>
-                <Text style={styles.hours}>{hours || 'Closed'}</Text>
-              </View>
-            );
-          })}
-        </View>
-      );
-    }
-
-    // Fallback: Build hours from periods if weekday_descriptions is missing
-    if (restaurant?.regular_opening_hours?.periods) {
-      const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-      
-      // Helper function to format time from hour and minute
-      const formatTime = (hour: number, minute: number = 0): string => {
-        const date = new Date();
-        date.setHours(hour, minute, 0, 0);
-        return date.toLocaleTimeString('en-US', {
-          hour: 'numeric',
-          minute: minute > 0 ? '2-digit' : undefined,
-          hour12: true,
-        });
-      };
-
-      // Build hours for each day
-      const weeklyHours: Array<{day: string, hours: string}> = [];
-      
-      for (let dayIndex = 0; dayIndex < 7; dayIndex++) {
-        const dayPeriods = restaurant.regular_opening_hours.periods.filter(
-          (period: any) => period.open?.day === dayIndex
-        );
-        
-        if (dayPeriods.length === 0) {
-          weeklyHours.push({
-            day: dayNames[dayIndex],
-            hours: 'Closed'
-          });
-        } else {
-          const periods = dayPeriods.map((period: any) => {
-            if (period.open && period.close) {
-              const openTime = formatTime(period.open.hour, period.open.minute);
-              const closeTime = formatTime(period.close.hour, period.close.minute);
-              return `${openTime} - ${closeTime}`;
-            }
-            return 'Hours unavailable';
-          });
-          
-          weeklyHours.push({
-            day: dayNames[dayIndex],
-            hours: periods.join(', ')
-          });
-        }
-      }
-
-      return (
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Hours</Text>
-          {weeklyHours.map((dayData, index) => (
-            <View key={index} style={styles.hoursRow}>
-              <Text style={styles.dayName}>{dayData.day}</Text>
-              <Text style={styles.hours}>{dayData.hours}</Text>
-            </View>
-          ))}
-        </View>
-      );
-    }
-
-    // No hours data available
-    return null;
-  }
-
-  if (loading) {
-    return (
-      <View style={styles.loadingScreen}>
-        <LoadingSpinner />
-      </View>
-    )
-  }
-
-  if (!restaurant) {
-    return (
-      <View style={styles.errorScreen}>
-        <Text style={styles.errorText}>Restaurant not found</Text>
-        <Button title="Go Back" onPress={() => navigation.goBack()} />
-      </View>
-    )
-  }
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: theme.colors.background,
+    },
+    photoContainer: {
+      position: 'relative',
+    },
+    heroImage: {
+      width: '100%',
+      height: 250,
+      backgroundColor: '#FFD700', // Golden background
+    },
+    noPhotoContainer: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#FFD700',
+    },
+    noPhotoText: {
+      fontSize: theme.typography.fontSize.secondary,
+      color: theme.colors.textMuted,
+      marginTop: theme.spacing.sm,
+      fontWeight: '500',
+    },
+    loadingContainer: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: theme.colors.surfaceElevated,
+    },
+    loadingText: {
+      fontSize: theme.typography.fontSize.secondary,
+      color: theme.colors.textMuted,
+      marginTop: theme.spacing.sm,
+    },
+    storageBadge: {
+      position: 'absolute',
+      top: theme.spacing.sm,
+      right: theme.spacing.sm,
+      flexDirection: 'row',
+      alignItems: 'center',
+      backgroundColor: 'rgba(76, 175, 80, 0.9)',
+      paddingHorizontal: theme.spacing.sm,
+      paddingVertical: theme.spacing.sm,
+      borderRadius: theme.borderRadius.sm,
+    },
+    storageBadgeText: {
+      color: '#FFFFFF',
+      fontSize: theme.typography.fontSize.caption,
+      fontWeight: '600',
+      marginLeft: theme.spacing.sm,
+    },
+    contentContainer: {
+      padding: theme.spacing.lg,
+    },
+    restaurantName: {
+      fontSize: theme.typography.fontSize.h1,
+      fontWeight: '700',
+      color: theme.colors.textPrimary,
+      marginBottom: theme.spacing.sm,
+    },
+    ratingContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: theme.spacing.md,
+    },
+    ratingText: {
+      fontSize: theme.typography.fontSize.body,
+      color: theme.colors.textSecondary,
+      marginLeft: theme.spacing.sm,
+    },
+    infoSection: {
+      marginBottom: theme.spacing.lg,
+    },
+    infoRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: theme.spacing.md,
+    },
+    infoText: {
+      fontSize: theme.typography.fontSize.body,
+      color: theme.colors.textPrimary,
+      marginLeft: theme.spacing.sm,
+      flex: 1,
+    },
+    infoTextSecondary: {
+      color: theme.colors.textSecondary,
+    },
+    actionButtons: {
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      marginTop: theme.spacing.lg,
+      paddingTop: theme.spacing.lg,
+      borderTopWidth: 1,
+      borderTopColor: theme.colors.border,
+    },
+    actionButton: {
+      alignItems: 'center',
+      padding: theme.spacing.md,
+    },
+    actionButtonText: {
+      fontSize: theme.typography.fontSize.secondary,
+      color: theme.colors.primary,
+      marginTop: theme.spacing.sm,
+      fontWeight: '600',
+    },
+  })
 
   return (
     <View style={styles.container}>
-      <Header
-        centerComponent={{ 
-          text: restaurant.display_name || restaurant.name, 
-          style: { color: '#fff', fontSize: 18, fontWeight: 'bold' } 
-        }}
-        leftComponent={{ 
-          icon: 'arrow-back', 
-          color: '#fff', 
-          onPress: () => navigation.goBack() 
-        }}
-        rightComponent={{ 
-          icon: 'share', 
-          color: '#fff', 
-          onPress: handleShare 
-        }}
-        backgroundColor={theme.colors.primary}
-      />
+      {/* Hero Photo */}
+      {renderPhotos()}
 
-      <ScrollView style={styles.scrollView}>
-        {renderPhotos()}
-        
-        {/* Favorite Button Overlay */}
-        <View style={styles.favoriteButtonContainer}>
-          <TouchableOpacity 
-            style={styles.favoriteButton}
-            onPress={handleFavoriteToggle}
-          >
-            <Text style={styles.favoriteIcon}>
-              {isFavorite(restaurant.id) ? '❤️' : '🤍'}
-            </Text>
-          </TouchableOpacity>
-        </View>
+      {/* Restaurant Details */}
+      <View style={styles.contentContainer}>
+        <Text style={styles.restaurantName}>
+          {restaurant.display_name || restaurant.name}
+        </Text>
 
-        <View style={styles.headerSection}>
-          <Text style={styles.restaurantName}>{restaurant.display_name || restaurant.name}</Text>
-          <Text style={styles.cuisineType}>{formatPrimaryType(restaurant.primary_type)}</Text>
-          
-          <View style={styles.ratingRow}>
-            <RatingDisplay 
-              rating={restaurant.rating}
-              reviewCount={restaurant.user_rating_count}
+        {/* Rating */}
+        {restaurant.rating && (
+          <View style={styles.ratingContainer}>
+            <Icon 
+              name="star" 
+              type="font-awesome" 
+              size={20} 
+              color="#FFD700" 
             />
+            <Text style={styles.ratingText}>
+              {restaurant.rating} ({restaurant.user_rating_count || 0} reviews)
+            </Text>
           </View>
-          
-          <View style={styles.statusRow}>
-            <HoursStatus restaurant={restaurant} />
-          </View>
-          
-          <Text style={styles.address}>{restaurant.formatted_address}</Text>
-          {restaurant.website_uri && (
-            <TouchableOpacity 
-              style={styles.websiteRow}
-              onPress={() => handleWebsite()}
-              activeOpacity={0.7}
-            >
-              <Icon name="globe" type="font-awesome" size={16} color="#666" />
-              <Text style={styles.websiteLink}>{restaurant.website_uri}</Text>
-            </TouchableOpacity>
+        )}
+
+        {/* Info Section */}
+        <View style={styles.infoSection}>
+          {/* Address */}
+          {restaurant.formatted_address && (
+            <View style={styles.infoRow}>
+              <Icon 
+                name="map-marker" 
+                type="font-awesome" 
+                size={18} 
+                color={theme.colors.textSecondary} 
+              />
+              <Text style={[styles.infoText, styles.infoTextSecondary]}>
+                {restaurant.formatted_address}
+              </Text>
+            </View>
+          )}
+
+          {/* Phone */}
+          {restaurant.phone_number && (
+            <View style={styles.infoRow}>
+              <Icon 
+                name="phone" 
+                type="font-awesome" 
+                size={18} 
+                color={theme.colors.textSecondary} 
+              />
+              <Text style={[styles.infoText, styles.infoTextSecondary]}>
+                {restaurant.phone_number}
+              </Text>
+            </View>
+          )}
+
+          {/* Cuisine Type */}
+          {restaurant.primary_type && (
+            <View style={styles.infoRow}>
+              <Icon 
+                name="utensils" 
+                type="font-awesome-5" 
+                size={18} 
+                color={theme.colors.textSecondary} 
+              />
+              <Text style={[styles.infoText, styles.infoTextSecondary]}>
+                {restaurant.primary_type.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
+              </Text>
+            </View>
+          )}
+
+          {/* Price Level */}
+          {restaurant.price_level && (
+            <View style={styles.infoRow}>
+              <Icon 
+                name="dollar-sign" 
+                type="font-awesome-5" 
+                size={18} 
+                color={theme.colors.textSecondary} 
+              />
+              <Text style={[styles.infoText, styles.infoTextSecondary]}>
+                {'$'.repeat(restaurant.price_level)} • {getPriceLevelText(restaurant.price_level)}
+              </Text>
+            </View>
           )}
         </View>
 
-        {renderDescription()}
-        {renderFeatures()}
-        {renderFullHours()}
-
-        <View style={styles.actionsSection}>
-          <View style={styles.actionButtonsRow}>
-            <ActionIcons 
-              restaurant={restaurant}
-              onWebsite={handleWebsite}
-              onDirections={handleDirections}
-              onPhone={handleCall}
+        {/* Action Buttons */}
+        <View style={styles.actionButtons}>
+          <Pressable style={styles.actionButton} onPress={handleDirections}>
+            <Icon 
+              name="directions" 
+              type="material" 
+              size={24} 
+              color={theme.colors.primary} 
             />
-          </View>
-        </View>
-      </ScrollView>
+            <Text style={styles.actionButtonText}>Directions</Text>
+          </Pressable>
 
-      {/* ONLY CHANGE: Replace the inline buttons with ButtonContainer for safe area */}
-      <ButtonContainer
-        direction="row"
-        spacing={12}
-        hasTabBar={false}
-        withBorder={true}
-        backgroundColor="#FFFFFF"
-      >
-        {restaurant.phone_number && (
-          <Button
-            title="Call Restaurant"
-            onPress={handleCall}
-            buttonStyle={styles.callButton}
-            icon={{ name: 'phone', type: 'material', color: 'white' }}
-          />
-        )}
-        
-        <Button
-          title="Get Directions"
-          onPress={handleDirections}
-          buttonStyle={styles.directionsButton}
-          titleStyle={styles.directionsButtonTitle}
-          icon={{ name: 'directions', type: 'material', color: '#2196F3' }}
-        />
-      </ButtonContainer>
+          {restaurant.phone_number && (
+            <Pressable 
+              style={styles.actionButton} 
+              onPress={() => Linking.openURL(`tel:${restaurant.phone_number}`)}
+            >
+              <Icon 
+                name="phone" 
+                type="font-awesome" 
+                size={24} 
+                color={theme.colors.primary} 
+              />
+              <Text style={styles.actionButtonText}>Call</Text>
+            </Pressable>
+          )}
+
+          {restaurant.website_uri && (
+            <Pressable 
+              style={styles.actionButton} 
+              onPress={() => Linking.openURL(restaurant.website_uri!)}
+            >
+              <Icon 
+                name="globe" 
+                type="font-awesome" 
+                size={24} 
+                color={theme.colors.primary} 
+              />
+              <Text style={styles.actionButtonText}>Website</Text>
+            </Pressable>
+          )}
+
+          <Pressable style={styles.actionButton} onPress={handleFavoriteToggle}>
+            <Icon 
+              name="heart" 
+              type="font-awesome" 
+              size={24} 
+              color={theme.colors.primary} 
+            />
+            <Text style={styles.actionButtonText}>Favorite</Text>
+          </Pressable>
+        </View>
+      </View>
     </View>
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFFFFF',
-  },
-  loadingScreen: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  errorScreen: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  errorText: {
-    fontSize: 18,
-    marginBottom: 20,
-    textAlign: 'center',
-  },
-  scrollView: {
-    flex: 1,
-  },
-  photoContainer: {
-    position: 'relative',
-    height: HERO_HEIGHT,
-  },
-  heroImage: {
-    width: screenWidth,
-    height: HERO_HEIGHT,
-  },
-  noPhotoContainer: {
-    backgroundColor: '#FFD700',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  noPhotoText: {
-    fontSize: 16,
-    color: '#B8860B',
-    marginTop: 12,
-    fontWeight: '500',
-    textAlign: 'center',
-  },
-  loadingContainer: {
-    backgroundColor: '#f0f0f0',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  loadingText: {
-    fontSize: 14,
-    color: '#666',
-    marginTop: 12,
-  },
-  favoriteButtonContainer: {
-    position: 'absolute',
-    top: HERO_HEIGHT - 30,
-    right: 20,
-    zIndex: 10,
-  },
-  favoriteButton: {
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
-    borderRadius: 25,
-    width: 50,
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  favoriteIcon: {
-    fontSize: 24,
-  },
-  headerSection: {
-    padding: 20,
-    backgroundColor: '#FFFFFF',
-  },
-  restaurantName: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 8,
-  },
-  cuisineType: {
-    fontSize: 16,
-    color: '#666',
-    marginBottom: 12,
-    textTransform: 'capitalize',
-  },
-  ratingRow: {
-    marginBottom: 12,
-  },
-  statusRow: {
-    marginBottom: 12,
-  },
-  address: {
-    fontSize: 16,
-    color: '#666',
-    lineHeight: 24,
-  },
-  section: {
-    padding: 20,
-    borderTopWidth: 1,
-    borderTopColor: '#f0f0f0',
-  },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 12,
-  },
-  description: {
-    fontSize: 16,
-    lineHeight: 24,
-    color: '#666',
-  },
-  featuresGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 8,
-  },
-  featureChip: {
-    backgroundColor: '#f0f8ff',
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 16,
-    marginRight: 8,
-    marginBottom: 8,
-  },
-  featureText: {
-    fontSize: 14,
-    color: '#0066cc',
-    fontWeight: '500',
-  },
-  hoursRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: 8,
-    borderBottomWidth: 1,
-    borderBottomColor: '#f0f0f0',
-  },
-  dayName: {
-    fontSize: 16,
-    fontWeight: '500',
-    color: '#333',
-  },
-  hours: {
-    fontSize: 16,
-    color: '#666',
-  },
-  actionsSection: {
-    padding: 20,
-    borderTopWidth: 1,
-    borderTopColor: '#f0f0f0',
-  },
-  actionButtonsRow: {
-    marginBottom: 20,
-  },
-  // Keep existing button styles for ButtonContainer
-  callButton: {
-    backgroundColor: '#4CAF50',
-    borderRadius: 8,
-    flex: 1,
-  },
-  directionsButton: {
-    backgroundColor: 'transparent',
-    borderWidth: 2,
-    borderColor: '#2196F3',
-    borderRadius: 8,
-    flex: 1,
-  },
-  directionsButtonTitle: {
-    color: '#2196F3',
-  },
-  websiteRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 8,
-  },
-  websiteLink: {
-    fontSize: 16,
-    color: '#666',
-    marginLeft: 6,
-    textDecorationLine: 'underline',
-  },
-})
+// Helper function for price level text
+function getPriceLevelText(priceLevel: number): string {
+  switch (priceLevel) {
+    case 1: return 'Inexpensive'
+    case 2: return 'Moderate'
+    case 3: return 'Expensive'
+    case 4: return 'Very Expensive'
+    default: return 'Price varies'
+  }
+}
 
 export default RestaurantDetailScreen
