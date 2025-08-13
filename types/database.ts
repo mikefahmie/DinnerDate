@@ -2,6 +2,7 @@
 // This file defines the Restaurant interface based on the Supabase database schema
 
 export interface Restaurant {
+  photo_storage_path: any;
   id: string;
   google_place_id: string;
   name: string;

@@ -11,6 +11,7 @@ const corsHeaders = {
 
 interface Restaurant {
   id: string
+  name?: string
   photos: string[] | null
   primary_photo_url: string | null
   photo_processed_at: string | null
@@ -35,29 +36,14 @@ serve(async (req) => {
       throw new Error('Google Places API key not found')
     }
 
-    // Parse request body for specific restaurant IDs (optional)
-    const { restaurantIds, batchSize = 50 } = await req.json().catch(() => ({}))
+    // Parse request body
+    const { restaurantIds, batchSize = 50, sourceUrl } = await req.json().catch(() => ({}))
 
-    // Build query to get restaurants that need photo processing
-    let query = supabaseClient
-      .from('restaurants')
-      .select('id, photos, primary_photo_url, photo_processed_at')
-      .is('primary_photo_url', null) // Only process restaurants without photos
-      .not('photos', 'is', null) // Only process restaurants that have photo references
-      .limit(batchSize)
-
-    // If specific restaurant IDs provided, filter to those
-    if (restaurantIds && Array.isArray(restaurantIds)) {
-      query = query.in('id', restaurantIds)
-    }
-
-    const { data: restaurants, error: fetchError } = await query
-
-    if (fetchError) {
-      throw new Error(`Failed to fetch restaurants: ${fetchError.message}`)
-    }
-
-    console.log(`Processing ${restaurants?.length || 0} restaurants for photos`)
+    console.log(`Edge function called with:`, { 
+      restaurantIds: restaurantIds?.length || 0, 
+      batchSize, 
+      hasSourceUrl: !!sourceUrl 
+    })
 
     const results = {
       processed: 0,
@@ -66,14 +52,61 @@ serve(async (req) => {
       errors: [] as string[]
     }
 
-    // Process each restaurant
-    for (const restaurant of restaurants || []) {
-      try {
-        await processRestaurantPhoto(restaurant, googleApiKey, supabaseClient, results)
-      } catch (error) {
-        console.error(`Failed to process restaurant ${restaurant.id}:`, error)
-        results.failed++
-        results.errors.push(`Restaurant ${restaurant.id}: ${error.message}`)
+    // If specific restaurant IDs provided (from migration script), process them
+    if (restaurantIds && Array.isArray(restaurantIds) && restaurantIds.length > 0) {
+      console.log(`Processing specific restaurants: ${restaurantIds}`)
+      
+      // Get the specific restaurants
+      const { data: restaurants, error: fetchError } = await supabaseClient
+        .from('restaurants')
+        .select('id, name, photos, primary_photo_url, photo_processed_at')
+        .in('id', restaurantIds)
+
+      if (fetchError) {
+        throw new Error(`Failed to fetch restaurants: ${fetchError.message}`)
+      }
+
+      console.log(`Found ${restaurants?.length || 0} restaurants to process`)
+
+      // Process each restaurant
+      for (const restaurant of restaurants || []) {
+        try {
+          await processRestaurantPhoto(restaurant, googleApiKey, supabaseClient, results, sourceUrl)
+        } catch (error) {
+          console.error(`Failed to process restaurant ${restaurant.id}:`, error)
+          results.failed++
+          results.errors.push(`Restaurant ${restaurant.id}: ${error.message}`)
+        }
+      }
+    } else {
+      // Original logic for batch processing
+      let query = supabaseClient
+        .from('restaurants')
+        .select('id, name, photos, primary_photo_url, photo_processed_at')
+        .not('photos', 'is', null)
+        .limit(batchSize)
+
+      // Only process restaurants without Supabase Storage URLs
+      const supabaseUrl = Deno.env.get('SUPABASE_URL') ?? ''
+      query = query.not('primary_photo_url', 'like', `%${supabaseUrl}%`)
+
+      const { data: restaurants, error: fetchError } = await query
+
+      if (fetchError) {
+        throw new Error(`Failed to fetch restaurants: ${fetchError.message}`)
+      }
+
+      console.log(`Processing ${restaurants?.length || 0} restaurants for photos`)
+
+      // Process each restaurant
+      for (const restaurant of restaurants || []) {
+        try {
+          await processRestaurantPhoto(restaurant, googleApiKey, supabaseClient, results)
+        } catch (error) {
+          console.error(`Failed to process restaurant ${restaurant.id}:`, error)
+          results.failed++
+          results.errors.push(`Restaurant ${restaurant.id}: ${error.message}`)
+        }
       }
     }
 
@@ -108,71 +141,128 @@ async function processRestaurantPhoto(
   restaurant: Restaurant, 
   apiKey: string, 
   supabaseClient: any,
-  results: any
+  results: any,
+  sourceUrl?: string
 ) {
-  // Skip if no photos array or empty
-  if (!restaurant.photos || restaurant.photos.length === 0) {
-    results.skipped++
-    return
-  }
+  console.log(`Processing restaurant ${restaurant.id} (${restaurant.name || 'Unknown'})`)
 
-  // Handle case where photos might be stored as string "[]" 
-  let photosArray = restaurant.photos
-  if (typeof photosArray === 'string') {
-    try {
-      photosArray = JSON.parse(photosArray)
-    } catch (e) {
-      console.log(`Invalid photos format for restaurant ${restaurant.id}:`, photosArray)
+  // If we have a sourceUrl (from the migration script), use it
+  let photoUrlToDownload = sourceUrl
+
+  // Otherwise, get URL from Google Places API
+  if (!photoUrlToDownload) {
+    // Skip if no photos array or empty
+    if (!restaurant.photos || restaurant.photos.length === 0) {
+      console.log(`Skipping ${restaurant.id}: No photos`)
       results.skipped++
+      return
+    }
+
+    // Handle case where photos might be stored as string "[]" 
+    let photosArray = restaurant.photos
+    if (typeof photosArray === 'string') {
+      try {
+        photosArray = JSON.parse(photosArray)
+      } catch (e) {
+        console.log(`Invalid photos format for restaurant ${restaurant.id}:`, photosArray)
+        results.skipped++
+        return
+      }
+    }
+
+    // Skip if still no valid photos
+    if (!Array.isArray(photosArray) || photosArray.length === 0) {
+      console.log(`Skipping ${restaurant.id}: No valid photos array`)
+      results.skipped++
+      return
+    }
+
+    // Get the first photo reference
+    const firstPhotoReference = photosArray[0]
+    
+    // Validate photo reference format
+    if (!firstPhotoReference || typeof firstPhotoReference !== 'string' || !firstPhotoReference.includes('places/')) {
+      console.log(`Invalid photo reference for restaurant ${restaurant.id}:`, firstPhotoReference)
+      results.skipped++
+      return
+    }
+    
+    try {
+      console.log(`Getting fresh photo URL for ${restaurant.id} from Google Places API`)
+      
+      // Call Google Places Photo API (New)
+      const photoApiUrl = `https://places.googleapis.com/v1/${firstPhotoReference}/media?key=${apiKey}&maxHeightPx=400&maxWidthPx=600`
+      
+      // Make request to get the actual photo URL
+      const photoResponse = await fetch(photoApiUrl, {
+        method: 'GET',
+        headers: {
+          'Accept': 'image/*',
+        },
+        redirect: 'follow'
+      })
+
+      if (!photoResponse.ok) {
+        throw new Error(`Photo API request failed: ${photoResponse.status} ${photoResponse.statusText}`)
+      }
+
+      photoUrlToDownload = photoResponse.url
+      console.log(`Got fresh URL for ${restaurant.id}`)
+
+    } catch (error) {
+      console.error(`❌ Failed to get photo URL for restaurant ${restaurant.id}:`, error)
+      results.failed++
       return
     }
   }
 
-  // Skip if still no valid photos
-  if (!Array.isArray(photosArray) || photosArray.length === 0) {
-    results.skipped++
-    return
-  }
-
-  // Get the first photo reference
-  const firstPhotoReference = photosArray[0]
-  
-  // Validate photo reference format
-  if (!firstPhotoReference || typeof firstPhotoReference !== 'string' || !firstPhotoReference.includes('places/')) {
-    console.log(`Invalid photo reference for restaurant ${restaurant.id}:`, firstPhotoReference)
-    results.skipped++
-    return
-  }
-  
-  
-  // Extract the photo name from the full photo reference
-  // Format: "places/ChIJTX4OFJhTO4gRyJY1ttCK-5U/photos/AXQCQNRqoxepFkxnFlB2VO5Jk4SIaaZo7CPP7yDPIH2njev3b3xyGudzYD_434NBtyw5ZObsZ5LvuW-wYPjOSC3CElQ3JDPe3Q526Dgv54R0p8TqZKMXPvgTi6vlzd-9yNRMkC3Zkhl4Em3MSgGjM_nqgzihYEwT-mdxHXbvqYi_XRJw_Y9d_Qq0DdvJ7usoPaWQci8b2FMhpfL5O2rPXeGScMTggFnT-pJPDBayamvnhA3N72jw-0xhO8q2_xq2x3SbjQeG12Np2sUZroFrSHEaI290jEOhFlovjsv8NHNnDZ7wyw"
-  
+  // Now download and store the photo in Supabase Storage
   try {
-    // Call Google Places Photo API (New)
-    const photoUrl = `https://places.googleapis.com/v1/${firstPhotoReference}/media?key=${apiKey}&maxHeightPx=400&maxWidthPx=600`
+    console.log(`Downloading and storing photo for ${restaurant.id}`)
     
-    // Make request to get the actual photo URL
-    const photoResponse = await fetch(photoUrl, {
-      method: 'GET',
-      headers: {
-        'Accept': 'image/*',
-      },
-      redirect: 'follow' // Important: follow redirects to get the actual image URL
-    })
-
+    // Download the photo
+    const photoResponse = await fetch(photoUrlToDownload)
     if (!photoResponse.ok) {
-      throw new Error(`Photo API request failed: ${photoResponse.status} ${photoResponse.statusText}`)
+      throw new Error(`Failed to download photo: ${photoResponse.status}`)
     }
 
-    // The final URL after redirects is our photo URL
-    const finalPhotoUrl = photoResponse.url
+    const photoBlob = await photoResponse.blob()
+    const photoBuffer = await photoBlob.arrayBuffer()
 
-    // Update restaurant with the photo URL
+    // Generate a unique filename
+    const fileExtension = getFileExtension(photoResponse.headers.get('content-type') || 'image/jpeg')
+    const fileName = `restaurant-${restaurant.id}-${Date.now()}.${fileExtension}`
+
+    console.log(`Uploading ${fileName} to Supabase Storage`)
+
+    // Upload to Supabase Storage
+    const { data: uploadData, error: uploadError } = await supabaseClient.storage
+      .from('restaurant-photos')
+      .upload(fileName, photoBuffer, {
+        contentType: photoResponse.headers.get('content-type') || 'image/jpeg',
+        upsert: true
+      })
+
+    if (uploadError) {
+      throw new Error(`Failed to upload photo: ${uploadError.message}`)
+    }
+
+    console.log(`Successfully uploaded ${fileName}`)
+
+    // Get the public URL
+    const { data: publicUrlData } = supabaseClient.storage
+      .from('restaurant-photos')
+      .getPublicUrl(fileName)
+
+    const publicUrl = publicUrlData.publicUrl
+
+    console.log(`Got public URL: ${publicUrl}`)
+
+    // Update restaurant with the Supabase Storage URL
     const { error: updateError } = await supabaseClient
       .from('restaurants')
       .update({
-        primary_photo_url: finalPhotoUrl,
+        primary_photo_url: publicUrl,
         photo_processed_at: new Date().toISOString()
       })
       .eq('id', restaurant.id)
@@ -181,12 +271,11 @@ async function processRestaurantPhoto(
       throw new Error(`Failed to update restaurant: ${updateError.message}`)
     }
 
-    console.log(`✅ Successfully processed photo for restaurant ${restaurant.id}`)
+    console.log(`✅ Successfully processed and stored photo for restaurant ${restaurant.id}`)
     results.processed++
 
-    // Add delay to respect rate limits (Google recommends staying under 100 QPS)
-    // Small delay between requests to be respectful
-    await new Promise(resolve => setTimeout(resolve, 50)) // 50ms = 20 requests per second
+    // Add delay to respect rate limits
+    await new Promise(resolve => setTimeout(resolve, 100))
 
   } catch (error) {
     console.error(`❌ Failed to process photo for restaurant ${restaurant.id}:`, error)
@@ -199,6 +288,23 @@ async function processRestaurantPhoto(
       })
       .eq('id', restaurant.id)
     
+    results.failed++
     throw error
+  }
+}
+
+function getFileExtension(contentType: string): string {
+  switch (contentType) {
+    case 'image/jpeg':
+    case 'image/jpg':
+      return 'jpg'
+    case 'image/png':
+      return 'png'
+    case 'image/webp':
+      return 'webp'
+    case 'image/gif':
+      return 'gif'
+    default:
+      return 'jpg'
   }
 }

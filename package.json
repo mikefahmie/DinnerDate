@@ -7,28 +7,15 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    
-    "// Photo migration scripts": "",
-    "migrate:photos": "npx ts-node scripts/migratePhotosToStorage.ts",
-    "migrate:photos:status": "npx ts-node scripts/migratePhotosToStorage.ts status",
-    "migrate:photos:broken": "npx ts-node scripts/migratePhotosToStorage.ts migrate-broken",
-    "migrate:photos:dry-run": "npx ts-node scripts/migratePhotosToStorage.ts dry-run",
-    "migrate:photos:batch": "npx ts-node scripts/migratePhotosToStorage.ts migrate-batch",
-    
-    "// Database and backend scripts": "",
-    "supabase:start": "supabase start",
-    "supabase:stop": "supabase stop", 
-    "supabase:reset": "supabase db reset",
-    "supabase:migrate": "supabase db push",
-    "supabase:generate-types": "supabase gen types typescript --local > types/supabase.ts",
-    
-    "// Restaurant data processing": "",
-    "process:photos": "npx ts-node scripts/processRestaurantPhotos.ts process",
-    "process:photos:status": "npx ts-node scripts/processRestaurantPhotos.ts status",
-    
-    "// Development utilities": "",
-    "type-check": "tsc --noEmit",
-    "lint": "eslint . --ext .ts,.tsx,.js,.jsx"
+    "migrate:photos:status": "npx tsx scripts/migratePhotosToStorage.ts status",
+    "migrate:photos:run": "npx tsx scripts/migratePhotosToStorage.ts migrate",
+    "migrate:photos:broken": "npx tsx scripts/migratePhotosToStorage.ts migrate-broken",
+    "migrate:photos:10": "npx tsx scripts/migratePhotosToStorage.ts migrate-10",
+    "migrate:photos:dry-run": "npx tsx scripts/migratePhotosToStorage.ts dry-run",
+    "migrate:photos:all": "npx tsx scripts/migratePhotosToStorage.ts migrate-all",
+    "photo:status": "tsx scripts/processRestaurantPhotos.ts status",
+    "photo:process": "tsx scripts/processRestaurantPhotos.ts process",
+    "photo:workflow": "tsx scripts/processRestaurantPhotos.ts workflow"
   },
   "dependencies": {
     "@awesome.me/kit-7b1e712fca": "^1.0.4",
@@ -49,8 +36,7 @@
     "@react-navigation/native-stack": "^7.3.16",
     "@rneui/base": "^4.0.0-rc.7",
     "@rneui/themed": "^4.0.0-rc.8",
-    "@supabase/supabase-js": "^2.55.0",
-    "dotenv": "^17.2.1",
+    "@supabase/supabase-js": "^2.50.0",
     "expo": "~53.0.11",
     "expo-constants": "~17.1.6",
     "expo-status-bar": "~2.2.3",
@@ -63,14 +49,15 @@
     "react-native-svg": "15.11.2",
     "react-native-vector-icons": "^10.2.0",
     "react-native-web": "^0.20.0",
-    "react-native-url-polyfill": "^2.0.0",
     "yup": "^1.6.1"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@types/react": "~19.0.10",
     "@types/react-native": "^0.72.8",
+    "dotenv": "^17.2.1",
     "ts-node": "^10.9.2",
+    "tsx": "^4.20.4",
     "typescript": "~5.8.3"
   },
   "private": true

@@ -1,5 +1,6 @@
 // components/restaurant/RestaurantCard.tsx
 // UPDATED: Uses new photo utility functions for Supabase Storage
+// FIXED: Corrected theme structure and imports
 
 import React from 'react'
 import { View, Text, Pressable, StyleSheet, Image } from 'react-native'
@@ -82,7 +83,7 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({
       color: theme.colors.textMuted,
       fontSize: theme.typography.fontSize.caption,
       fontWeight: '500',
-      marginTop: theme.spacing.xs,
+      marginTop: theme.spacing.sm,
     },
     overlayBadges: {
       position: 'absolute',
@@ -95,7 +96,7 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({
     },
     statusBadge: {
       paddingHorizontal: theme.spacing.sm,
-      paddingVertical: theme.spacing.xs,
+      paddingVertical: theme.spacing.sm,
       borderRadius: theme.borderRadius.sm,
       backgroundColor: 'rgba(0, 0, 0, 0.7)',
     },
@@ -108,7 +109,7 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({
     statusText: {
       fontSize: theme.typography.fontSize.caption,
       fontWeight: '600',
-      color: theme.colors.textOnPrimary,
+      color: '#FFFFFF',
     },
     openText: {
       color: '#FFFFFF',
@@ -117,7 +118,7 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({
       color: '#FFFFFF',
     },
     favoriteButton: {
-      padding: theme.spacing.xs,
+      padding: theme.spacing.sm,
       borderRadius: theme.borderRadius.full,
       backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
@@ -125,39 +126,39 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({
       padding: theme.spacing.md,
     },
     restaurantName: {
-      fontSize: theme.typography.fontSize.lg,
-      fontWeight: theme.typography.fontWeight.bold,
-      color: theme.colors.text,
-      marginBottom: theme.spacing.xs,
+      fontSize: theme.typography.fontSize.h3,
+      fontWeight: '600',
+      color: theme.colors.textPrimary,
+      marginBottom: theme.spacing.sm,
     },
     ratingContainer: {
       flexDirection: 'row',
       alignItems: 'center',
-      marginBottom: theme.spacing.xs,
+      marginBottom: theme.spacing.sm,
     },
     ratingText: {
-      fontSize: theme.typography.fontSize.sm,
+      fontSize: theme.typography.fontSize.secondary,
       color: theme.colors.textSecondary,
-      marginLeft: theme.spacing.xs,
+      marginLeft: theme.spacing.sm,
     },
     hoursContainer: {
       flexDirection: 'row',
       alignItems: 'center',
-      marginBottom: theme.spacing.xs,
+      marginBottom: theme.spacing.sm,
     },
     hoursText: {
-      fontSize: theme.typography.fontSize.sm,
+      fontSize: theme.typography.fontSize.secondary,
       color: theme.colors.textSecondary,
-      marginLeft: theme.spacing.xs,
+      marginLeft: theme.spacing.sm,
     },
     varietyContainer: {
       flexDirection: 'row',
       alignItems: 'center',
     },
     varietyText: {
-      fontSize: theme.typography.fontSize.sm,
+      fontSize: theme.typography.fontSize.secondary,
       color: theme.colors.textSecondary,
-      marginLeft: theme.spacing.xs,
+      marginLeft: theme.spacing.sm,
     },
     shadowCard: {
       shadowColor: '#000',
